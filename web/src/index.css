@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sii-blue: #003087;
+  --color-sii-blue-light: #0050c8;
+  --color-sii-red: #c8102e;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
