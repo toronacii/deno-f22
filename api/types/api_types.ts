@@ -106,6 +106,14 @@ export interface FieldDTO {
   dataType: string;
   isCalculated: boolean;
   isMandatory: boolean;
+  /** Descripción extraída de las instrucciones oficiales (tooltip). */
+  description?: string;
+  /** Advertencias o restricciones especiales del SII. */
+  warnings?: string[];
+  /** Regímenes tributarios a los que aplica este campo (null = todos). */
+  applicableRegimes?: string[];
+  /** Tipos de entidad a los que aplica (null = todos). */
+  applicableEntityTypes?: number[];
 }
 
 export interface FieldsResponse {

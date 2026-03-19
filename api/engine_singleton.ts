@@ -20,7 +20,7 @@ import {
   type Rule,
   type RawRule,
 } from "@f22/core";
-import type { LayoutSection } from "@f22/core/models/layout.ts";
+import type { LayoutSection } from "@f22/core";
 import { resolve, fromFileUrl, dirname } from "jsr:@std/path@^1.0.0";
 
 // Paths relative to this file (api/)

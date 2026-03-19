@@ -18,7 +18,7 @@ export function F22Form({ optimizableFields }: Props) {
   useCalculator();
 
   const { sections } = useVariant();
-  const { layoutSections } = useEngine();
+  const { layoutSections, fieldMetadata } = useEngine();
   const currentSection = useFormStore((s) => s.currentSection);
   const setCurrentSection = useFormStore((s) => s.setCurrentSection);
   const computedValues = useFormStore((s) => s.computedValues);
@@ -89,6 +89,7 @@ export function F22Form({ optimizableFields }: Props) {
           section={activeLayoutSection}
           computedCodes={computedCodes}
           optimizableFields={optimizableFields}
+          fieldMetadata={fieldMetadata}
         />
       ) : activeSection ? (
         <div className="text-sm text-gray-400 text-center py-8">

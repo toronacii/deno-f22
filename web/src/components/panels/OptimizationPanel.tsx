@@ -12,11 +12,13 @@ interface SuggestionDTO {
   fieldName: string;
   legalBasis: string;
   strategy: string;
+  conditions?: string;
   currentValue: number;
   suggestedValue: number;
   maxLegalValue: number;
   estimatedTaxSaving: number;
   alreadyOptimized: boolean;
+  isInformational: boolean;
 }
 
 interface OptimizeResponse {
@@ -131,59 +133,86 @@ export function OptimizationPanel() {
             </div>
           </div>
 
-          {/* Suggestions */}
-          {report.suggestions.filter((s) => !s.alreadyOptimized).length > 0 && (
-            <>
-              <ul className="flex flex-col gap-1.5">
-                {report.suggestions
-                  .filter((s) => !s.alreadyOptimized)
-                  .map((s) => (
-                    <li
-                      key={s.fieldCode}
-                      className="rounded-lg border border-amber-200 bg-amber-50/60 p-2.5"
+          {/* Quantified suggestions */}
+          {(() => {
+            const actionable = report.suggestions.filter((s) => !s.alreadyOptimized && !s.isInformational);
+            const informational = report.suggestions.filter((s) => !s.alreadyOptimized && s.isInformational);
+
+            return (
+              <>
+                {actionable.length > 0 && (
+                  <>
+                    <ul className="flex flex-col gap-1.5">
+                      {actionable.map((s) => (
+                        <li key={s.fieldCode} className="rounded-lg border border-amber-200 bg-amber-50/60 p-2.5">
+                          <div className="flex items-start justify-between gap-1">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs font-medium text-gray-800 leading-snug">{s.fieldName}</p>
+                              <p className="text-xs text-gray-500 mt-0.5 font-mono">
+                                [{s.fieldCode}] actual: {formatPesos(s.currentValue)} → {formatPesos(s.suggestedValue)}
+                              </p>
+                            </div>
+                            {s.estimatedTaxSaving > 0 && (
+                              <span className="shrink-0 text-xs font-bold text-green-700 bg-green-100 rounded px-1.5 py-0.5">
+                                -{formatPesos(s.estimatedTaxSaving)}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1.5 leading-snug line-clamp-2">{s.strategy}</p>
+                          {s.conditions && (
+                            <p className="text-xs text-gray-400 mt-1 leading-snug line-clamp-1" title={s.conditions}>
+                              👤 {s.conditions}
+                            </p>
+                          )}
+                          <p className="text-xs text-blue-600 mt-1 line-clamp-1" title={s.legalBasis}>
+                            {s.legalBasis}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                    <button
+                      onClick={applyAll}
+                      className="w-full py-1.5 px-3 rounded-lg border border-amber-400
+                        text-amber-700 text-xs font-medium hover:bg-amber-50 transition-colors"
                     >
-                      <div className="flex items-start justify-between gap-1">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium text-gray-800 leading-snug">
-                            {s.fieldName}
-                          </p>
-                          <p className="text-xs text-gray-500 mt-0.5 font-mono">
-                            [{s.fieldCode}] actual: {formatPesos(s.currentValue)} →{" "}
-                            {formatPesos(s.suggestedValue)}
-                          </p>
-                        </div>
-                        {s.estimatedTaxSaving > 0 && (
-                          <span className="shrink-0 text-xs font-bold text-green-700 bg-green-100
-                            rounded px-1.5 py-0.5">
-                            -{formatPesos(s.estimatedTaxSaving)}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-gray-500 mt-1.5 leading-snug line-clamp-2">
-                        {s.strategy}
-                      </p>
-                      <p className="text-xs text-blue-600 mt-1 line-clamp-1" title={s.legalBasis}>
-                        {s.legalBasis}
-                      </p>
-                    </li>
-                  ))}
-              </ul>
+                      Aplicar todas las sugerencias
+                    </button>
+                  </>
+                )}
 
-              <button
-                onClick={applyAll}
-                className="w-full py-1.5 px-3 rounded-lg border border-amber-400
-                  text-amber-700 text-xs font-medium hover:bg-amber-50 transition-colors"
-              >
-                Aplicar todas las sugerencias
-              </button>
-            </>
-          )}
+                {/* Informational — no fixed limit, user must evaluate */}
+                {informational.length > 0 && (
+                  <details className="mt-1">
+                    <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700 select-none">
+                      {informational.length} deducciones adicionales a evaluar
+                    </summary>
+                    <ul className="flex flex-col gap-1 mt-1.5">
+                      {informational.map((s) => (
+                        <li key={s.fieldCode} className="rounded-lg border border-gray-200 bg-gray-50 p-2">
+                          <p className="text-xs font-medium text-gray-700">{s.fieldName}</p>
+                          <p className="text-xs text-gray-500 mt-0.5 leading-snug line-clamp-2">{s.strategy}</p>
+                          {s.conditions && (
+                            <p className="text-xs text-gray-400 mt-0.5 line-clamp-1" title={s.conditions}>
+                              👤 {s.conditions}
+                            </p>
+                          )}
+                          <p className="text-xs text-blue-500 mt-0.5 line-clamp-1" title={s.legalBasis}>
+                            {s.legalBasis}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
 
-          {report.suggestions.filter((s) => !s.alreadyOptimized).length === 0 && (
-            <p className="text-xs text-green-700 text-center py-2">
-              ✓ Ya estás aprovechando todas las deducciones disponibles
-            </p>
-          )}
+                {actionable.length === 0 && informational.length === 0 && (
+                  <p className="text-xs text-green-700 text-center py-2">
+                    ✓ Ya estás aprovechando todas las deducciones disponibles
+                  </p>
+                )}
+              </>
+            );
+          })()}
         </div>
       )}
     </div>

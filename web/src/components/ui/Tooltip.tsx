@@ -17,7 +17,8 @@ export function Tooltip({ content, children }: Props) {
       {children}
       {visible && (
         <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 z-50
-          bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap shadow-lg pointer-events-none">
+          bg-gray-800 text-white text-xs rounded px-3 py-2 shadow-lg pointer-events-none
+          w-72 whitespace-normal leading-relaxed text-left">
           {content}
           <span className="absolute top-full left-1/2 -translate-x-1/2 border-4
             border-transparent border-t-gray-800" />

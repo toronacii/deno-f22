@@ -28,6 +28,17 @@ interface FieldDTO {
   dataType: string;
   isCalculated: boolean;
   isMandatory: boolean;
+  description?: string;
+  warnings?: string[];
+  applicableRegimes?: string[];
+  applicableEntityTypes?: number[];
+}
+
+export interface FieldMetadataEntry {
+  description?: string;
+  warnings?: string[];
+  applicableRegimes?: string[];
+  applicableEntityTypes?: number[];
 }
 
 interface ParamDTO {
@@ -45,6 +56,7 @@ export interface BrowserEngine {
   sections: SectionInfo[];
   layoutSections: LayoutSection[];
   params: ParameterStore;
+  fieldMetadata: Map<number, FieldMetadataEntry>;
   parseRate: number;
   totalRules: number;
 }
@@ -104,11 +116,23 @@ export async function initBrowserEngine(apiBase = "/api"): Promise<BrowserEngine
     canBeNegative: false,
   }));
 
+  const fieldMetadata = new Map<number, FieldMetadataEntry>();
+  for (const f of fieldsData.fields) {
+    if (f.description || f.warnings?.length || f.applicableRegimes || f.applicableEntityTypes) {
+      fieldMetadata.set(f.code, {
+        description: f.description,
+        warnings: f.warnings,
+        applicableRegimes: f.applicableRegimes,
+        applicableEntityTypes: f.applicableEntityTypes,
+      });
+    }
+  }
+
   const layoutSections: LayoutSection[] = layoutRes.ok
     ? await layoutRes.json() as LayoutSection[]
     : [];
 
-  return { calculator, validator, fields, sections, layoutSections, params, parseRate: parsed / total, totalRules: total };
+  return { calculator, validator, fields, sections, layoutSections, params, fieldMetadata, parseRate: parsed / total, totalRules: total };
 }
 
 // Minimal params embedded in the browser bundle as fallback

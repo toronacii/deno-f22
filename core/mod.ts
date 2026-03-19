@@ -24,6 +24,7 @@ export { loadXlsx, getCell, getCellStr, getCellNum } from "./loaders/xlsx_loader
 export type { CellValue, Sheet, Workbook } from "./loaders/xlsx_loader.ts";
 export { loadLayout, loadLayoutSections } from "./loaders/layout_loader.ts";
 export type { LayoutLoadResult } from "./loaders/layout_loader.ts";
+export type { LayoutSection, LayoutRow, LayoutField } from "./models/layout.ts";
 export { loadRules } from "./loaders/rules_loader.ts";
 export { loadParameters, loadDefaultParameters } from "./loaders/params_loader.ts";
 
@@ -63,3 +64,7 @@ export { Optimizer } from "./optimizer/optimizer.ts";
 export type { OptimizationReport, OptimizationSuggestion } from "./optimizer/optimizer.ts";
 export { DEDUCTIBLE_FIELDS, getDeductibleFieldMap } from "./optimizer/optimization_space.ts";
 export type { DeductibleField } from "./optimizer/optimization_space.ts";
+
+// Field metadata (descriptions, warnings, applicability from PDF instructions)
+export { FIELD_METADATA, getFieldMetadata, isFieldApplicable } from "./data/field_metadata.ts";
+export type { FieldMetadata } from "./data/field_metadata.ts";

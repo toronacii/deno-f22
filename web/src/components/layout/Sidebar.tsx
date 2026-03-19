@@ -7,7 +7,11 @@
 import { useFormStore } from "../../store/form_store.ts";
 import { useVariant } from "../../hooks/use_variant.ts";
 
-export function Sidebar() {
+interface Props {
+  onNavigate?: () => void;
+}
+
+export function Sidebar({ onNavigate }: Props) {
   const { sections, fieldsBySection } = useVariant();
   const currentSection = useFormStore((s) => s.currentSection);
   const setCurrentSection = useFormStore((s) => s.setCurrentSection);
@@ -20,7 +24,7 @@ export function Sidebar() {
   }
 
   return (
-    <nav className="w-56 shrink-0 flex flex-col gap-0.5 py-2">
+    <nav className="flex flex-col gap-0.5 py-2">
       {sections.map((section, i) => {
         const isActive = section.id === currentSection;
         const errors = errorsInSection(section.id);
@@ -28,7 +32,7 @@ export function Sidebar() {
         return (
           <button
             key={section.id}
-            onClick={() => setCurrentSection(section.id)}
+            onClick={() => { setCurrentSection(section.id); onNavigate?.(); }}
             className={`w-full text-left flex items-center justify-between px-3 py-2 rounded-lg
               text-sm transition-colors group
               ${

@@ -9,6 +9,7 @@
 
 import { Fragment } from "react";
 import type { LayoutSection, LayoutRow, LayoutField } from "@core/models/layout.ts";
+import type { FieldMetadataEntry } from "../../engine/browser_engine.ts";
 import { useFormStore } from "../../store/form_store.ts";
 import { CurrencyInput } from "../ui/CurrencyInput.tsx";
 import { Tooltip } from "../ui/Tooltip.tsx";
@@ -18,6 +19,7 @@ interface Props {
   /** Set of field codes that have been computed (read-only) */
   computedCodes: Set<number>;
   optimizableFields?: Set<number>;
+  fieldMetadata?: Map<number, FieldMetadataEntry>;
 }
 
 function formatPesos(n: number): string {
@@ -193,19 +195,33 @@ function ColHeaderRow({ row, nSlots }: { row: LayoutRow; nSlots: number }) {
 
 // ── slot cell ─────────────────────────────────────────────────────────────────
 
+/** Tooltip content combining description + warnings. */
+function FieldTooltipContent({ meta }: { meta: FieldMetadataEntry }) {
+  return (
+    <span>
+      {meta.description && <span className="block">{meta.description}</span>}
+      {meta.warnings?.map((w, i) => (
+        <span key={i} className="block mt-1 text-amber-300">⚠ {w}</span>
+      ))}
+    </span>
+  );
+}
+
 /** Renders a single slot (field + operator). Handles per-field labels. */
 function SlotCell({
   field,
   rowText,
   computedCodes,
+  meta,
 }: {
   field: LayoutField;
   rowText: string;
   computedCodes: Set<number>;
+  meta?: FieldMetadataEntry;
 }) {
   const isComputed = computedCodes.has(field.code);
-  // Show the field's own label when it adds information beyond the row label
   const perFieldLabel = field.label && field.label !== rowText ? field.label : "";
+  const hasWarnings = (meta?.warnings?.length ?? 0) > 0;
 
   return (
     <td className="w-44 py-1.5 px-2 align-top">
@@ -216,6 +232,16 @@ function SlotCell({
           </span>
         )}
         <div className={`flex items-center gap-1 ${field.dataType === "boolean" ? "justify-start" : "justify-end"}`}>
+          {/* Info / warning icon with tooltip */}
+          {meta && (
+            <Tooltip content={<FieldTooltipContent meta={meta} />}>
+              <span className={`text-[11px] cursor-help select-none ${
+                hasWarnings ? "text-amber-400" : "text-gray-300 hover:text-blue-400"
+              }`}>
+                {hasWarnings ? "⚠" : "?"}
+              </span>
+            </Tooltip>
+          )}
           <span className="text-[10px] font-mono text-gray-400 select-none">{field.code}</span>
           <div className={field.dataType === "boolean" ? "" : "flex-1 max-w-28"}>
             <FieldCell
@@ -236,10 +262,12 @@ function FieldDataRow({
   row,
   nSlots,
   computedCodes,
+  fieldMetadata,
 }: {
   row: LayoutRow;
   nSlots: number;
   computedCodes: Set<number>;
+  fieldMetadata?: Map<number, FieldMetadataEntry>;
 }) {
   return (
     <tr
@@ -269,6 +297,7 @@ function FieldDataRow({
               field={f}
               rowText={row.text}
               computedCodes={computedCodes}
+              meta={fieldMetadata?.get(f.code)}
             />
             <td className="w-5 py-1.5 text-center text-xs font-mono text-gray-500 select-none align-middle">
               {f.operator}
@@ -282,7 +311,7 @@ function FieldDataRow({
 
 // ── main component ────────────────────────────────────────────────────────────
 
-export function RecuadroTable({ section, computedCodes, optimizableFields: _optimizableFields }: Props) {
+export function RecuadroTable({ section, computedCodes, optimizableFields: _optimizableFields, fieldMetadata }: Props) {
   const nSlots = Math.max(
     1,
     ...section.rows
@@ -305,7 +334,7 @@ export function RecuadroTable({ section, computedCodes, optimizableFields: _opti
               return <SubHeaderRow key={i} row={row} nSlots={nSlots} />;
             }
             return (
-              <FieldDataRow key={i} row={row} nSlots={nSlots} computedCodes={computedCodes} />
+              <FieldDataRow key={i} row={row} nSlots={nSlots} computedCodes={computedCodes} fieldMetadata={fieldMetadata} />
             );
           })}
         </tbody>

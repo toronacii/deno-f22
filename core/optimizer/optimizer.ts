@@ -11,7 +11,7 @@ import type { FormData, FormContext } from "../models/form.ts";
 import type { ParameterStore } from "../models/parameter.ts";
 import type { Rule } from "../models/rule.ts";
 import { Calculator } from "../engine/calculator.ts";
-import { DEDUCTIBLE_FIELDS, type DeductibleField } from "./optimization_space.ts";
+import { DEDUCTIBLE_FIELDS, type DeductibleField } from "./optimization_space_v2.ts";
 import { getField, createFormData } from "../models/form.ts";
 
 /** Main tax fields: IGC or IDPC */
@@ -26,12 +26,16 @@ export interface OptimizationSuggestion {
   fieldName: string;
   legalBasis: string;
   strategy: string;
+  /** Who can use this deduction (null = everyone). */
+  conditions?: string;
   currentValue: number;
   suggestedValue: number;
   maxLegalValue: number;
   estimatedTaxSaving: number;
   /** Is the current value already at the legal maximum? */
   alreadyOptimized: boolean;
+  /** No fixed limit — user must determine the applicable amount. */
+  isInformational: boolean;
 }
 
 export interface OptimizationReport {
@@ -101,7 +105,25 @@ export class Optimizer {
     const currentValue = getField(declared, deductible.fieldCode);
     const maxLegal = this.computeMaxLegal(deductible, computed, context);
 
-    if (maxLegal <= 0) return null;
+    // Fields with no fixed limit: show as informational if user hasn't declared a value
+    if (maxLegal <= 0) {
+      if (deductible.limitType === "none" && currentValue === 0) {
+        return {
+          fieldCode: deductible.fieldCode,
+          fieldName: deductible.name,
+          legalBasis: deductible.legalBasis,
+          strategy: deductible.strategy,
+          conditions: deductible.conditions,
+          currentValue: 0,
+          suggestedValue: 0,
+          maxLegalValue: 0,
+          estimatedTaxSaving: 0,
+          alreadyOptimized: false,
+          isInformational: true,
+        };
+      }
+      return null;
+    }
 
     const suggestedValue = Math.min(maxLegal, Math.max(currentValue, maxLegal));
     const alreadyOptimized = currentValue >= maxLegal;
@@ -112,18 +134,18 @@ export class Optimizer {
         fieldName: deductible.name,
         legalBasis: deductible.legalBasis,
         strategy: deductible.strategy,
+        conditions: deductible.conditions,
         currentValue,
         suggestedValue: currentValue,
         maxLegalValue: maxLegal,
         estimatedTaxSaving: 0,
         alreadyOptimized: true,
+        isInformational: false,
       };
     }
 
-    // Estimate tax saving: apply marginal rate heuristic
-    // For IGC, marginal rate for highest brackets is ~35%
     const deductionIncrease = suggestedValue - currentValue;
-    const estimatedMarginalRate = 0.35; // Conservative estimate
+    const estimatedMarginalRate = 0.35;
     const estimatedSaving = Math.round(deductionIncrease * estimatedMarginalRate);
 
     return {
@@ -131,11 +153,13 @@ export class Optimizer {
       fieldName: deductible.name,
       legalBasis: deductible.legalBasis,
       strategy: deductible.strategy,
+      conditions: deductible.conditions,
       currentValue,
       suggestedValue,
       maxLegalValue: maxLegal,
       estimatedTaxSaving: estimatedSaving,
       alreadyOptimized: false,
+      isInformational: false,
     };
   }
 
@@ -146,23 +170,23 @@ export class Optimizer {
   ): number {
     switch (deductible.limitType) {
       case "fixed_pesos":
-        return deductible.limitValue;
+        return deductible.limitValue ?? 0;
 
       case "fixed_utm": {
         const utmValue = this.params.get(deductible.paramId ?? 29)?.value ?? 65887;
-        return Math.round(deductible.limitValue * utmValue);
+        return Math.round((deductible.limitValue ?? 0) * utmValue);
       }
 
       case "percentage_of_income": {
         const referenceField = deductible.referenceField ?? 547;
         const income = getField(computed, referenceField);
-        return Math.round(income * deductible.limitValue);
+        return Math.round(income * (deductible.limitValue ?? 0));
       }
 
       case "percentage_of_field": {
         const referenceField = deductible.referenceField ?? 547;
         const fieldValue = getField(computed, referenceField);
-        return Math.round(fieldValue * deductible.limitValue);
+        return Math.round(fieldValue * (deductible.limitValue ?? 0));
       }
 
       default:

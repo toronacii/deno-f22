@@ -1,0 +1,20 @@
+# Secretos
+.env
+
+# Scripts — archivos intermedios
+scripts/.progress.json
+scripts/chunks.json
+scripts/deductions_raw.json
+
+# Node / Deno
+node_modules/
+web/node_modules/
+web/dist/
+
+# Deno cache
+.deno/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
