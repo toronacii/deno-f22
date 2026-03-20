@@ -261,11 +261,13 @@ function SlotCell({
 function FieldDataRow({
   row,
   nSlots,
+  slotGroups,
   computedCodes,
   fieldMetadata,
 }: {
   row: LayoutRow;
   nSlots: number;
+  slotGroups: number[][];
   computedCodes: Set<number>;
   fieldMetadata?: Map<number, FieldMetadataEntry>;
 }) {
@@ -280,12 +282,13 @@ function FieldDataRow({
         {row.text}
       </td>
 
-      {/* Field slots */}
-      {Array.from({ length: nSlots }).map((_, slotIdx) => {
-        const f = row.fields.find((x) => x.slot === slotIdx);
+      {/* Field slots — one cell per slot group */}
+      {Array.from({ length: nSlots }).map((_, groupIdx) => {
+        const group = slotGroups[groupIdx] ?? [groupIdx];
+        const f = row.fields.find((x) => group.includes(x.slot));
         if (!f) {
           return (
-            <Fragment key={`empty-${slotIdx}`}>
+            <Fragment key={`empty-${groupIdx}`}>
               <td className="w-44 py-1.5 px-2" />
               <td className="w-5 py-1.5 text-center text-xs text-gray-400" />
             </Fragment>
@@ -311,13 +314,47 @@ function FieldDataRow({
 
 // ── main component ────────────────────────────────────────────────────────────
 
-export function RecuadroTable({ section, computedCodes, optimizableFields: _optimizableFields, fieldMetadata }: Props) {
-  const nSlots = Math.max(
-    1,
-    ...section.rows
-      .filter((r) => r.type === "field")
-      .flatMap((r) => r.fields.map((f) => f.slot + 1)),
+/**
+ * Build display-column groups by merging adjacent slots that are never
+ * used simultaneously in the same row.  Example: RECUADRO 0 has slots
+ * {0,1,2,3} where even slots carry checkboxes and odd slots carry text
+ * inputs — never both in the same row — so they collapse to 2 groups:
+ * [0,1] and [2,3].  Sections whose rows do use both slots keep them apart.
+ */
+function buildSlotGroups(section: LayoutSection): number[][] {
+  const fieldRows = section.rows.filter((r) => r.type === "field");
+  if (fieldRows.length === 0) return [[0]];
+
+  const maxSlot = Math.max(
+    0,
+    ...fieldRows.flatMap((r) => r.fields.map((f) => f.slot)),
   );
+
+  const groups: number[][] = [];
+  let s = 0;
+  while (s <= maxSlot) {
+    if (s + 1 <= maxSlot) {
+      // Check if slot s and slot s+1 ever co-exist in the same row
+      const conflict = fieldRows.some(
+        (r) =>
+          r.fields.some((f) => f.slot === s) &&
+          r.fields.some((f) => f.slot === s + 1),
+      );
+      if (!conflict) {
+        groups.push([s, s + 1]);
+        s += 2;
+        continue;
+      }
+    }
+    groups.push([s]);
+    s += 1;
+  }
+  return groups;
+}
+
+export function RecuadroTable({ section, computedCodes, optimizableFields: _optimizableFields, fieldMetadata }: Props) {
+  const slotGroups = buildSlotGroups(section);
+  const nSlots = slotGroups.length;
 
   return (
     <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
@@ -334,7 +371,7 @@ export function RecuadroTable({ section, computedCodes, optimizableFields: _opti
               return <SubHeaderRow key={i} row={row} nSlots={nSlots} />;
             }
             return (
-              <FieldDataRow key={i} row={row} nSlots={nSlots} computedCodes={computedCodes} fieldMetadata={fieldMetadata} />
+              <FieldDataRow key={i} row={row} nSlots={nSlots} slotGroups={slotGroups} computedCodes={computedCodes} fieldMetadata={fieldMetadata} />
             );
           })}
         </tbody>
