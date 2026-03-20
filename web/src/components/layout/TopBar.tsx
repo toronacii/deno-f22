@@ -126,10 +126,11 @@ export function TopBar({ onMenuClick }: Props) {
         </div>
       </div>
 
-      {/* Second row — mobile only: selects */}
+      {/* Second row — mobile only: selects + rectificatoria */}
       <div className="flex md:hidden items-center gap-2 pb-2.5">
         {regimeSelect}
         {entitySelect}
+        {rectCheck}
       </div>
     </header>
   );

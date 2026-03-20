@@ -78,8 +78,8 @@ function NumericFieldCell({ code, isComputed }: { code: number; isComputed: bool
     return (
       <div
         id={`field-${code}`}
-        className={`flex items-center justify-end gap-1 px-2 py-1 rounded text-right ${
-          hasDrift ? "border border-amber-400 bg-amber-50" : ""
+        className={`flex items-center justify-end gap-1 px-2 py-1 rounded text-right bg-gray-50 border border-gray-200 ${
+          hasDrift ? "!border-amber-400 !bg-amber-50" : ""
         }`}
       >
         {hasDrift && (
@@ -87,7 +87,7 @@ function NumericFieldCell({ code, isComputed }: { code: number; isComputed: bool
             <span className="text-amber-500 text-xs cursor-help">⚠</span>
           </Tooltip>
         )}
-        <span className="font-mono text-sm text-emerald-700 font-medium tabular-nums">
+        <span className="font-mono text-sm text-emerald-700 font-semibold tabular-nums">
           {formatPesos(effectiveValue ?? 0)}
         </span>
       </div>

@@ -52,35 +52,44 @@ export function F22Form({ optimizableFields }: Props) {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       {/* Section navigator */}
-      <div className="flex items-center justify-between text-sm text-gray-500">
-        <button
-          onClick={() => {
-            if (currentIndex > 0) setCurrentSection(sections[currentIndex - 1].id);
-          }}
-          disabled={currentIndex <= 0}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-200
-            hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-        >
-          ← Anterior
-        </button>
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center justify-between">
+          <button
+            onClick={() => {
+              if (currentIndex > 0) setCurrentSection(sections[currentIndex - 1].id);
+            }}
+            disabled={currentIndex <= 0}
+            className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border border-gray-200
+              hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-gray-600"
+          >
+            ← Anterior
+          </button>
 
-        <span className="font-medium text-gray-700">
-          {currentIndex + 1} / {sections.length}
-        </span>
+          <span className="text-xs font-medium text-gray-400 tracking-wide">
+            {currentIndex + 1} de {sections.length}
+          </span>
 
-        <button
-          onClick={() => {
-            if (currentIndex < sections.length - 1)
-              setCurrentSection(sections[currentIndex + 1].id);
-          }}
-          disabled={currentIndex >= sections.length - 1}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-200
-            hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-        >
-          Siguiente →
-        </button>
+          <button
+            onClick={() => {
+              if (currentIndex < sections.length - 1)
+                setCurrentSection(sections[currentIndex + 1].id);
+            }}
+            disabled={currentIndex >= sections.length - 1}
+            className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border border-gray-200
+              hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-gray-600"
+          >
+            Siguiente →
+          </button>
+        </div>
+        {/* Progress bar */}
+        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-blue-500 rounded-full transition-all duration-300"
+            style={{ width: `${((currentIndex + 1) / sections.length) * 100}%` }}
+          />
+        </div>
       </div>
 
       {/* Active RECUADRO */}

@@ -7,6 +7,29 @@
 import { useFormStore } from "../../store/form_store.ts";
 import { useVariant } from "../../hooks/use_variant.ts";
 
+const SECTION_NAMES: Record<string, string> = {
+  "N° 0":  "Info. Base",
+  "N° 1":  "Honorarios",
+  "N° 2":  "Bienes Raíces",
+  "N° 3":  "Ahorro Art. 57 bis",
+  "N° 4":  "Acciones y Fondos",
+  "N° 5":  "Rentas del Capital",
+  "N° 6":  "Rentas Empresariales",
+  "N° 7":  "Rentas del Exterior",
+  "N° 8":  "Créditos",
+  "N° 9":  "Retenciones y PPM",
+  "N° 10": "Reliquidación",
+  "N° 11": "Datos Adicionales",
+  "N° 12": "Determinación Impuesto",
+};
+
+function getSectionShortName(sectionId: string): string {
+  for (const [key, name] of Object.entries(SECTION_NAMES)) {
+    if (sectionId.includes(key)) return name;
+  }
+  return sectionId.replace("RECUADRO ", "Rec. ");
+}
+
 interface Props {
   onNavigate?: () => void;
 }
@@ -49,8 +72,8 @@ export function Sidebar({ onNavigate }: Props) {
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="truncate">
-                {section.id.replace("RECUADRO ", "Rec. ")}
+              <span className="truncate leading-tight">
+                {getSectionShortName(section.id)}
               </span>
             </span>
             {errors > 0 && (
