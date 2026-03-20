@@ -37,6 +37,8 @@ jobs:
         working-directory: web
 
       - name: Deploy to Deno Deploy
-        run: deno run -A jsr:@deno/deployctl deploy --project=${{ secrets.DENO_DEPLOY_PROJECT }} --include=api,core,web/dist api/main.ts
-        env:
-          DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
+        uses: denoland/deployctl@v1
+        with:
+          project: ${{ secrets.DENO_DEPLOY_PROJECT }}
+          entrypoint: api/main.ts
+          root: .
