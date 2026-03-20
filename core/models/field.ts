@@ -30,6 +30,8 @@ export interface FieldDefinition {
   canBeNegative: boolean;
   /** Max digits allowed */
   maxDigits?: number;
+  /** Decimal places allowed (0 or absent = integer field) */
+  decimals?: number;
   /** Row number in source XLSX */
   sourceRow?: number;
 }

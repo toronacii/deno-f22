@@ -16,6 +16,8 @@ export interface LayoutField {
   label?: string;
   /** Inferred data type for this specific field */
   dataType?: "number" | "text" | "boolean" | "currency" | "date";
+  /** Decimal places allowed (0 or absent = integer field) */
+  decimals?: number;
 }
 
 export interface LayoutRow {

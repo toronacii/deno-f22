@@ -998,6 +998,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
+    "decimals": 6,
     "sourceRow": 108
   },
   {
@@ -1008,6 +1009,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
+    "decimals": 6,
     "sourceRow": 109
   },
   {
@@ -2068,6 +2070,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
+    "decimals": 2,
     "sourceRow": 213
   },
   {
@@ -2098,6 +2101,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
+    "decimals": 1,
     "sourceRow": 216
   },
   {
@@ -2108,6 +2112,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
+    "decimals": 2,
     "sourceRow": 217
   },
   {
@@ -12296,7 +12301,8 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 1,
             "label": "TEX",
-            "dataType": "number"
+            "dataType": "number",
+            "decimals": 6
           }
         ]
       },
@@ -12311,7 +12317,8 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 1,
             "label": "TEF",
-            "dataType": "number"
+            "dataType": "number",
+            "decimals": 6
           }
         ]
       },
@@ -13839,7 +13846,8 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 0,
             "label": "Promedio TMCF (incluídos los ingresos de explotadores mineros relacionados) art. 5 Ley N° 21.591",
-            "dataType": "number"
+            "dataType": "number",
+            "decimals": 2
           }
         ]
       },
@@ -13884,7 +13892,8 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 0,
             "label": "Margen operacional minero según N° 6 del art 1 Ley N° 21.591",
-            "dataType": "number"
+            "dataType": "number",
+            "decimals": 1
           }
         ]
       },
@@ -13899,7 +13908,8 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 0,
             "label": "Tasa componente sobre la rentabilidad, según art. 3 o art. 4 Ley N° 21.591",
-            "dataType": "number"
+            "dataType": "number",
+            "decimals": 2
           }
         ]
       }

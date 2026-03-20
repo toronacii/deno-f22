@@ -1,6 +1,7 @@
 /**
- * Currency input for Chilean pesos.
- * Displays formatted value (1.234.567) while storing raw integer.
+ * Numeric input for F22 fields.
+ * Integer fields: formats with thousands separator (es-CL style).
+ * Decimal fields: allows up to `decimals` fractional digits.
  */
 
 import { useRef, useState } from "react";
@@ -8,50 +9,61 @@ import { useRef, useState } from "react";
 interface Props {
   value: number | undefined;
   onChange: (value: number | undefined) => void;
+  decimals?: number;
   disabled?: boolean;
   hasError?: boolean;
   placeholder?: string;
   className?: string;
 }
 
-function format(n: number): string {
+function formatValue(n: number, decimals: number): string {
+  if (decimals > 0) {
+    return new Intl.NumberFormat("es-CL", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: decimals,
+    }).format(n);
+  }
   return new Intl.NumberFormat("es-CL", { maximumFractionDigits: 0 }).format(n);
 }
 
-function parse(s: string): number | undefined {
-  const clean = s.replace(/\./g, "").replace(/,/g, "").trim();
+function parseValue(s: string, decimals: number): number | undefined {
+  // Strip thousands separators (period in es-CL), keep minus and decimal comma/dot
+  const clean = decimals > 0
+    ? s.replace(/\./g, "").replace(",", ".").trim()
+    : s.replace(/\./g, "").replace(/,/g, "").trim();
   if (clean === "" || clean === "-") return undefined;
-  const n = parseInt(clean, 10);
+  const n = decimals > 0 ? parseFloat(clean) : parseInt(clean, 10);
   return isNaN(n) ? undefined : n;
 }
 
-export function CurrencyInput({ value, onChange, disabled, hasError, placeholder, className }: Props) {
+export function CurrencyInput({ value, onChange, decimals = 0, disabled, hasError, placeholder, className }: Props) {
   const [rawInput, setRawInput] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const displayValue = rawInput !== null
     ? rawInput
     : value !== undefined
-    ? format(value)
+    ? formatValue(value, decimals)
     : "";
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const raw = e.target.value.replace(/[^\d-]/g, "");
+    const raw = decimals > 0
+      ? e.target.value.replace(/[^\d,.-]/g, "")
+      : e.target.value.replace(/[^\d-]/g, "");
     setRawInput(raw);
-    onChange(parse(raw));
+    onChange(parseValue(raw, decimals));
   }
 
   function handleBlur() {
     setRawInput(null);
     if (inputRef.current && value !== undefined) {
-      // Reformat on blur
-      inputRef.current.value = format(value);
+      inputRef.current.value = formatValue(value, decimals);
     }
   }
 
   function handleFocus() {
     if (value !== undefined) {
-      setRawInput(String(value));
+      setRawInput(decimals > 0 ? String(value).replace(".", ",") : String(value));
     }
   }
 
@@ -59,13 +71,13 @@ export function CurrencyInput({ value, onChange, disabled, hasError, placeholder
     <input
       ref={inputRef}
       type="text"
-      inputMode="numeric"
+      inputMode={decimals > 0 ? "decimal" : "numeric"}
       value={displayValue}
       onChange={handleChange}
       onBlur={handleBlur}
       onFocus={handleFocus}
       disabled={disabled}
-      placeholder={placeholder ?? "0"}
+      placeholder={placeholder ?? (decimals > 0 ? `0,${"0".repeat(decimals)}` : "0")}
       className={[
         "w-full text-right tabular-nums rounded px-2 py-1 text-sm",
         "border focus:outline-none focus:ring-2",
