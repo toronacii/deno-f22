@@ -4,6 +4,7 @@
 
 import type { Parameter, ParameterStore } from "../models/parameter.ts";
 import { buildParameterStore } from "../models/parameter.ts";
+import { RAW_PARAMS } from "../data/params_AT2026.ts";
 
 export async function loadParameters(jsonPath: string): Promise<ParameterStore> {
   const text = await Deno.readTextFile(jsonPath);
@@ -11,8 +12,7 @@ export async function loadParameters(jsonPath: string): Promise<ParameterStore> 
   return buildParameterStore(raw);
 }
 
-/** Load parameters from the default bundled data file */
-export async function loadDefaultParameters(): Promise<ParameterStore> {
-  const url = new URL("../data/params_AT2026.json", import.meta.url);
-  return loadParameters(url.pathname);
+/** Load parameters from the pre-processed data module (no disk I/O) */
+export function loadDefaultParameters(): Promise<ParameterStore> {
+  return Promise.resolve(buildParameterStore(RAW_PARAMS));
 }
