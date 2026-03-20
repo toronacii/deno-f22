@@ -12,7 +12,7 @@ const EngineCtx = createContext<BrowserEngine | null>(null);
 export function EngineProvider({ children }: { children: ReactNode }) {
   const { data: engine, isLoading, error } = useQuery({
     queryKey: ["engine"],
-    queryFn: () => initBrowserEngine("/api"),
+    queryFn: () => initBrowserEngine("/api/v1"),
     staleTime: Infinity,   // rules never change during a session
     retry: 2,
   });
@@ -34,8 +34,7 @@ export function EngineProvider({ children }: { children: ReactNode }) {
         <div className="text-center max-w-sm">
           <p className="text-red-600 font-semibold mb-2">Error al cargar el motor</p>
           <p className="text-gray-500 text-sm">
-            Asegúrate de que la API esté corriendo en{" "}
-            <code className="bg-gray-100 px-1 rounded">localhost:8000</code>
+            No se pudo conectar con la API. Intenta recargar la página.
           </p>
           <p className="text-gray-400 text-xs mt-2">
             {error instanceof Error ? error.message : "Error desconocido"}
