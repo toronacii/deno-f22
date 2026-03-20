@@ -9,6 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
 
     steps:
@@ -36,9 +37,6 @@ jobs:
         working-directory: web
 
       - name: Deploy to Deno Deploy
-        uses: denoland/deployctl@v1
-        with:
-          project: ${{ secrets.DENO_DEPLOY_PROJECT }}
-          token: ${{ secrets.DENO_DEPLOY_TOKEN }}
-          entrypoint: api/main.ts
-          root: .
+        run: deployctl deploy --project=${{ secrets.DENO_DEPLOY_PROJECT }} --include=api,core,web/dist api/main.ts
+        env:
+          DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
