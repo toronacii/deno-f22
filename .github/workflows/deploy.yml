@@ -9,7 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write   # needed for Deno Deploy OIDC auth
       contents: read
 
     steps:
@@ -40,5 +39,6 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: ${{ secrets.DENO_DEPLOY_PROJECT }}
+          token: ${{ secrets.DENO_DEPLOY_TOKEN }}
           entrypoint: api/main.ts
           root: .
