@@ -46,8 +46,38 @@ app.get("/api/rules/:id", ruleByIdHandler);
 
 app.get("/api/layout", layoutHandler);
 
-// 404 catch-all
-app.notFound((c) => c.json({ error: "Not found" }, 404));
+// ---------------------------------------------------------------------------
+// Static frontend (web/dist/) — SPA fallback to index.html
+// ---------------------------------------------------------------------------
+const STATIC_ROOT = new URL("../web/dist", import.meta.url).pathname;
+const MIME: Record<string, string> = {
+  ".html": "text/html; charset=utf-8",
+  ".js":   "application/javascript",
+  ".css":  "text/css",
+  ".svg":  "image/svg+xml",
+  ".png":  "image/png",
+  ".ico":  "image/x-icon",
+  ".json": "application/json",
+  ".woff2": "font/woff2",
+};
+
+app.get("*", async (c) => {
+  const url   = new URL(c.req.url);
+  const path  = url.pathname;
+  const ext   = path.includes(".") ? path.slice(path.lastIndexOf(".")) : "";
+  const candidates = ext
+    ? [`${STATIC_ROOT}${path}`]
+    : [`${STATIC_ROOT}${path}/index.html`, `${STATIC_ROOT}/index.html`];
+
+  for (const file of candidates) {
+    try {
+      const data = await Deno.readFile(file);
+      const mime = MIME[ext] ?? MIME[".html"];
+      return new Response(data, { headers: { "Content-Type": mime } });
+    } catch { /* try next */ }
+  }
+  return c.json({ error: "Not found" }, 404);
+});
 
 // ---------------------------------------------------------------------------
 // Start server
