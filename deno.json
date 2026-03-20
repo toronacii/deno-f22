@@ -1,0 +1,9 @@
+{
+  "deploy": {
+    "install": "npm ci --prefix web",
+    "build": "npm run build --prefix web",
+    "runtime": {
+      "entrypoint": "api/main.ts"
+    }
+  }
+}
