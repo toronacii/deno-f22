@@ -49,7 +49,7 @@ export function OptimizationPanel() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/optimize", {
+      const res = await fetch("/api/v1/optimize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

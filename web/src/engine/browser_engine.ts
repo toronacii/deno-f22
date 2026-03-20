@@ -61,7 +61,7 @@ export interface BrowserEngine {
   totalRules: number;
 }
 
-export async function initBrowserEngine(apiBase = "/api"): Promise<BrowserEngine> {
+export async function initBrowserEngine(apiBase = "/api/v1"): Promise<BrowserEngine> {
   // Fetch rules, fields, params and layout in parallel
   const [rulesRes, fieldsRes, paramsRes, layoutRes] = await Promise.all([
     fetch(`${apiBase}/rules`),

@@ -29,22 +29,26 @@ app.use("*", logger());
 app.use("*", errorHandler);
 
 // ---------------------------------------------------------------------------
-// Routes
+// Routes — /api/v1/
 // ---------------------------------------------------------------------------
-app.get("/api/health", healthHandler);
-app.get("/api/params", paramsHandler);
+const v1 = new Hono();
 
-app.post("/api/calculate", calculateHandler);
-app.post("/api/validate", validateHandler);
-app.post("/api/optimize", optimizeHandler);
+v1.get("/health", healthHandler);
+v1.get("/params", paramsHandler);
 
-app.get("/api/fields", fieldsHandler);
-app.get("/api/fields/:code", fieldByCodeHandler);
+v1.post("/calculate", calculateHandler);
+v1.post("/validate", validateHandler);
+v1.post("/optimize", optimizeHandler);
 
-app.get("/api/rules", rulesHandler);
-app.get("/api/rules/:id", ruleByIdHandler);
+v1.get("/fields", fieldsHandler);
+v1.get("/fields/:code", fieldByCodeHandler);
 
-app.get("/api/layout", layoutHandler);
+v1.get("/rules", rulesHandler);
+v1.get("/rules/:id", ruleByIdHandler);
+
+v1.get("/layout", layoutHandler);
+
+app.route("/api/v1", v1);
 
 // ---------------------------------------------------------------------------
 // Static frontend (web/dist/) — SPA fallback to index.html

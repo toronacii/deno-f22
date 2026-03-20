@@ -27,14 +27,16 @@ import type {
 
 function buildTestApp(): Hono {
   const app = new Hono();
-  app.get("/api/health", healthHandler);
-  app.post("/api/calculate", calculateHandler);
-  app.post("/api/validate", validateHandler);
-  app.post("/api/optimize", optimizeHandler);
-  app.get("/api/fields", fieldsHandler);
-  app.get("/api/fields/:code", fieldByCodeHandler);
-  app.get("/api/rules", rulesHandler);
-  app.get("/api/rules/:id", ruleByIdHandler);
+  const v1 = new Hono();
+  v1.get("/health", healthHandler);
+  v1.post("/calculate", calculateHandler);
+  v1.post("/validate", validateHandler);
+  v1.post("/optimize", optimizeHandler);
+  v1.get("/fields", fieldsHandler);
+  v1.get("/fields/:code", fieldByCodeHandler);
+  v1.get("/rules", rulesHandler);
+  v1.get("/rules/:id", ruleByIdHandler);
+  app.route("/api/v1", v1);
   return app;
 }
 
@@ -71,7 +73,7 @@ async function get(app: Hono, path: string): Promise<Response> {
 
 Deno.test("GET /api/health — returns ok status with engine info", async () => {
   const app = buildTestApp();
-  const res = await get(app, "/api/health");
+  const res = await get(app, "/api/v1/health");
   assertEquals(res.status, 200);
   const data = await res.json();
   assertEquals(data.status, "ok");
@@ -88,7 +90,7 @@ Deno.test("GET /api/health — returns ok status with engine info", async () => 
 
 Deno.test("/calculate — computes RECUADRO 1 correctly", async () => {
   const app = buildTestApp();
-  const res = await post(app, "/api/calculate", SAMPLE_BODY);
+  const res = await post(app, "/api/v1/calculate", SAMPLE_BODY);
   assertEquals(res.status, 200);
 
   const data = await res.json() as CalculateResponse;
@@ -116,7 +118,7 @@ Deno.test("/calculate — computes RECUADRO 1 correctly", async () => {
 
 Deno.test("/calculate — returns 400 for missing fieldValues", async () => {
   const app = buildTestApp();
-  const res = await post(app, "/api/calculate", { taxRegime: "14D8" });
+  const res = await post(app, "/api/v1/calculate", { taxRegime: "14D8" });
   assertEquals(res.status, 400);
   const data = await res.json();
   assertExists(data.error);
@@ -124,7 +126,7 @@ Deno.test("/calculate — returns 400 for missing fieldValues", async () => {
 
 Deno.test("/calculate — returns 400 for invalid taxRegime", async () => {
   const app = buildTestApp();
-  const res = await post(app, "/api/calculate", {
+  const res = await post(app, "/api/v1/calculate", {
     fieldValues: { "547": 1000 },
     taxRegime: "INVALID_REGIME",
   });
@@ -135,7 +137,7 @@ Deno.test("/calculate — returns 400 for invalid taxRegime", async () => {
 
 Deno.test("/calculate — handles empty fieldValues gracefully", async () => {
   const app = buildTestApp();
-  const res = await post(app, "/api/calculate", {
+  const res = await post(app, "/api/v1/calculate", {
     fieldValues: {},
     taxRegime: "14D8",
     entityType: 1,
@@ -147,7 +149,7 @@ Deno.test("/calculate — handles empty fieldValues gracefully", async () => {
 
 Deno.test("/calculate — includes skipped rules list", async () => {
   const app = buildTestApp();
-  const res = await post(app, "/api/calculate", SAMPLE_BODY);
+  const res = await post(app, "/api/v1/calculate", SAMPLE_BODY);
   const data = await res.json() as CalculateResponse;
   assert(Array.isArray(data.skipped), "skipped must be an array");
 });
@@ -155,8 +157,8 @@ Deno.test("/calculate — includes skipped rules list", async () => {
 Deno.test("/calculate — entityType=2 (sociedad) produces different result than entityType=1", async () => {
   const app = buildTestApp();
 
-  const res1 = await post(app, "/api/calculate", { ...SAMPLE_BODY, entityType: 1 });
-  const res2 = await post(app, "/api/calculate", { ...SAMPLE_BODY, entityType: 2 });
+  const res1 = await post(app, "/api/v1/calculate", { ...SAMPLE_BODY, entityType: 1 });
+  const res2 = await post(app, "/api/v1/calculate", { ...SAMPLE_BODY, entityType: 2 });
 
   const d1 = await res1.json() as CalculateResponse;
   const d2 = await res2.json() as CalculateResponse;
@@ -182,7 +184,7 @@ Deno.test("/validate — no violations when values are consistent", async () => 
   const app = buildTestApp();
 
   // First calculate to get correct values
-  const calcRes = await post(app, "/api/calculate", SAMPLE_BODY);
+  const calcRes = await post(app, "/api/v1/calculate", SAMPLE_BODY);
   const calcData = await calcRes.json() as CalculateResponse;
 
   // Then validate with the computed values
@@ -192,7 +194,7 @@ Deno.test("/validate — no violations when values are consistent", async () => 
     entityType: SAMPLE_BODY.entityType,
   };
 
-  const res = await post(app, "/api/validate", validateBody);
+  const res = await post(app, "/api/v1/validate", validateBody);
   assertEquals(res.status, 200);
 
   const data = await res.json() as ValidateResponse;
@@ -214,7 +216,7 @@ Deno.test("/validate — detects violation for wrong [547]", async () => {
     entityType: SAMPLE_BODY.entityType,
   };
 
-  const res = await post(app, "/api/validate", badBody);
+  const res = await post(app, "/api/v1/validate", badBody);
   assertEquals(res.status, 200);
 
   const data = await res.json() as ValidateResponse;
@@ -227,7 +229,7 @@ Deno.test("/validate — detects violation for wrong [547]", async () => {
 
 Deno.test("/validate — returns 400 for invalid request", async () => {
   const app = buildTestApp();
-  const res = await post(app, "/api/validate", { taxRegime: "14D8" });
+  const res = await post(app, "/api/v1/validate", { taxRegime: "14D8" });
   assertEquals(res.status, 400);
 });
 
@@ -237,7 +239,7 @@ Deno.test("/validate — returns 400 for invalid request", async () => {
 
 Deno.test("/optimize — returns suggestions", async () => {
   const app = buildTestApp();
-  const res = await post(app, "/api/optimize", SAMPLE_BODY);
+  const res = await post(app, "/api/v1/optimize", SAMPLE_BODY);
   assertEquals(res.status, 200);
 
   const data = await res.json() as OptimizeResponse;
@@ -250,7 +252,7 @@ Deno.test("/optimize — returns suggestions", async () => {
 
 Deno.test("/optimize — each suggestion has required fields", async () => {
   const app = buildTestApp();
-  const res = await post(app, "/api/optimize", SAMPLE_BODY);
+  const res = await post(app, "/api/v1/optimize", SAMPLE_BODY);
   const data = await res.json() as OptimizeResponse;
 
   for (const s of data.suggestions) {
@@ -271,7 +273,7 @@ Deno.test("/optimize — each suggestion has required fields", async () => {
 
 Deno.test("GET /api/fields — returns field list", async () => {
   const app = buildTestApp();
-  const res = await get(app, "/api/fields");
+  const res = await get(app, "/api/v1/fields");
   assertEquals(res.status, 200);
 
   const data = await res.json() as FieldsResponse;
@@ -285,12 +287,12 @@ Deno.test("GET /api/fields — filters by section", async () => {
   const app = buildTestApp();
 
   // First get all to find a valid section name
-  const allRes = await get(app, "/api/fields");
+  const allRes = await get(app, "/api/v1/fields");
   const allData = await allRes.json() as FieldsResponse;
   if (allData.sections.length === 0) return; // Skip if no sections loaded
 
   const section = encodeURIComponent(allData.sections[0]);
-  const res = await get(app, `/api/fields?section=${section}`);
+  const res = await get(app, `/api/v1/fields?section=${section}`);
   assertEquals(res.status, 200);
 
   const data = await res.json() as FieldsResponse;
@@ -299,7 +301,7 @@ Deno.test("GET /api/fields — filters by section", async () => {
 
 Deno.test("GET /api/fields/:code — returns single field", async () => {
   const app = buildTestApp();
-  const res = await get(app, "/api/fields/547");
+  const res = await get(app, "/api/v1/fields/547");
   // 547 may or may not be in the layout depending on the XLSX content
   // Accept either 200 (found) or 404 (not in layout but OK)
   assert(res.status === 200 || res.status === 404);
@@ -307,7 +309,7 @@ Deno.test("GET /api/fields/:code — returns single field", async () => {
 
 Deno.test("GET /api/fields/:code — 400 for non-numeric code", async () => {
   const app = buildTestApp();
-  const res = await get(app, "/api/fields/abc");
+  const res = await get(app, "/api/v1/fields/abc");
   assertEquals(res.status, 400);
 });
 
@@ -317,7 +319,7 @@ Deno.test("GET /api/fields/:code — 400 for non-numeric code", async () => {
 
 Deno.test("GET /api/rules — returns all rules", async () => {
   const app = buildTestApp();
-  const res = await get(app, "/api/rules");
+  const res = await get(app, "/api/v1/rules");
   assertEquals(res.status, 200);
 
   const data = await res.json() as RulesResponse;
@@ -328,7 +330,7 @@ Deno.test("GET /api/rules — returns all rules", async () => {
 
 Deno.test("GET /api/rules — parse rate >80%", async () => {
   const app = buildTestApp();
-  const res = await get(app, "/api/rules");
+  const res = await get(app, "/api/v1/rules");
   const data = await res.json() as RulesResponse;
 
   const parseRate = (data.total - data.parseErrors) / data.total;
@@ -338,7 +340,7 @@ Deno.test("GET /api/rules — parse rate >80%", async () => {
 
 Deno.test("GET /api/rules?field=547 — filters by field", async () => {
   const app = buildTestApp();
-  const res = await get(app, "/api/rules?field=547");
+  const res = await get(app, "/api/v1/rules?field=547");
   assertEquals(res.status, 200);
 
   const data = await res.json() as RulesResponse;
@@ -347,7 +349,7 @@ Deno.test("GET /api/rules?field=547 — filters by field", async () => {
 
 Deno.test("GET /api/rules?parsed=false — returns only unparsed rules", async () => {
   const app = buildTestApp();
-  const res = await get(app, "/api/rules?parsed=false");
+  const res = await get(app, "/api/v1/rules?parsed=false");
   const data = await res.json() as RulesResponse;
   assert(data.rules.every((r) => !r.parsed));
   assertEquals(data.parseErrors, data.total);
@@ -355,13 +357,13 @@ Deno.test("GET /api/rules?parsed=false — returns only unparsed rules", async (
 
 Deno.test("GET /api/rules/:id — 404 for unknown id", async () => {
   const app = buildTestApp();
-  const res = await get(app, "/api/rules/z.999");
+  const res = await get(app, "/api/v1/rules/z.999");
   assertEquals(res.status, 404);
 });
 
 Deno.test("GET /api/rules/:id — 400 for invalid id format", async () => {
   // Non-existent but not clearly invalid — API returns 404
   const app = buildTestApp();
-  const res = await get(app, "/api/rules/nonexistent");
+  const res = await get(app, "/api/v1/rules/nonexistent");
   assertEquals(res.status, 404);
 });
