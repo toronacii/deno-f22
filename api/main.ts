@@ -48,6 +48,9 @@ v1.get("/rules/:id", ruleByIdHandler);
 
 v1.get("/layout", layoutHandler);
 
+// Any unmatched /api/v1/* path → JSON 404 (never fall through to SPA)
+v1.all("*", (c) => c.json({ error: "Not found" }, 404));
+
 app.route("/api/v1", v1);
 
 // ---------------------------------------------------------------------------
