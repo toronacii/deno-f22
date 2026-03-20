@@ -227,7 +227,7 @@ function SlotCell({
     <td className="w-44 py-1.5 px-2 align-top">
       <div className="flex flex-col gap-0.5">
         {perFieldLabel && (
-          <span className="text-[11px] text-gray-500 leading-tight truncate max-w-[160px]" title={perFieldLabel}>
+          <span className="text-[11px] text-gray-500 leading-tight" title={perFieldLabel}>
             {perFieldLabel}
           </span>
         )}
@@ -243,7 +243,7 @@ function SlotCell({
             </Tooltip>
           )}
           <span className="text-[10px] font-mono text-gray-400 select-none">{field.code}</span>
-          <div className={field.dataType === "boolean" ? "" : "flex-1 max-w-28"}>
+          <div className={field.dataType === "boolean" ? "" : field.dataType === "text" ? "flex-1" : "flex-1 max-w-28"}>
             <FieldCell
               code={field.code}
               isComputed={isComputed}
@@ -276,7 +276,7 @@ function FieldDataRow({
       }`}
     >
       {/* Label column — row.text only; per-field labels live in the slot cells */}
-      <td className="py-1.5 px-3 text-sm text-gray-800 leading-snug">
+      <td className="py-1.5 px-3 text-sm text-gray-800 leading-snug min-w-[140px]">
         {row.text}
       </td>
 

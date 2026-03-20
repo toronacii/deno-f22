@@ -8,24 +8,38 @@ import { useFormStore } from "../../store/form_store.ts";
 import { useVariant } from "../../hooks/use_variant.ts";
 
 const SECTION_NAMES: Record<string, string> = {
-  "N° 0":  "Info. Base",
-  "N° 1":  "Honorarios",
-  "N° 2":  "Bienes Raíces",
-  "N° 3":  "Ahorro Art. 57 bis",
-  "N° 4":  "Acciones y Fondos",
-  "N° 5":  "Rentas del Capital",
-  "N° 6":  "Rentas Empresariales",
-  "N° 7":  "Rentas del Exterior",
-  "N° 8":  "Créditos",
-  "N° 9":  "Retenciones y PPM",
-  "N° 10": "Reliquidación",
-  "N° 11": "Datos Adicionales",
-  "N° 12": "Determinación Impuesto",
+  "RECUADRO 0":  "Info. Base",
+  "RECUADRO 1":  "Honorarios",
+  "RECUADRO 2":  "Bienes Raíces",
+  "RECUADRO 3":  "Ahorro Art. 57 bis",
+  "RECUADRO 4":  "Acciones y Fondos",
+  "RECUADRO 5":  "Crédito Ingreso Diferido",
+  "RECUADRO 6":  "Datos Informativos",
+  "RECUADRO 7":  "Ingreso Diferido",
+  "RECUADRO 8":  "Donaciones y Créditos",
+  "RECUADRO 9":  "Registro FUR",
+  "RECUADRO 10": "Depreciación",
+  "RECUADRO 11": "Royalty Minero",
+  "RECUADRO 12": "Base Imponible 1ª Cat.",
+  "RECUADRO 13": "RAI (Art. 14A)",
+  "RECUADRO 14": "CPT (Art. 14A/G)",
+  "RECUADRO 15": "RTRE y STUT (14A)",
+  "RECUADRO 16": "Registro SAC (14A)",
+  "RECUADRO 17": "Base Imp. Pro Pyme",
+  "RECUADRO 19": "CPTS Pro Pyme",
+  "RECUADRO 20": "RTRE y STUT (14D3)",
+  "RECUADRO 21": "Registro SAC (14D3)",
+  "RECUADRO 22": "Base Imp. Transparencia",
+  "RECUADRO 23": "CPTS Transparencia",
+  "RECUADRO 24": "Préstamo Tasa 0%",
 };
 
 function getSectionShortName(sectionId: string): string {
-  for (const [key, name] of Object.entries(SECTION_NAMES)) {
-    if (sectionId.includes(key)) return name;
+  // Extract the numeric portion from IDs like "RECUADRO 0", "RECUADRO 10" etc.
+  const match = sectionId.match(/RECUADRO\s+(\d+)/);
+  if (match) {
+    const key = `RECUADRO ${match[1]}`;
+    if (SECTION_NAMES[key]) return SECTION_NAMES[key];
   }
   return sectionId.replace("RECUADRO ", "Rec. ");
 }
