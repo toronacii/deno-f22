@@ -10,6 +10,7 @@
     "hono": "jsr:@hono/hono@^4.6.0",
     "hono/middleware": "jsr:@hono/hono@^4.6.0/middleware",
     "@std/assert": "jsr:@std/assert@^1.0.0",
-    "@f22/core": "../core/mod.ts"
+    "@f22/core": "../core/mod.ts",
+    "npm:@supabase/supabase-js@2": "npm:@supabase/supabase-js@^2.49.0"
   }
 }

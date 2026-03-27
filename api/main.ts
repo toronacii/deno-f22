@@ -18,6 +18,14 @@ import { healthHandler } from "./routes/health.ts";
 import { paramsHandler } from "./routes/params.ts";
 import { layoutHandler } from "./routes/layout.ts";
 import { getEngine } from "./engine_singleton.ts";
+// SaaS routes
+import { authSaasRouter }    from "./routes/auth_saas.ts";
+import { meRouter }          from "./routes/me.ts";
+import { dashboardRouter }   from "./routes/dashboard.ts";
+import { plansRouter }       from "./routes/plans.ts";
+import { subscriptionsRouter } from "./routes/subscriptions.ts";
+import { taxpayersRouter }   from "./routes/taxpayers.ts";
+import { formsSaasRouter }   from "./routes/forms_saas.ts";
 
 const app = new Hono();
 
@@ -47,6 +55,17 @@ v1.get("/rules", rulesHandler);
 v1.get("/rules/:id", ruleByIdHandler);
 
 v1.get("/layout", layoutHandler);
+
+// ---------------------------------------------------------------------------
+// SaaS — auth, perfil, planes, RUTs, formularios
+// ---------------------------------------------------------------------------
+v1.route("/auth",          authSaasRouter);
+v1.route("/me",            meRouter);
+v1.route("/dashboard",     dashboardRouter);
+v1.route("/plans",         plansRouter);
+v1.route("/subscriptions", subscriptionsRouter);
+v1.route("/taxpayers",     taxpayersRouter);
+v1.route("/forms",         formsSaasRouter);
 
 // Any unmatched /api/v1/* path → JSON 404 (never fall through to SPA)
 v1.all("*", (c) => c.json({ error: "Not found" }, 404));
