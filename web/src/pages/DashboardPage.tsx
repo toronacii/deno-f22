@@ -4,8 +4,8 @@
  */
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate, Link } from "react-router-dom";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api.ts";
 import { useAuth } from "../lib/auth_context.tsx";
 import { AddTaxpayerModal } from "../components/dashboard/AddTaxpayerModal.tsx";
@@ -40,11 +40,31 @@ export function DashboardPage() {
   const navigate      = useNavigate();
   const queryClient   = useQueryClient();
   const [showAdd, setShowAdd] = useState(false);
+  const [showArchived, setShowArchived] = useState(false);
+  const [reactivateError, setReactivateError] = useState<{ id: string; msg: string } | null>(null);
+
+  const reactivate = useMutation({
+    mutationFn: (id: string) => api.patch(`/taxpayers/${id}/reactivate`, {}),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+      queryClient.invalidateQueries({ queryKey: ["taxpayers-inactive"] });
+      setReactivateError(null);
+    },
+    onError: (err: Error, id: string) => {
+      setReactivateError({ id, msg: err.message });
+    },
+  });
 
   const { data, isLoading } = useQuery({
     queryKey: ["dashboard"],
     queryFn:  () => api.get<DashboardData>("/dashboard"),
   });
+
+  const { data: archivedData } = useQuery({
+    queryKey: ["taxpayers-inactive"],
+    queryFn:  () => api.get<{ taxpayers: Taxpayer[] }>("/taxpayers?inactive=true"),
+  });
+  const archivedTaxpayers = archivedData?.taxpayers ?? [];
 
   const taxpayers  = data?.taxpayers ?? [];
   const sub        = data?.subscription;
@@ -156,6 +176,76 @@ export function DashboardPage() {
             )}
           </div>
         )}
+
+        {/* Archivados */}
+        {archivedTaxpayers.length > 0 && <div className="mt-8">
+          <button
+            onClick={() => setShowArchived(!showArchived)}
+            className="flex items-center gap-2 text-sm text-stone-400 hover:text-stone-600 transition-colors"
+          >
+            <svg className={`w-4 h-4 transition-transform ${showArchived ? "rotate-90" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+            Contribuyentes archivados
+            {archivedTaxpayers.length > 0 && (
+              <span className="bg-stone-100 text-stone-500 text-xs rounded-full px-2 py-0.5">
+                {archivedTaxpayers.length}
+              </span>
+            )}
+          </button>
+
+          {showArchived && (
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {archivedTaxpayers.length === 0 ? (
+                <p className="text-sm text-stone-400 col-span-full py-2">Sin contribuyentes archivados.</p>
+              ) : (
+                archivedTaxpayers.map((t) => {
+                  const isPending = reactivate.isPending && reactivate.variables === t.id;
+                  const err = reactivateError?.id === t.id ? reactivateError.msg : null;
+                  return (
+                    <div
+                      key={t.id}
+                      className="rounded-xl border border-stone-200 bg-white p-5 flex flex-col gap-3"
+                    >
+                      <Link to={`/rut/${t.id}`} className="group flex-1">
+                        <div className="font-mono text-xs text-stone-400 mb-1 tracking-wide">{t.rut}</div>
+                        <div className="font-semibold text-stone-700 leading-snug line-clamp-2 group-hover:text-brand-700 transition-colors">
+                          {t.name}
+                        </div>
+                      </Link>
+                      <div className="flex items-center justify-between gap-2 pt-2 border-t border-stone-100">
+                        <span className="text-[11px] bg-stone-100 text-stone-400 rounded-md px-2 py-0.5 font-medium">
+                          Inactivo
+                        </span>
+                        <div className="flex flex-col items-end gap-1">
+                          {err && (
+                            <span className="text-[11px] text-danger-600 text-right max-w-[180px]">{err}</span>
+                          )}
+                          {err?.includes("límite") || err?.includes("PLAN") ? (
+                            <Link
+                              to="/account"
+                              className="text-xs font-medium bg-brand-700 hover:bg-brand-800 text-white px-3 py-1.5 rounded-lg transition-colors"
+                            >
+                              Actualizar plan
+                            </Link>
+                          ) : (
+                            <button
+                              onClick={() => reactivate.mutate(t.id)}
+                              disabled={isPending}
+                              className="text-xs font-medium bg-brand-700 hover:bg-brand-800 disabled:bg-brand-300 text-white px-3 py-1.5 rounded-lg transition-colors"
+                            >
+                              {isPending ? "Activando…" : "Activar"}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          )}
+        </div>}
       </main>
 
       {showAdd && (

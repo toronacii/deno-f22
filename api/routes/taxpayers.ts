@@ -14,17 +14,18 @@ export const taxpayersRouter = new Hono();
 
 taxpayersRouter.use("*", authMiddleware);
 
-// GET /taxpayers
+// GET /taxpayers?inactive=true
 taxpayersRouter.get("/", async (c) => {
-  const userId = c.get("userId") as string;
-  const jwt    = c.get("userJwt") as string;
-  const db     = getUserClient(jwt);
+  const userId   = c.get("userId") as string;
+  const jwt      = c.get("userJwt") as string;
+  const db       = getUserClient(jwt);
+  const inactive = c.req.query("inactive") === "true";
 
   const { data, error } = await db
     .from("taxpayer_entities")
     .select("id, rut, name, tax_regime, entity_type, is_active, created_at")
     .eq("user_id", userId)
-    .eq("is_active", true)
+    .eq("is_active", !inactive)
     .order("name");
 
   if (error) return c.json({ error: error.message }, 500);
@@ -125,6 +126,41 @@ taxpayersRouter.put("/:id", async (c) => {
   if (!data) return c.json({ error: "RUT no encontrado" }, 404);
 
   return c.json({ taxpayer: data });
+});
+
+// PATCH /taxpayers/:id/reactivate — reactiva si hay cupo en el plan
+taxpayersRouter.patch("/:id/reactivate", async (c) => {
+  const userId = c.get("userId") as string;
+  const jwt    = c.get("userJwt") as string;
+  const db     = getUserClient(jwt);
+  const id     = c.req.param("id");
+
+  // Verificar que el RUT pertenece al usuario y está inactivo
+  const { data: taxpayer } = await db
+    .from("taxpayer_entities")
+    .select("id, is_active")
+    .eq("id", id)
+    .eq("user_id", userId)
+    .single();
+
+  if (!taxpayer) return c.json({ error: "Contribuyente no encontrado" }, 404);
+  if (taxpayer.is_active) return c.json({ error: "El contribuyente ya está activo" }, 400);
+
+  // Verificar cupo en el plan (reutiliza la misma lógica que al agregar)
+  try {
+    await assertCanAddRut(db, userId);
+  } catch (e) {
+    return c.json({ error: (e as Error).message, code: "PLAN_LIMIT" }, 403);
+  }
+
+  const { error } = await db
+    .from("taxpayer_entities")
+    .update({ is_active: true })
+    .eq("id", id)
+    .eq("user_id", userId);
+
+  if (error) return c.json({ error: error.message }, 400);
+  return c.json({ success: true });
 });
 
 // DELETE /taxpayers/:id — soft delete

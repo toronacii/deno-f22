@@ -9,6 +9,7 @@ import { LoginPage }              from "./pages/LoginPage.tsx";
 import { RegisterPage }           from "./pages/RegisterPage.tsx";
 import { AuthCallbackPage }       from "./pages/AuthCallbackPage.tsx";
 import { OnboardingPage }         from "./pages/OnboardingPage.tsx";
+import { AccountPage }            from "./pages/AccountPage.tsx";
 import { DashboardPage }          from "./pages/DashboardPage.tsx";
 import { TaxpayerWorkspacePage }  from "./pages/TaxpayerWorkspacePage.tsx";
 import { FormEditorPage }         from "./pages/FormEditorPage.tsx";
@@ -30,6 +31,13 @@ export default function App() {
             <Route path="/onboarding" element={
               <AuthGuard requireOnboarding={false}>
                 <OnboardingPage />
+              </AuthGuard>
+            } />
+
+            {/* Protected — cuenta */}
+            <Route path="/account" element={
+              <AuthGuard>
+                <AccountPage />
               </AuthGuard>
             } />
 

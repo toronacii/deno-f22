@@ -25,9 +25,10 @@ export interface BreadcrumbInfo {
 
 interface AppShellProps {
   breadcrumb?: BreadcrumbInfo;
+  readOnly?: boolean;
 }
 
-export function AppShell({ breadcrumb }: AppShellProps) {
+export function AppShell({ breadcrumb, readOnly }: AppShellProps) {
   const [rightTab,     setRightTab]     = useState<RightPanelTab>("validation");
   const [sidebarOpen,  setSidebarOpen]  = useState(false);
   const [panelOpen,    setPanelOpen]    = useState(false);
@@ -54,7 +55,15 @@ export function AppShell({ breadcrumb }: AppShellProps) {
 
         {/* Main form — extra bottom padding on mobile so bottom toolbar doesn't cover content */}
         <main className="flex-1 overflow-y-auto px-3 md:px-6 py-4 md:py-5 pb-20 lg:pb-5">
-          <F22Form />
+          {readOnly && (
+            <div className="flex items-center gap-2.5 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 text-sm text-amber-800">
+              <svg className="w-4 h-4 shrink-0 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Contribuyente desactivado — formulario en <strong className="ml-1">solo lectura</strong>.
+            </div>
+          )}
+          <F22Form readOnly={readOnly} />
         </main>
 
         {/* Desktop right panel */}

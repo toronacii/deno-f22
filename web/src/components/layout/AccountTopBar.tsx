@@ -146,6 +146,17 @@ export function AccountTopBar({ rutContext, otherRuts }: Props) {
               </svg>
               Dashboard
             </Link>
+            <Link
+              to="/account"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 px-3 py-2 text-sm text-stone-700 hover:bg-stone-50 transition-colors"
+            >
+              <svg className="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              Mi cuenta
+            </Link>
+            <div className="h-px bg-stone-100 mx-2 my-1" />
             <button
               onClick={() => { signOut(); navigate("/login"); }}
               className="w-full flex items-center gap-2 px-3 py-2 text-sm text-danger-600 hover:bg-danger-500/8 transition-colors"

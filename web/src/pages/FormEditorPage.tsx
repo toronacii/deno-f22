@@ -22,6 +22,7 @@ interface FormDetail {
     name:        string;
     tax_regime:  string | null;
     entity_type: number | null;
+    is_active:   boolean;
   };
   form_types: { id: string; code: string; name: string; tax_year: number | null };
   tax_form_data: { data: Record<string, unknown>; version: number }[] | null;
@@ -74,9 +75,11 @@ export function FormEditorPage() {
   // Autosave: guarda al API cuando cambian fieldValues o textValues (debounced)
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const versionRef = useRef(1);
+  const readOnly = data?.form ? !data.form.taxpayer_entities.is_active : false;
 
   useEffect(() => {
     if (!formId || loadedFormId.current !== formId) return;
+    if (readOnly) return;  // no autosave for inactive taxpayers
     if (saveTimer.current) clearTimeout(saveTimer.current);
 
     saveTimer.current = setTimeout(async () => {
@@ -127,6 +130,7 @@ export function FormEditorPage() {
   // Pasa el contexto del RUT al AppShell a través de props adicionales
   return (
     <AppShell
+      readOnly={readOnly}
       breadcrumb={{
         rutId:   rutId!,
         rutRut:  tp.rut,

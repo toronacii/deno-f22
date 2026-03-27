@@ -20,6 +20,7 @@ interface Props {
   computedCodes: Set<number>;
   optimizableFields?: Set<number>;
   fieldMetadata?: Map<number, FieldMetadataEntry>;
+  readOnly?: boolean;
 }
 
 function formatPesos(n: number): string {
@@ -28,7 +29,7 @@ function formatPesos(n: number): string {
 
 // ── text field cell ───────────────────────────────────────────────────────────
 
-function TextFieldCell({ code }: { code: number }) {
+function TextFieldCell({ code, readOnly }: { code: number; readOnly?: boolean }) {
   const value = useFormStore((s) => s.textValues[code] ?? "");
   const setTextField = useFormStore((s) => s.setTextField);
   return (
@@ -36,15 +37,16 @@ function TextFieldCell({ code }: { code: number }) {
       id={`field-${code}`}
       type="text"
       value={value}
-      onChange={(e) => setTextField(code, e.target.value)}
-      className="w-full border border-stone-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-brand-400"
+      onChange={(e) => !readOnly && setTextField(code, e.target.value)}
+      disabled={readOnly}
+      className="w-full border border-stone-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-brand-400 disabled:bg-stone-50 disabled:text-stone-400 disabled:cursor-not-allowed"
     />
   );
 }
 
 // ── boolean field cell ────────────────────────────────────────────────────────
 
-function BoolFieldCell({ code }: { code: number }) {
+function BoolFieldCell({ code, readOnly }: { code: number; readOnly?: boolean }) {
   const value = useFormStore((s) => s.fieldValues[code] ?? 0);
   const setField = useFormStore((s) => s.setField);
   return (
@@ -52,15 +54,16 @@ function BoolFieldCell({ code }: { code: number }) {
       id={`field-${code}`}
       type="checkbox"
       checked={value === 1}
-      onChange={(e) => setField(code, e.target.checked ? 1 : 0)}
-      className="w-4 h-4 accent-brand-600 cursor-pointer"
+      onChange={(e) => !readOnly && setField(code, e.target.checked ? 1 : 0)}
+      disabled={readOnly}
+      className="w-4 h-4 accent-brand-600 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
     />
   );
 }
 
 // ── numeric field cell ────────────────────────────────────────────────────────
 
-function NumericFieldCell({ code, isComputed, decimals }: { code: number; isComputed: boolean; decimals?: number }) {
+function NumericFieldCell({ code, isComputed, decimals, readOnly }: { code: number; isComputed: boolean; decimals?: number; readOnly?: boolean }) {
   const declared = useFormStore((s) => s.fieldValues[code]);
   const computed = useFormStore((s) => s.computedValues[code]);
   const hasViolation = useFormStore((s) => s.violations.some((v) => v.targetField === code));
@@ -96,7 +99,7 @@ function NumericFieldCell({ code, isComputed, decimals }: { code: number; isComp
 
   return (
     <div id={`field-${code}`}>
-      {hasViolation ? (
+      {hasViolation && !readOnly ? (
         <Tooltip content={violationMsg ?? ""}>
           <div>
             <CurrencyInput
@@ -112,6 +115,7 @@ function NumericFieldCell({ code, isComputed, decimals }: { code: number; isComp
           value={declared}
           onChange={(v) => v === undefined ? clearField(code) : setField(code, v)}
           decimals={decimals}
+          disabled={readOnly}
         />
       )}
     </div>
@@ -125,15 +129,17 @@ function FieldCell({
   isComputed,
   dataType,
   decimals,
+  readOnly,
 }: {
   code: number;
   isComputed: boolean;
   dataType?: string;
   decimals?: number;
+  readOnly?: boolean;
 }) {
-  if (dataType === "text") return <TextFieldCell code={code} />;
-  if (dataType === "boolean") return <BoolFieldCell code={code} />;
-  return <NumericFieldCell code={code} isComputed={isComputed} decimals={decimals} />;
+  if (dataType === "text") return <TextFieldCell code={code} readOnly={readOnly} />;
+  if (dataType === "boolean") return <BoolFieldCell code={code} readOnly={readOnly} />;
+  return <NumericFieldCell code={code} isComputed={isComputed} decimals={decimals} readOnly={readOnly} />;
 }
 
 // ── section title row ─────────────────────────────────────────────────────────
@@ -217,11 +223,13 @@ function SlotCell({
   rowText,
   computedCodes,
   meta,
+  readOnly,
 }: {
   field: LayoutField;
   rowText: string;
   computedCodes: Set<number>;
   meta?: FieldMetadataEntry;
+  readOnly?: boolean;
 }) {
   const isComputed = computedCodes.has(field.code);
   const perFieldLabel = field.label && field.label !== rowText ? field.label : "";
@@ -253,6 +261,7 @@ function SlotCell({
               isComputed={isComputed}
               dataType={field.dataType}
               decimals={field.decimals}
+              readOnly={readOnly}
             />
           </div>
         </div>
@@ -269,12 +278,14 @@ function FieldDataRow({
   slotGroups,
   computedCodes,
   fieldMetadata,
+  readOnly,
 }: {
   row: LayoutRow;
   nSlots: number;
   slotGroups: number[][];
   computedCodes: Set<number>;
   fieldMetadata?: Map<number, FieldMetadataEntry>;
+  readOnly?: boolean;
 }) {
   return (
     <tr
@@ -306,6 +317,7 @@ function FieldDataRow({
               rowText={row.text}
               computedCodes={computedCodes}
               meta={fieldMetadata?.get(f.code)}
+              readOnly={readOnly}
             />
             <td className="w-5 py-1.5 text-center text-xs font-mono text-stone-500 select-none align-middle">
               {f.operator}
@@ -357,7 +369,7 @@ function buildSlotGroups(section: LayoutSection): number[][] {
   return groups;
 }
 
-export function RecuadroTable({ section, computedCodes, optimizableFields: _optimizableFields, fieldMetadata }: Props) {
+export function RecuadroTable({ section, computedCodes, optimizableFields: _optimizableFields, fieldMetadata, readOnly }: Props) {
   const slotGroups = buildSlotGroups(section);
   const nSlots = slotGroups.length;
 
@@ -376,7 +388,7 @@ export function RecuadroTable({ section, computedCodes, optimizableFields: _opti
               return <SubHeaderRow key={i} row={row} nSlots={nSlots} />;
             }
             return (
-              <FieldDataRow key={i} row={row} nSlots={nSlots} slotGroups={slotGroups} computedCodes={computedCodes} fieldMetadata={fieldMetadata} />
+              <FieldDataRow key={i} row={row} nSlots={nSlots} slotGroups={slotGroups} computedCodes={computedCodes} fieldMetadata={fieldMetadata} readOnly={readOnly} />
             );
           })}
         </tbody>

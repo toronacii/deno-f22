@@ -12,9 +12,10 @@ import { RecuadroTable } from "./RecuadroTable.tsx";
 
 interface Props {
   optimizableFields?: Set<number>;
+  readOnly?: boolean;
 }
 
-export function F22Form({ optimizableFields }: Props) {
+export function F22Form({ optimizableFields, readOnly }: Props) {
   useCalculator();
 
   const { sections } = useVariant();
@@ -99,6 +100,7 @@ export function F22Form({ optimizableFields }: Props) {
           computedCodes={computedCodes}
           optimizableFields={optimizableFields}
           fieldMetadata={fieldMetadata}
+          readOnly={readOnly}
         />
       ) : activeSection ? (
         <div className="text-sm text-stone-400 text-center py-8">

@@ -117,7 +117,7 @@ formsSaasRouter.get("/:id", async (c) => {
     .from("tax_forms")
     .select(`
       id, title, status, created_at, updated_at,
-      taxpayer_entities ( id, rut, name, tax_regime, entity_type ),
+      taxpayer_entities ( id, rut, name, tax_regime, entity_type, is_active ),
       form_types ( id, code, name, tax_year ),
       tax_form_data ( data, version, updated_at )
     `)
