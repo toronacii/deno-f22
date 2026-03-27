@@ -5,37 +5,47 @@ import { supabase } from "../lib/supabase.ts";
 export function RegisterPage() {
   const navigate = useNavigate();
 
-  const [name,     setName]     = useState("");
-  const [email,    setEmail]    = useState("");
-  const [password, setPassword] = useState("");
-  const [error,    setError]    = useState<string | null>(null);
-  const [loading,  setLoading]  = useState(false);
+  const [name,        setName]        = useState("");
+  const [email,       setEmail]       = useState("");
+  const [password,    setPassword]    = useState("");
+  const [error,       setError]       = useState<string | null>(null);
+  const [loading,     setLoading]     = useState(false);
+  const [needsConfirm, setNeedsConfirm] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
     setLoading(true);
 
-    const { error: err } = await supabase.auth.signUp({
+    // Sign out any existing session so the new account gets a fresh start
+    await supabase.auth.signOut();
+
+    const { data, error: err } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: { full_name: name },
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
     });
 
     if (err) {
       setError(err.message);
       setLoading(false);
-    } else {
+    } else if (data.session) {
+      // Auto-login (email confirmation disabled) — go straight to onboarding
       navigate("/onboarding", { replace: true });
+    } else {
+      // Email confirmation required — show message, don't navigate
+      setNeedsConfirm(true);
+      setLoading(false);
     }
   }
 
   async function handleGoogle() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/onboarding` },
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
     });
   }
 
@@ -57,13 +67,20 @@ export function RegisterPage() {
           <h1 className="text-xl font-semibold text-stone-900 mb-1">Crear cuenta</h1>
           <p className="text-sm text-stone-500 mb-6">Solo necesitas tu correo — los RUTs los agregas después.</p>
 
+          {needsConfirm && (
+            <div className="mb-4 px-3 py-3 bg-brand-50 border border-brand-200 rounded-lg text-sm text-brand-700">
+              <p className="font-medium mb-1">Revisa tu correo</p>
+              <p>Enviamos un link de confirmación a <strong>{email}</strong>. Haz clic en él para activar tu cuenta.</p>
+            </div>
+          )}
+
           {error && (
             <div className="mb-4 px-3 py-2.5 bg-danger-500/10 border border-danger-500/20 rounded-lg text-sm text-danger-600">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className={`space-y-4 ${needsConfirm ? "opacity-50 pointer-events-none" : ""}`}>
             <div>
               <label className="block text-sm font-medium text-stone-700 mb-1">
                 Nombre completo

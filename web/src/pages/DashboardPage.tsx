@@ -3,7 +3,7 @@
  * Muestra tarjetas de todos los RUTs activos del usuario.
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api.ts";
@@ -50,6 +50,13 @@ export function DashboardPage() {
   const sub        = data?.subscription;
   const rutUsage   = data?.rut_usage;
   const canAddMore = rutUsage != null && (rutUsage.max === null || rutUsage.active < rutUsage.max);
+
+  // Plan Núcleo con 1 RUT → ir directo al workspace
+  useEffect(() => {
+    if (!isLoading && sub?.max_ruts === 1 && taxpayers.length === 1) {
+      navigate(`/rut/${taxpayers[0].id}`, { replace: true });
+    }
+  }, [isLoading, sub, taxpayers, navigate]);
 
   function handleTaxpayerAdded() {
     setShowAdd(false);

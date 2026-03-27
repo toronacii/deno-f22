@@ -10,7 +10,7 @@ const allowedOrigin = Deno.env.get("ALLOWED_ORIGIN") ?? "*";
 
 export const corsMiddleware = cors({
   origin: allowedOrigin,
-  allowMethods: ["GET", "POST", "OPTIONS"],
+  allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowHeaders: ["Content-Type", "Authorization"],
   maxAge: 86400,
 });

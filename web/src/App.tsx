@@ -7,6 +7,7 @@ import { EngineProvider } from "./engine/engine_context.tsx";
 // Pages
 import { LoginPage }              from "./pages/LoginPage.tsx";
 import { RegisterPage }           from "./pages/RegisterPage.tsx";
+import { AuthCallbackPage }       from "./pages/AuthCallbackPage.tsx";
 import { OnboardingPage }         from "./pages/OnboardingPage.tsx";
 import { DashboardPage }          from "./pages/DashboardPage.tsx";
 import { TaxpayerWorkspacePage }  from "./pages/TaxpayerWorkspacePage.tsx";
@@ -21,8 +22,9 @@ export default function App() {
         <AuthProvider>
           <Routes>
             {/* Public */}
-            <Route path="/login"    element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login"         element={<LoginPage />} />
+            <Route path="/register"      element={<RegisterPage />} />
+            <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
             {/* Post-login: onboarding no requiere onboarding previo */}
             <Route path="/onboarding" element={

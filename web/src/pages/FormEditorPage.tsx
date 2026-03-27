@@ -24,7 +24,7 @@ interface FormDetail {
     entity_type: number | null;
   };
   form_types: { id: string; code: string; name: string; tax_year: number | null };
-  tax_form_data: { data: Record<string, number>; version: number } | null;
+  tax_form_data: { data: Record<string, unknown>; version: number }[] | null;
 }
 
 export function FormEditorPage() {
@@ -33,9 +33,11 @@ export function FormEditorPage() {
   const loadedFormId       = useRef<string | null>(null);
 
   // Zustand store
-  const setField   = useFormStore((s) => s.setField);
-  const setContext = useFormStore((s) => s.setContext);
-  const fieldValues = useFormStore((s) => s.fieldValues);
+  const setField    = useFormStore((s) => s.setField);
+  const setTextField = useFormStore((s) => s.setTextField);
+  const setContext  = useFormStore((s) => s.setContext);
+  const fieldValues  = useFormStore((s) => s.fieldValues);
+  const textValues   = useFormStore((s) => s.textValues);
 
   const { data, isLoading } = useQuery({
     queryKey: ["form", formId],
@@ -58,14 +60,18 @@ export function FormEditorPage() {
       setContext({ entityType: tp.entity_type as EntityType });
     }
 
-    // Cargar campos guardados
-    const saved = form.tax_form_data?.data ?? {};
+    // Cargar campos guardados (Supabase returns related rows as array)
+    const saved = (Array.isArray(form.tax_form_data) ? form.tax_form_data[0] : form.tax_form_data)?.data ?? {};
     for (const [code, value] of Object.entries(saved)) {
-      setField(parseInt(code), value as number);
+      if (code.startsWith("t_")) {
+        setTextField(parseInt(code.slice(2)), value as string);
+      } else {
+        setField(parseInt(code), value as number);
+      }
     }
   }, [data, formId, setField, setContext]);
 
-  // Autosave: guarda al API cuando cambian los fieldValues (debounced)
+  // Autosave: guarda al API cuando cambian fieldValues o textValues (debounced)
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const versionRef = useRef(1);
 
@@ -75,8 +81,12 @@ export function FormEditorPage() {
 
     saveTimer.current = setTimeout(async () => {
       try {
+        // Merge numeric and text values: text fields prefixed with "t_"
+        const textEntries = Object.fromEntries(
+          Object.entries(textValues).map(([k, v]) => [`t_${k}`, v])
+        );
         await api.put(`/forms/${formId}/data`, {
-          data:    fieldValues,
+          data:    { ...fieldValues, ...textEntries },
           version: versionRef.current++,
         });
       } catch {
@@ -85,7 +95,7 @@ export function FormEditorPage() {
     }, 2000); // 2s debounce para no saturar la API
 
     return () => { if (saveTimer.current) clearTimeout(saveTimer.current); };
-  }, [fieldValues, formId]);
+  }, [fieldValues, textValues, formId]);
 
   if (isLoading) {
     return (
