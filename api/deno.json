@@ -2,9 +2,9 @@
   "name": "@sii/f22-api",
   "version": "1.0.0",
   "tasks": {
-    "start": "deno run --allow-read --allow-net --allow-env main.ts",
-    "dev": "deno run --allow-read --allow-net --allow-env --watch main.ts",
-    "test": "deno test --allow-read --allow-net tests/"
+    "start": "deno run --allow-read --allow-net --allow-env --env-file=../.env main.ts",
+    "dev": "deno run --allow-read --allow-net --allow-env --env-file=../.env --watch main.ts",
+    "test": "deno test --allow-read --allow-net --env-file=../.env tests/"
   },
   "imports": {
     "hono": "jsr:@hono/hono@^4.6.0",

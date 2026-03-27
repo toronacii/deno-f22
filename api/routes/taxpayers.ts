@@ -78,6 +78,24 @@ taxpayersRouter.post("/", async (c) => {
   return c.json({ taxpayer: data }, 201);
 });
 
+// GET /taxpayers/:id
+taxpayersRouter.get("/:id", async (c) => {
+  const userId = c.get("userId") as string;
+  const jwt    = c.get("userJwt") as string;
+  const db     = getUserClient(jwt);
+  const id     = c.req.param("id");
+
+  const { data, error } = await db
+    .from("taxpayer_entities")
+    .select("id, rut, name, tax_regime, entity_type, is_active, created_at")
+    .eq("id", id)
+    .eq("user_id", userId)
+    .single();
+
+  if (error || !data) return c.json({ error: "Contribuyente no encontrado" }, 404);
+  return c.json({ taxpayer: data });
+});
+
 // PUT /taxpayers/:id
 taxpayersRouter.put("/:id", async (c) => {
   const userId = c.get("userId") as string;

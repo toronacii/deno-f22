@@ -16,7 +16,18 @@ import { useFormStore } from "../../store/form_store.ts";
 
 type RightPanelTab = "validation" | "optimization";
 
-export function AppShell() {
+export interface BreadcrumbInfo {
+  rutId:    string;
+  rutRut:   string;
+  rutName:  string;
+  formTitle: string;
+}
+
+interface AppShellProps {
+  breadcrumb?: BreadcrumbInfo;
+}
+
+export function AppShell({ breadcrumb }: AppShellProps) {
   const [rightTab,     setRightTab]     = useState<RightPanelTab>("validation");
   const [sidebarOpen,  setSidebarOpen]  = useState(false);
   const [panelOpen,    setPanelOpen]    = useState(false);
@@ -31,7 +42,7 @@ export function AppShell() {
 
   return (
     <div className="flex flex-col h-[100dvh] bg-stone-50 overflow-hidden">
-      <TopBar onMenuClick={() => setSidebarOpen(true)} />
+      <TopBar onMenuClick={() => setSidebarOpen(true)} breadcrumb={breadcrumb} />
 
       {/* Body */}
       <div className="flex flex-1 overflow-hidden">

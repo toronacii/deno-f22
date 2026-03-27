@@ -20,7 +20,7 @@ dashboardRouter.get("/", authMiddleware, async (c) => {
   const jwt    = c.get("userJwt") as string;
   const db     = getUserClient(jwt);
 
-  const [profileResult, subscription, rutUsage, formsResult] = await Promise.all([
+  const [profileResult, subscription, rutUsage, taxpayersResult] = await Promise.all([
     db.from("profiles")
       .select("id, email, full_name, avatar_url, onboarding_completed")
       .eq("id", userId)
@@ -29,25 +29,26 @@ dashboardRouter.get("/", authMiddleware, async (c) => {
     getActiveSubscription(db, userId),
     getRutUsage(db, userId),
 
-    db.from("tax_forms")
-      .select(`
-        id, title, status, updated_at,
-        taxpayer_entities ( rut, name ),
-        form_types ( code, name )
-      `)
+    db.from("taxpayer_entities")
+      .select("id, rut, name, tax_regime, entity_type, is_active")
       .eq("user_id", userId)
-      .order("updated_at", { ascending: false })
-      .limit(5),
+      .eq("is_active", true)
+      .order("name"),
   ]);
 
   return c.json({
     profile:      profileResult.data,
-    subscription,
-    ruts: {
-      used:       rutUsage.used,
-      limit:      rutUsage.limit,
-      canAddMore: rutUsage.canAddMore,
+    subscription: subscription ? {
+      plan_code:    subscription.code,
+      plan_name:    subscription.name,
+      max_ruts:     subscription.maxRuts,
+      billing_cycle: subscription.billingCycle,
+      status:       subscription.status,
+    } : null,
+    rut_usage: {
+      active: rutUsage.used,
+      max:    rutUsage.limit,
     },
-    recent_forms: formsResult.data ?? [],
+    taxpayers: taxpayersResult.data ?? [],
   });
 });

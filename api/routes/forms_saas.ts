@@ -13,13 +13,14 @@ export const formsSaasRouter = new Hono();
 
 formsSaasRouter.use("*", authMiddleware);
 
-// GET /forms
+// GET /forms  (opcional: ?taxpayer_id=uuid)
 formsSaasRouter.get("/", async (c) => {
-  const userId = c.get("userId") as string;
-  const jwt    = c.get("userJwt") as string;
-  const db     = getUserClient(jwt);
+  const userId     = c.get("userId") as string;
+  const jwt        = c.get("userJwt") as string;
+  const db         = getUserClient(jwt);
+  const taxpayerId = c.req.query("taxpayer_id");
 
-  const { data, error } = await db
+  let query = db
     .from("tax_forms")
     .select(`
       id, title, status, created_at, updated_at,
@@ -28,6 +29,12 @@ formsSaasRouter.get("/", async (c) => {
     `)
     .eq("user_id", userId)
     .order("updated_at", { ascending: false });
+
+  if (taxpayerId) {
+    query = query.eq("taxpayer_id", taxpayerId);
+  }
+
+  const { data, error } = await query;
 
   if (error) return c.json({ error: error.message }, 500);
   return c.json({ forms: data });

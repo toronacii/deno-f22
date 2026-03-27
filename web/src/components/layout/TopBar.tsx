@@ -4,9 +4,11 @@
  * Desktop: single row with everything inline.
  */
 
+import { Link } from "react-router-dom";
 import { useFormStore } from "../../store/form_store.ts";
 import { useVariant } from "../../hooks/use_variant.ts";
 import { Badge } from "../ui/Badge.tsx";
+import type { BreadcrumbInfo } from "./AppShell.tsx";
 import type { TaxRegime, EntityType } from "@core/models/form.ts";
 
 const TAX_REGIMES: { value: TaxRegime; label: string }[] = [
@@ -34,9 +36,10 @@ const ENTITY_TYPES: { value: EntityType; label: string }[] = [
 
 interface Props {
   onMenuClick?: () => void;
+  breadcrumb?:  BreadcrumbInfo;
 }
 
-export function TopBar({ onMenuClick }: Props) {
+export function TopBar({ onMenuClick, breadcrumb }: Props) {
   const context  = useFormStore((s) => s.context);
   const setCtx   = useFormStore((s) => s.setContext);
   const violations = useFormStore((s) => s.violations);
@@ -92,15 +95,31 @@ export function TopBar({ onMenuClick }: Props) {
           </svg>
         </button>
 
-        {/* Logo */}
-        <div className="flex items-center gap-2 shrink-0">
-          <div className="w-7 h-7 bg-brand-800 rounded flex items-center justify-center">
+        {/* Logo + breadcrumb */}
+        <div className="flex items-center gap-2 shrink-0 min-w-0">
+          <Link to="/dashboard" className="w-7 h-7 bg-brand-800 rounded flex items-center justify-center shrink-0 hover:bg-brand-700 transition-colors">
             <span className="text-white text-xs font-bold">SII</span>
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="text-sm font-bold text-stone-900">Formulario 22</span>
-            <span className="text-[11px] text-stone-400 hidden sm:block">AT 2026</span>
-          </div>
+          </Link>
+
+          {breadcrumb ? (
+            <div className="flex items-center gap-1.5 min-w-0 text-sm">
+              <Link
+                to={`/rut/${breadcrumb.rutId}`}
+                className="text-stone-400 hover:text-stone-600 transition-colors hidden sm:block truncate max-w-[120px]"
+              >
+                {breadcrumb.rutName}
+              </Link>
+              <span className="text-stone-300 hidden sm:block">/</span>
+              <span className="font-medium text-stone-900 truncate max-w-[140px]">
+                {breadcrumb.formTitle}
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-col leading-none">
+              <span className="text-sm font-bold text-stone-900">Formulario 22</span>
+              <span className="text-[11px] text-stone-400 hidden sm:block">AT 2026</span>
+            </div>
+          )}
         </div>
 
         {/* Selects — hidden on mobile (shown below), visible on md+ */}

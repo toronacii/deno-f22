@@ -1,15 +1,65 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "./lib/auth_context.tsx";
+import { AuthGuard } from "./components/auth/AuthGuard.tsx";
 import { EngineProvider } from "./engine/engine_context.tsx";
-import { AppShell } from "./components/layout/AppShell.tsx";
+
+// Pages
+import { LoginPage }              from "./pages/LoginPage.tsx";
+import { RegisterPage }           from "./pages/RegisterPage.tsx";
+import { OnboardingPage }         from "./pages/OnboardingPage.tsx";
+import { DashboardPage }          from "./pages/DashboardPage.tsx";
+import { TaxpayerWorkspacePage }  from "./pages/TaxpayerWorkspacePage.tsx";
+import { FormEditorPage }         from "./pages/FormEditorPage.tsx";
 
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <EngineProvider>
-        <AppShell />
-      </EngineProvider>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <Routes>
+            {/* Public */}
+            <Route path="/login"    element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+
+            {/* Post-login: onboarding no requiere onboarding previo */}
+            <Route path="/onboarding" element={
+              <AuthGuard requireOnboarding={false}>
+                <OnboardingPage />
+              </AuthGuard>
+            } />
+
+            {/* Protected — nivel cuenta */}
+            <Route path="/dashboard" element={
+              <AuthGuard>
+                <DashboardPage />
+              </AuthGuard>
+            } />
+
+            {/* Protected — nivel RUT */}
+            <Route path="/rut/:rutId" element={
+              <AuthGuard>
+                <TaxpayerWorkspacePage />
+              </AuthGuard>
+            } />
+
+            {/* Protected — nivel formulario (envuelve el motor F22) */}
+            <Route path="/rut/:rutId/forms/:formId" element={
+              <AuthGuard>
+                <EngineProvider>
+                  <FormEditorPage />
+                </EngineProvider>
+              </AuthGuard>
+            } />
+
+            {/* Default */}
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          </Routes>
+        </AuthProvider>
+      </QueryClientProvider>
+    </BrowserRouter>
   );
 }

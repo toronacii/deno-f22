@@ -1,2033 +1,918 @@
 # SaaS Tributario Chileno — Documento de Arquitectura
 
-**Proyecto**: Plataforma SaaS para gestión tributaria chilena (F22, F29, etc.)
+**Proyecto**: Plataforma SaaS para gestión tributaria chilena
 **Fecha**: 2026-03-27
-**Estado**: Diseño pre-implementación
+**Estado**: En implementación (Fase 3 — Frontend)
 
 ---
 
-## 1. Resumen Ejecutivo
+## 1. Recomendación Ejecutiva
 
-### Qué es el sistema
+El diseño correcto para este producto no es "una aplicación de formularios tributarios". Es una **plataforma de gestión tributaria por contribuyente**, donde el formulario es solo una de las operaciones que ocurren dentro del espacio de trabajo de un RUT.
 
-Plataforma SaaS multi-tenant para contadores y empresas chilenas que necesitan preparar, validar y enviar formularios tributarios al SII. Envuelve el motor de reglas F22 AT2026 existente (`core/`) y lo expone como servicio escalable con autenticación, multitenancy por RUT, planes de membresía y auditoría.
+Esta distinción no es cosmética. Afecta la arquitectura de navegación, el modelo de datos, los estados del sistema, la jerarquía de permisos y cómo el producto crece con nuevos formularios en el futuro.
 
-### Objetivo
+### Principio rector
 
-- Permitir a contadores gestionar múltiples RUTs desde un solo dashboard
-- Validar formularios F22 en tiempo real usando el motor existente
-- Escalar a F29, F50 y otros formularios en fases posteriores
-- Monetizar mediante planes de suscripción mensual/trimestral/anual
+> La identidad fiscal es del RUT, no del usuario. El usuario es el operador. El RUT es el sujeto tributario.
 
-### Stack tecnológico
+Esto se traduce en:
+
+- El usuario gestiona RUTs, no formula F22s directamente.
+- El workspace es del RUT. El dashboard es del usuario.
+- Un F22 existe *dentro* de un RUT, para un año tributario. No flota libre.
+- Al agregar F29, F50 u otros formularios, simplemente aparecen en el workspace del RUT como nuevos módulos. Sin reestructurar nada.
+
+### Por qué no acoplar el login al F22
+
+Si el login manda directo al F22, el producto queda acoplado a un solo formulario. Cada nuevo formulario requiere rediseñar la navegación. Además, en un escenario multi-RUT, el usuario no sabe "¿el F22 de quién?". El contexto del contribuyente debe establecerse *antes* de entrar a cualquier formulario.
+
+---
+
+## 2. Flujo Ideal del Usuario
+
+### 2.1 Registro (< 60 segundos)
+
+```
+Landing
+  └─ CTA "Crear cuenta"
+       └─ Email + Password (o Google OAuth)
+            └─ Verificación de email (si aplica)
+                 └─ → Onboarding
+```
+
+**Datos recolectados**: solo email y contraseña (o token OAuth).
+**No se pide**: RUT, nombre de empresa, plan. Eso viene después.
+**Por qué**: El registro debe ser lo más rápido posible. La fricción mínima maximiza conversión. Los datos tributarios son sensibles y el usuario debe sentirse "dentro" antes de entregarlos.
+
+---
+
+### 2.2 Onboarding Inicial (una sola vez)
+
+```
+Onboarding Step 1: "Bienvenido. ¿Cómo te llamas?"
+  └─ Nombre completo (o nombre del estudio)
+       └─ Onboarding Step 2: "Elige tu plan"
+            └─ Selector de planes (Núcleo / Estructura / Arquitectura / Expansión)
+                 └─ Confirmación
+                      └─ → Dashboard Global (con estado vacío)
+```
+
+**Datos recolectados**: nombre para personalizar la UI, y plan seleccionado.
+**No se pide aún**: RUTs.
+**Estado del sistema después**: `profiles.onboarding_completed = true`, suscripción activa.
+
+El onboarding termina en el **dashboard global vacío**, con un call-to-action prominente para agregar el primer RUT. Este es el estado cero del producto. Es normal y no debe verse como un error.
+
+---
+
+### 2.3 Alta del Primer RUT
+
+El usuario llega al dashboard vacío y ve:
+
+```
+┌──────────────────────────────────────────────────────┐
+│  No tienes contribuyentes registrados aún.            │
+│                                                       │
+│  [+ Agregar primer RUT]                              │
+└──────────────────────────────────────────────────────┘
+```
+
+Al hacer click:
+
+```
+Modal "Agregar contribuyente"
+  ├─ RUT (con validación de dígito verificador en tiempo real)
+  ├─ Nombre o razón social
+  ├─ Tipo (Persona Natural / Empresa)
+  └─ Régimen tributario (opcional, puede completarse después)
+       └─ → Guardar
+            └─ → Workspace del RUT recién creado
+```
+
+El sistema valida:
+1. Formato del RUT (12345678-9)
+2. Dígito verificador correcto
+3. RUT no duplicado para este usuario
+4. Que el usuario no ha excedido el límite de RUTs de su plan
+
+---
+
+### 2.4 Selección de RUT Activo
+
+A partir del segundo RUT, el usuario tiene que elegir contexto cada vez que entra a la app o quiere cambiar de contribuyente.
+
+**Caso 1 — Plan Núcleo (1 RUT)**:
+No hay selección. El sistema entra directamente al workspace del único RUT activo.
+
+**Caso 2 — Plan multi-RUT (2+ RUTs)**:
+El dashboard global muestra las tarjetas de todos los RUTs activos. El usuario hace click en uno para entrar a su workspace.
+
+---
+
+### 2.5 Entrada al Workspace del RUT
+
+Al seleccionar un RUT, el sistema entra al workspace contextual:
+
+```
+Contexto activo: [RUT seleccionado] visible en el topbar
+Sidebar cambia a navegación nivel-RUT:
+  ├─ Resumen del contribuyente
+  ├─ Formulario 22 AT2026
+  ├─ (futuro) Formulario 29
+  └─ (futuro) Historial de declaraciones
+```
+
+El cambio de contexto es explícito y visible. El usuario nunca pierde la referencia de qué contribuyente está gestionando.
+
+---
+
+### 2.6 Creación del Primer Formulario
+
+Dentro del workspace del RUT:
+
+```
+Workspace vacío para el RUT:
+  └─ "No hay formularios para este contribuyente."
+       └─ [+ Nuevo formulario]
+            └─ Selector de tipo de formulario
+                 └─ F22 AT2026 → Año tributario 2026
+                      └─ → Editor del formulario (RecuadroTable)
+```
+
+Si el formulario para ese RUT y año tributario ya existe, se abre el borrador existente en lugar de crear uno nuevo.
+
+---
+
+## 3. Arquitectura de Navegación
+
+### 3.1 Los tres niveles
+
+```
+NIVEL 1 — CUENTA
+  Ruta: /dashboard
+  Componentes: DashboardGlobal, RUTSelector, ProfileSettings, BillingSettings
+  ¿Qué vive aquí?
+    - Resumen consolidado (todos los RUTs)
+    - Lista y gestión de contribuyentes registrados
+    - Estado de la suscripción y plan
+    - Configuración del perfil del usuario
+    - Historial de auditoría global
+
+NIVEL 2 — RUT (Workspace)
+  Ruta: /rut/:rutId
+  Componentes: TaxpayerWorkspace, FormList, TaxpayerProfile
+  ¿Qué vive aquí?
+    - Datos del contribuyente (RUT, nombre, régimen, tipo)
+    - Lista de formularios del contribuyente
+    - Estado de cada formulario (borrador / validado / enviado)
+    - Historial de declaraciones del contribuyente
+
+NIVEL 3 — FORMULARIO
+  Ruta: /rut/:rutId/forms/:formId
+  Componentes: RecuadroTable, ValidationPanel, OptimizationPanel
+  ¿Qué vive aquí?
+    - Editor del formulario (campos, secciones)
+    - Validación en tiempo real (reglas CSW)
+    - Optimización tributaria
+    - Vista previa / exportación
+```
+
+### 3.2 Por qué esta separación
+
+| Criterio | Nivel Cuenta | Nivel RUT | Nivel Formulario |
+|---|---|---|---|
+| Sujeto | Usuario | Contribuyente | Declaración |
+| Temporalidad | Permanente | Permanente | Anual / periódico |
+| Afectado por el plan | Sí (límite de RUTs) | No | No |
+| Escala con nuevos formularios | No | Sí (nuevo ítem en sidebar) | Sí (nuevo editor) |
+| Requiere contexto de RUT | No | Sí | Sí |
+
+La llave de diseño es que el **Nivel 2 (RUT)** actúa como contenedor escalable. Cuando agreguemos F29 o F50, simplemente aparecen como nuevos ítems dentro del workspace del RUT. No hay que reestructurar navegación ni mover formularios.
+
+---
+
+## 4. Dashboard Global vs Workspace por RUT
+
+### 4.1 Dashboard Global — Nivel Cuenta
+
+Es la vista de gestión, no de trabajo. El contador llega aquí para tomar decisiones sobre su cartera de contribuyentes.
+
+**Contenido:**
+
+```
+┌─────────────────────────────────────────────────────┐
+│  Bienvenido, [Nombre]. Plan: Estructura (3 RUTs)     │
+│  RUTs activos: 2 / 3                                 │
+│                                                      │
+│  [+ Agregar contribuyente]                           │
+├─────────────────────────────────────────────────────┤
+│  MIS CONTRIBUYENTES                                  │
+│                                                      │
+│  ┌─────────────┐  ┌─────────────┐                   │
+│  │ 76.543.210-K│  │ 12.345.678-9│                   │
+│  │ Empresa SpA │  │ Juan Pérez  │                   │
+│  │ F22: Borrador│  │ F22: Listo │                   │
+│  │ [→ Entrar]  │  │ [→ Entrar]  │                   │
+│  └─────────────┘  └─────────────┘                   │
+└─────────────────────────────────────────────────────┘
+```
+
+**Lo que NO debe aparecer aquí:**
+- Campos del F22
+- Datos tributarios de un contribuyente específico
+- Formularios individuales
+
+**Lo que SÍ debe aparecer:**
+- Estado consolidado de todos los RUTs (ej: "2 con borradores, 1 listo para enviar")
+- Alertas de plazos SII que afectan a todos los contribuyentes
+- Estado del plan y límites
+- Acceso rápido a agregar nuevo RUT
+
+---
+
+### 4.2 Workspace del RUT — Nivel Contribuyente
+
+Es la vista de trabajo. El contador llega aquí para operar sobre un contribuyente específico.
+
+**Contenido:**
+
+```
+┌─────────────────────────────────────────────────────┐
+│  [← Mis contribuyentes]  RUT activo: 76.543.210-K   │
+│  Empresa SpA — Régimen: 14D8                         │
+├─────────────────────────────────────────────────────┤
+│  FORMULARIOS                                         │
+│                                                      │
+│  F22 AT2026  [Borrador]  Última edición: hace 2h    │
+│  → Abrir formulario                                  │
+│                                                      │
+│  [+ Nuevo formulario]                                │
+├─────────────────────────────────────────────────────┤
+│  DATOS DEL CONTRIBUYENTE                             │
+│  RUT: 76.543.210-K                                   │
+│  Razón Social: Empresa SpA                           │
+│  Régimen: 14D8 / Tipo: Empresa                       │
+│  [Editar datos]                                      │
+└─────────────────────────────────────────────────────┘
+```
+
+**Lo que NO debe aparecer aquí:**
+- Información de otros contribuyentes
+- Datos del plan o suscripción
+
+---
+
+## 5. UX del Selector de Contexto
+
+### 5.1 Principio: el contexto siempre debe ser visible
+
+Cuando el usuario está dentro del workspace de un RUT, nunca debe preguntarse "¿de qué contribuyente estoy viendo esto?". El RUT activo es siempre visible.
+
+### 5.2 Diseño del topbar con contexto
+
+**Nivel Cuenta (sin RUT activo):**
+```
+[Logo F22] ──────────────────────────────── [Plan: Estructura] [Avatar]
+```
+
+**Nivel RUT (con RUT activo):**
+```
+[Logo F22] [← Inicio] | 76.543.210-K — Empresa SpA ▼ | ──── [Avatar]
+                         └─ selector de RUT activo
+```
+
+El selector desplegable al hacer click en el RUT activo muestra:
+```
+┌─────────────────────────────────┐
+│  ● 76.543.210-K — Empresa SpA  │  ← activo
+│    12.345.678-9 — Juan Pérez   │
+│  ─────────────────────────────  │
+│  + Agregar contribuyente        │
+│    (RUTs: 2/3 en tu plan)       │
+└─────────────────────────────────┘
+```
+
+### 5.3 Sidebar — navegación contextual
+
+**Cuando no hay RUT activo (nivel cuenta):**
+```
+Sidebar:
+  Dashboard
+  Mis contribuyentes
+  Plan y facturación
+  Perfil
+```
+
+**Cuando hay RUT activo (nivel contribuyente):**
+```
+Sidebar:
+  ← Todos los contribuyentes
+  ─────────────────────────
+  [Contexto: 76.543.210-K]
+  ─────────────────────────
+  Resumen del contribuyente
+  Formulario 22
+  (futuro) Formulario 29
+  Historial
+```
+
+### 5.4 Cambio de contexto
+
+El cambio de RUT activo se hace desde el selector del topbar. Al cambiar:
+1. El sidebar actualiza su navegación
+2. La ruta cambia a `/rut/:nuevoRutId`
+3. Los datos del formulario anterior NO se pierden (guardado automático)
+4. El usuario ve el workspace del nuevo RUT
+
+**No hay "RUT activo" en localStorage o state global permanente**. El contexto está en la URL. Si el usuario comparte `/rut/abc123/forms/xyz`, otro usuario (con acceso) verá el mismo formulario. La URL es la fuente de verdad del contexto.
+
+### 5.5 CTA para agregar nuevo RUT
+
+El botón "+ Agregar contribuyente" aparece en tres lugares:
+1. Dashboard global (estado vacío y estado con RUTs)
+2. Selector desplegable del topbar (nivel RUT)
+3. Panel de plan cuando el usuario está cerca del límite
+
+Cuando el usuario ha alcanzado el límite de su plan, el CTA cambia a:
+```
++ Agregar contribuyente (requiere upgrade)
+```
+Y al hacer click abre un modal de upgrade al siguiente plan, no un formulario de RUT.
+
+---
+
+## 6. Reglas de Negocio
+
+### 6.1 Cuándo se permite crear un nuevo RUT
+
+Un usuario puede crear un nuevo RUT si:
+1. Tiene una suscripción activa (`subscriptions.status = 'active'`)
+2. El número de `taxpayer_entities` activos es menor que `membership_plans.max_ruts`
+3. `max_ruts IS NULL` (plan Expansión = ilimitado) también permite crear
+
+```
+assertCanAddRut(userId):
+  subscription = getActiveSubscription(userId)
+  if !subscription: throw "Sin suscripción activa"
+
+  plan = subscription.membership_plan
+  if plan.max_ruts IS NULL: return OK  // Expansión
+
+  active_ruts = COUNT(taxpayer_entities WHERE user_id = userId AND is_active = true)
+  if active_ruts >= plan.max_ruts: throw "Límite de RUTs alcanzado"
+
+  return OK
+```
+
+Esta lógica vive **exclusivamente en el backend** (`api/services/subscription_service.ts`). El frontend puede mostrar el límite como orientación UI, pero nunca confiar en él como validación real.
+
+### 6.2 Usuario sin RUT aún
+
+Estado: `onboarding_completed = true` pero `COUNT(taxpayer_entities) = 0`
+
+Comportamiento:
+- El dashboard global muestra un estado vacío con CTA prominente
+- La URL `/rut/*` redirige a `/dashboard`
+- No se muestra error, se muestra una invitación a actuar
+
+Este estado es válido y transitorio. No es un error del sistema.
+
+### 6.3 Usuario con plan de 1 RUT (Núcleo)
+
+- El selector de contexto en el topbar no se muestra (no hay contexto que elegir)
+- El dashboard global, al detectar 1 solo RUT, puede redirigir automáticamente al workspace de ese RUT
+- El CTA "Agregar contribuyente" lleva al modal de upgrade, no al formulario de RUT
+
+Decisión de diseño: en plan Núcleo, la app se siente como "una aplicación de 1 RUT". La complejidad multi-RUT no contamina la experiencia de quien no la necesita.
+
+### 6.4 Usuario con plan multi-RUT
+
+- El selector de contexto en el topbar siempre visible
+- El dashboard muestra tarjetas por cada RUT activo
+- Se puede agregar hasta el límite del plan
+- Al acercarse al límite (ej: 2/3 RUTs), el sistema puede mostrar una advertencia proactiva
+
+### 6.5 Cómo evitar confusión entre contribuyentes
+
+Reglas:
+1. El RUT activo siempre visible en topbar — nunca oculto
+2. Los datos de un contribuyente nunca se muestran en el contexto de otro
+3. Los formularios usan el nombre y RUT del contribuyente en el encabezado, no el del usuario
+4. El breadcrumb siempre muestra: `Dashboard > [RUT] > [Formulario]`
+5. Al cambiar de RUT, animación o feedback visual que confirma el cambio de contexto
+
+### 6.6 Baja de un RUT
+
+Un RUT se da de baja con `is_active = false` (soft delete). No se borran sus formularios.
+- El RUT inactivo no cuenta para el límite del plan
+- Sus formularios quedan archivados y accesibles en modo lectura
+- Si el usuario reactiva el RUT y sigue dentro del límite del plan, vuelve a estar activo
+
+---
+
+## 7. Modelo Conceptual de Datos
+
+### 7.1 Jerarquía de entidades
+
+```
+auth.users (gestionado por Supabase)
+    │
+    │ 1:1 (trigger automático)
+    ▼
+profiles
+    ├─ email, full_name, avatar_url
+    ├─ onboarding_completed
+    │
+    │ 1:0..1
+    ├─▶ subscriptions ──────── membership_plans
+    │       billing_cycle           max_ruts
+    │       status                  price_*
+    │       ends_at
+    │
+    │ 1:N
+    └─▶ taxpayer_entities  ← "el RUT"
+            rut, name
+            tax_regime, entity_type
+            is_active
+            │
+            │ 1:N
+            └─▶ tax_forms ──── form_types
+                    status          code (F22, F29...)
+                    title           tax_year
+                    │               is_active
+                    │ 1:1 (JSONB)
+                    ├─▶ tax_form_data
+                    │       data: { fieldCode: value }
+                    │       version
+                    │
+                    │ 1:N
+                    └─▶ submissions
+                            folio, status
+                            response_data
+
+profiles
+    │ 1:N
+    └─▶ audit_logs (inmutable)
+```
+
+### 7.2 Invariantes del modelo
+
+| Invariante | Descripción |
+|---|---|
+| Un usuario tiene exactamente una suscripción activa | Enforced por UNIQUE INDEX con WHERE status='active' |
+| Un RUT por usuario es único | UNIQUE(user_id, rut) |
+| Un formulario por RUT por tipo por año | UNIQUE(taxpayer_id, form_type_id) — un F22 AT2026 por contribuyente |
+| Un blob de datos por formulario | UNIQUE(form_id) en tax_form_data |
+| Los formularios pertenecen al RUT, no solo al usuario | taxpayer_id es FK, user_id es denormalización para RLS |
+| La identidad del usuario (profiles) es independiente del contribuyente (taxpayer_entities) | Son entidades separadas con propósitos distintos |
+
+### 7.3 Por qué user_id está en tax_forms
+
+`tax_forms` tiene `user_id` por dos razones prácticas:
+1. **RLS eficiente**: permite hacer `WHERE user_id = auth.uid()` sin join a taxpayer_entities
+2. **Auditoría**: quien creó el formulario queda registrado aunque el RUT cambie de manos en el futuro
+
+Es denormalización intencional, no un error de diseño.
+
+### 7.4 Escalabilidad a nuevos formularios
+
+Para agregar F29:
+1. `INSERT INTO form_types (code='F29', tax_year=2026, is_active=true, ...)` — 1 fila en DB
+2. Motor de reglas F29 en `core/` — nuevo módulo aislado
+3. Ruta en API: `POST /api/v1/calculate/f29` — análogo al de F22
+4. Componente de formulario F29 en `web/` — aparece en el workspace del RUT automáticamente
+
+No hay que cambiar la estructura de `taxpayer_entities`, `tax_forms`, ni la navegación principal. El workspace del RUT simplemente detecta los `form_types` activos y los ofrece como opciones.
+
+---
+
+## 8. Arquitectura Técnica
+
+### 8.1 Stack completo
 
 | Capa | Tecnología |
 |------|-----------|
-| Frontend | React 18 + Vite + Tailwind CSS |
-| Backend API | Deno + Hono (mismo runtime que el motor) |
+| Frontend | React 18 + Vite + Tailwind CSS v4 |
+| Backend API | Deno + Hono |
 | Auth | Supabase Auth (email/password + Google OAuth) |
 | Base de datos | Supabase (PostgreSQL 15) |
 | Motor de reglas | `core/` existente (Deno library) |
-| Storage | Supabase Storage (PDFs, archivos XLSX) |
-| Hosting API | Deno Deploy o Railway |
+| Storage | Supabase Storage (PDFs exportados) |
+| Hosting API | Deno Deploy |
 | Hosting Web | Vercel o Netlify |
 
----
-
-## 2. Arquitectura General
-
-### Diagrama de capas
+### 8.2 Diagrama de capas
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        CLIENTE                                   │
-│                                                                  │
-│   ┌──────────────────────────────────────────────────────┐      │
-│   │              React + Vite + Tailwind                  │      │
-│   │                                                       │      │
-│   │  [Login/Reg]  [Onboarding]  [Dashboard]  [F22 Form]  │      │
-│   └──────────────────────┬───────────────────────────────┘      │
-└──────────────────────────┼──────────────────────────────────────┘
+│   React + Vite + Tailwind                                        │
+│   [Auth]  [Dashboard]  [RUT Selector]  [Workspace]  [F22 Form]  │
+└──────────────────────────┬──────────────────────────────────────┘
                            │ HTTPS / Bearer JWT
-                           │
 ┌──────────────────────────▼──────────────────────────────────────┐
-│                     SAAS API (Deno + Hono)                       │
-│                                                                  │
-│  ┌─────────────┐  ┌─────────────┐  ┌──────────────────────┐    │
-│  │ middleware/ │  │   routes/   │  │     services/        │    │
-│  │  auth.ts    │  │  auth.ts    │  │  subscription_svc    │    │
-│  │  cors.ts    │  │  me.ts      │  │  taxpayer_svc        │    │
-│  │  rate_limit │  │  dashboard  │  │  form_svc            │    │
-│  └─────────────┘  │  plans.ts   │  └──────────────────────┘    │
-│                   │  taxpayers  │                                │
-│                   │  forms.ts   │  ┌──────────────────────┐    │
-│                   └─────────────┘  │   Tax Engine (core/) │    │
-│                                    │  Calculator          │    │
-│                                    │  Validator           │    │
-│                                    │  Optimizer           │    │
-│                                    └──────────────────────┘    │
+│                     API (Deno + Hono)                            │
+│  auth.ts │ me.ts │ dashboard.ts │ taxpayers.ts │ forms_saas.ts  │
+│  plans.ts │ subscriptions.ts                                     │
+│  + subscription_service.ts (assertCanAddRut)                     │
+│  + Tax Engine (core/): Calculator, Validator, Optimizer          │
 └──────────────────────────┬──────────────────────────────────────┘
                            │ Service Role Key (nunca al frontend)
-                           │
 ┌──────────────────────────▼──────────────────────────────────────┐
 │                      SUPABASE                                    │
-│                                                                  │
-│  ┌─────────────────┐  ┌──────────────────┐  ┌───────────────┐  │
-│  │  Auth Service   │  │   PostgreSQL 15   │  │    Storage    │  │
-│  │  (JWT tokens)   │  │   (con RLS)       │  │  (PDFs/XLSX)  │  │
-│  └─────────────────┘  └──────────────────┘  └───────────────┘  │
+│  Auth Service │ PostgreSQL 15 (con RLS) │ Storage (PDFs)        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Separación de responsabilidades
+### 8.3 Separación de responsabilidades
 
 | Capa | Responsabilidad | NO hace |
 |------|----------------|---------|
-| Frontend | UI, UX, llamadas HTTP, estado local | Lógica de negocio, validación de límites |
-| Backend API | Auth JWT, reglas de negocio, límites de plan, auditoría | Renderizado, lógica de presentación |
-| Motor (core/) | Cálculo F22, validación de reglas tributarias | Auth, persistencia, multitenancy |
-| Supabase | Persistencia, autenticación, RLS, storage | Lógica de negocio de planes |
+| Frontend | UI, UX, llamadas HTTP, estado local | Validar límites de plan, lógica tributaria |
+| Backend API | Auth JWT, límites de plan, auditoría | Renderizado, lógica de presentación |
+| Motor (core/) | Cálculo F22, validación CSW | Auth, persistencia, multitenancy |
+| Supabase | Persistencia, autenticación, RLS | Lógica de negocio de planes |
+
+### 8.4 Rutas del frontend (React Router)
+
+```
+/                     → redirect a /dashboard (si auth) o /login
+/login                → formulario de login
+/register             → formulario de registro
+/onboarding           → wizard post-registro (nombre + plan)
+
+/dashboard            → dashboard global (nivel cuenta)
+/dashboard/settings   → configuración del perfil
+/dashboard/billing    → plan y facturación
+
+/rut/:rutId           → workspace del contribuyente (nivel RUT)
+/rut/:rutId/edit      → editar datos del contribuyente
+/rut/:rutId/forms/:formId → editor del formulario (nivel formulario)
+```
+
+### 8.5 Endpoints de la API
+
+```
+# Auth y perfil
+POST /api/v1/auth/register        — upsert profile tras OAuth
+POST /api/v1/auth/select-plan     — asociar suscripción
+GET  /api/v1/me                   — perfil del usuario autenticado
+
+# Dashboard
+GET  /api/v1/dashboard            — resumen: suscripción + RUTs + últimos forms
+
+# Planes
+GET  /api/v1/plans                — catálogo público de planes
+
+# Suscripciones
+GET  /api/v1/subscriptions/current
+
+# Contribuyentes (RUTs)
+GET  /api/v1/taxpayers            — lista RUTs del usuario
+POST /api/v1/taxpayers            — crear (verifica límite de plan)
+GET  /api/v1/taxpayers/:id        — detalle
+PUT  /api/v1/taxpayers/:id        — actualizar
+DELETE /api/v1/taxpayers/:id      — soft delete (is_active = false)
+
+# Formularios
+GET  /api/v1/forms                — lista forms del usuario (todos los RUTs)
+POST /api/v1/forms                — crear form para un RUT
+GET  /api/v1/forms/:id            — detalle con datos y RUT
+PUT  /api/v1/forms/:id/data       — guardar borrador JSONB
+
+# Motor tributario
+POST /api/v1/calculate            — calcular campos derivados
+POST /api/v1/validate             — validar reglas CSW
+POST /api/v1/optimize             — sugerir optimizaciones
+```
 
 ---
 
-## 3. Modelo de Datos Completo
-
-### Entidades y relaciones (Diagrama ER textual)
-
-```
-auth.users (Supabase gestionado)
-    │ 1
-    │
-    ▼ 1
-profiles
-    │ 1
-    │
-    ▼ 0..1
-subscriptions ─────────── membership_plans
-                                │ 1
-                                │ (define max_ruts)
-    
-profiles
-    │ 1
-    │
-    ▼ N
-taxpayer_entities
-    │ 1
-    │
-    ▼ N
-tax_forms ──────────────── form_types
-    │ 1                        (F22, F29...)
-    │
-    ├──▼ 1
-    │  tax_form_data (JSONB blob)
-    │
-    └──▼ N
-       submissions
-
-profiles
-    │ 1
-    │
-    ▼ N
-audit_logs
-```
-
-### Descripción de tablas
-
-**`profiles`** — Extiende auth.users. Datos del usuario: nombre, empresa, RUT personal, teléfono, plan UI preferences.
-
-**`membership_plans`** — Catálogo estático de los 4 planes. Max_ruts = -1 para ilimitado.
-
-**`subscriptions`** — Suscripción activa del usuario. Una por usuario. Incluye billing_cycle (monthly/quarterly/annual), fecha inicio, fecha próximo cobro, estado.
-
-**`taxpayer_entities`** — RUTs tributarios que el usuario gestiona. Cada fila = un RUT. Contiene nombre_razon_social, rut (formato 12345678-9), tipo (persona_natural / empresa).
-
-**`form_types`** — Catálogo de tipos de formulario. Genérico para soportar F22, F29, F50, etc. Incluye código, nombre, año tributario, versión del motor.
-
-**`tax_forms`** — Instancia de un formulario para un taxpayer_entity específico. Incluye estado (borrador/listo/enviado), año tributario, referencia al form_type.
-
-**`tax_form_data`** — Blob JSONB con los datos del formulario. Separado de tax_forms para evitar cargar datos pesados en listados.
-
-**`submissions`** — Registro de cada envío al SII (o intento). Incluye timestamp, estado, respuesta del SII.
-
-**`audit_logs`** — Registro inmutable de acciones del usuario: crear/editar/borrar RUTs, enviar formularios, cambiar plan.
-
----
-
-## 4. SQL Completo
+## 9. SQL del Schema
 
 ```sql
--- ============================================================
--- SCHEMA: SaaS Tributario Chileno
--- Base de datos: Supabase (PostgreSQL 15)
--- ============================================================
+-- =============================================================================
+-- SaaS Tributario — Schema PostgreSQL/Supabase
+-- =============================================================================
 
--- Habilitar extensiones necesarias
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-
--- ============================================================
--- TABLA: profiles
--- Extiende auth.users de Supabase
--- ============================================================
-CREATE TABLE public.profiles (
-    id              UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-    email           TEXT NOT NULL,
-    full_name       TEXT,
-    company_name    TEXT,
-    personal_rut    TEXT,                          -- RUT personal del contador (ej: 12345678-9)
-    phone           TEXT,
-    avatar_url      TEXT,
-    onboarding_done BOOLEAN NOT NULL DEFAULT FALSE, -- FALSE = mostrar wizard de plan
-    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-
-    CONSTRAINT profiles_personal_rut_format
-        CHECK (personal_rut IS NULL OR personal_rut ~ '^[0-9]{7,8}-[0-9kK]$')
+CREATE TABLE IF NOT EXISTS public.profiles (
+  id                   UUID        PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  email                TEXT        NOT NULL,
+  full_name            TEXT,
+  avatar_url           TEXT,
+  onboarding_completed BOOLEAN     NOT NULL DEFAULT false,
+  created_at           TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at           TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_profiles_email ON public.profiles(email);
-
--- ============================================================
--- TABLA: membership_plans
--- Catálogo estático de los 4 planes disponibles
--- ============================================================
-CREATE TABLE public.membership_plans (
-    id                  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    code                TEXT NOT NULL UNIQUE,       -- 'nucleo', 'estructura', 'arquitectura', 'expansion'
-    name                TEXT NOT NULL,
-    description         TEXT,
-    max_ruts            INTEGER NOT NULL,           -- -1 = ilimitado
-    price_monthly       NUMERIC(10, 2) NOT NULL,    -- USD
-    price_quarterly     NUMERIC(10, 2) NOT NULL,    -- USD (3 meses)
-    price_annual        NUMERIC(10, 2) NOT NULL,    -- USD (12 meses)
-    min_billing_months  INTEGER NOT NULL DEFAULT 1, -- meses mínimos de contrato
-    is_active           BOOLEAN NOT NULL DEFAULT TRUE,
-    sort_order          INTEGER NOT NULL DEFAULT 0,
-    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-
-    CONSTRAINT membership_plans_max_ruts_valid
-        CHECK (max_ruts = -1 OR max_ruts > 0),
-    CONSTRAINT membership_plans_prices_positive
-        CHECK (price_monthly >= 0 AND price_quarterly >= 0 AND price_annual >= 0),
-    CONSTRAINT membership_plans_min_billing_valid
-        CHECK (min_billing_months IN (1, 3, 12))
+CREATE TABLE IF NOT EXISTS public.membership_plans (
+  id                    UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  code                  TEXT        NOT NULL UNIQUE,
+  name                  TEXT        NOT NULL,
+  max_ruts              INTEGER,                      -- NULL = ilimitado
+  price_monthly_usd     NUMERIC(10,2) NOT NULL,
+  price_quarterly_usd   NUMERIC(10,2) NOT NULL,
+  price_annual_usd      NUMERIC(10,2) NOT NULL,
+  min_commitment_months INTEGER     NOT NULL DEFAULT 1,
+  is_active             BOOLEAN     NOT NULL DEFAULT true,
+  created_at            TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
--- ============================================================
--- TABLA: subscriptions
--- Suscripción activa del usuario (una por usuario)
--- ============================================================
-CREATE TYPE public.subscription_status AS ENUM (
-    'active',
-    'past_due',
-    'cancelled',
-    'trialing',
-    'pending'  -- pendiente de activación (recién seleccionó plan)
+CREATE TABLE IF NOT EXISTS public.subscriptions (
+  id            UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id       UUID        NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  plan_id       UUID        NOT NULL REFERENCES public.membership_plans(id),
+  billing_cycle TEXT        NOT NULL CHECK (billing_cycle IN ('monthly', 'quarterly', 'annual')),
+  status        TEXT        NOT NULL DEFAULT 'active'
+                            CHECK (status IN ('active', 'cancelled', 'past_due', 'trialing')),
+  started_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  ends_at       TIMESTAMPTZ,
+  cancelled_at  TIMESTAMPTZ,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TYPE public.billing_cycle AS ENUM (
-    'monthly',
-    'quarterly',
-    'annual'
+-- Un usuario solo puede tener una suscripción activa a la vez
+CREATE UNIQUE INDEX IF NOT EXISTS subscriptions_user_active_idx
+  ON public.subscriptions (user_id)
+  WHERE status = 'active';
+
+CREATE TABLE IF NOT EXISTS public.taxpayer_entities (
+  id            UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id       UUID        NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  rut           TEXT        NOT NULL,
+  name          TEXT        NOT NULL,
+  tax_regime    TEXT,
+  entity_type   INTEGER     CHECK (entity_type BETWEEN 1 AND 8),
+  is_active     BOOLEAN     NOT NULL DEFAULT true,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (user_id, rut)
 );
 
-CREATE TABLE public.subscriptions (
-    id                  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id             UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
-    plan_id             UUID NOT NULL REFERENCES public.membership_plans(id),
-    status              public.subscription_status NOT NULL DEFAULT 'pending',
-    billing_cycle       public.billing_cycle NOT NULL DEFAULT 'monthly',
-    current_period_start TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    current_period_end  TIMESTAMPTZ,
-    cancelled_at        TIMESTAMPTZ,
-    trial_ends_at       TIMESTAMPTZ,
-    external_id         TEXT,                       -- ID en procesador de pagos (Stripe, etc.)
-    metadata            JSONB NOT NULL DEFAULT '{}',
-    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+CREATE INDEX IF NOT EXISTS taxpayer_entities_user_idx ON public.taxpayer_entities (user_id);
 
-    CONSTRAINT subscriptions_one_per_user UNIQUE (user_id)
+CREATE TABLE IF NOT EXISTS public.form_types (
+  id          UUID    PRIMARY KEY DEFAULT gen_random_uuid(),
+  code        TEXT    NOT NULL UNIQUE,
+  name        TEXT    NOT NULL,
+  description TEXT,
+  tax_year    INTEGER,
+  is_active   BOOLEAN NOT NULL DEFAULT true,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_subscriptions_user_id ON public.subscriptions(user_id);
-CREATE INDEX idx_subscriptions_plan_id ON public.subscriptions(plan_id);
-CREATE INDEX idx_subscriptions_status ON public.subscriptions(status);
-
--- ============================================================
--- TABLA: taxpayer_entities
--- RUTs tributarios gestionados por el usuario
--- ============================================================
-CREATE TYPE public.entity_type AS ENUM (
-    'persona_natural',
-    'empresa',
-    'sociedad_anonima',
-    'sociedad_responsabilidad_limitada'
+CREATE TABLE IF NOT EXISTS public.tax_forms (
+  id              UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id         UUID        NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  taxpayer_id     UUID        NOT NULL REFERENCES public.taxpayer_entities(id) ON DELETE CASCADE,
+  form_type_id    UUID        NOT NULL REFERENCES public.form_types(id),
+  title           TEXT,
+  status          TEXT        NOT NULL DEFAULT 'draft'
+                              CHECK (status IN ('draft', 'validated', 'submitted', 'accepted', 'rejected')),
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at      TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE public.taxpayer_entities (
-    id              UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id         UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
-    rut             TEXT NOT NULL,                  -- Formato: 12345678-9
-    razon_social    TEXT NOT NULL,
-    entity_type     public.entity_type NOT NULL DEFAULT 'empresa',
-    is_active       BOOLEAN NOT NULL DEFAULT TRUE,
-    notes           TEXT,
-    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+CREATE INDEX IF NOT EXISTS tax_forms_user_idx       ON public.tax_forms (user_id);
+CREATE INDEX IF NOT EXISTS tax_forms_taxpayer_idx   ON public.tax_forms (taxpayer_id);
+CREATE INDEX IF NOT EXISTS tax_forms_status_idx     ON public.tax_forms (status);
 
-    CONSTRAINT taxpayer_entities_rut_format
-        CHECK (rut ~ '^[0-9]{7,8}-[0-9kK]$'),
-    CONSTRAINT taxpayer_entities_unique_rut_per_user
-        UNIQUE (user_id, rut)
+CREATE TABLE IF NOT EXISTS public.tax_form_data (
+  id         UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  form_id    UUID        NOT NULL REFERENCES public.tax_forms(id) ON DELETE CASCADE,
+  data       JSONB       NOT NULL DEFAULT '{}',
+  version    INTEGER     NOT NULL DEFAULT 1,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_taxpayer_entities_user_id ON public.taxpayer_entities(user_id);
-CREATE INDEX idx_taxpayer_entities_rut ON public.taxpayer_entities(rut);
+CREATE UNIQUE INDEX IF NOT EXISTS tax_form_data_form_idx ON public.tax_form_data (form_id);
 
--- ============================================================
--- TABLA: form_types
--- Catálogo genérico de tipos de formulario
--- ============================================================
-CREATE TABLE public.form_types (
-    id              UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    code            TEXT NOT NULL,                  -- 'F22', 'F29', 'F50'
-    name            TEXT NOT NULL,                  -- 'Declaración de Renta AT2026'
-    tax_year        INTEGER NOT NULL,               -- 2026
-    engine_version  TEXT NOT NULL DEFAULT '1.0.0',  -- versión del motor de reglas
-    is_active       BOOLEAN NOT NULL DEFAULT TRUE,
-    description     TEXT,
-    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-
-    CONSTRAINT form_types_unique_code_year UNIQUE (code, tax_year),
-    CONSTRAINT form_types_tax_year_valid CHECK (tax_year BETWEEN 2000 AND 2100)
+CREATE TABLE IF NOT EXISTS public.submissions (
+  id            UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  form_id       UUID        NOT NULL REFERENCES public.tax_forms(id) ON DELETE CASCADE,
+  user_id       UUID        NOT NULL REFERENCES public.profiles(id),
+  folio         TEXT,
+  status        TEXT        NOT NULL DEFAULT 'pending'
+                            CHECK (status IN ('pending', 'accepted', 'rejected')),
+  response_data JSONB,
+  submitted_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_form_types_code ON public.form_types(code);
-
--- ============================================================
--- TABLA: tax_forms
--- Instancias de formularios por usuario/RUT
--- ============================================================
-CREATE TYPE public.form_status AS ENUM (
-    'draft',        -- borrador, datos incompletos
-    'in_review',    -- datos completos, pendiente validación manual
-    'ready',        -- validado, listo para enviar
-    'submitted',    -- enviado al SII
-    'accepted',     -- aceptado por el SII
-    'rejected'      -- rechazado por el SII
+CREATE TABLE IF NOT EXISTS public.audit_logs (
+  id          UUID        PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id     UUID        REFERENCES public.profiles(id) ON DELETE SET NULL,
+  action      TEXT        NOT NULL,
+  entity_type TEXT        NOT NULL,
+  entity_id   UUID,
+  details     JSONB,
+  ip_address  INET,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE public.tax_forms (
-    id                  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id             UUID NOT NULL REFERENCES public.profiles(id) ON DELETE RESTRICT,
-    taxpayer_id         UUID NOT NULL REFERENCES public.taxpayer_entities(id) ON DELETE RESTRICT,
-    form_type_id        UUID NOT NULL REFERENCES public.form_types(id),
-    status              public.form_status NOT NULL DEFAULT 'draft',
-    tax_year            INTEGER NOT NULL,
-    folio               TEXT,                       -- folio SII si fue enviado
-    validation_errors   JSONB NOT NULL DEFAULT '[]',
-    last_calculated_at  TIMESTAMPTZ,
-    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+CREATE INDEX IF NOT EXISTS audit_logs_user_idx    ON public.audit_logs (user_id);
+CREATE INDEX IF NOT EXISTS audit_logs_entity_idx  ON public.audit_logs (entity_type, entity_id);
+CREATE INDEX IF NOT EXISTS audit_logs_created_idx ON public.audit_logs (created_at DESC);
 
-    CONSTRAINT tax_forms_unique_per_taxpayer_year
-        UNIQUE (taxpayer_id, form_type_id, tax_year),
-    CONSTRAINT tax_forms_tax_year_valid
-        CHECK (tax_year BETWEEN 2000 AND 2100)
-);
-
-CREATE INDEX idx_tax_forms_user_id ON public.tax_forms(user_id);
-CREATE INDEX idx_tax_forms_taxpayer_id ON public.tax_forms(taxpayer_id);
-CREATE INDEX idx_tax_forms_status ON public.tax_forms(status);
-CREATE INDEX idx_tax_forms_tax_year ON public.tax_forms(tax_year);
-
--- ============================================================
--- TABLA: tax_form_data
--- Blob JSONB con los campos del formulario (separado para performance)
--- ============================================================
-CREATE TABLE public.tax_form_data (
-    id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    form_id     UUID NOT NULL REFERENCES public.tax_forms(id) ON DELETE CASCADE,
-    data        JSONB NOT NULL DEFAULT '{}',        -- Map<field_code, value>
-    version     INTEGER NOT NULL DEFAULT 1,         -- para control de versiones optimista
-    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-
-    CONSTRAINT tax_form_data_one_per_form UNIQUE (form_id)
-);
-
-CREATE INDEX idx_tax_form_data_form_id ON public.tax_form_data(form_id);
-
--- ============================================================
--- TABLA: submissions
--- Registro de envíos al SII
--- ============================================================
-CREATE TYPE public.submission_status AS ENUM (
-    'pending',
-    'sent',
-    'accepted',
-    'rejected',
-    'error'
-);
-
-CREATE TABLE public.submissions (
-    id              UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    form_id         UUID NOT NULL REFERENCES public.tax_forms(id) ON DELETE RESTRICT,
-    user_id         UUID NOT NULL REFERENCES public.profiles(id) ON DELETE RESTRICT,
-    status          public.submission_status NOT NULL DEFAULT 'pending',
-    submitted_at    TIMESTAMPTZ,
-    response_code   TEXT,                           -- código de respuesta SII
-    response_body   JSONB,                          -- respuesta completa SII
-    folio           TEXT,                           -- folio asignado por SII
-    error_message   TEXT,
-    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE INDEX idx_submissions_form_id ON public.submissions(form_id);
-CREATE INDEX idx_submissions_user_id ON public.submissions(user_id);
-CREATE INDEX idx_submissions_status ON public.submissions(status);
-
--- ============================================================
--- TABLA: audit_logs
--- Registro inmutable de acciones del usuario
--- ============================================================
-CREATE TYPE public.audit_action AS ENUM (
-    'profile_updated',
-    'plan_selected',
-    'plan_changed',
-    'subscription_cancelled',
-    'taxpayer_created',
-    'taxpayer_updated',
-    'taxpayer_deleted',
-    'form_created',
-    'form_updated',
-    'form_data_saved',
-    'form_submitted',
-    'form_deleted'
-);
-
-CREATE TABLE public.audit_logs (
-    id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id     UUID NOT NULL REFERENCES public.profiles(id) ON DELETE RESTRICT,
-    action      public.audit_action NOT NULL,
-    entity_type TEXT,                               -- 'taxpayer', 'form', 'subscription'
-    entity_id   UUID,                               -- ID del objeto afectado
-    metadata    JSONB NOT NULL DEFAULT '{}',        -- datos adicionales del evento
-    ip_address  INET,
-    user_agent  TEXT,
-    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
-    -- NO updated_at: audit_logs es inmutable
-);
-
-CREATE INDEX idx_audit_logs_user_id ON public.audit_logs(user_id);
-CREATE INDEX idx_audit_logs_action ON public.audit_logs(action);
-CREATE INDEX idx_audit_logs_created_at ON public.audit_logs(created_at DESC);
-CREATE INDEX idx_audit_logs_entity_id ON public.audit_logs(entity_id) WHERE entity_id IS NOT NULL;
-
--- ============================================================
--- TRIGGERS: updated_at automático
--- ============================================================
-CREATE OR REPLACE FUNCTION public.handle_updated_at()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at = NOW();
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_profiles_updated_at
-    BEFORE UPDATE ON public.profiles
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
-CREATE TRIGGER trg_subscriptions_updated_at
-    BEFORE UPDATE ON public.subscriptions
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
-CREATE TRIGGER trg_taxpayer_entities_updated_at
-    BEFORE UPDATE ON public.taxpayer_entities
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
-CREATE TRIGGER trg_tax_forms_updated_at
-    BEFORE UPDATE ON public.tax_forms
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
-CREATE TRIGGER trg_tax_form_data_updated_at
-    BEFORE UPDATE ON public.tax_form_data
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
-CREATE TRIGGER trg_submissions_updated_at
-    BEFORE UPDATE ON public.submissions
-    FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
--- ============================================================
--- TRIGGER: Auto-crear profile cuando se registra un usuario
--- ============================================================
+-- Trigger: crear profile al registrarse
 CREATE OR REPLACE FUNCTION public.handle_new_user()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$
 BEGIN
-    INSERT INTO public.profiles (id, email, full_name, avatar_url)
-    VALUES (
-        NEW.id,
-        NEW.email,
-        COALESCE(NEW.raw_user_meta_data->>'full_name', NEW.raw_user_meta_data->>'name'),
-        NEW.raw_user_meta_data->>'avatar_url'
-    );
-    RETURN NEW;
+  INSERT INTO public.profiles (id, email, full_name, avatar_url)
+  VALUES (NEW.id, NEW.email, NEW.raw_user_meta_data->>'full_name', NEW.raw_user_meta_data->>'avatar_url')
+  ON CONFLICT (id) DO NOTHING;
+  RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$;
 
-CREATE TRIGGER trg_on_auth_user_created
-    AFTER INSERT ON auth.users
-    FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
+-- Trigger: updated_at automático
+CREATE OR REPLACE FUNCTION public.set_updated_at()
+RETURNS TRIGGER LANGUAGE plpgsql AS $$
+BEGIN NEW.updated_at = now(); RETURN NEW; END;
+$$;
+
+CREATE OR REPLACE TRIGGER set_updated_at_profiles
+  BEFORE UPDATE ON public.profiles FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
+CREATE OR REPLACE TRIGGER set_updated_at_subscriptions
+  BEFORE UPDATE ON public.subscriptions FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
+CREATE OR REPLACE TRIGGER set_updated_at_taxpayer_entities
+  BEFORE UPDATE ON public.taxpayer_entities FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
+CREATE OR REPLACE TRIGGER set_updated_at_tax_forms
+  BEFORE UPDATE ON public.tax_forms FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
+CREATE OR REPLACE TRIGGER set_updated_at_tax_form_data
+  BEFORE UPDATE ON public.tax_form_data FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 ```
 
 ---
 
-## 5. Seeds Iniciales
+## 10. Seeds Iniciales
 
 ```sql
--- ============================================================
--- SEED: membership_plans
--- Precios en USD
--- ============================================================
-
+-- membership_plans
 INSERT INTO public.membership_plans
-    (code, name, description, max_ruts, price_monthly, price_quarterly, price_annual, min_billing_months, sort_order)
+  (code, name, max_ruts, price_monthly_usd, price_quarterly_usd, price_annual_usd, min_commitment_months)
 VALUES
-(
-    'nucleo',
-    'Núcleo',
-    'Para contadores independientes. Gestiona 1 RUT con todas las funcionalidades.',
-    1,
-    500.00,
-    1350.00,   -- 3 * 450 (10% descuento)
-    4800.00,   -- 12 * 400 (20% descuento)
-    3,         -- mínimo 3 meses
-    1
-),
-(
-    'estructura',
-    'Estructura',
-    'Para estudios contables pequeños. Hasta 3 RUTs simultáneos.',
-    3,
-    1200.00,
-    3240.00,   -- 3 * 1080 (10% descuento)
-    11520.00,  -- 12 * 960 (20% descuento)
-    3,
-    2
-),
-(
-    'arquitectura',
-    'Arquitectura',
-    'Para empresas contables medianas. Hasta 7 RUTs simultáneos.',
-    7,
-    2500.00,
-    6750.00,   -- 3 * 2250 (10% descuento)
-    24000.00,  -- 12 * 2000 (20% descuento)
-    3,
-    3
-),
-(
-    'expansion',
-    'Expansión',
-    'Para grandes estudios tributarios. RUTs ilimitados y soporte prioritario.',
-    -1,        -- -1 = ilimitado
-    6000.00,
-    16200.00,  -- 3 * 5400 (10% descuento)
-    57600.00,  -- 12 * 4800 (20% descuento)
-    3,
-    4
-);
+  ('nucleo',       'Núcleo',       1,    500.00,  1350.00,  4800.00, 3),
+  ('estructura',   'Estructura',   3,   1200.00,  3240.00, 11520.00, 1),
+  ('arquitectura', 'Arquitectura', 7,   2500.00,  6750.00, 24000.00, 1),
+  ('expansion',    'Expansión',    NULL, 6000.00, 16200.00, 57600.00, 1)
+ON CONFLICT (code) DO UPDATE SET
+  name = EXCLUDED.name, max_ruts = EXCLUDED.max_ruts,
+  price_monthly_usd = EXCLUDED.price_monthly_usd,
+  price_quarterly_usd = EXCLUDED.price_quarterly_usd,
+  price_annual_usd = EXCLUDED.price_annual_usd,
+  min_commitment_months = EXCLUDED.min_commitment_months;
 
--- ============================================================
--- SEED: form_types
--- F22 y F29 para demostrar arquitectura genérica
--- ============================================================
-
-INSERT INTO public.form_types
-    (code, name, tax_year, engine_version, description)
+-- form_types
+INSERT INTO public.form_types (code, name, description, tax_year, is_active)
 VALUES
-(
-    'F22',
-    'Declaración de Renta AT2026',
-    2026,
-    '1.0.0',
-    'Formulario 22 para la Operación Renta AT2026. Incluye motor de 609 reglas con 80.5% de tasa de parseo.'
-),
-(
-    'F29',
-    'Declaración Mensual de IVA',
-    2026,
-    '1.0.0',
-    'Formulario 29 para declaración y pago mensual de IVA. Motor de reglas en desarrollo.'
-);
+  ('F22', 'Formulario 22', 'Declaración Anual de Impuestos a la Renta', 2026, true),
+  ('F29', 'Formulario 29', 'Declaración Mensual IVA', NULL, false),
+  ('F50', 'Formulario 50', 'Declaración Mensual Impuestos Varios', NULL, false)
+ON CONFLICT (code) DO UPDATE SET
+  name = EXCLUDED.name, description = EXCLUDED.description,
+  tax_year = EXCLUDED.tax_year, is_active = EXCLUDED.is_active;
 ```
 
 ---
 
-## 6. Políticas RLS (Row Level Security)
+## 11. Row Level Security
 
 ```sql
--- ============================================================
--- Habilitar RLS en todas las tablas
--- ============================================================
-ALTER TABLE public.profiles             ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.membership_plans     ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.subscriptions        ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.taxpayer_entities    ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.form_types           ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.tax_forms            ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.tax_form_data        ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.submissions          ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.audit_logs           ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.profiles          ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.membership_plans  ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.subscriptions     ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.taxpayer_entities ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.form_types        ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.tax_forms         ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.tax_form_data     ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.submissions       ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.audit_logs        ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- profiles: usuario solo ve/edita su propio perfil
--- ============================================================
-CREATE POLICY "profiles_select_own"
-    ON public.profiles FOR SELECT
-    USING (auth.uid() = id);
+-- profiles
+CREATE POLICY "profiles: select own" ON public.profiles FOR SELECT USING (auth.uid() = id);
+CREATE POLICY "profiles: insert own" ON public.profiles FOR INSERT WITH CHECK (auth.uid() = id);
+CREATE POLICY "profiles: update own" ON public.profiles FOR UPDATE USING (auth.uid() = id);
 
-CREATE POLICY "profiles_update_own"
-    ON public.profiles FOR UPDATE
-    USING (auth.uid() = id)
-    WITH CHECK (auth.uid() = id);
+-- membership_plans (lectura pública)
+CREATE POLICY "plans: select all" ON public.membership_plans FOR SELECT USING (true);
 
--- INSERT lo maneja el trigger handle_new_user con SECURITY DEFINER
--- No permitir INSERT directo desde el cliente
-CREATE POLICY "profiles_no_insert"
-    ON public.profiles FOR INSERT
-    WITH CHECK (FALSE);
+-- subscriptions
+CREATE POLICY "subscriptions: select own" ON public.subscriptions FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "subscriptions: insert own" ON public.subscriptions FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "subscriptions: update own" ON public.subscriptions FOR UPDATE USING (auth.uid() = user_id);
 
--- ============================================================
--- membership_plans: lectura pública (catálogo de precios)
--- ============================================================
-CREATE POLICY "plans_public_read"
-    ON public.membership_plans FOR SELECT
-    USING (TRUE);
+-- taxpayer_entities
+CREATE POLICY "taxpayers: select own" ON public.taxpayer_entities FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "taxpayers: insert own" ON public.taxpayer_entities FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "taxpayers: update own" ON public.taxpayer_entities FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "taxpayers: delete own" ON public.taxpayer_entities FOR DELETE USING (auth.uid() = user_id);
 
--- Solo service_role puede modificar planes (no políticas para INSERT/UPDATE/DELETE)
+-- form_types (activos, lectura pública)
+CREATE POLICY "form_types: select active" ON public.form_types FOR SELECT USING (is_active = true);
 
--- ============================================================
--- subscriptions: usuario solo ve su suscripción
--- ============================================================
-CREATE POLICY "subscriptions_select_own"
-    ON public.subscriptions FOR SELECT
-    USING (auth.uid() = user_id);
+-- tax_forms
+CREATE POLICY "tax_forms: select own" ON public.tax_forms FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "tax_forms: insert own" ON public.tax_forms FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "tax_forms: update own" ON public.tax_forms FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "tax_forms: delete own" ON public.tax_forms FOR DELETE USING (auth.uid() = user_id);
 
--- INSERT/UPDATE solo desde service_role (backend con service_role key)
--- No políticas de INSERT/UPDATE para anon/authenticated
+-- tax_form_data (a través del form del usuario)
+CREATE POLICY "tax_form_data: select own" ON public.tax_form_data FOR SELECT USING (
+  EXISTS (SELECT 1 FROM public.tax_forms f WHERE f.id = form_id AND f.user_id = auth.uid())
+);
+CREATE POLICY "tax_form_data: insert own" ON public.tax_form_data FOR INSERT WITH CHECK (
+  EXISTS (SELECT 1 FROM public.tax_forms f WHERE f.id = form_id AND f.user_id = auth.uid())
+);
+CREATE POLICY "tax_form_data: update own" ON public.tax_form_data FOR UPDATE USING (
+  EXISTS (SELECT 1 FROM public.tax_forms f WHERE f.id = form_id AND f.user_id = auth.uid())
+);
 
--- ============================================================
--- taxpayer_entities: usuario solo ve sus RUTs
--- ============================================================
-CREATE POLICY "taxpayers_select_own"
-    ON public.taxpayer_entities FOR SELECT
-    USING (auth.uid() = user_id);
+-- submissions
+CREATE POLICY "submissions: select own" ON public.submissions FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "submissions: insert own" ON public.submissions FOR INSERT WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "taxpayers_insert_own"
-    ON public.taxpayer_entities FOR INSERT
-    WITH CHECK (auth.uid() = user_id);
-
-CREATE POLICY "taxpayers_update_own"
-    ON public.taxpayer_entities FOR UPDATE
-    USING (auth.uid() = user_id)
-    WITH CHECK (auth.uid() = user_id);
-
-CREATE POLICY "taxpayers_delete_own"
-    ON public.taxpayer_entities FOR DELETE
-    USING (auth.uid() = user_id);
-
--- NOTA: La validación de límite de RUTs NO se hace via RLS.
--- Se hace en el backend (subscription_service.ts) antes del INSERT.
-
--- ============================================================
--- form_types: lectura pública (catálogo de formularios)
--- ============================================================
-CREATE POLICY "form_types_public_read"
-    ON public.form_types FOR SELECT
-    USING (TRUE);
-
--- ============================================================
--- tax_forms: usuario solo ve sus formularios
--- ============================================================
-CREATE POLICY "tax_forms_select_own"
-    ON public.tax_forms FOR SELECT
-    USING (auth.uid() = user_id);
-
-CREATE POLICY "tax_forms_insert_own"
-    ON public.tax_forms FOR INSERT
-    WITH CHECK (auth.uid() = user_id);
-
-CREATE POLICY "tax_forms_update_own"
-    ON public.tax_forms FOR UPDATE
-    USING (auth.uid() = user_id)
-    WITH CHECK (auth.uid() = user_id);
-
-CREATE POLICY "tax_forms_delete_own"
-    ON public.tax_forms FOR DELETE
-    USING (auth.uid() = user_id AND status = 'draft');  -- solo se puede borrar borradores
-
--- ============================================================
--- tax_form_data: acceso via form_id (usuario dueño del form)
--- ============================================================
-CREATE POLICY "tax_form_data_select_own"
-    ON public.tax_form_data FOR SELECT
-    USING (
-        EXISTS (
-            SELECT 1 FROM public.tax_forms tf
-            WHERE tf.id = tax_form_data.form_id
-            AND tf.user_id = auth.uid()
-        )
-    );
-
-CREATE POLICY "tax_form_data_insert_own"
-    ON public.tax_form_data FOR INSERT
-    WITH CHECK (
-        EXISTS (
-            SELECT 1 FROM public.tax_forms tf
-            WHERE tf.id = tax_form_data.form_id
-            AND tf.user_id = auth.uid()
-        )
-    );
-
-CREATE POLICY "tax_form_data_update_own"
-    ON public.tax_form_data FOR UPDATE
-    USING (
-        EXISTS (
-            SELECT 1 FROM public.tax_forms tf
-            WHERE tf.id = tax_form_data.form_id
-            AND tf.user_id = auth.uid()
-        )
-    );
-
--- ============================================================
--- submissions: usuario solo ve sus envíos
--- ============================================================
-CREATE POLICY "submissions_select_own"
-    ON public.submissions FOR SELECT
-    USING (auth.uid() = user_id);
-
--- INSERT solo desde service_role (el backend gestiona el envío)
-
--- ============================================================
--- audit_logs: usuario solo ve sus propios logs (solo lectura)
--- ============================================================
-CREATE POLICY "audit_logs_select_own"
-    ON public.audit_logs FOR SELECT
-    USING (auth.uid() = user_id);
-
--- INSERT solo desde service_role (nunca directamente desde el frontend)
+-- audit_logs (solo lectura; escritura solo desde backend con service_role)
+CREATE POLICY "audit_logs: select own" ON public.audit_logs FOR SELECT USING (auth.uid() = user_id);
 ```
 
 ---
 
-## 7. Estructura de Carpetas Backend Deno
+## 12. Riesgos a Evitar
 
-```
-saas-api/
-├── deno.json                          ← tasks: dev, test, check
-├── deno.lock
-├── main.ts                            ← Entry point Hono, registra rutas y middleware
-├── middleware/
-│   ├── auth.ts                        ← Valida Bearer JWT Supabase, extrae user_id
-│   ├── cors.ts                        ← CORS dinámico desde ALLOWED_ORIGIN env
-│   └── rate_limit.ts                  ← Rate limiting in-memory (Deno KV en prod)
-├── routes/
-│   ├── auth.ts                        ← POST /auth/register, POST /auth/select-plan
-│   ├── me.ts                          ← GET /me (perfil + suscripción)
-│   ├── dashboard.ts                   ← GET /dashboard (resumen completo)
-│   ├── plans.ts                       ← GET /plans (catálogo público)
-│   ├── subscriptions.ts               ← GET /subscriptions/current
-│   ├── taxpayers.ts                   ← GET /taxpayers, POST /taxpayers
-│   └── forms.ts                       ← GET /forms, POST /forms, GET/PUT /forms/:id/data
-├── services/
-│   ├── subscription_service.ts        ← canAddTaxpayer(), getCurrentPlan()
-│   ├── taxpayer_service.ts            ← listTaxpayers(), createTaxpayer()
-│   └── form_service.ts                ← createForm(), saveFormData(), calculateForm()
-├── db/
-│   └── supabase_client.ts             ← createClient con service_role (acceso total)
-├── types/
-│   └── api_types.ts                   ← DTOs de request/response TypeScript
-└── tests/
-    ├── auth.test.ts
-    ├── taxpayers.test.ts
-    └── forms.test.ts
-```
+### 12.1 Confusión de identidades
 
-**`deno.json` (configuración):**
+**Riesgo**: mezclar el RUT del contador (persona que usa la app) con el RUT del contribuyente (sujeto tributario).
+**Solución**: `profiles` nunca tiene un campo `rut` propio. Los RUTs viven exclusivamente en `taxpayer_entities`. Si el contador quiere gestionar su propio RUT, lo agrega como un `taxpayer_entity` más.
 
-```json
-{
-  "tasks": {
-    "dev": "deno run --allow-net --allow-env --watch main.ts",
-    "test": "deno test --allow-net --allow-env tests/",
-    "check": "deno check main.ts"
-  },
-  "imports": {
-    "hono": "npm:hono@^4.6.0",
-    "@supabase/supabase-js": "npm:@supabase/supabase-js@^2.45.0"
-  }
-}
-```
+### 12.2 Estado activo en localStorage
+
+**Riesgo**: guardar "el RUT activo" en localStorage hace que el estado sobreviva al logout, mezcle sesiones, y no sea bookmarkeable.
+**Solución**: el RUT activo vive en la URL (`/rut/:rutId`). El estado de la app se deriva de la URL, no al revés.
+
+### 12.3 Validación de límites solo en el frontend
+
+**Riesgo**: el usuario puede manipular el frontend para crear más RUTs de los que permite su plan.
+**Solución**: `assertCanAddRut()` en el backend valida el límite antes de cualquier INSERT. El frontend solo muestra el estado como orientación; nunca como barrera real.
+
+### 12.4 Acoplamiento al F22
+
+**Riesgo**: rutas, componentes o llamadas API que asumen que el único formulario es F22.
+**Solución**: todos los formularios se identifican por `form_type_id` (UUID de la tabla `form_types`). El code `'F22'` es solo un valor de catálogo. Las rutas usan `formId`, no `f22`.
+
+### 12.5 Onboarding que pide demasiado
+
+**Riesgo**: un onboarding largo (RUT, régimen, tipo de contribuyente, todos los campos) antes de que el usuario haya visto el valor del producto.
+**Solución**: el onboarding pide solo nombre y plan. Todo lo demás se completa más tarde, dentro del workspace del RUT, con contexto y motivación.
+
+### 12.6 Borrado físico de datos fiscales
+
+**Riesgo**: borrar un `taxpayer_entity` o `tax_form` elimina datos con implicaciones legales.
+**Solución**: soft delete obligatorio (`is_active = false`). Los formularios nunca se borran físicamente. El borrado lógico de un RUT archiva sus formularios en modo lectura.
 
 ---
 
-## 8. Código Base
-
-### `db/supabase_client.ts`
-
-```typescript
-import { createClient, SupabaseClient } from "@supabase/supabase-js";
-
-// IMPORTANTE: Usar service_role key SOLO en backend.
-// Nunca exponer al frontend. La service_role bypasea RLS.
-let _client: SupabaseClient | null = null;
-
-export function getSupabaseClient(): SupabaseClient {
-  if (_client) return _client;
-
-  const url = Deno.env.get("SUPABASE_URL");
-  const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-
-  if (!url || !key) {
-    throw new Error(
-      "Missing required env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY"
-    );
-  }
-
-  _client = createClient(url, key, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  });
-
-  return _client;
-}
-
-// Para validar JWTs del cliente (usa anon key, respeta RLS)
-let _anonClient: SupabaseClient | null = null;
-
-export function getSupabaseAnonClient(): SupabaseClient {
-  if (_anonClient) return _anonClient;
-
-  const url = Deno.env.get("SUPABASE_URL");
-  const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
-
-  if (!url || !anonKey) {
-    throw new Error(
-      "Missing required env vars: SUPABASE_URL, SUPABASE_ANON_KEY"
-    );
-  }
-
-  _anonClient = createClient(url, anonKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  });
-
-  return _anonClient;
-}
-```
-
-### `middleware/auth.ts`
-
-```typescript
-import { Context, Next } from "hono";
-import { getSupabaseAnonClient } from "../db/supabase_client.ts";
-
-export type AuthUser = {
-  id: string;
-  email: string;
-};
-
-declare module "hono" {
-  interface ContextVariableMap {
-    user: AuthUser;
-  }
-}
-
-export async function authMiddleware(c: Context, next: Next): Promise<Response | void> {
-  const authorization = c.req.header("Authorization");
-
-  if (!authorization || !authorization.startsWith("Bearer ")) {
-    return c.json({ error: "Unauthorized", message: "Missing Bearer token" }, 401);
-  }
-
-  const token = authorization.slice(7);
-  const supabase = getSupabaseAnonClient();
-
-  const { data: { user }, error } = await supabase.auth.getUser(token);
-
-  if (error || !user) {
-    return c.json({ error: "Unauthorized", message: "Invalid or expired token" }, 401);
-  }
-
-  c.set("user", { id: user.id, email: user.email ?? "" });
-  await next();
-}
-```
-
-### `routes/auth.ts`
-
-```typescript
-import { Hono } from "hono";
-import { getSupabaseClient } from "../db/supabase_client.ts";
-import { authMiddleware } from "../middleware/auth.ts";
-
-const auth = new Hono();
-
-// POST /auth/register
-// Supabase Auth maneja el registro. Este endpoint es para
-// completar el onboarding DESPUÉS del registro de Supabase.
-// El trigger handle_new_user ya crea el profile automáticamente.
-// Este endpoint confirma que el profile existe y retorna el estado.
-auth.post("/register", authMiddleware, async (c) => {
-  const user = c.get("user");
-  const db = getSupabaseClient();
-
-  const { data: profile, error } = await db
-    .from("profiles")
-    .select("id, email, full_name, onboarding_done")
-    .eq("id", user.id)
-    .single();
-
-  if (error || !profile) {
-    return c.json({ error: "Profile not found" }, 404);
-  }
-
-  return c.json({
-    user_id: profile.id,
-    email: profile.email,
-    onboarding_done: profile.onboarding_done,
-    message: profile.onboarding_done
-      ? "Profile ready"
-      : "Complete onboarding: select a plan",
-  }, 200);
-});
-
-// POST /auth/select-plan
-// Body: { plan_code: string, billing_cycle: 'monthly' | 'quarterly' | 'annual' }
-auth.post("/select-plan", authMiddleware, async (c) => {
-  const user = c.get("user");
-  const body = await c.req.json<{ plan_code: string; billing_cycle: string }>();
-
-  if (!body.plan_code || !body.billing_cycle) {
-    return c.json({ error: "plan_code and billing_cycle are required" }, 400);
-  }
-
-  const validCycles = ["monthly", "quarterly", "annual"];
-  if (!validCycles.includes(body.billing_cycle)) {
-    return c.json({ error: "billing_cycle must be monthly, quarterly, or annual" }, 400);
-  }
-
-  const db = getSupabaseClient();
-
-  // Obtener el plan
-  const { data: plan, error: planError } = await db
-    .from("membership_plans")
-    .select("id, code, name, max_ruts, min_billing_months")
-    .eq("code", body.plan_code)
-    .eq("is_active", true)
-    .single();
-
-  if (planError || !plan) {
-    return c.json({ error: "Plan not found or inactive" }, 404);
-  }
-
-  // Validar min_billing_months vs billing_cycle
-  const cycleMonths = { monthly: 1, quarterly: 3, annual: 12 };
-  const selectedMonths = cycleMonths[body.billing_cycle as keyof typeof cycleMonths];
-
-  if (selectedMonths < plan.min_billing_months) {
-    return c.json({
-      error: `Plan '${plan.code}' requires minimum ${plan.min_billing_months} months billing`,
-    }, 400);
-  }
-
-  // Calcular period_end
-  const now = new Date();
-  const periodEnd = new Date(now);
-  periodEnd.setMonth(periodEnd.getMonth() + selectedMonths);
-
-  // Upsert suscripción
-  const { data: subscription, error: subError } = await db
-    .from("subscriptions")
-    .upsert({
-      user_id: user.id,
-      plan_id: plan.id,
-      status: "active",
-      billing_cycle: body.billing_cycle,
-      current_period_start: now.toISOString(),
-      current_period_end: periodEnd.toISOString(),
-    }, { onConflict: "user_id" })
-    .select()
-    .single();
-
-  if (subError || !subscription) {
-    console.error("Subscription upsert error:", subError);
-    return c.json({ error: "Failed to create subscription" }, 500);
-  }
-
-  // Marcar onboarding como completado
-  await db
-    .from("profiles")
-    .update({ onboarding_done: true })
-    .eq("id", user.id);
-
-  // Registrar en audit_log
-  await db.from("audit_logs").insert({
-    user_id: user.id,
-    action: "plan_selected",
-    entity_type: "subscription",
-    entity_id: subscription.id,
-    metadata: { plan_code: plan.code, billing_cycle: body.billing_cycle },
-  });
-
-  return c.json({
-    subscription_id: subscription.id,
-    plan: { code: plan.code, name: plan.name, max_ruts: plan.max_ruts },
-    billing_cycle: body.billing_cycle,
-    current_period_end: periodEnd.toISOString(),
-    message: "Subscription activated",
-  }, 201);
-});
-
-export default auth;
-```
-
-### `routes/dashboard.ts`
-
-```typescript
-import { Hono } from "hono";
-import { authMiddleware } from "../middleware/auth.ts";
-import { getSupabaseClient } from "../db/supabase_client.ts";
-
-const dashboard = new Hono();
-
-// GET /dashboard
-// Retorna resumen completo: plan, uso de RUTs, formularios recientes
-dashboard.get("/", authMiddleware, async (c) => {
-  const user = c.get("user");
-  const db = getSupabaseClient();
-
-  // Ejecutar consultas en paralelo para performance
-  const [profileResult, subscriptionResult, taxpayersResult, recentFormsResult] =
-    await Promise.all([
-      // Perfil
-      db
-        .from("profiles")
-        .select("id, full_name, email, company_name, personal_rut")
-        .eq("id", user.id)
-        .single(),
-
-      // Suscripción + plan
-      db
-        .from("subscriptions")
-        .select(`
-          id,
-          status,
-          billing_cycle,
-          current_period_end,
-          membership_plans (
-            code,
-            name,
-            max_ruts,
-            price_monthly,
-            price_quarterly,
-            price_annual
-          )
-        `)
-        .eq("user_id", user.id)
-        .single(),
-
-      // RUTs activos (count)
-      db
-        .from("taxpayer_entities")
-        .select("id, rut, razon_social, entity_type, created_at")
-        .eq("user_id", user.id)
-        .eq("is_active", true)
-        .order("created_at", { ascending: false }),
-
-      // Formularios recientes (últimos 5)
-      db
-        .from("tax_forms")
-        .select(`
-          id,
-          status,
-          tax_year,
-          updated_at,
-          taxpayer_entities (rut, razon_social),
-          form_types (code, name)
-        `)
-        .eq("user_id", user.id)
-        .order("updated_at", { ascending: false })
-        .limit(5),
-    ]);
-
-  const profile = profileResult.data;
-  const subscription = subscriptionResult.data;
-  const taxpayers = taxpayersResult.data ?? [];
-  const recentForms = recentFormsResult.data ?? [];
-
-  const plan = subscription?.membership_plans as Record<string, unknown> | undefined;
-  const maxRuts = (plan?.max_ruts as number) ?? 0;
-  const usedRuts = taxpayers.length;
-
-  return c.json({
-    profile: {
-      id: profile?.id,
-      full_name: profile?.full_name,
-      email: profile?.email,
-      company_name: profile?.company_name,
-    },
-    subscription: subscription
-      ? {
-          id: subscription.id,
-          status: subscription.status,
-          billing_cycle: subscription.billing_cycle,
-          current_period_end: subscription.current_period_end,
-          plan: plan,
-        }
-      : null,
-    usage: {
-      ruts_used: usedRuts,
-      ruts_max: maxRuts,         // -1 = ilimitado
-      ruts_available: maxRuts === -1 ? -1 : Math.max(0, maxRuts - usedRuts),
-      can_add_rut: maxRuts === -1 || usedRuts < maxRuts,
-    },
-    taxpayers: taxpayers.slice(0, 3),  // preview de los primeros 3
-    recent_forms: recentForms,
-  });
-});
-
-export default dashboard;
-```
-
-### `routes/taxpayers.ts`
-
-```typescript
-import { Hono } from "hono";
-import { authMiddleware } from "../middleware/auth.ts";
-import { getSupabaseClient } from "../db/supabase_client.ts";
-import { canAddTaxpayer } from "../services/subscription_service.ts";
-
-const taxpayers = new Hono();
-
-// GET /taxpayers
-taxpayers.get("/", authMiddleware, async (c) => {
-  const user = c.get("user");
-  const db = getSupabaseClient();
-
-  const { data, error } = await db
-    .from("taxpayer_entities")
-    .select("id, rut, razon_social, entity_type, is_active, notes, created_at, updated_at")
-    .eq("user_id", user.id)
-    .order("razon_social", { ascending: true });
-
-  if (error) {
-    console.error("Error fetching taxpayers:", error);
-    return c.json({ error: "Failed to fetch taxpayers" }, 500);
-  }
-
-  return c.json({ taxpayers: data ?? [], total: (data ?? []).length });
-});
-
-// POST /taxpayers
-// Body: { rut: string, razon_social: string, entity_type?: string, notes?: string }
-taxpayers.post("/", authMiddleware, async (c) => {
-  const user = c.get("user");
-  const body = await c.req.json<{
-    rut: string;
-    razon_social: string;
-    entity_type?: string;
-    notes?: string;
-  }>();
-
-  // Validaciones básicas
-  if (!body.rut || !body.razon_social) {
-    return c.json({ error: "rut and razon_social are required" }, 400);
-  }
-
-  // Validar formato de RUT
-  const rutRegex = /^[0-9]{7,8}-[0-9kK]$/;
-  if (!rutRegex.test(body.rut)) {
-    return c.json({
-      error: "Invalid RUT format. Expected: 12345678-9 or 1234567-K",
-    }, 400);
-  }
-
-  // VALIDACIÓN DE LÍMITE — siempre en backend, nunca confiar en el frontend
-  const { canAdd, reason, currentCount, maxAllowed } = await canAddTaxpayer(user.id);
-
-  if (!canAdd) {
-    return c.json({
-      error: "Plan limit reached",
-      message: reason,
-      current_count: currentCount,
-      max_allowed: maxAllowed,
-      upgrade_url: "/plans",
-    }, 403);
-  }
-
-  const db = getSupabaseClient();
-
-  const { data: taxpayer, error } = await db
-    .from("taxpayer_entities")
-    .insert({
-      user_id: user.id,
-      rut: body.rut,
-      razon_social: body.razon_social.trim(),
-      entity_type: body.entity_type ?? "empresa",
-      notes: body.notes ?? null,
-    })
-    .select()
-    .single();
-
-  if (error) {
-    // Manejar duplicado (unique constraint user_id + rut)
-    if (error.code === "23505") {
-      return c.json({ error: "RUT already exists in your account" }, 409);
-    }
-    console.error("Error creating taxpayer:", error);
-    return c.json({ error: "Failed to create taxpayer" }, 500);
-  }
-
-  // Registrar en audit_log
-  await db.from("audit_logs").insert({
-    user_id: user.id,
-    action: "taxpayer_created",
-    entity_type: "taxpayer",
-    entity_id: taxpayer.id,
-    metadata: { rut: body.rut, razon_social: body.razon_social },
-    ip_address: c.req.header("x-forwarded-for") ?? null,
-  });
-
-  return c.json({ taxpayer }, 201);
-});
-
-// DELETE /taxpayers/:id
-taxpayers.delete("/:id", authMiddleware, async (c) => {
-  const user = c.get("user");
-  const taxpayerId = c.req.param("id");
-  const db = getSupabaseClient();
-
-  // Verificar que pertenece al usuario (RLS también lo valida pero doble check)
-  const { data: existing } = await db
-    .from("taxpayer_entities")
-    .select("id, rut, razon_social")
-    .eq("id", taxpayerId)
-    .eq("user_id", user.id)
-    .single();
-
-  if (!existing) {
-    return c.json({ error: "Taxpayer not found" }, 404);
-  }
-
-  // Soft delete (marcar como inactivo)
-  const { error } = await db
-    .from("taxpayer_entities")
-    .update({ is_active: false })
-    .eq("id", taxpayerId)
-    .eq("user_id", user.id);
-
-  if (error) {
-    return c.json({ error: "Failed to delete taxpayer" }, 500);
-  }
-
-  await db.from("audit_logs").insert({
-    user_id: user.id,
-    action: "taxpayer_deleted",
-    entity_type: "taxpayer",
-    entity_id: taxpayerId,
-    metadata: { rut: existing.rut },
-  });
-
-  return c.json({ message: "Taxpayer deactivated" }, 200);
-});
-
-export default taxpayers;
-```
-
-### `services/subscription_service.ts`
-
-```typescript
-import { getSupabaseClient } from "../db/supabase_client.ts";
-
-export type CanAddResult = {
-  canAdd: boolean;
-  reason: string;
-  currentCount: number;
-  maxAllowed: number;  // -1 = ilimitado
-};
-
-// Verifica si el usuario puede agregar más RUTs según su plan.
-// Esta función es la fuente de verdad — siempre consulta la DB.
-export async function canAddTaxpayer(userId: string): Promise<CanAddResult> {
-  const db = getSupabaseClient();
-
-  // Obtener suscripción activa + límite del plan
-  const { data: subscription, error: subError } = await db
-    .from("subscriptions")
-    .select(`
-      status,
-      membership_plans (
-        max_ruts,
-        code
-      )
-    `)
-    .eq("user_id", userId)
-    .single();
-
-  if (subError || !subscription) {
-    return {
-      canAdd: false,
-      reason: "No active subscription found. Please select a plan.",
-      currentCount: 0,
-      maxAllowed: 0,
-    };
-  }
-
-  if (subscription.status !== "active" && subscription.status !== "trialing") {
-    return {
-      canAdd: false,
-      reason: `Subscription is ${subscription.status}. Please renew your plan.`,
-      currentCount: 0,
-      maxAllowed: 0,
-    };
-  }
-
-  const plan = subscription.membership_plans as { max_ruts: number; code: string } | null;
-
-  if (!plan) {
-    return {
-      canAdd: false,
-      reason: "Plan information not found.",
-      currentCount: 0,
-      maxAllowed: 0,
-    };
-  }
-
-  const maxRuts = plan.max_ruts;
-
-  // Ilimitado
-  if (maxRuts === -1) {
-    const { count } = await db
-      .from("taxpayer_entities")
-      .select("id", { count: "exact", head: true })
-      .eq("user_id", userId)
-      .eq("is_active", true);
-
-    return {
-      canAdd: true,
-      reason: "Unlimited plan",
-      currentCount: count ?? 0,
-      maxAllowed: -1,
-    };
-  }
-
-  // Contar RUTs activos actuales
-  const { count, error: countError } = await db
-    .from("taxpayer_entities")
-    .select("id", { count: "exact", head: true })
-    .eq("user_id", userId)
-    .eq("is_active", true);
-
-  if (countError) {
-    return {
-      canAdd: false,
-      reason: "Could not verify current RUT count.",
-      currentCount: 0,
-      maxAllowed: maxRuts,
-    };
-  }
-
-  const currentCount = count ?? 0;
-
-  if (currentCount >= maxRuts) {
-    return {
-      canAdd: false,
-      reason: `Your plan '${plan.code}' allows a maximum of ${maxRuts} RUT(s). You currently have ${currentCount}. Please upgrade your plan.`,
-      currentCount,
-      maxAllowed: maxRuts,
-    };
-  }
-
-  return {
-    canAdd: true,
-    reason: "Within plan limits",
-    currentCount,
-    maxAllowed: maxRuts,
-  };
-}
-
-// Obtener el plan actual del usuario con todos sus detalles
-export async function getCurrentPlan(userId: string) {
-  const db = getSupabaseClient();
-
-  const { data, error } = await db
-    .from("subscriptions")
-    .select(`
-      id,
-      status,
-      billing_cycle,
-      current_period_start,
-      current_period_end,
-      membership_plans (
-        code,
-        name,
-        max_ruts,
-        price_monthly,
-        price_quarterly,
-        price_annual,
-        description
-      )
-    `)
-    .eq("user_id", userId)
-    .single();
-
-  if (error || !data) return null;
-  return data;
-}
-```
-
-### `main.ts`
-
-```typescript
-import { Hono } from "hono";
-import { corsMiddleware } from "./middleware/cors.ts";
-import { rateLimitMiddleware } from "./middleware/rate_limit.ts";
-import authRoutes from "./routes/auth.ts";
-import meRoutes from "./routes/me.ts";
-import dashboardRoutes from "./routes/dashboard.ts";
-import plansRoutes from "./routes/plans.ts";
-import subscriptionsRoutes from "./routes/subscriptions.ts";
-import taxpayersRoutes from "./routes/taxpayers.ts";
-import formsRoutes from "./routes/forms.ts";
-
-const app = new Hono();
-
-// Middleware global
-app.use("*", corsMiddleware);
-app.use("/auth/*", rateLimitMiddleware);  // Rate limit solo en auth
-
-// Rutas
-app.route("/auth", authRoutes);
-app.route("/me", meRoutes);
-app.route("/dashboard", dashboardRoutes);
-app.route("/plans", plansRoutes);
-app.route("/subscriptions", subscriptionsRoutes);
-app.route("/taxpayers", taxpayersRoutes);
-app.route("/forms", formsRoutes);
-
-// Health check
-app.get("/health", (c) => c.json({ status: "ok", timestamp: new Date().toISOString() }));
-
-// 404 handler
-app.notFound((c) => c.json({ error: "Not found" }, 404));
-
-// Error handler
-app.onError((err, c) => {
-  console.error("Unhandled error:", err);
-  return c.json({ error: "Internal server error" }, 500);
-});
-
-const port = parseInt(Deno.env.get("PORT") ?? "8001");
-console.log(`SaaS API running on http://localhost:${port}`);
-
-Deno.serve({ port }, app.fetch);
-```
+## 13. Recomendación Final de Implementación
+
+### Fase 3 — Frontend (inmediata)
+
+Implementar el shell completo de la app con los tres niveles de navegación. El objetivo de esta fase no es que el F22 funcione en producción, sino que la estructura de navegación y contexto quede correctamente establecida para escalar.
+
+**Componentes prioritarios:**
+1. `AppShell` — layout con topbar contextual y sidebar adaptativo
+2. `DashboardPage` — nivel cuenta, tarjetas de RUTs activos
+3. `RUTSelectorDropdown` — selector en topbar con CTA de upgrade
+4. `TaxpayerWorkspacePage` — nivel RUT, lista de formularios disponibles
+5. `OnboardingWizard` — flujo post-registro (nombre + plan)
+6. `AddTaxpayerModal` — formulario de alta de RUT con validación
+7. `FormEditorPage` — envuelve el `RecuadroTable` existente dentro del contexto de RUT
+
+**Orden de implementación recomendado:**
+1. Rutas y router (`/dashboard`, `/rut/:id`, `/rut/:id/forms/:formId`)
+2. Contexto de autenticación (Supabase Auth hook)
+3. Dashboard global vacío con CTA
+4. Modal de alta de RUT
+5. Workspace del RUT con lista de formularios
+6. Integrar el editor F22 existente dentro del workspace
+7. Topbar con selector de RUT activo
+8. Onboarding wizard
+
+### Criterio de "hecho"
+
+La Fase 3 está completa cuando:
+- Un usuario puede registrarse, elegir un plan, agregar un RUT y abrir un F22 para ese RUT, todo sin fricción innecesaria
+- El RUT activo siempre es visible cuando el usuario está en el workspace
+- El mismo código soporta un usuario con 1 RUT (Núcleo) y uno con 7 (Arquitectura) sin cambios de lógica
+- Al agregar un segundo `form_type` activo en la DB, aparece automáticamente en el workspace sin cambios de código
 
 ---
 
-## 9. Flujo de Autenticación
-
-### Flujo completo en texto
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    REGISTRO (Email/Password)                     │
-│                                                                  │
-│  1. Usuario llena form en React                                  │
-│  2. React → supabase.auth.signUp(email, password)               │
-│  3. Supabase Auth crea registro en auth.users                    │
-│  4. TRIGGER handle_new_user → INSERT INTO profiles               │
-│  5. Supabase envía email de confirmación                         │
-│  6. Usuario confirma email → auth.users.email_confirmed = true   │
-│  7. React recibe session con JWT                                 │
-│  8. React → POST /auth/register (con Bearer JWT)                │
-│  9. Backend verifica JWT, retorna { onboarding_done: false }     │
-│ 10. React redirige a /onboarding (selección de plan)             │
-│ 11. Usuario selecciona plan → POST /auth/select-plan             │
-│ 12. Backend crea suscripción, marca onboarding_done = true       │
-│ 13. React redirige a /dashboard                                  │
-└─────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────┐
-│                    LOGIN (Email/Password)                        │
-│                                                                  │
-│  1. Usuario llena form en React                                  │
-│  2. React → supabase.auth.signInWithPassword(email, password)   │
-│  3. Supabase Auth valida credenciales                            │
-│  4. Retorna { session: { access_token: "JWT...", ... } }         │
-│  5. React almacena JWT en memory (no localStorage por seguridad) │
-│  6. React → GET /me (con Bearer JWT)                            │
-│  7. Backend valida JWT, retorna perfil + estado onboarding       │
-│  8a. Si onboarding_done = false → redirige a /onboarding         │
-│  8b. Si onboarding_done = true → redirige a /dashboard           │
-└─────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────┐
-│                    LOGIN (Google OAuth)                          │
-│                                                                  │
-│  1. Usuario hace click en "Continuar con Google"                 │
-│  2. React → supabase.auth.signInWithOAuth({ provider: "google" })│
-│  3. Redirect a Google OAuth                                      │
-│  4. Google autentica → redirect de vuelta a callback URL         │
-│  5. Supabase Auth procesa callback, crea/actualiza auth.users    │
-│  6. Si usuario nuevo: TRIGGER handle_new_user crea profile       │
-│     (full_name y avatar_url vienen de Google metadata)           │
-│  7. Supabase redirige a /auth/callback con session               │
-│  8. React procesa callback → igual que login email paso 6-8b     │
-└─────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────┐
-│                    USUARIO SIN PLAN                              │
-│                                                                  │
-│  Cualquier ruta protegida → GET /me → onboarding_done = false   │
-│                           → React redirige a /onboarding        │
-│                                                                  │
-│  El backend también verifica: si algún endpoint requiere         │
-│  suscripción activa y no existe → 403 con upgrade_url           │
-└─────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 10. Endpoints Completos
-
-### `POST /auth/register`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida (Bearer JWT) |
-| Body | ninguno |
-| Descripción | Verifica que el profile fue creado por el trigger y retorna estado de onboarding |
-
-**Response 200:**
-```json
-{
-  "user_id": "uuid",
-  "email": "user@example.com",
-  "onboarding_done": false,
-  "message": "Complete onboarding: select a plan"
-}
-```
-
-**Errores:** `401 Unauthorized`, `404 Profile not found`
-
----
-
-### `POST /auth/select-plan`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida (Bearer JWT) |
-| Body | `{ "plan_code": "nucleo", "billing_cycle": "monthly" }` |
-
-**Response 201:**
-```json
-{
-  "subscription_id": "uuid",
-  "plan": { "code": "nucleo", "name": "Núcleo", "max_ruts": 1 },
-  "billing_cycle": "monthly",
-  "current_period_end": "2026-04-27T00:00:00Z",
-  "message": "Subscription activated"
-}
-```
-
-**Errores:** `400 Invalid billing_cycle`, `400 Min billing months not met`, `404 Plan not found`, `401 Unauthorized`
-
----
-
-### `GET /me`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida |
-| Body | ninguno |
-
-**Response 200:**
-```json
-{
-  "profile": {
-    "id": "uuid",
-    "full_name": "Juan Pérez",
-    "email": "juan@example.com",
-    "company_name": "Estudio Pérez",
-    "personal_rut": "12345678-9",
-    "onboarding_done": true
-  },
-  "subscription": {
-    "status": "active",
-    "plan": { "code": "estructura", "name": "Estructura", "max_ruts": 3 },
-    "current_period_end": "2026-06-27T00:00:00Z"
-  }
-}
-```
-
----
-
-### `GET /dashboard`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida |
-| Body | ninguno |
-
-**Response 200:**
-```json
-{
-  "profile": { "id": "uuid", "full_name": "...", "email": "..." },
-  "subscription": {
-    "status": "active",
-    "billing_cycle": "quarterly",
-    "current_period_end": "2026-06-27T00:00:00Z",
-    "plan": { "code": "estructura", "max_ruts": 3, "price_monthly": 1200 }
-  },
-  "usage": {
-    "ruts_used": 2,
-    "ruts_max": 3,
-    "ruts_available": 1,
-    "can_add_rut": true
-  },
-  "taxpayers": [
-    { "id": "uuid", "rut": "76123456-7", "razon_social": "Empresa A SpA" }
-  ],
-  "recent_forms": [
-    {
-      "id": "uuid",
-      "status": "draft",
-      "tax_year": 2026,
-      "updated_at": "2026-03-20T10:00:00Z",
-      "taxpayer_entities": { "rut": "76123456-7", "razon_social": "Empresa A SpA" },
-      "form_types": { "code": "F22", "name": "Declaración de Renta AT2026" }
-    }
-  ]
-}
-```
-
----
-
-### `GET /plans`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | No requerida (pública) |
-
-**Response 200:**
-```json
-{
-  "plans": [
-    {
-      "id": "uuid",
-      "code": "nucleo",
-      "name": "Núcleo",
-      "max_ruts": 1,
-      "price_monthly": 500,
-      "price_quarterly": 1350,
-      "price_annual": 4800,
-      "min_billing_months": 3
-    }
-  ]
-}
-```
-
----
-
-### `GET /subscriptions/current`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida |
-
-**Response 200:** Objeto subscription completo con plan anidado.
-**Errores:** `404` si no tiene suscripción.
-
----
-
-### `GET /taxpayers`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida |
-
-**Response 200:**
-```json
-{
-  "taxpayers": [
-    {
-      "id": "uuid",
-      "rut": "76123456-7",
-      "razon_social": "Empresa ABC SpA",
-      "entity_type": "empresa",
-      "is_active": true,
-      "created_at": "2026-03-01T00:00:00Z"
-    }
-  ],
-  "total": 1
-}
-```
-
----
-
-### `POST /taxpayers`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida |
-| Body | `{ "rut": "76123456-7", "razon_social": "Empresa ABC SpA", "entity_type": "empresa" }` |
-
-**Response 201:** Objeto taxpayer creado.
-**Errores:** `400 Invalid RUT format`, `403 Plan limit reached` (con `upgrade_url`), `409 RUT already exists`
-
----
-
-### `GET /forms`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida |
-| Query params | `taxpayer_id` (opcional), `tax_year` (opcional), `status` (opcional) |
-
-**Response 200:**
-```json
-{
-  "forms": [
-    {
-      "id": "uuid",
-      "status": "draft",
-      "tax_year": 2026,
-      "taxpayer": { "rut": "76123456-7", "razon_social": "Empresa ABC SpA" },
-      "form_type": { "code": "F22", "name": "Declaración de Renta AT2026" },
-      "updated_at": "2026-03-20T10:00:00Z"
-    }
-  ]
-}
-```
-
----
-
-### `POST /forms`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida |
-| Body | `{ "taxpayer_id": "uuid", "form_type_id": "uuid", "tax_year": 2026 }` |
-
-**Response 201:** Objeto form creado (con id para usar en `/forms/:id/data`).
-**Errores:** `400 Missing fields`, `409 Form already exists for this taxpayer/year`, `404 Taxpayer not found`
-
----
-
-### `GET /forms/:id`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida |
-
-**Response 200:** Objeto form completo con validation_errors y last_calculated_at.
-
----
-
-### `PUT /forms/:id/data`
-
-| Campo | Valor |
-|-------|-------|
-| Auth | Requerida |
-| Body | `{ "data": { "1": 1500000, "2": 200000 }, "version": 1 }` |
-| Descripción | Guarda datos y ejecuta cálculo/validación en tiempo real |
-
-**Response 200:**
-```json
-{
-  "form_id": "uuid",
-  "version": 2,
-  "data": { "1": 1500000, "2": 200000 },
-  "calculation": {
-    "computed_fields": { "30": 1700000 },
-    "validation_errors": [],
-    "status": "valid"
-  }
-}
-```
-
-**Errores:** `409 Version conflict (optimistic locking)`, `404 Form not found`, `403 Form is submitted, cannot edit`
-
----
-
-## 11. Dashboard UI — Estructura Propuesta
-
-### Layout principal
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  SIDEBAR (240px fijo)          MAIN CONTENT                 │
-│  ┌──────────────────┐         ┌──────────────────────────┐  │
-│  │ Logo / Brand     │         │  Header: "Dashboard"     │  │
-│  │──────────────────│         │  sub: "Bienvenido, Juan" │  │
-│  │ [Dashboard]      │         └──────────────────────────┘  │
-│  │ [Mis RUTs]       │                                        │
-│  │ [Formularios]    │         ┌──────────────────────────┐  │
-│  │ [Historial]      │         │  TARJETA: Plan Actual    │  │
-│  │──────────────────│         │  "Estructura — 2/3 RUTs" │  │
-│  │ [Mi Plan]        │         │  Progreso visual         │  │
-│  │ [Configuración]  │         │  Btn: "Administrar plan" │  │
-│  │──────────────────│         └──────────────────────────┘  │
-│  │ [Cerrar Sesión]  │                                        │
-│  └──────────────────┘         ┌──────────────────────────┐  │
-│                               │  GRID 2 cols:            │  │
-│                               │  [RUTs Activos: 2/3]    │  │
-│                               │  [F22 en borrador: 1]   │  │
-│                               └──────────────────────────┘  │
-│                                                             │
-│                               ┌──────────────────────────┐  │
-│                               │  Accesos Rápidos         │  │
-│                               │  [+ Nuevo RUT]           │  │
-│                               │  [+ Nuevo F22]           │  │
-│                               └──────────────────────────┘  │
-│                                                             │
-│                               ┌──────────────────────────┐  │
-│                               │  Formularios Recientes   │  │
-│                               │  ─────────────────────  │  │
-│                               │  F22 · Empresa A SpA     │  │
-│                               │  Borrador · 20 Mar 2026  │  │
-│                               │  ─────────────────────  │  │
-│                               │  [Ver todos →]           │  │
-│                               └──────────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Datos por sección y su fuente en el API
-
-| Sección UI | Datos mostrados | Endpoint |
-|-----------|----------------|---------|
-| Header bienvenida | `profile.full_name` | `GET /dashboard` |
-| Tarjeta plan | `subscription.plan.name`, `usage.ruts_used`, `usage.ruts_max` | `GET /dashboard` |
-| Barra progreso RUTs | `usage.ruts_used / usage.ruts_max` | `GET /dashboard` |
-| Métricas rápidas | count de formularios por status | `GET /dashboard` (o `GET /forms` con query) |
-| Acceso rápido "+ Nuevo RUT" | `usage.can_add_rut` (deshabilitar si false) | `GET /dashboard` |
-| Formularios recientes | `recent_forms` array (últimos 5) | `GET /dashboard` |
-| Lista completa de RUTs | array completo con paginación | `GET /taxpayers` |
-
----
-
-## 12. Fases de Implementación
-
-### Fase 0: Setup de infraestructura
-**Duración estimada: 1 día**
-- Crear proyecto Supabase (free tier para dev)
-- Ejecutar schema SQL completo (tablas, tipos, triggers, índices)
-- Ejecutar seeds (planes y tipos de formulario)
-- Ejecutar políticas RLS
-- Crear repositorio `saas-api/` con `deno.json`
-- Configurar `.env` con variables de entorno
-- Verificar trigger `handle_new_user` con test manual
-
-### Fase 1: Autenticación
-**Duración estimada: 2 días**
-- Implementar `db/supabase_client.ts`
-- Implementar `middleware/auth.ts`
-- Implementar `routes/auth.ts` (register + select-plan)
-- Configurar Google OAuth en Supabase Dashboard
-- Implementar frontend: páginas Login y Register con Supabase SDK
-- Implementar callback URL para OAuth
-- Tests: registro, login email, login Google, token inválido
-
-### Fase 2: Onboarding
-**Duración estimada: 2 días**
-- Implementar `routes/plans.ts` (GET /plans público)
-- Implementar UI de selección de plan (pricing table)
-- Integrar POST /auth/select-plan
-- Guardia de ruta: si `onboarding_done = false` → /onboarding
-- Tests: selección de plan, validación de billing_cycle mínimo
-
-### Fase 3: Dashboard
-**Duración estimada: 2 días**
-- Implementar `routes/dashboard.ts`
-- Implementar `routes/me.ts`
-- Implementar `routes/subscriptions.ts`
-- Implementar UI del dashboard con todas las secciones
-- Tests: dashboard completo con datos reales
-
-### Fase 4: Gestión de RUTs
-**Duración estimada: 2 días**
-- Implementar `services/subscription_service.ts` (canAddTaxpayer)
-- Implementar `services/taxpayer_service.ts`
-- Implementar `routes/taxpayers.ts` (GET, POST, DELETE)
-- Implementar UI: lista de RUTs, modal de creación
-- Deshabilitar botón "+ Nuevo RUT" si límite alcanzado
-- Tests: límite de plan, RUT duplicado, formato inválido
-
-### Fase 5: Gestión de Formularios
-**Duración estimada: 3 días**
-- Implementar `services/form_service.ts`
-- Implementar `routes/forms.ts` (GET, POST, GET/:id, PUT/:id/data)
-- Crear F22 vinculado a un RUT
-- Cargar/guardar borrador con datos JSONB
-- Listar formularios con filtros
-- UI: lista de formularios, vista de detalle básica
-
-### Fase 6: Integración con Motor F22
-**Duración estimada: 3 días**
-- Importar `core/` existente en el saas-api como dependencia local
-- En `PUT /forms/:id/data`: tras guardar datos → ejecutar `Calculator.calculate()`
-- Retornar `calculation_result` con errores de validación
-- Actualizar `tax_forms.validation_errors` y `last_calculated_at`
-- UI: mostrar errores de validación en tiempo real en el formulario
-- Actualizar `tax_forms.status` según resultado (draft/ready)
-- Tests de integración end-to-end: crear F22, cargar datos, ver resultado del motor
-
----
-
-## 13. Consideraciones de Seguridad
-
-### Service Role Key
-- La `SUPABASE_SERVICE_ROLE_KEY` NUNCA se expone al frontend.
-- Solo existe en variables de entorno del servidor backend.
-- Toda operación sensible (upsert suscripciones, audit_logs) pasa por el backend con service_role.
-- El frontend solo usa la `SUPABASE_ANON_KEY` para operaciones de auth directo con Supabase.
-
-### Validación de JWT
-- El `middleware/auth.ts` valida el Bearer token en CADA request al backend.
-- Se usa `supabase.auth.getUser(token)` que verifica la firma y expiración.
-- JWTs de Supabase expiran en 1 hora. El frontend debe manejar refresh con `onAuthStateChange`.
-
-### Rate Limiting
-- El middleware `rate_limit.ts` aplica límite estricto en `/auth/*`:
-  - POST /auth/register: máximo 5 requests por IP por hora
-  - POST /auth/select-plan: máximo 10 requests por usuario por hora
-- En producción, usar Deno KV para estado distribuido si hay múltiples instancias.
-
-### Validación de Límite de RUTs
-- La validación de `canAddTaxpayer()` SIEMPRE se ejecuta en el backend.
-- El frontend puede ocultar/deshabilitar botones basado en `usage.can_add_rut` (del /dashboard) pero esto es solo UX.
-- Un usuario que manipule el frontend no puede bypassear el límite porque el POST /taxpayers siempre verifica.
-
-### Auditoría
-- Todas las acciones críticas se registran en `audit_logs`:
-  - Creación/eliminación de RUTs
-  - Selección/cambio de plan
-  - Envíos de formularios
-- Los logs son inmutables (no se permite UPDATE ni DELETE sobre audit_logs via RLS).
-- Solo el propio usuario puede leer sus logs.
-
-### CORS
-- El backend solo acepta requests del dominio del frontend (variable `ALLOWED_ORIGIN`).
-- En desarrollo: `http://localhost:5173` (Vite dev server).
-- En producción: dominio real del frontend.
-
-### Validación de inputs
-- Formato de RUT validado con regex tanto en frontend (UX) como en backend (seguridad) como en DB (CHECK constraint).
-- billing_cycle validado contra enum en backend antes de insertar.
-- Todos los body JSON se parsean con tipos TypeScript explícitos.
-
----
-
-## 14. Variables de Entorno
-
-### Backend (`saas-api/.env`)
-
-```dotenv
-# ============================================================
-# Supabase
-# ============================================================
-
-# URL del proyecto Supabase
-# Ejemplo: https://xyzcompany.supabase.co
-SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-
-# Clave anon (pública, para validar JWTs del cliente)
-# Se encuentra en: Supabase Dashboard > Settings > API > anon public
-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-
-# SECRETO: Service role key (bypasea RLS, solo en backend)
-# Se encuentra en: Supabase Dashboard > Settings > API > service_role secret
-# NUNCA exponer al frontend ni commitear al repositorio
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-
-# ============================================================
-# Servidor
-# ============================================================
-
-# Puerto donde corre la API (default: 8001)
-PORT=8001
-
-# Origen permitido para CORS
-# En desarrollo: http://localhost:5173
-# En producción: https://tu-dominio.com
-ALLOWED_ORIGIN=http://localhost:5173
-
-# Entorno: development | staging | production
-NODE_ENV=development
-
-# ============================================================
-# Motor F22 (opcional — si se separa en servicio propio)
-# ============================================================
-
-# Ruta al archivo XLSX de reglas F22
-# Solo necesario si saas-api está separado del core/
-F22_RULES_XLSX_PATH=../core/data/5_CSW_Set_1.0_AT2026.xlsx
-F22_PARAMS_JSON_PATH=../core/data/params_AT2026.json
-
-# ============================================================
-# Rate Limiting (producción)
-# ============================================================
-
-# URL de Deno KV para rate limiting distribuido
-# En desarrollo: omitir (usa in-memory)
-# DENO_KV_URL=https://api.deno.com/databases/YOUR_DB_ID/connect
-```
-
-### Frontend (`web/.env`)
-
-```dotenv
-# URL del proyecto Supabase (mismo que backend)
-VITE_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-
-# Clave anon (pública — OK para el frontend)
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-
-# URL del backend SaaS API
-VITE_SAAS_API_URL=http://localhost:8001
-
-# URL de callback para OAuth de Google
-# Debe estar registrada en Supabase Dashboard > Auth > URL Configuration
-VITE_OAUTH_REDIRECT_URL=http://localhost:5173/auth/callback
-```
-
-### Variables de Supabase Dashboard a configurar
-
-| Variable | Dónde configurar | Valor ejemplo |
-|----------|----------------|---------------|
-| Site URL | Auth > URL Configuration | `https://tu-dominio.com` |
-| Redirect URLs | Auth > URL Configuration | `https://tu-dominio.com/auth/callback` |
-| Google Client ID | Auth > Providers > Google | Desde Google Cloud Console |
-| Google Client Secret | Auth > Providers > Google | Desde Google Cloud Console |
-| SMTP (emails) | Auth > SMTP Settings | Resend, SendGrid, etc. |
-
----
-
-*Fin del documento de arquitectura.*
-*Versión: 1.0.0 — 2026-03-27*
-```
-
----
-
-No tengo acceso a herramientas de escritura de archivos en este modo de planificación. Para guardar el documento, ejecuta el siguiente comando en tu terminal:
-
-```bash
-pbpaste > /Users/toronacii/Documents/code/side-projects/SII/DSL4/SAAS_ARCHITECTURE.md
+*Última actualización: 2026-03-27*
