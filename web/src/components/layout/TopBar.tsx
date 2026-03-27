@@ -47,8 +47,8 @@ export function TopBar({ onMenuClick }: Props) {
     <select
       value={context.taxRegime}
       onChange={(e) => setCtx({ taxRegime: e.target.value as TaxRegime })}
-      className="flex-1 min-w-0 text-sm border border-gray-200 rounded-lg px-2 py-1.5
-        bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+      className="flex-1 min-w-0 text-sm border border-stone-200 rounded-lg px-2 py-1.5
+        bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-brand-300"
     >
       {TAX_REGIMES.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
     </select>
@@ -58,33 +58,33 @@ export function TopBar({ onMenuClick }: Props) {
     <select
       value={context.entityType}
       onChange={(e) => setCtx({ entityType: parseInt(e.target.value) as EntityType })}
-      className="flex-1 min-w-0 text-sm border border-gray-200 rounded-lg px-2 py-1.5
-        bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+      className="flex-1 min-w-0 text-sm border border-stone-200 rounded-lg px-2 py-1.5
+        bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-brand-300"
     >
       {ENTITY_TYPES.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
     </select>
   );
 
   const rectCheck = (
-    <label className="flex items-center gap-1.5 text-sm text-gray-600 shrink-0 cursor-pointer whitespace-nowrap">
+    <label className="flex items-center gap-1.5 text-sm text-stone-600 shrink-0 cursor-pointer whitespace-nowrap">
       <input
         type="checkbox"
         checked={context.isRectificatoria}
         onChange={(e) => setCtx({ isRectificatoria: e.target.checked })}
-        className="rounded border-gray-300 text-blue-600 focus:ring-blue-300"
+        className="rounded border-stone-300 text-brand-600 focus:ring-brand-300"
       />
       Rectificatoria
     </label>
   );
 
   return (
-    <header className="bg-white border-b border-gray-200 shrink-0 px-3 md:px-4">
+    <header className="bg-white border-b border-stone-200 shrink-0 px-3 md:px-4">
       {/* Main row */}
       <div className="flex items-center gap-2 h-12">
         {/* Hamburger (mobile / tablet only) */}
         <button
           onClick={onMenuClick}
-          className="lg:hidden p-1.5 -ml-1 rounded-lg text-gray-500 hover:bg-gray-100"
+          className="lg:hidden p-1.5 -ml-1 rounded-lg text-stone-500 hover:bg-stone-100"
           aria-label="Secciones"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,12 +94,12 @@ export function TopBar({ onMenuClick }: Props) {
 
         {/* Logo */}
         <div className="flex items-center gap-2 shrink-0">
-          <div className="w-7 h-7 bg-blue-700 rounded flex items-center justify-center">
+          <div className="w-7 h-7 bg-brand-800 rounded flex items-center justify-center">
             <span className="text-white text-xs font-bold">SII</span>
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-sm font-bold text-gray-900">Formulario 22</span>
-            <span className="text-[11px] text-gray-400 hidden sm:block">AT 2026</span>
+            <span className="text-sm font-bold text-stone-900">Formulario 22</span>
+            <span className="text-[11px] text-stone-400 hidden sm:block">AT 2026</span>
           </div>
         </div>
 
@@ -115,7 +115,7 @@ export function TopBar({ onMenuClick }: Props) {
 
         {/* Badge */}
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-xs text-gray-400 hidden xl:block truncate max-w-40">
+          <span className="text-xs text-stone-400 hidden xl:block truncate max-w-40">
             {variant.id}
           </span>
           {errorCount === 0 ? (

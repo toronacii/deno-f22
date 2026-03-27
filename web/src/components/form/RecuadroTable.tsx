@@ -37,7 +37,7 @@ function TextFieldCell({ code }: { code: number }) {
       type="text"
       value={value}
       onChange={(e) => setTextField(code, e.target.value)}
-      className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+      className="w-full border border-stone-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-brand-400"
     />
   );
 }
@@ -53,7 +53,7 @@ function BoolFieldCell({ code }: { code: number }) {
       type="checkbox"
       checked={value === 1}
       onChange={(e) => setField(code, e.target.checked ? 1 : 0)}
-      className="w-4 h-4 accent-blue-600 cursor-pointer"
+      className="w-4 h-4 accent-brand-600 cursor-pointer"
     />
   );
 }
@@ -78,16 +78,16 @@ function NumericFieldCell({ code, isComputed, decimals }: { code: number; isComp
     return (
       <div
         id={`field-${code}`}
-        className={`flex items-center justify-end gap-1 px-2 py-1 rounded text-right bg-gray-50 border border-gray-200 ${
-          hasDrift ? "!border-amber-400 !bg-amber-50" : ""
+        className={`flex items-center justify-end gap-1 px-2 py-1 rounded text-right bg-stone-50 border border-stone-200 ${
+          hasDrift ? "!border-gold-400 !bg-gold-50" : ""
         }`}
       >
         {hasDrift && (
           <Tooltip content={`Declarado: ${formatPesos(declared!)} — Calculado: ${formatPesos(computed!)}`}>
-            <span className="text-amber-500 text-xs cursor-help">⚠</span>
+            <span className="text-gold-500 text-xs cursor-help">⚠</span>
           </Tooltip>
         )}
-        <span className="font-mono text-sm text-emerald-700 font-semibold tabular-nums">
+        <span className="font-mono text-sm text-success-500 font-semibold tabular-nums">
           {formatPesos(effectiveValue ?? 0)}
         </span>
       </div>
@@ -143,7 +143,7 @@ function SectionTitleRow({ section, nSlots }: { section: LayoutSection; nSlots: 
     <tr>
       <td
         colSpan={1 + nSlots * 2}
-        className="bg-[#003087] text-white font-bold text-sm py-1.5 px-3"
+        className="bg-brand-800 text-white font-bold text-sm py-1.5 px-3"
       >
         {section.title}
       </td>
@@ -155,10 +155,10 @@ function SectionTitleRow({ section, nSlots }: { section: LayoutSection; nSlots: 
 
 function SubHeaderRow({ row, nSlots }: { row: LayoutRow; nSlots: number }) {
   return (
-    <tr className="bg-gray-100">
+    <tr className="bg-stone-100">
       <td
         colSpan={1 + nSlots * 2}
-        className="py-1 px-3 text-xs uppercase tracking-wide text-gray-600 font-semibold border-b border-gray-200"
+        className="py-1 px-3 text-xs uppercase tracking-wide text-stone-600 font-semibold border-b border-stone-200"
       >
         {row.text}
       </td>
@@ -173,20 +173,20 @@ function ColHeaderRow({ row, nSlots }: { row: LayoutRow; nSlots: number }) {
   return (
     <>
       {row.text && (
-        <tr className="bg-gray-50">
+        <tr className="bg-stone-50">
           <td
             colSpan={1 + nSlots * 2}
-            className="py-1 px-3 text-xs font-semibold text-gray-700 border-b border-gray-200 uppercase tracking-wide"
+            className="py-1 px-3 text-xs font-semibold text-stone-700 border-b border-stone-200 uppercase tracking-wide"
           >
             {row.text}
           </td>
         </tr>
       )}
-      <tr className="bg-gray-50 text-xs text-gray-500 font-medium border-b border-gray-300">
+      <tr className="bg-stone-50 text-xs text-stone-500 font-medium border-b border-stone-300">
         <td className="py-1 px-3" />
         {Array.from({ length: nSlots }).map((_, i) => (
           <Fragment key={i}>
-            <td className="py-1 px-2 text-center text-[11px] text-gray-500 italic">
+            <td className="py-1 px-2 text-center text-[11px] text-stone-500 italic">
               {colTexts[i] ?? ""}
             </td>
             <td className="w-5" />
@@ -205,7 +205,7 @@ function FieldTooltipContent({ meta }: { meta: FieldMetadataEntry }) {
     <span>
       {meta.description && <span className="block">{meta.description}</span>}
       {meta.warnings?.map((w, i) => (
-        <span key={i} className="block mt-1 text-amber-300">⚠ {w}</span>
+        <span key={i} className="block mt-1 text-gold-300">⚠ {w}</span>
       ))}
     </span>
   );
@@ -231,7 +231,7 @@ function SlotCell({
     <td className="w-44 py-1.5 px-2 align-top">
       <div className="flex flex-col gap-0.5">
         {perFieldLabel && (
-          <span className="text-[11px] text-gray-500 leading-tight" title={perFieldLabel}>
+          <span className="text-[11px] text-stone-500 leading-tight" title={perFieldLabel}>
             {perFieldLabel}
           </span>
         )}
@@ -240,13 +240,13 @@ function SlotCell({
           {meta && (
             <Tooltip content={<FieldTooltipContent meta={meta} />}>
               <span className={`text-[11px] cursor-help select-none ${
-                hasWarnings ? "text-amber-400" : "text-gray-300 hover:text-blue-400"
+                hasWarnings ? "text-gold-400" : "text-stone-300 hover:text-brand-400"
               }`}>
                 {hasWarnings ? "⚠" : "?"}
               </span>
             </Tooltip>
           )}
-          <span className="text-[10px] font-mono text-gray-400 select-none">{field.code}</span>
+          <span className="text-[10px] font-mono text-stone-400 select-none">{field.code}</span>
           <div className={field.dataType === "boolean" ? "" : field.dataType === "text" ? "flex-1" : "flex-1 max-w-28"}>
             <FieldCell
               code={field.code}
@@ -278,12 +278,12 @@ function FieldDataRow({
 }) {
   return (
     <tr
-      className={`border-b border-gray-100 last:border-0 hover:bg-blue-50/30 group ${
-        row.bold ? "font-semibold bg-gray-50/60" : ""
+      className={`border-b border-stone-100 last:border-0 hover:bg-brand-50/30 group ${
+        row.bold ? "font-semibold bg-stone-50/60" : ""
       }`}
     >
       {/* Label column — row.text only; per-field labels live in the slot cells */}
-      <td className="py-1.5 px-3 text-sm text-gray-800 leading-snug min-w-[140px]">
+      <td className="py-1.5 px-3 text-sm text-stone-800 leading-snug min-w-[140px]">
         {row.text}
       </td>
 
@@ -295,7 +295,7 @@ function FieldDataRow({
           return (
             <Fragment key={`empty-${groupIdx}`}>
               <td className="w-44 py-1.5 px-2" />
-              <td className="w-5 py-1.5 text-center text-xs text-gray-400" />
+              <td className="w-5 py-1.5 text-center text-xs text-stone-400" />
             </Fragment>
           );
         }
@@ -307,7 +307,7 @@ function FieldDataRow({
               computedCodes={computedCodes}
               meta={fieldMetadata?.get(f.code)}
             />
-            <td className="w-5 py-1.5 text-center text-xs font-mono text-gray-500 select-none align-middle">
+            <td className="w-5 py-1.5 text-center text-xs font-mono text-stone-500 select-none align-middle">
               {f.operator}
             </td>
           </Fragment>
@@ -362,7 +362,7 @@ export function RecuadroTable({ section, computedCodes, optimizableFields: _opti
   const nSlots = slotGroups.length;
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+    <div className="overflow-x-auto rounded-lg border border-stone-200 shadow-sm">
       <table className="w-full border-collapse text-sm">
         <thead>
           <SectionTitleRow section={section} nSlots={nSlots} />

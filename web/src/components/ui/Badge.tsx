@@ -5,11 +5,11 @@ interface Props {
 }
 
 const styles: Record<NonNullable<Props["variant"]>, string> = {
-  ok:      "bg-green-100 text-green-800 border border-green-200",
-  error:   "bg-red-100 text-red-700 border border-red-200",
-  warning: "bg-amber-100 text-amber-700 border border-amber-200",
-  info:    "bg-blue-100 text-blue-700 border border-blue-200",
-  neutral: "bg-gray-100 text-gray-600 border border-gray-200",
+  ok:      "bg-success-500/15 text-success-600 border border-success-500/25",
+  error:   "bg-danger-500/15 text-danger-600 border border-danger-500/25",
+  warning: "bg-gold-100 text-gold-700 border border-gold-200",
+  info:    "bg-brand-100 text-brand-700 border border-brand-200",
+  neutral: "bg-stone-100 text-stone-600 border border-stone-200",
 };
 
 export function Badge({ children, variant = "neutral", size = "sm" }: Props) {

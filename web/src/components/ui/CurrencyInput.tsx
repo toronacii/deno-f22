@@ -82,10 +82,10 @@ export function CurrencyInput({ value, onChange, decimals = 0, disabled, hasErro
         "w-full text-right tabular-nums rounded px-2 py-1 text-sm",
         "border focus:outline-none focus:ring-2",
         disabled
-          ? "bg-gray-50 text-gray-500 border-gray-200 cursor-default"
+          ? "bg-stone-50 text-stone-400 border-stone-200 cursor-default"
           : hasError
-          ? "border-red-400 bg-red-50 focus:ring-red-300"
-          : "border-gray-300 bg-white focus:ring-blue-300 focus:border-blue-400",
+          ? "border-danger-500 bg-danger-500/8 focus:ring-danger-500/30"
+          : "border-stone-300 bg-white focus:ring-brand-300 focus:border-brand-400",
         className ?? "",
       ]
         .filter(Boolean)

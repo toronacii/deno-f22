@@ -83,7 +83,7 @@ export function OptimizationPanel() {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+        <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
           Optimización tributaria
         </span>
         {report && report.totalEstimatedSaving > 0 && (
@@ -94,7 +94,7 @@ export function OptimizationPanel() {
       </div>
 
       {!report && (
-        <p className="text-xs text-gray-500 leading-relaxed">
+        <p className="text-xs text-stone-500 leading-relaxed">
           Analiza el formulario para encontrar deducciones legales que reduzcan
           tu carga tributaria.
         </p>
@@ -103,31 +103,31 @@ export function OptimizationPanel() {
       <button
         onClick={runOptimization}
         disabled={loading}
-        className="w-full py-2 px-3 rounded-lg bg-amber-500 hover:bg-amber-600
+        className="w-full py-2 px-3 rounded-lg bg-gold-500 hover:bg-gold-600
           disabled:opacity-50 text-white text-sm font-medium transition-colors"
       >
         {loading ? "Analizando…" : "Analizar oportunidades"}
       </button>
 
       {error && (
-        <p className="text-xs text-red-600 bg-red-50 rounded p-2">{error}</p>
+        <p className="text-xs text-danger-600 bg-danger-500/10 rounded p-2">{error}</p>
       )}
 
       {report && (
         <div className="flex flex-col gap-2">
           {/* Summary */}
-          <div className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-xs">
+          <div className="rounded-lg bg-gold-50 border border-gold-200 p-3 text-xs">
             <div className="flex justify-between mb-1">
-              <span className="text-gray-600">Impuesto actual</span>
+              <span className="text-stone-600">Impuesto actual</span>
               <span className="font-mono font-medium">{formatPesos(report.currentTax)}</span>
             </div>
             <div className="flex justify-between mb-1">
-              <span className="text-gray-600">Impuesto optimizado</span>
-              <span className="font-mono font-medium text-green-700">{formatPesos(report.optimizedTax)}</span>
+              <span className="text-stone-600">Impuesto optimizado</span>
+              <span className="font-mono font-medium text-success-500">{formatPesos(report.optimizedTax)}</span>
             </div>
-            <div className="flex justify-between border-t border-amber-200 pt-1 mt-1">
-              <span className="font-semibold text-gray-700">Ahorro estimado</span>
-              <span className="font-mono font-bold text-amber-700">
+            <div className="flex justify-between border-t border-gold-200 pt-1 mt-1">
+              <span className="font-semibold text-stone-700">Ahorro estimado</span>
+              <span className="font-mono font-bold text-gold-700">
                 {formatPesos(report.totalEstimatedSaving)}
               </span>
             </div>
@@ -144,27 +144,27 @@ export function OptimizationPanel() {
                   <>
                     <ul className="flex flex-col gap-1.5">
                       {actionable.map((s) => (
-                        <li key={s.fieldCode} className="rounded-lg border border-amber-200 bg-amber-50/60 p-2.5">
+                        <li key={s.fieldCode} className="rounded-lg border border-gold-200 bg-gold-50/60 p-2.5">
                           <div className="flex items-start justify-between gap-1">
                             <div className="flex-1 min-w-0">
-                              <p className="text-xs font-medium text-gray-800 leading-snug">{s.fieldName}</p>
-                              <p className="text-xs text-gray-500 mt-0.5 font-mono">
+                              <p className="text-xs font-medium text-stone-800 leading-snug">{s.fieldName}</p>
+                              <p className="text-xs text-stone-500 mt-0.5 font-mono">
                                 [{s.fieldCode}] actual: {formatPesos(s.currentValue)} → {formatPesos(s.suggestedValue)}
                               </p>
                             </div>
                             {s.estimatedTaxSaving > 0 && (
-                              <span className="shrink-0 text-xs font-bold text-green-700 bg-green-100 rounded px-1.5 py-0.5">
+                              <span className="shrink-0 text-xs font-bold text-success-500 bg-success-500/15 rounded px-1.5 py-0.5">
                                 -{formatPesos(s.estimatedTaxSaving)}
                               </span>
                             )}
                           </div>
-                          <p className="text-xs text-gray-500 mt-1.5 leading-snug line-clamp-2">{s.strategy}</p>
+                          <p className="text-xs text-stone-500 mt-1.5 leading-snug line-clamp-2">{s.strategy}</p>
                           {s.conditions && (
-                            <p className="text-xs text-gray-400 mt-1 leading-snug line-clamp-1" title={s.conditions}>
+                            <p className="text-xs text-stone-400 mt-1 leading-snug line-clamp-1" title={s.conditions}>
                               👤 {s.conditions}
                             </p>
                           )}
-                          <p className="text-xs text-blue-600 mt-1 line-clamp-1" title={s.legalBasis}>
+                          <p className="text-xs text-brand-600 mt-1 line-clamp-1" title={s.legalBasis}>
                             {s.legalBasis}
                           </p>
                         </li>
@@ -172,8 +172,8 @@ export function OptimizationPanel() {
                     </ul>
                     <button
                       onClick={applyAll}
-                      className="w-full py-1.5 px-3 rounded-lg border border-amber-400
-                        text-amber-700 text-xs font-medium hover:bg-amber-50 transition-colors"
+                      className="w-full py-1.5 px-3 rounded-lg border border-gold-400
+                        text-gold-700 text-xs font-medium hover:bg-gold-50 transition-colors"
                     >
                       Aplicar todas las sugerencias
                     </button>
@@ -183,20 +183,20 @@ export function OptimizationPanel() {
                 {/* Informational — no fixed limit, user must evaluate */}
                 {informational.length > 0 && (
                   <details className="mt-1">
-                    <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700 select-none">
+                    <summary className="text-xs text-stone-500 cursor-pointer hover:text-stone-700 select-none">
                       {informational.length} deducciones adicionales a evaluar
                     </summary>
                     <ul className="flex flex-col gap-1 mt-1.5">
                       {informational.map((s) => (
-                        <li key={s.fieldCode} className="rounded-lg border border-gray-200 bg-gray-50 p-2">
-                          <p className="text-xs font-medium text-gray-700">{s.fieldName}</p>
-                          <p className="text-xs text-gray-500 mt-0.5 leading-snug line-clamp-2">{s.strategy}</p>
+                        <li key={s.fieldCode} className="rounded-lg border border-stone-200 bg-stone-50 p-2">
+                          <p className="text-xs font-medium text-stone-700">{s.fieldName}</p>
+                          <p className="text-xs text-stone-500 mt-0.5 leading-snug line-clamp-2">{s.strategy}</p>
                           {s.conditions && (
-                            <p className="text-xs text-gray-400 mt-0.5 line-clamp-1" title={s.conditions}>
+                            <p className="text-xs text-stone-400 mt-0.5 line-clamp-1" title={s.conditions}>
                               👤 {s.conditions}
                             </p>
                           )}
-                          <p className="text-xs text-blue-500 mt-0.5 line-clamp-1" title={s.legalBasis}>
+                          <p className="text-xs text-brand-500 mt-0.5 line-clamp-1" title={s.legalBasis}>
                             {s.legalBasis}
                           </p>
                         </li>
@@ -206,7 +206,7 @@ export function OptimizationPanel() {
                 )}
 
                 {actionable.length === 0 && informational.length === 0 && (
-                  <p className="text-xs text-green-700 text-center py-2">
+                  <p className="text-xs text-success-500 text-center py-2">
                     ✓ Ya estás aprovechando todas las deducciones disponibles
                   </p>
                 )}

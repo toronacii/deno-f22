@@ -61,13 +61,13 @@ export function F22Form({ optimizableFields }: Props) {
               if (currentIndex > 0) setCurrentSection(sections[currentIndex - 1].id);
             }}
             disabled={currentIndex <= 0}
-            className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border border-gray-200
-              hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-gray-600"
+            className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border border-stone-200
+              hover:bg-stone-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-stone-600"
           >
             ← Anterior
           </button>
 
-          <span className="text-xs font-medium text-gray-400 tracking-wide">
+          <span className="text-xs font-medium text-stone-400 tracking-wide">
             {currentIndex + 1} de {sections.length}
           </span>
 
@@ -77,16 +77,16 @@ export function F22Form({ optimizableFields }: Props) {
                 setCurrentSection(sections[currentIndex + 1].id);
             }}
             disabled={currentIndex >= sections.length - 1}
-            className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border border-gray-200
-              hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-gray-600"
+            className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border border-stone-200
+              hover:bg-stone-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-stone-600"
           >
             Siguiente →
           </button>
         </div>
         {/* Progress bar */}
-        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+        <div className="h-1 bg-stone-100 rounded-full overflow-hidden">
           <div
-            className="h-full bg-blue-500 rounded-full transition-all duration-300"
+            className="h-full bg-brand-500 rounded-full transition-all duration-300"
             style={{ width: `${((currentIndex + 1) / sections.length) * 100}%` }}
           />
         </div>
@@ -101,7 +101,7 @@ export function F22Form({ optimizableFields }: Props) {
           fieldMetadata={fieldMetadata}
         />
       ) : activeSection ? (
-        <div className="text-sm text-gray-400 text-center py-8">
+        <div className="text-sm text-stone-400 text-center py-8">
           {activeSection.id} — layout no disponible
         </div>
       ) : null}

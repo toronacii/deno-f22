@@ -74,14 +74,14 @@ export function Sidebar({ onNavigate }: Props) {
               text-sm transition-colors group
               ${
                 isActive
-                  ? "bg-blue-600 text-white font-medium"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  ? "bg-brand-700 text-white font-medium"
+                  : "text-stone-600 hover:bg-stone-100 hover:text-stone-900"
               }`}
           >
             <span className="flex items-center gap-2 truncate">
               <span
                 className={`text-xs font-mono shrink-0 ${
-                  isActive ? "text-blue-200" : "text-gray-400"
+                  isActive ? "text-brand-200" : "text-stone-400"
                 }`}
               >
                 {String(i + 1).padStart(2, "0")}
@@ -93,7 +93,7 @@ export function Sidebar({ onNavigate }: Props) {
             {errors > 0 && (
               <span
                 className={`ml-1 shrink-0 rounded-full text-xs font-bold px-1.5 py-0.5
-                  ${isActive ? "bg-blue-400 text-white" : "bg-red-100 text-red-600"}`}
+                  ${isActive ? "bg-brand-500 text-white" : "bg-danger-500/15 text-danger-600"}`}
               >
                 {errors}
               </span>
