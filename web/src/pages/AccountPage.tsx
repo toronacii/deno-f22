@@ -86,6 +86,7 @@ export function AccountPage() {
   }
 
   /* ── Contraseña ── */
+  const [currentPwd, setCurrentPwd] = useState("");
   const [newPwd,     setNewPwd]     = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
   const [pwdSaving,  setPwdSaving]  = useState(false);
@@ -103,11 +104,22 @@ export function AccountPage() {
     }
     setPwdSaving(true);
     setPwdMsg(null);
+
+    // Re-autenticar con contraseña actual antes de cambiarla
+    const email = user?.email ?? "";
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password: currentPwd });
+    if (signInError) {
+      setPwdMsg({ ok: false, text: "La contraseña actual es incorrecta." });
+      setPwdSaving(false);
+      return;
+    }
+
     const { error } = await supabase.auth.updateUser({ password: newPwd });
     if (error) {
       setPwdMsg({ ok: false, text: error.message });
     } else {
       setPwdMsg({ ok: true, text: "Contraseña actualizada." });
+      setCurrentPwd("");
       setNewPwd("");
       setConfirmPwd("");
     }
@@ -356,6 +368,18 @@ export function AccountPage() {
 
           <form onSubmit={handlePwdSubmit} className="space-y-4">
             <div>
+              <label className="block text-sm font-medium text-stone-700 mb-1">Contraseña actual</label>
+              <input
+                type="password"
+                required
+                value={currentPwd}
+                onChange={(e) => { setCurrentPwd(e.target.value); setPwdMsg(null); }}
+                className="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm
+                  focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400"
+                placeholder="Tu contraseña actual"
+              />
+            </div>
+            <div>
               <label className="block text-sm font-medium text-stone-700 mb-1">Nueva contraseña</label>
               <input
                 type="password"
@@ -387,7 +411,7 @@ export function AccountPage() {
             )}
             <button
               type="submit"
-              disabled={pwdSaving || !newPwd || !confirmPwd}
+              disabled={pwdSaving || !currentPwd || !newPwd || !confirmPwd}
               className="bg-brand-700 hover:bg-brand-800 disabled:bg-brand-300
                 text-white font-medium px-5 py-2 rounded-lg text-sm transition-colors"
             >
