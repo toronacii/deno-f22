@@ -6,18 +6,33 @@
  */
 
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "../lib/supabase.ts";
 
+const VALID_PLANS   = ["nucleo", "estructura", "arquitectura", "expansion"];
+const VALID_BILLING = ["monthly", "quarterly", "annual"];
+
 export function AuthCallbackPage() {
-  const navigate  = useNavigate();
-  const handled   = useRef(false);
+  const navigate      = useNavigate();
+  const handled       = useRef(false);
+  const [searchParams] = useSearchParams();
+
+  function buildDestination(onboardingDone: boolean) {
+    if (onboardingDone) return "/dashboard";
+    const plan    = searchParams.get("plan");
+    const billing = searchParams.get("billing");
+    const params  = new URLSearchParams();
+    if (plan    && VALID_PLANS.includes(plan))    params.set("plan",    plan);
+    if (billing && VALID_BILLING.includes(billing)) params.set("billing", billing);
+    const qs = params.toString();
+    return qs ? `/onboarding?${qs}` : "/onboarding";
+  }
 
   useEffect(() => {
     function redirect(onboardingDone: boolean) {
       if (handled.current) return;
       handled.current = true;
-      navigate(onboardingDone ? "/dashboard" : "/onboarding", { replace: true });
+      navigate(buildDestination(onboardingDone), { replace: true });
     }
 
     // onAuthStateChange detecta los tokens del hash automáticamente

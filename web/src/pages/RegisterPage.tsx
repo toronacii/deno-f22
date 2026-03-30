@@ -1,9 +1,36 @@
 import { useState, type FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "../lib/supabase.ts";
+
+const VALID_PLANS   = ["nucleo", "estructura", "arquitectura", "expansion"];
+const VALID_BILLING = ["monthly", "quarterly", "annual"];
 
 export function RegisterPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const preselectedPlan    = searchParams.get("plan");
+  const preselectedBilling = searchParams.get("billing");
+  const validPlan    = preselectedPlan    && VALID_PLANS.includes(preselectedPlan)    ? preselectedPlan    : null;
+  const validBilling = preselectedBilling && VALID_BILLING.includes(preselectedBilling) ? preselectedBilling : null;
+
+  function buildCallbackUrl() {
+    const params = new URLSearchParams();
+    if (validPlan)    params.set("plan",    validPlan);
+    if (validBilling) params.set("billing", validBilling);
+    const qs = params.toString();
+    return qs
+      ? `${window.location.origin}/auth/callback?${qs}`
+      : `${window.location.origin}/auth/callback`;
+  }
+
+  function buildOnboardingPath() {
+    const params = new URLSearchParams();
+    if (validPlan)    params.set("plan",    validPlan);
+    if (validBilling) params.set("billing", validBilling);
+    const qs = params.toString();
+    return qs ? `/onboarding?${qs}` : "/onboarding";
+  }
 
   const [name,        setName]        = useState("");
   const [email,       setEmail]       = useState("");
@@ -25,7 +52,7 @@ export function RegisterPage() {
       password,
       options: {
         data: { full_name: name },
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: buildCallbackUrl(),
       },
     });
 
@@ -34,7 +61,7 @@ export function RegisterPage() {
       setLoading(false);
     } else if (data.session) {
       // Auto-login (email confirmation disabled) — go straight to onboarding
-      navigate("/onboarding", { replace: true });
+      navigate(buildOnboardingPath(), { replace: true });
     } else {
       // Email confirmation required — show message, don't navigate
       setNeedsConfirm(true);
@@ -45,7 +72,7 @@ export function RegisterPage() {
   async function handleGoogle() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
+      options: { redirectTo: buildCallbackUrl() },
     });
   }
 

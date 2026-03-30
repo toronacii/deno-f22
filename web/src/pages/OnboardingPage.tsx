@@ -4,9 +4,12 @@
  * Paso 2: elegir plan
  */
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+
+const VALID_PLANS   = ["nucleo", "estructura", "arquitectura", "expansion"];
+const VALID_BILLING = ["monthly", "quarterly", "annual"] as const;
 import { api } from "../lib/api.ts";
 import { supabase } from "../lib/supabase.ts";
 import { useAuth } from "../lib/auth_context.tsx";
@@ -38,11 +41,17 @@ const BILLING_LABELS: Record<string, string> = {
 export function OnboardingPage() {
   const { user } = useAuth();
   const navigate  = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const urlPlan    = searchParams.get("plan");
+  const urlBilling = searchParams.get("billing");
+  const preselectedPlan    = urlPlan    && VALID_PLANS.includes(urlPlan)                         ? urlPlan    : null;
+  const preselectedBilling = urlBilling && VALID_BILLING.includes(urlBilling as typeof VALID_BILLING[number]) ? urlBilling as typeof VALID_BILLING[number] : null;
 
   const [step,         setStep]         = useState<1 | 2>(1);
   const [name,         setName]         = useState(user?.user_metadata?.full_name ?? "");
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
-  const [billing,      setBilling]      = useState<"monthly" | "quarterly" | "annual">("monthly");
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(preselectedPlan);
+  const [billing,      setBilling]      = useState<"monthly" | "quarterly" | "annual">(preselectedBilling ?? "monthly");
   const [loading,      setLoading]      = useState(false);
   const [error,        setError]        = useState<string | null>(null);
 
@@ -51,6 +60,14 @@ export function OnboardingPage() {
     queryFn:  () => api.get<{ plans: Plan[] }>("/plans"),
   });
   const plans = plansData?.plans ?? [];
+
+  // Validate preselected plan against actual API data; clear if not found
+  useEffect(() => {
+    if (!preselectedPlan || plans.length === 0) return;
+    if (!plans.some((p) => p.code === preselectedPlan)) {
+      setSelectedPlan(null);
+    }
+  }, [plans, preselectedPlan]);
 
   async function handleStep1(e: React.FormEvent) {
     e.preventDefault();
