@@ -1,11 +1,13 @@
 import { useState, type FormEvent } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { supabase } from "../lib/supabase.ts";
 
 export function LoginPage() {
   const navigate  = useNavigate();
   const location  = useLocation();
+  const [searchParams] = useSearchParams();
   const from      = (location.state as { from?: { pathname: string } })?.from?.pathname ?? "/dashboard";
+  const resetOk   = searchParams.get("reset") === "ok";
 
   const [email,    setEmail]    = useState("");
   const [password, setPassword] = useState("");
@@ -49,7 +51,13 @@ export function LoginPage() {
         </div>
 
         <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
-          <h1 className="text-xl font-semibold text-stone-900 mb-6">Iniciar sesión</h1>
+          <h1 className="text-xl font-semibold text-stone-900 mb-1">Iniciar sesión</h1>
+
+          {resetOk && (
+            <div className="mb-4 px-3 py-2.5 bg-brand-50 border border-brand-200 rounded-lg text-sm text-brand-700">
+              Contraseña actualizada. Ingresa con tu nueva contraseña.
+            </div>
+          )}
 
           {error && (
             <div className="mb-4 px-3 py-2.5 bg-danger-500/10 border border-danger-500/20 rounded-lg text-sm text-danger-600">
@@ -87,6 +95,15 @@ export function LoginPage() {
                   focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400"
                 placeholder="••••••••"
               />
+            </div>
+
+            <div className="flex justify-end">
+              <Link
+                to="/forgot-password"
+                className="text-xs text-stone-400 hover:text-brand-600 transition-colors"
+              >
+                ¿Olvidaste tu contraseña?
+              </Link>
             </div>
 
             <button

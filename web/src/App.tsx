@@ -8,6 +8,8 @@ import { EngineProvider } from "./engine/engine_context.tsx";
 import { LoginPage }              from "./pages/LoginPage.tsx";
 import { RegisterPage }           from "./pages/RegisterPage.tsx";
 import { AuthCallbackPage }       from "./pages/AuthCallbackPage.tsx";
+import { ForgotPasswordPage }     from "./pages/ForgotPasswordPage.tsx";
+import { ResetPasswordPage }      from "./pages/ResetPasswordPage.tsx";
 import { OnboardingPage }         from "./pages/OnboardingPage.tsx";
 import { AccountPage }            from "./pages/AccountPage.tsx";
 import { DashboardPage }          from "./pages/DashboardPage.tsx";
@@ -23,9 +25,11 @@ export default function App() {
         <AuthProvider>
           <Routes>
             {/* Public */}
-            <Route path="/login"         element={<LoginPage />} />
-            <Route path="/register"      element={<RegisterPage />} />
-            <Route path="/auth/callback" element={<AuthCallbackPage />} />
+            <Route path="/login"            element={<LoginPage />} />
+            <Route path="/register"         element={<RegisterPage />} />
+            <Route path="/forgot-password"  element={<ForgotPasswordPage />} />
+            <Route path="/reset-password"   element={<ResetPasswordPage />} />
+            <Route path="/auth/callback"    element={<AuthCallbackPage />} />
 
             {/* Post-login: onboarding no requiere onboarding previo */}
             <Route path="/onboarding" element={

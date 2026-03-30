@@ -36,7 +36,13 @@ export function AuthCallbackPage() {
     }
 
     // onAuthStateChange detecta los tokens del hash automáticamente
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY") {
+        if (handled.current) return;
+        handled.current = true;
+        navigate("/reset-password", { replace: true });
+        return;
+      }
       if (session) {
         redirect(session.user.user_metadata?.onboarding_completed === true);
       }
