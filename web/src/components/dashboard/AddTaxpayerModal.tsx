@@ -1,6 +1,7 @@
 /**
  * Modal para agregar un contribuyente (RUT).
  * Valida formato RUT + dígito verificador en tiempo real.
+ * Al perder el foco sobre el RUT válido, consulta el SII para obtener info del contribuyente.
  */
 
 import { useState, type FormEvent } from "react";
@@ -9,6 +10,16 @@ import { api } from "../../lib/api.ts";
 interface Props {
   onClose: () => void;
   onAdded: () => void;
+}
+
+interface SiiData {
+  registrado: boolean;
+  nombre: string | null;
+  inicioActividades: boolean;
+  fechaInicioActividades: string | null;
+  cumpleObligacionTributaria: string | null;
+  girosNegocio: { codigo: string; descripcion: string; categoriaTributaria: string; indicadorAfectoIva: string }[];
+  timbrajes: { codigo: string; descripcion: string }[];
 }
 
 const TAX_REGIMES = [
@@ -54,20 +65,50 @@ function validateRut(rut: string): boolean {
 }
 
 export function AddTaxpayerModal({ onClose, onAdded }: Props) {
-  const [rutBody,  setRutBody]  = useState("");
-  const [name,     setName]     = useState("");
-  const [regime,   setRegime]   = useState("");
-  const [error,    setError]    = useState<string | null>(null);
-  const [loading,  setLoading]  = useState(false);
+  const [rutBody,    setRutBody]    = useState("");
+  const [name,       setName]       = useState("");
+  const [regime,     setRegime]     = useState("");
+  const [error,      setError]      = useState<string | null>(null);
+  const [loading,    setLoading]    = useState(false);
+  const [siiData,    setSiiData]    = useState<SiiData | null>(null);
+  const [siiLoading, setSiiLoading] = useState(false);
+  const [siiError,   setSiiError]   = useState<string | null>(null);
 
   const dvDisplay = rutBody.length >= 7 ? calcDv(rutBody.replace(/\./g, "")) : null;
   const rutFull   = rutBody ? `${formatRutDisplay(rutBody.replace(/\./g, ""))}-${dvDisplay ?? ""}` : "";
   const rutValid  = rutBody.length >= 7 && validateRut(rutFull);
 
   function handleRutChange(raw: string) {
-    // solo números y puntos
     const cleaned = raw.replace(/[^\d\.]/g, "");
     setRutBody(cleaned);
+    // Limpiar info SII al cambiar el RUT
+    if (cleaned !== rutBody) {
+      setSiiData(null);
+      setSiiError(null);
+    }
+  }
+
+  async function handleRutBlur() {
+    if (!rutValid) return;
+    const digits = rutBody.replace(/\./g, "");
+    const dv     = dvDisplay!;
+
+    setSiiLoading(true);
+    setSiiError(null);
+    setSiiData(null);
+
+    try {
+      const data = await api.get<SiiData>(`/taxpayers/sii-lookup?rut=${digits}&dv=${dv}`);
+      setSiiData(data);
+      // Auto-rellenar nombre si está vacío y el SII devolvió uno
+      if (data.nombre && !name.trim()) {
+        setName(data.nombre);
+      }
+    } catch {
+      setSiiError("No se pudo consultar el SII");
+    } finally {
+      setSiiLoading(false);
+    }
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -81,6 +122,7 @@ export function AddTaxpayerModal({ onClose, onAdded }: Props) {
         rut:        rutFull,
         name:       name.trim(),
         tax_regime: regime || undefined,
+        sii_data:   siiData ?? undefined,
       });
       onAdded();
     } catch (err) {
@@ -88,6 +130,8 @@ export function AddTaxpayerModal({ onClose, onAdded }: Props) {
       setLoading(false);
     }
   }
+
+  const cumpleOk = siiData?.cumpleObligacionTributaria === "SI";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
@@ -122,6 +166,7 @@ export function AddTaxpayerModal({ onClose, onAdded }: Props) {
                 required
                 value={rutBody}
                 onChange={(e) => handleRutChange(e.target.value)}
+                onBlur={handleRutBlur}
                 placeholder="12345678"
                 maxLength={11}
                 className={`flex-1 border rounded-lg px-3 py-2.5 text-sm font-mono
@@ -144,6 +189,77 @@ export function AddTaxpayerModal({ onClose, onAdded }: Props) {
               <p className={`text-xs mt-1 ${rutValid ? "text-success-500" : "text-danger-600"}`}>
                 {rutValid ? "✓ RUT válido" : "Dígito verificador incorrecto"}
               </p>
+            )}
+
+            {/* SII lookup result */}
+            {siiLoading && (
+              <div className="mt-2 flex items-center gap-1.5 text-xs text-stone-400">
+                <svg className="w-3 h-3 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+                </svg>
+                Consultando SII…
+              </div>
+            )}
+
+            {siiError && (
+              <p className="mt-2 text-xs text-amber-600">{siiError}</p>
+            )}
+
+            {siiData && !siiLoading && (
+              <div className={`mt-2 rounded-lg border px-3 py-2.5 text-xs space-y-1.5 ${
+                !siiData.registrado
+                  ? "border-danger-200 bg-danger-500/5"
+                  : cumpleOk
+                    ? "border-stone-200 bg-stone-50"
+                    : "border-amber-200 bg-amber-50"
+              }`}>
+                {/* Nombre */}
+                {siiData.nombre && (
+                  <div className="flex items-center gap-1.5">
+                    <svg className="w-3 h-3 text-stone-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span className="font-medium text-stone-800">{siiData.nombre}</span>
+                  </div>
+                )}
+
+                {/* Inicio de actividades */}
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-3 h-3 text-stone-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  {siiData.inicioActividades
+                    ? <span className="text-stone-600">Inicio actividades: <span className="font-medium">{siiData.fechaInicioActividades}</span></span>
+                    : <span className="text-danger-600">Sin inicio de actividades</span>
+                  }
+                </div>
+
+                {/* Giro principal */}
+                {siiData.girosNegocio.length > 0 && (
+                  <div className="flex items-start gap-1.5">
+                    <svg className="w-3 h-3 text-stone-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <span className="text-stone-600">{siiData.girosNegocio[0].descripcion}</span>
+                  </div>
+                )}
+
+                {/* Cumplimiento tributario */}
+                {siiData.cumpleObligacionTributaria && (
+                  <div className="flex items-center gap-1.5">
+                    <svg className={`w-3 h-3 shrink-0 ${cumpleOk ? "text-success-500" : "text-amber-500"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      {cumpleOk
+                        ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      }
+                    </svg>
+                    <span className={cumpleOk ? "text-success-600" : "text-amber-700"}>
+                      {cumpleOk ? "Cumple obligaciones tributarias" : "No cumple obligaciones tributarias"}
+                    </span>
+                  </div>
+                )}
+              </div>
             )}
           </div>
 

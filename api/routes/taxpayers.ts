@@ -1,8 +1,9 @@
 /**
- * GET  /api/v1/taxpayers       — lista RUTs del usuario
- * POST /api/v1/taxpayers       — agrega un RUT (con validación de límite)
- * PUT  /api/v1/taxpayers/:id   — actualiza datos del RUT
- * DELETE /api/v1/taxpayers/:id — desactiva el RUT
+ * GET  /api/v1/taxpayers             — lista RUTs del usuario
+ * GET  /api/v1/taxpayers/sii-lookup  — proxy hacia SII para obtener info del contribuyente
+ * POST /api/v1/taxpayers             — agrega un RUT (con validación de límite)
+ * PUT  /api/v1/taxpayers/:id         — actualiza datos del RUT
+ * DELETE /api/v1/taxpayers/:id       — desactiva el RUT
  */
 
 import { Hono } from "hono";
@@ -43,6 +44,7 @@ taxpayersRouter.post("/", async (c) => {
     name?: string;
     tax_regime?: string;
     entity_type?: number;
+    sii_data?: Record<string, unknown>;
   };
 
   if (!body.rut || !body.name) {
@@ -64,6 +66,7 @@ taxpayersRouter.post("/", async (c) => {
       name:        body.name.trim(),
       tax_regime:  body.tax_regime ?? null,
       entity_type: body.entity_type ?? null,
+      sii_data:    body.sii_data ?? null,
     })
     .select()
     .single();
@@ -77,6 +80,69 @@ taxpayersRouter.post("/", async (c) => {
   }
 
   return c.json({ taxpayer: data }, 201);
+});
+
+// GET /taxpayers/sii-lookup?rut=12345678&dv=9
+// Proxy hacia el SII — evita CORS desde el browser
+taxpayersRouter.get("/sii-lookup", async (c) => {
+  const rut = c.req.query("rut");
+  const dv  = c.req.query("dv");
+
+  if (!rut || !dv) {
+    return c.json({ error: "rut y dv son requeridos" }, 400);
+  }
+
+  try {
+    const res = await fetch(
+      "https://www2.sii.cl/app/stc/recurso/v1/consulta/getConsultaData/",
+      {
+        method: "POST",
+        headers: {
+          "Accept":       "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+          "Origin":       "https://www2.sii.cl",
+          "Referer":      "https://www2.sii.cl/stc/noauthz/consulta",
+          "User-Agent":   "Mozilla/5.0 (compatible; F22App/1.0)",
+        },
+        body: JSON.stringify({ rut, dv, reAction: "consultaSTC", reToken: " " }),
+      }
+    );
+
+    if (!res.ok) {
+      return c.json({ error: "Error consultando el SII" }, 502);
+    }
+
+    const raw = await res.json() as {
+      registrado?: boolean;
+      nombre?: string;
+      inicioActividades?: boolean;
+      fechaInicioActividades?: string;
+      cumpleObligacionTributaria?: string;
+      girosNegocio?: { codigo: string; descripcion: string; categoriaTributaria: string; indicadorAfectoIva: string; fechaInicio: string }[];
+      timbrajes?: { codigo: string; descripcion: string; fechaTimbraje: string }[];
+    };
+
+    // Devuelve solo los campos útiles
+    return c.json({
+      registrado:                raw.registrado ?? false,
+      nombre:                    raw.nombre ?? null,
+      inicioActividades:         raw.inicioActividades ?? false,
+      fechaInicioActividades:    raw.fechaInicioActividades ?? null,
+      cumpleObligacionTributaria: raw.cumpleObligacionTributaria ?? null,
+      girosNegocio: (raw.girosNegocio ?? []).map((g) => ({
+        codigo:             g.codigo,
+        descripcion:        g.descripcion.trim(),
+        categoriaTributaria: g.categoriaTributaria,
+        indicadorAfectoIva: g.indicadorAfectoIva,
+      })),
+      timbrajes: (raw.timbrajes ?? []).map((t) => ({
+        codigo:      t.codigo,
+        descripcion: t.descripcion.trim(),
+      })),
+    });
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
 });
 
 // GET /taxpayers/:id
