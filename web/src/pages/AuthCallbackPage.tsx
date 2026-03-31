@@ -9,8 +9,8 @@ import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "../lib/supabase.ts";
 
-const VALID_PLANS   = ["nucleo", "estructura", "arquitectura", "expansion"];
-const VALID_BILLING = ["monthly", "quarterly", "annual"];
+const VALID_PLANS   = ["f22digital", "genesis", "sinergy", "momentum", "horizon"];
+const VALID_BILLING = ["monthly", "annual"];
 
 export function AuthCallbackPage() {
   const navigate      = useNavigate();

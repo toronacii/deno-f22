@@ -9,8 +9,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Logo } from "../components/ui/Logo.tsx";
 
-const VALID_PLANS   = ["nucleo", "estructura", "arquitectura", "expansion"];
-const VALID_BILLING = ["monthly", "quarterly", "annual"] as const;
+const VALID_PLANS   = ["f22digital", "genesis", "sinergy", "momentum", "horizon"];
+const VALID_BILLING = ["monthly", "annual"] as const;
 import { api } from "../lib/api.ts";
 import { supabase } from "../lib/supabase.ts";
 import { useAuth } from "../lib/auth_context.tsx";
@@ -27,16 +27,49 @@ interface Plan {
 }
 
 const PLAN_DESCRIPTIONS: Record<string, string> = {
-  nucleo:       "Para contadores independientes.",
-  estructura:   "Para estudios contables pequeños.",
-  arquitectura: "Para empresas contables medianas.",
-  expansion:    "Para grandes estudios tributarios.",
+  f22digital: "Ideal para el profesional independiente que gestiona un único contribuyente.",
+  genesis:    "Para el profesional que busca herramientas avanzadas con un solo cliente clave.",
+  sinergy:    "Para estudios contables pequeños que manejan varios contribuyentes.",
+  momentum:   "Para estudios en crecimiento con cartera de clientes consolidada.",
+  horizon:    "Para grandes estudios tributarios sin límite de contribuyentes.",
 };
 
-const BILLING_LABELS: Record<string, string> = {
-  monthly:   "Mensual",
-  quarterly: "Trimestral (10% dcto.)",
-  annual:    "Anual (20% dcto.)",
+const PLAN_FEATURES: Record<string, string[]> = {
+  f22digital: [
+    "1 RUT activo",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "1% donación a ONG",
+  ],
+  genesis: [
+    "1 RUT activo",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "2% donación a ONG",
+  ],
+  sinergy: [
+    "2–3 RUTs activos",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "3% donación a ONG",
+  ],
+  momentum: [
+    "4–7 RUTs activos",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "4% donación a ONG",
+  ],
+  horizon: [
+    "RUTs ilimitados",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "4% donación a ONG",
+  ],
+};
+
+/** Promo override for Sinergy — original prices shown as strikethrough */
+const PROMO: Record<string, { originalMonthly: number; originalAnnual: number; label: string }> = {
+  sinergy: { originalMonthly: 911, originalAnnual: 759, label: "PROMO ABRIL" },
 };
 
 export function OnboardingPage() {
@@ -51,8 +84,8 @@ export function OnboardingPage() {
 
   const [step,         setStep]         = useState<1 | 2>(1);
   const [name,         setName]         = useState(user?.user_metadata?.full_name ?? "");
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(preselectedPlan);
-  const [billing,      setBilling]      = useState<"monthly" | "quarterly" | "annual">(preselectedBilling ?? "monthly");
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(preselectedPlan ?? "sinergy");
+  const [billing,      setBilling]      = useState<"monthly" | "annual">(preselectedBilling ?? "monthly");
   const [loading,      setLoading]      = useState(false);
   const [error,        setError]        = useState<string | null>(null);
 
@@ -62,7 +95,6 @@ export function OnboardingPage() {
   });
   const plans = plansData?.plans ?? [];
 
-  // Validate preselected plan against actual API data; clear if not found
   useEffect(() => {
     if (!preselectedPlan || plans.length === 0) return;
     if (!plans.some((p) => p.code === preselectedPlan)) {
@@ -70,10 +102,9 @@ export function OnboardingPage() {
     }
   }, [plans, preselectedPlan]);
 
-  async function handleStep1(e: React.FormEvent) {
+  async function handleStep1(e: { preventDefault(): void }) {
     e.preventDefault();
     if (!name.trim()) return;
-    // Update display name in Supabase metadata
     await supabase.auth.updateUser({ data: { full_name: name.trim() } });
     setStep(2);
   }
@@ -84,14 +115,11 @@ export function OnboardingPage() {
     setError(null);
 
     try {
-      // Upsert profile via API
       await api.post("/auth/register", { full_name: name });
-      // Select plan
       await api.post("/auth/select-plan", {
         plan_code:    selectedPlan,
         billing_cycle: billing,
       });
-      // Mark onboarding complete in Supabase metadata
       await supabase.auth.updateUser({
         data: { onboarding_completed: true },
       });
@@ -102,15 +130,13 @@ export function OnboardingPage() {
     }
   }
 
-  function getPriceForBilling(plan: Plan): number {
-    if (billing === "monthly")   return plan.price_monthly_usd;
-    if (billing === "quarterly") return plan.price_quarterly_usd / 3;
-    return plan.price_annual_usd / 12;
+  function getMonthlyPrice(plan: Plan): number {
+    return billing === "monthly" ? plan.price_monthly_usd : plan.price_annual_usd / 12;
   }
 
   return (
     <div className="min-h-[100dvh] bg-stone-50 flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-2xl">
+      <div className="w-full max-w-5xl">
         {/* Logo + progress */}
         <div className="flex items-center justify-between mb-8">
           <Logo className="h-8 w-auto" />
@@ -161,21 +187,40 @@ export function OnboardingPage() {
             {/* Billing toggle */}
             <div className="flex justify-center mb-6">
               <div className="inline-flex bg-stone-100 rounded-lg p-1 gap-1">
-                {(["monthly", "quarterly", "annual"] as const).map((b) => (
-                  <button
-                    key={b}
-                    onClick={() => setBilling(b)}
-                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                      billing === b
-                        ? "bg-white text-stone-900 shadow-sm"
-                        : "text-stone-500 hover:text-stone-700"
-                    }`}
-                  >
-                    {BILLING_LABELS[b]}
-                  </button>
-                ))}
+                <button
+                  onClick={() => setBilling("monthly")}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                    billing === "monthly"
+                      ? "bg-white text-stone-900 shadow-sm"
+                      : "text-stone-500 hover:text-stone-700"
+                  }`}
+                >
+                  Mensual
+                </button>
+                <button
+                  onClick={() => setBilling("annual")}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all flex items-center gap-2 ${
+                    billing === "annual"
+                      ? "bg-white text-stone-900 shadow-sm"
+                      : "text-stone-500 hover:text-stone-700"
+                  }`}
+                >
+                  Anual
+                  <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
+                    −17%
+                  </span>
+                </button>
               </div>
             </div>
+
+            {/* Monthly commitment notice */}
+            {billing === "monthly" && (
+              <div className="flex justify-center mb-5">
+                <p className="text-xs text-stone-400 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+                  Mínimo de contratación: 3 meses
+                </p>
+              </div>
+            )}
 
             {error && (
               <div className="mb-4 px-3 py-2.5 bg-danger-500/10 border border-danger-500/20 rounded-lg text-sm text-danger-600 text-center">
@@ -187,59 +232,101 @@ export function OnboardingPage() {
             {plans.length === 0 ? (
               <div className="text-center text-stone-400 py-8">Cargando planes…</div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 mb-5">
                 {plans.map((plan) => {
-                  const price    = getPriceForBilling(plan);
-                  const selected = selectedPlan === plan.code;
+                  const monthlyPrice = getMonthlyPrice(plan);
+                  const selected     = selectedPlan === plan.code;
+                  const isPopular    = plan.code === "sinergy";
+                  const promo        = PROMO[plan.code];
+
                   return (
                     <button
                       key={plan.code}
                       onClick={() => setSelectedPlan(plan.code)}
-                      className={`text-left rounded-xl border-2 p-5 transition-all ${
+                      className={`relative text-left rounded-xl border-2 p-4 transition-all flex flex-col ${
                         selected
-                          ? "border-brand-600 bg-brand-50 shadow-md"
-                          : "border-stone-200 bg-white hover:border-stone-300"
+                          ? "border-brand-600 bg-brand-800 text-white shadow-lg"
+                          : "border-stone-200 bg-white hover:border-brand-300 hover:shadow-md"
                       }`}
                     >
-                      <div className="font-semibold text-stone-900 mb-1">{plan.name}</div>
-                      <div className="text-2xl font-bold text-brand-700 mb-0.5">
-                        ${Math.round(price).toLocaleString("es-CL")}
-                        <span className="text-sm font-normal text-stone-400">/mes</span>
-                      </div>
-                      <div className="text-xs text-stone-500 mb-3">USD</div>
-                      <div className="text-xs text-stone-600 mb-3">
-                        {PLAN_DESCRIPTIONS[plan.code]}
-                      </div>
-                      <div className={`text-xs font-medium ${selected ? "text-brand-700" : "text-stone-500"}`}>
-                        {plan.max_ruts === null
-                          ? "RUTs ilimitados"
-                          : `${plan.max_ruts} RUT${plan.max_ruts > 1 ? "s" : ""}`}
-                      </div>
-                      {plan.min_commitment_months > 1 && (
-                        <div className="text-[11px] text-stone-400 mt-1">
-                          Mín. {plan.min_commitment_months} meses
+                      {/* Popular badge */}
+                      {isPopular && (
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                          <span className="bg-gold-300 text-stone-900 text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap uppercase tracking-wide">
+                            Más Popular
+                          </span>
                         </div>
                       )}
+
+                      <div className={`text-xs font-semibold uppercase tracking-wider mb-1 ${selected ? "text-brand-300" : "text-stone-400"}`}>
+                        {plan.name}
+                      </div>
+
+                      {/* Price */}
+                      {promo ? (
+                        <div className="mb-2">
+                          <div className={`text-[10px] line-through ${selected ? "text-brand-400" : "text-stone-300"}`}>
+                            USD ${billing === "monthly" ? promo.originalMonthly : promo.originalAnnual}
+                          </div>
+                          <div className={`text-lg font-bold ${selected ? "text-white" : "text-brand-800"}`}>
+                            ${Math.round(monthlyPrice).toLocaleString("es-CL")}
+                            <span className={`text-[10px] font-normal ml-0.5 ${selected ? "text-brand-300" : "text-stone-400"}`}>/mes USD</span>
+                          </div>
+                          <div className={`text-[10px] font-bold ${selected ? "text-gold-300" : "text-brand-700"}`}>
+                            {promo.label}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className={`text-lg font-bold mb-2 ${selected ? "text-white" : "text-brand-800"}`}>
+                          ${Math.round(monthlyPrice).toLocaleString("es-CL")}
+                          <span className={`text-[10px] font-normal ml-0.5 ${selected ? "text-brand-300" : "text-stone-400"}`}>/mes USD</span>
+                        </div>
+                      )}
+
+                      <p className={`text-[11px] leading-relaxed mb-3 ${selected ? "text-brand-200" : "text-stone-500"}`}>
+                        {PLAN_DESCRIPTIONS[plan.code]}
+                      </p>
+
+                      <ul className="mt-auto space-y-1">
+                        {(PLAN_FEATURES[plan.code] ?? []).map((f) => (
+                          <li key={f} className="flex items-start gap-1.5 text-[11px]">
+                            <svg className={`w-3 h-3 mt-0.5 shrink-0 ${selected ? "text-gold-300" : "text-brand-600"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span className={selected ? "text-brand-100" : "text-stone-600"}>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </button>
                   );
                 })}
               </div>
             )}
 
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-4">
               <button
                 onClick={handleStep2}
                 disabled={!selectedPlan || loading}
                 className="bg-brand-700 hover:bg-brand-800 disabled:bg-brand-300
-                  text-white font-medium px-8 py-3 rounded-xl text-sm transition-colors"
+                  text-white font-medium px-10 py-3 rounded-xl text-sm transition-colors"
               >
                 {loading ? "Configurando…" : "Comenzar con este plan"}
               </button>
             </div>
 
+            {/* Banner profesional */}
+            <div className="bg-brand-800 rounded-xl px-5 py-4 text-center mb-4">
+              <p className="text-sm text-brand-200">
+                ¿Eres profesional contable?{" "}
+                <a href="mailto:contacto@ocglobalservices.cl" className="text-gold-300 font-semibold hover:text-gold-200 transition-colors">
+                  Consúltanos por precios especiales
+                </a>
+              </p>
+            </div>
+
             <button
               onClick={() => setStep(1)}
-              className="block mx-auto mt-4 text-sm text-stone-400 hover:text-stone-600"
+              className="block mx-auto mt-2 text-sm text-stone-400 hover:text-stone-600"
             >
               Atrás
             </button>

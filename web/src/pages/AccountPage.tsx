@@ -34,16 +34,53 @@ interface DashboardData {
 }
 
 const BILLING_LABELS: Record<string, string> = {
-  monthly:   "Mensual",
-  quarterly: "Trimestral",
-  annual:    "Anual",
+  monthly: "Mensual",
+  annual:  "Anual",
 };
 
 const PLAN_DESCRIPTIONS: Record<string, string> = {
-  nucleo:       "Para contadores independientes.",
-  estructura:   "Para estudios contables pequeños.",
-  arquitectura: "Para empresas contables medianas.",
-  expansion:    "Para grandes estudios tributarios.",
+  f22digital: "Para el profesional independiente con un único contribuyente.",
+  genesis:    "Para el profesional con herramientas avanzadas y un cliente clave.",
+  sinergy:    "Para estudios contables pequeños con varios contribuyentes.",
+  momentum:   "Para estudios en crecimiento con cartera consolidada.",
+  horizon:    "Para grandes estudios tributarios sin límite de contribuyentes.",
+};
+
+const PLAN_FEATURES: Record<string, string[]> = {
+  f22digital: [
+    "1 RUT activo",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "1% donación a ONG",
+  ],
+  genesis: [
+    "1 RUT activo",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "2% donación a ONG",
+  ],
+  sinergy: [
+    "2–3 RUTs activos",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "3% donación a ONG",
+  ],
+  momentum: [
+    "4–7 RUTs activos",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "4% donación a ONG",
+  ],
+  horizon: [
+    "RUTs ilimitados",
+    "Formulario 22 AT2026",
+    "Sistema automático de alertas de vencimientos",
+    "4% donación a ONG",
+  ],
+};
+
+const PROMO: Record<string, { originalMonthly: number; originalAnnual: number; label: string }> = {
+  sinergy: { originalMonthly: 911, originalAnnual: 759, label: "PROMO ABRIL" },
 };
 
 export function AccountPage() {
@@ -105,7 +142,6 @@ export function AccountPage() {
     setPwdSaving(true);
     setPwdMsg(null);
 
-    // Re-autenticar con contraseña actual antes de cambiarla
     const email = user?.email ?? "";
     const { error: signInError } = await supabase.auth.signInWithPassword({ email, password: currentPwd });
     if (signInError) {
@@ -128,23 +164,21 @@ export function AccountPage() {
 
   /* ── Membresía ── */
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
-  const [billing,      setBilling]      = useState<"monthly" | "quarterly" | "annual">(
-    (currentSub?.billing_cycle as "monthly" | "quarterly" | "annual") ?? "monthly"
+  const [billing,      setBilling]      = useState<"monthly" | "annual">(
+    (currentSub?.billing_cycle === "annual" ? "annual" : "monthly")
   );
   const [planSaving,   setPlanSaving]   = useState(false);
   const [planMsg,      setPlanMsg]      = useState<{ ok: boolean; text: string } | null>(null);
 
-  const effectivePlan    = selectedPlan ?? currentSub?.plan_code ?? null;
-  const planChanged      = selectedPlan !== null && (
+  const effectivePlan = selectedPlan ?? currentSub?.plan_code ?? null;
+  const planChanged   = selectedPlan !== null && (
     selectedPlan !== currentSub?.plan_code || billing !== currentSub?.billing_cycle
   );
-  const billingChanged   = selectedPlan === null && billing !== currentSub?.billing_cycle;
-  const canSavePlan      = planChanged || billingChanged;
+  const billingChanged = selectedPlan === null && billing !== currentSub?.billing_cycle;
+  const canSavePlan    = planChanged || billingChanged;
 
-  function getPriceForBilling(plan: Plan): number {
-    if (billing === "monthly")   return plan.price_monthly_usd;
-    if (billing === "quarterly") return plan.price_quarterly_usd / 3;
-    return plan.price_annual_usd / 12;
+  function getMonthlyPrice(plan: Plan): number {
+    return billing === "monthly" ? plan.price_monthly_usd : plan.price_annual_usd / 12;
   }
 
   async function handlePlanSave() {
@@ -168,7 +202,7 @@ export function AccountPage() {
     <div className="min-h-[100dvh] bg-stone-50 flex flex-col">
       <AccountTopBar />
 
-      <main className="flex-1 max-w-2xl mx-auto w-full px-4 md:px-6 py-8">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 md:px-6 py-8">
         {/* Back */}
         <button
           onClick={() => navigate(-1)}
@@ -237,39 +271,56 @@ export function AccountPage() {
             )}
           </div>
 
-          {/* Billing cycle toggle */}
+          {/* Billing toggle */}
           <div className="flex mb-5">
             <div className="inline-flex bg-stone-100 rounded-lg p-1 gap-1">
-              {(["monthly", "quarterly", "annual"] as const).map((b) => (
-                <button
-                  key={b}
-                  onClick={() => { setBilling(b); setPlanMsg(null); }}
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                    billing === b
-                      ? "bg-white text-stone-900 shadow-sm"
-                      : "text-stone-500 hover:text-stone-700"
-                  }`}
-                >
-                  {BILLING_LABELS[b]}
-                  {b === "quarterly" && <span className="ml-1 text-success-600">−10%</span>}
-                  {b === "annual"    && <span className="ml-1 text-success-600">−20%</span>}
-                </button>
-              ))}
+              <button
+                onClick={() => { setBilling("monthly"); setPlanMsg(null); }}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  billing === "monthly"
+                    ? "bg-white text-stone-900 shadow-sm"
+                    : "text-stone-500 hover:text-stone-700"
+                }`}
+              >
+                Mensual
+              </button>
+              <button
+                onClick={() => { setBilling("annual"); setPlanMsg(null); }}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all flex items-center gap-2 ${
+                  billing === "annual"
+                    ? "bg-white text-stone-900 shadow-sm"
+                    : "text-stone-500 hover:text-stone-700"
+                }`}
+              >
+                Anual
+                <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
+                  −17%
+                </span>
+              </button>
             </div>
           </div>
+
+          {/* Monthly notice */}
+          {billing === "monthly" && (
+            <p className="text-xs text-stone-400 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-5 inline-block">
+              Mínimo de contratación: 3 meses
+            </p>
+          )}
 
           {/* Plan cards */}
           {plans.length === 0 ? (
             <div className="text-sm text-stone-400 py-4">Cargando planes…</div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 mb-5">
               {plans.map((plan) => {
-                const price      = getPriceForBilling(plan);
-                const isCurrent  = plan.code === currentSub?.plan_code && selectedPlan === null;
-                const isSelected = effectivePlan === plan.code;
-                const activeRuts = dashboard?.rut_usage.active ?? 0;
-                const blocked    = plan.max_ruts !== null && plan.max_ruts < activeRuts;
-                const excess     = blocked ? activeRuts - (plan.max_ruts ?? 0) : 0;
+                const monthlyPrice = getMonthlyPrice(plan);
+                const isCurrent    = plan.code === currentSub?.plan_code && selectedPlan === null;
+                const isSelected   = effectivePlan === plan.code;
+                const isPopular    = plan.code === "sinergy";
+                const activeRuts   = dashboard?.rut_usage.active ?? 0;
+                const blocked      = plan.max_ruts !== null && plan.max_ruts < activeRuts;
+                const excess       = blocked ? activeRuts - (plan.max_ruts ?? 0) : 0;
+                const promo        = PROMO[plan.code];
 
                 return (
                   <button
@@ -283,39 +334,72 @@ export function AccountPage() {
                       ? `Debes desactivar ${excess} contribuyente${excess > 1 ? "s" : ""} antes de bajar a este plan`
                       : undefined
                     }
-                    className={`text-left rounded-xl border-2 p-4 transition-all ${
+                    className={`relative text-left rounded-xl border-2 p-4 transition-all flex flex-col ${
                       blocked
                         ? "border-stone-100 bg-stone-50 opacity-50 cursor-not-allowed"
                         : isSelected
-                          ? "border-brand-600 bg-brand-50"
-                          : "border-stone-200 bg-white hover:border-stone-300"
+                          ? "border-brand-600 bg-brand-800 text-white shadow-lg"
+                          : "border-stone-200 bg-white hover:border-brand-300 hover:shadow-md"
                     }`}
                   >
+                    {/* Badges */}
+                    {isPopular && !blocked && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <span className="bg-gold-300 text-stone-900 text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap uppercase tracking-wide">
+                          Más Popular
+                        </span>
+                      </div>
+                    )}
+
                     <div className="flex items-start justify-between mb-1">
-                      <span className="font-semibold text-stone-900 text-sm">{plan.name}</span>
+                      <span className={`text-xs font-semibold uppercase tracking-wider ${isSelected ? "text-brand-300" : "text-stone-400"}`}>
+                        {plan.name}
+                      </span>
                       {isCurrent && (
-                        <span className="text-[10px] font-medium bg-brand-100 text-brand-700 rounded-full px-2 py-0.5 shrink-0 ml-2">
-                          Plan actual
-                        </span>
-                      )}
-                      {blocked && (
-                        <span className="text-[10px] font-medium bg-stone-100 text-stone-400 rounded-full px-2 py-0.5 shrink-0 ml-2">
-                          No disponible
+                        <span className="text-[9px] font-medium bg-brand-100 text-brand-700 rounded-full px-1.5 py-0.5 shrink-0 ml-1">
+                          Actual
                         </span>
                       )}
                     </div>
-                    <div className="text-xl font-bold text-brand-700 mb-0.5">
-                      ${Math.round(price).toLocaleString("es-CL")}
-                      <span className="text-xs font-normal text-stone-400">/mes USD</span>
-                    </div>
-                    <div className="text-xs text-stone-500 mb-2">
+
+                    {/* Price */}
+                    {promo ? (
+                      <div className="mb-2">
+                        <div className={`text-[10px] line-through ${isSelected ? "text-brand-400" : "text-stone-300"}`}>
+                          USD ${billing === "monthly" ? promo.originalMonthly : promo.originalAnnual}
+                        </div>
+                        <div className={`text-lg font-bold ${isSelected ? "text-white" : "text-brand-800"}`}>
+                          ${Math.round(monthlyPrice).toLocaleString("es-CL")}
+                          <span className={`text-[10px] font-normal ml-0.5 ${isSelected ? "text-brand-300" : "text-stone-400"}`}>/mes</span>
+                        </div>
+                        <div className={`text-[10px] font-bold ${isSelected ? "text-gold-300" : "text-brand-700"}`}>
+                          {promo.label}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={`text-lg font-bold mb-2 ${isSelected ? "text-white" : "text-brand-800"}`}>
+                        ${Math.round(monthlyPrice).toLocaleString("es-CL")}
+                        <span className={`text-[10px] font-normal ml-0.5 ${isSelected ? "text-brand-300" : "text-stone-400"}`}>/mes USD</span>
+                      </div>
+                    )}
+
+                    <p className={`text-[11px] leading-relaxed mb-3 ${isSelected ? "text-brand-200" : "text-stone-500"}`}>
                       {PLAN_DESCRIPTIONS[plan.code]}
-                    </div>
-                    <div className={`text-xs font-medium ${isSelected ? "text-brand-700" : "text-stone-400"}`}>
-                      {plan.max_ruts === null ? "RUTs ilimitados" : `${plan.max_ruts} RUT${plan.max_ruts > 1 ? "s" : ""}`}
-                    </div>
+                    </p>
+
+                    <ul className="mt-auto space-y-1">
+                      {(PLAN_FEATURES[plan.code] ?? []).map((f) => (
+                        <li key={f} className="flex items-start gap-1.5 text-[11px]">
+                          <svg className={`w-3 h-3 mt-0.5 shrink-0 ${isSelected ? "text-gold-300" : "text-brand-600"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className={isSelected ? "text-brand-100" : "text-stone-600"}>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+
                     {blocked && (
-                      <p className="text-[11px] text-stone-400 mt-2 leading-snug">
+                      <p className="text-[10px] text-stone-400 mt-2 leading-snug">
                         Desactiva {excess} contribuyente{excess > 1 ? "s" : ""} primero.
                       </p>
                     )}
@@ -325,7 +409,7 @@ export function AccountPage() {
             </div>
           )}
 
-          {/* Aviso de downgrade bloqueado */}
+          {/* Downgrade warning */}
           {plans.some(p => p.max_ruts !== null && p.max_ruts < (dashboard?.rut_usage.active ?? 0)) && (
             <div className="flex items-start gap-2.5 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 text-sm text-amber-800">
               <svg className="w-4 h-4 mt-0.5 shrink-0 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -360,6 +444,16 @@ export function AccountPage() {
               Selecciona un plan distinto o cambia el ciclo de facturación para continuar.
             </p>
           )}
+
+          {/* Banner profesional */}
+          <div className="bg-brand-800 rounded-xl px-5 py-4 text-center mt-5">
+            <p className="text-sm text-brand-200">
+              ¿Eres profesional contable?{" "}
+              <a href="mailto:contacto@ocglobalservices.cl" className="text-gold-300 font-semibold hover:text-gold-200 transition-colors">
+                Consúltanos por precios especiales
+              </a>
+            </p>
+          </div>
         </section>
 
         {/* ── Seguridad ── */}

@@ -3,8 +3,8 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "../lib/supabase.ts";
 import { Logo } from "../components/ui/Logo.tsx";
 
-const VALID_PLANS   = ["nucleo", "estructura", "arquitectura", "expansion"];
-const VALID_BILLING = ["monthly", "quarterly", "annual"];
+const VALID_PLANS   = ["f22digital", "genesis", "sinergy", "momentum", "horizon"];
+const VALID_BILLING = ["monthly", "annual"];
 
 export function RegisterPage() {
   const navigate = useNavigate();
