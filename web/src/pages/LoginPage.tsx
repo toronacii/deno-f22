@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { supabase } from "../lib/supabase.ts";
+import { Logo } from "../components/ui/Logo.tsx";
 
 export function LoginPage() {
   const navigate  = useNavigate();
@@ -40,14 +41,8 @@ export function LoginPage() {
     <div className="min-h-[100dvh] bg-stone-50 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         {/* Logo */}
-        <div className="flex items-center gap-3 mb-8 justify-center">
-          <div className="w-9 h-9 bg-brand-800 rounded-lg flex items-center justify-center">
-            <span className="text-white text-sm font-bold">SII</span>
-          </div>
-          <div>
-            <div className="text-lg font-bold text-stone-900 leading-tight">Plataforma Tributaria</div>
-            <div className="text-xs text-stone-400">Formulario 22 AT2026</div>
-          </div>
+        <div className="flex justify-center mb-8">
+          <Logo className="h-10 w-auto" />
         </div>
 
         <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">

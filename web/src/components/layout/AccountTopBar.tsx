@@ -7,6 +7,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../lib/auth_context.tsx";
+import { Logo } from "../ui/Logo.tsx";
 
 interface Props {
   /** Contexto activo del RUT (para páginas nivel workspace) */
@@ -43,11 +44,8 @@ export function AccountTopBar({ rutContext, otherRuts }: Props) {
   return (
     <header className="bg-white border-b border-stone-200 shrink-0 px-4 md:px-6 h-14 flex items-center gap-3">
       {/* Logo */}
-      <Link to="/dashboard" className="flex items-center gap-2.5 shrink-0 mr-2">
-        <div className="w-7 h-7 bg-brand-800 rounded-lg flex items-center justify-center">
-          <span className="text-white text-xs font-bold">SII</span>
-        </div>
-        <span className="text-sm font-bold text-stone-900 hidden sm:block">F22</span>
+      <Link to="/dashboard" className="shrink-0 mr-2">
+        <Logo className="h-7 w-auto" />
       </Link>
 
       {/* Separador + contexto RUT */}

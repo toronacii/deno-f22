@@ -7,6 +7,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { Logo } from "../components/ui/Logo.tsx";
 
 const VALID_PLANS   = ["nucleo", "estructura", "arquitectura", "expansion"];
 const VALID_BILLING = ["monthly", "quarterly", "annual"] as const;
@@ -112,12 +113,7 @@ export function OnboardingPage() {
       <div className="w-full max-w-2xl">
         {/* Logo + progress */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-brand-800 rounded-lg flex items-center justify-center">
-              <span className="text-white text-xs font-bold">SII</span>
-            </div>
-            <span className="font-semibold text-stone-900">Plataforma Tributaria</span>
-          </div>
+          <Logo className="h-8 w-auto" />
           <div className="flex items-center gap-2 text-sm text-stone-400">
             <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium ${step >= 1 ? "bg-brand-700 text-white" : "bg-stone-200 text-stone-500"}`}>1</div>
             <div className="w-8 h-px bg-stone-200" />

@@ -4,47 +4,47 @@
   --color-sii-blue: #003087;
   --color-sii-blue-light: #0050c8;
   --color-sii-red: #c8102e;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Figtree", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* brand */
-  --color-brand-50:  #f6f7f9;
-  --color-brand-100: #e9edf2;
-  --color-brand-200: #cfd8e3;
-  --color-brand-300: #aabacc;
-  --color-brand-400: #7f95ae;
-  --color-brand-500: #5f7592;
-  --color-brand-600: #485d78;
-  --color-brand-700: #35465b;
-  --color-brand-800: #1f2c3d;
-  --color-brand-900: #0f1724;
-  --color-brand-950: #0a1018;
+  /* brand — OC Global navy (#111C4E) */
+  --color-brand-50:  #eef0f7;
+  --color-brand-100: #d4d9ee;
+  --color-brand-200: #aab5dd;
+  --color-brand-300: #7888c4;
+  --color-brand-400: #4d62aa;
+  --color-brand-500: #304590;
+  --color-brand-600: #233578;
+  --color-brand-700: #192863;
+  --color-brand-800: #111C4E;
+  --color-brand-900: #0b1236;
+  --color-brand-950: #060920;
 
-  /* gold */
-  --color-gold-50:  #faf7ef;
-  --color-gold-100: #f4ecd7;
-  --color-gold-200: #e8d5a6;
-  --color-gold-300: #d8b86d;
-  --color-gold-400: #c79b3c;
-  --color-gold-500: #b8831f;
-  --color-gold-600: #966815;
-  --color-gold-700: #744f12;
-  --color-gold-800: #53380f;
-  --color-gold-900: #37250b;
-  --color-gold-950: #211506;
+  /* gold — OC Global accent (#F4DB6C) */
+  --color-gold-50:  #fffbeb;
+  --color-gold-100: #fef4c0;
+  --color-gold-200: #fde986;
+  --color-gold-300: #f4db6c;
+  --color-gold-400: #ecc520;
+  --color-gold-500: #d4aa10;
+  --color-gold-600: #b08610;
+  --color-gold-700: #8a650e;
+  --color-gold-800: #644809;
+  --color-gold-900: #3f2e05;
+  --color-gold-950: #251b03;
 
-  /* stone (overrides Tailwind default) */
-  --color-stone-50:  #faf9f7;
-  --color-stone-100: #f3f1ec;
-  --color-stone-200: #e7e1d7;
-  --color-stone-300: #d5cab8;
-  --color-stone-400: #b9aa90;
-  --color-stone-500: #9b8a70;
-  --color-stone-600: #7d6d57;
-  --color-stone-700: #615446;
-  --color-stone-800: #463d34;
-  --color-stone-900: #2f2923;
-  --color-stone-950: #1d1915;
+  /* stone — neutral grays, aligned to OCG body text (#808187) */
+  --color-stone-50:  #f8f9fa;
+  --color-stone-100: #f0f1f3;
+  --color-stone-200: #dfe1e4;
+  --color-stone-300: #c3c6cb;
+  --color-stone-400: #a0a3a9;
+  --color-stone-500: #808187;
+  --color-stone-600: #64666b;
+  --color-stone-700: #4e5054;
+  --color-stone-800: #36383b;
+  --color-stone-900: #1f2123;
+  --color-stone-950: #121315;
 
   /* success */
   --color-success-500: #2f7d57;

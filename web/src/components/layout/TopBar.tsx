@@ -6,6 +6,7 @@
 
 import { Link } from "react-router-dom";
 import { useFormStore } from "../../store/form_store.ts";
+import { Logo } from "../ui/Logo.tsx";
 import { useVariant } from "../../hooks/use_variant.ts";
 import { Badge } from "../ui/Badge.tsx";
 import type { BreadcrumbInfo } from "./AppShell.tsx";
@@ -97,8 +98,8 @@ export function TopBar({ onMenuClick, breadcrumb }: Props) {
 
         {/* Logo + breadcrumb */}
         <div className="flex items-center gap-2 shrink-0 min-w-0">
-          <Link to="/dashboard" className="w-7 h-7 bg-brand-800 rounded flex items-center justify-center shrink-0 hover:bg-brand-700 transition-colors">
-            <span className="text-white text-xs font-bold">SII</span>
+          <Link to="/dashboard" className="shrink-0">
+            <Logo className="h-6 w-auto" />
           </Link>
 
           {breadcrumb ? (
