@@ -24,10 +24,28 @@ const COL_LABEL = 1;        // Column B — always the label
 const OP_OFFSET = 6;        // operator column = code_col + 6
 const OPS = new Set(["+", "-", "="]);
 
+// Final sections of the F22 form that use plain text headers instead of "RECUADRO N°..." format.
+const FINAL_SECTION_HEADERS = new Set([
+  "BASE IMPONIBLE IUSC O IGC O IA",
+  "REBAJAS A LA RENTA",
+  "BASE IMPONIBLE ANUAL",
+  "IUSC o IGC, Y DÉBITOS FISCALES",
+  "CRÉDITOS",
+  "IMPUESTOS ANUALES A LA RENTA",
+  "DEDUCCIONES A LOS IMPUESTOS",
+  "OTROS CARGOS",
+  "REMANENTE DE CRÉDITO",
+  "IMPUESTO A PAGAR",
+]);
+
 // ── helpers ──────────────────────────────────────────────────────────────────
 
 function isRecuadroHeader(val: string): boolean {
   return /RECUADRO\s+N[°º]?\s*\d+/i.test(val) || /RECUADRO\s+\d+/i.test(val);
+}
+
+function isFinalSectionHeader(val: string): boolean {
+  return FINAL_SECTION_HEADERS.has(val.trim());
 }
 
 function extractSectionId(val: string): string {
@@ -126,7 +144,7 @@ export async function loadLayout(xlsxPath: string): Promise<LayoutLoadResult> {
   for (let row = 0; row < sheet.length; row++) {
     const colB = getCellStr(sheet, row, COL_LABEL);
 
-    if (colB && isRecuadroHeader(colB)) {
+    if (colB && (isRecuadroHeader(colB) || isFinalSectionHeader(colB))) {
       const sectionId = extractSectionId(colB);
       currentSection = sectionId;
       sections.push({ id: sectionId, title: colB.trim(), startRow: row });
@@ -180,7 +198,7 @@ export async function loadLayoutSections(xlsxPath: string): Promise<LayoutSectio
   const rawSections: RawSection[] = [];
   for (let row = 0; row < sheet.length; row++) {
     const colB = getCellStr(sheet, row, COL_LABEL);
-    if (colB && isRecuadroHeader(colB)) {
+    if (colB && (isRecuadroHeader(colB) || isFinalSectionHeader(colB))) {
       if (rawSections.length > 0) rawSections[rawSections.length - 1].endRow = row - 1;
       rawSections.push({ id: extractSectionId(colB), title: colB.trim(), startRow: row, endRow: sheet.length - 1 });
     }

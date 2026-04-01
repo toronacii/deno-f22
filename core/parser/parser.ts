@@ -139,6 +139,18 @@ class Parser {
       return this.parseIfExpr();
     }
 
+    // Standalone condition expression: "atributo = REGIME"
+    if (this.check(TokenKind.KW_ATRIBUTO)) {
+      const cond = this.parseCondition();
+      return { kind: "cond_expr", cond };
+    }
+
+    // Top-level "{cond}" blocks (e.g. "{[x] > 0 .y. [y] > 0}")
+    if (this.check(TokenKind.LBRACE) && this.looksLikeConditionBlock()) {
+      const cond = this.parseCondition(); // parseSimpleCond handles LBRACE
+      return { kind: "cond_expr", cond };
+    }
+
     const arith = this.parseArithmetic();
 
     // Inline guard: expr ; Si condition
@@ -155,26 +167,91 @@ class Parser {
       this.pos = savedPos;
     }
 
+    // Top-level comparison (e.g. "{sum} > 0" validation rules)
+    const compOps = [
+      TokenKind.EQ, TokenKind.NEQ, TokenKind.LT,
+      TokenKind.GT, TokenKind.LTE, TokenKind.GTE,
+    ] as const;
+    if (this.check(...compOps)) {
+      let op: "=" | "!=" | "<" | ">" | "<=" | ">=" = "=";
+      if (this.check(TokenKind.EQ))       { this.advance(); op = "="; }
+      else if (this.check(TokenKind.NEQ)) { this.advance(); op = "!="; }
+      else if (this.check(TokenKind.LTE)) { this.advance(); op = "<="; }
+      else if (this.check(TokenKind.GTE)) { this.advance(); op = ">="; }
+      else if (this.check(TokenKind.LT))  { this.advance(); op = "<"; }
+      else if (this.check(TokenKind.GT))  { this.advance(); op = ">"; }
+      const right = this.parseArithmetic();
+      return { kind: "cond_expr", cond: { kind: "compare", op, left: arith, right } };
+    }
+
     return arith;
+  }
+
+  /**
+   * Scan ahead from current pos (expected to be LBRACE) to find if the block
+   * content contains condition-specific tokens (.y., .o., atributo, TIPO).
+   * Used to disambiguate "{cond}" vs "{arithmetic}" at top level.
+   */
+  private looksLikeConditionBlock(): boolean {
+    let depth = 0;
+    let i = this.pos;
+    while (i < this.tokens.length) {
+      const t = this.tokens[i];
+      if (t.kind === TokenKind.LBRACE) depth++;
+      else if (t.kind === TokenKind.RBRACE) {
+        depth--;
+        if (depth === 0) break;
+      } else if (depth === 1) {
+        if (
+          t.kind === TokenKind.AND || t.kind === TokenKind.OR ||
+          t.kind === TokenKind.KW_ATRIBUTO || t.kind === TokenKind.FUNC_TIPO
+        ) return true;
+      }
+      i++;
+    }
+    return false;
   }
 
   private parseIfExpr(): ExprNode {
     this.expect(TokenKind.KW_SI);
     const condition = this.parseCondition();
 
-    // Optional semicolon before entonces
+    // Optional semicolon before entonces; entonces itself is also optional
     this.match(TokenKind.SEMICOLON);
     this.skipNewlines();
-    this.expect(TokenKind.KW_ENTONCES);
+    this.match(TokenKind.KW_ENTONCES);
 
-    const thenExpr = this.parseArithmetic();
+    const thenExpr = this.parseArithmeticOrCond();
     this.skipNewlines();
 
-    this.expect(TokenKind.KW_SINO);
+    if (!this.match(TokenKind.KW_SINO)) {
+      return { kind: "if", condition, then: thenExpr, else: { kind: "number", value: 0 } };
+    }
     this.skipNewlines();
     const elseExpr = this.parseExpr();
 
     return { kind: "if", condition, then: thenExpr, else: elseExpr };
+  }
+
+  /** Parse an arithmetic expression; if followed by a comparison op, wrap as cond_expr (1/0). */
+  private parseArithmeticOrCond(): ExprNode {
+    const arith = this.parseArithmetic();
+    const compOps = [
+      TokenKind.EQ, TokenKind.NEQ, TokenKind.LT,
+      TokenKind.GT, TokenKind.LTE, TokenKind.GTE,
+    ] as const;
+    if (this.check(...compOps)) {
+      let op: "=" | "!=" | "<" | ">" | "<=" | ">=" = "=";
+      if (this.check(TokenKind.EQ))  { this.advance(); op = "="; }
+      else if (this.check(TokenKind.NEQ)) { this.advance(); op = "!="; }
+      else if (this.check(TokenKind.LTE)) { this.advance(); op = "<="; }
+      else if (this.check(TokenKind.GTE)) { this.advance(); op = ">="; }
+      else if (this.check(TokenKind.LT))  { this.advance(); op = "<"; }
+      else if (this.check(TokenKind.GT))  { this.advance(); op = ">"; }
+      const right = this.parseArithmetic();
+      return { kind: "cond_expr", cond: { kind: "compare", op, left: arith, right } };
+    }
+    return arith;
   }
 
   // -------------------------------------------------------------------------
@@ -250,11 +327,12 @@ class Parser {
       return this.parseFuncCall();
     }
 
-    // Parenthesized expression
-    if (tok.kind === TokenKind.LPAREN) {
+    // Parenthesized expression (with parens or braces)
+    if (tok.kind === TokenKind.LPAREN || tok.kind === TokenKind.LBRACE) {
+      const closeKind = tok.kind === TokenKind.LPAREN ? TokenKind.RPAREN : TokenKind.RBRACE;
       this.advance();
       const expr = this.parseExpr();
-      this.match(TokenKind.RPAREN);
+      this.match(closeKind);
       return expr;
     }
 
@@ -345,6 +423,32 @@ class Parser {
   }
 
   private parseSimpleCond(): CondNode {
+    const compOps = [
+      TokenKind.EQ, TokenKind.NEQ, TokenKind.LT,
+      TokenKind.GT, TokenKind.LTE, TokenKind.GTE,
+    ] as const;
+
+    // Grouped condition: (cond) — but NOT (expr) op value, which is a compare_cond
+    if (this.check(TokenKind.LPAREN)) {
+      const savedPos = this.pos;
+      this.advance();
+      const cond = this.parseCondition();
+      if (this.match(TokenKind.RPAREN)) {
+        if (!this.check(...compOps)) {
+          return cond;
+        }
+      }
+      // Backtrack: this is (expr) op value — let parseCompareCond handle it
+      this.pos = savedPos;
+    }
+
+    if (this.check(TokenKind.LBRACE)) {
+      this.advance();
+      const cond = this.parseCondition();
+      this.match(TokenKind.RBRACE);
+      return cond;
+    }
+
     // TIPO{[NNN]} = NUM (,NUM)*
     if (this.check(TokenKind.FUNC_TIPO)) {
       return this.parseTipoCond();
@@ -417,7 +521,14 @@ class Parser {
 
   private parseAtributoCond(): CondNode {
     this.expect(TokenKind.KW_ATRIBUTO);
-    this.expect(TokenKind.EQ);
+
+    // Accept both "atributo = REGIME" and "atributo != REGIME"
+    const negated = this.check(TokenKind.NEQ);
+    if (negated) {
+      this.advance();
+    } else {
+      this.expect(TokenKind.EQ);
+    }
 
     const values: string[] = [];
     if (this.check(TokenKind.REGIME_ID)) {
@@ -432,10 +543,12 @@ class Parser {
         values.push(this.advance().value);
       } else if (this.check(TokenKind.IDENT)) {
         values.push(this.advance().value);
+      } else {
+        break;
       }
     }
 
-    return { kind: "atributo_check", values };
+    return { kind: "atributo_check", values, negated };
   }
 
   private parseCompareCond(): CondNode {

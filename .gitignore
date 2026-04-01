@@ -1,5 +1,6 @@
 # Secretos
 .env*
+.npm
 
 # Scripts — archivos intermedios
 scripts/.progress.json
@@ -13,6 +14,7 @@ web/dist/
 
 # Deno cache
 .deno/
+deno.lock
 
 # Python
 __pycache__/

@@ -73,6 +73,9 @@ export function evaluateExpr(node: ExprNode, ctx: EvalContext): number {
       return node.values.some((v) => v.toUpperCase() === regime.toUpperCase()) ? 1 : 0;
     }
 
+    case "cond_expr":
+      return evaluateCondition(node.cond, ctx) ? 1 : 0;
+
     default:
       return 0;
   }

@@ -1,10 +1,10 @@
-/**
- * AUTO-GENERATED — do not edit manually.
- * Source: 5_CSW_Set_1.0_AT2026.xlsx
- *
- * Regenerate with:
- *   deno run --allow-read --allow-write scripts/build_data.ts
- */
+/*
+* AUTO - GENERATED — do not edit manually.
+* Source: 5_CSW_Set_1.0_AT2026.xlsx
+* 
+* Regenerate with:
+* deno run - - allow - read - - allow - write scripts / build_data.ts
+*/
 
 import type { RawRule } from "../models/rule.ts";
 
@@ -27,14 +27,14 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.4",
     "targetFieldRaw": "[494]",
     "operatorRaw": "=",
-    "formulaRaw": "MIN{ P08 * [547] ; P42 } ; si   [465] = 0 .y. TIPO{[03]}=1",
+    "formulaRaw": "Si [465] = 0 .y. TIPO{[03]} = 1; entonces MIN{ P08 * [547] ; P42 } Sino 0",
     "guidanceText": "El monto registrado en el código 494 debe corresponder al mínimo entre 30% del valor declarado en el código 547 y el tope de 15 UTA."
   },
   {
     "ruleId": "a.5",
     "targetFieldRaw": "[467]",
     "operatorRaw": "=",
-    "formulaRaw": "SiTIPO{[03]} = 2;entoncesPOS{[547] - [465]}SinoSi[617] > 0 .y. [547] = 0;entonces[617] - [770] - [872]SinoPOS{POS{[547] - [465] - [494] - [850]}+ [617] - [770] - [872]}",
+    "formulaRaw": "Si TIPO{[03]} = 2; entonces POS{[547] - [465]} Sino Si [617] > 0 .y. [547] = 0; entonces [617] - [770] - [872] Sino POS{POS{[547] - [465] - [494] - [850]} + [617] - [770] - [872]}",
     "guidanceText": "El monto registrado en el código 467 debe ser igual a la suma de los códigos 547 y 617 menos 770, 872, 465, 494 y 850. En el caso del código 617 solo es procedente deducir las cantidades anotadas en los códigos 770 y 872, y en el caso de sociedades profesionales la diferencia entre los códigos 547 y 465."
   },
   {
@@ -55,14 +55,14 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.10",
     "targetFieldRaw": "[703]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[701] - [702]}",
+    "formulaRaw": "POS{[701] - [702]}",
     "guidanceText": "El código 703 debe ser igual al resultado positivo del código 701 menos el código 702."
   },
   {
     "ruleId": "a.32",
     "targetFieldRaw": "[953]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[999] - [998]}",
+    "formulaRaw": "POS{[999] - [998]}",
     "guidanceText": "El código 953 debe ser igual que el código 999 y el código 998."
   },
   {
@@ -83,56 +83,56 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.39",
     "targetFieldRaw": "[1061]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1058] - [1060]}",
+    "formulaRaw": "POS{[1058] - [1060]}",
     "guidanceText": "El monto del código 1061 debe ser igual al código 1058 menos el código 1060."
   },
   {
     "ruleId": "a.40",
     "targetFieldRaw": "[1062]",
     "operatorRaw": "=",
-    "formulaRaw": "Si[1058] ≤ 0;entonces[1060]SinoPOS {[1060] - [1058]}",
+    "formulaRaw": "Si [1058] <=​ 0; entonces [1060] Sino POS{[1060] - [1058]}",
     "guidanceText": "El monto registrado en el código 1062 es incorrecto."
   },
   {
     "ruleId": "a.42",
     "targetFieldRaw": "[1100]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1061] - [1099] - [1847]}",
+    "formulaRaw": "POS{[1061] - [1099] - [1847]}",
     "guidanceText": "El monto registrado en el código 1100 debe ser igual al código 1061 menos los códigos 1099 y 1847."
   },
   {
     "ruleId": "a.44",
     "targetFieldRaw": "[1654]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1651] + [1652] - [1653]}",
+    "formulaRaw": "POS{[1651] + [1652] - [1653]}",
     "guidanceText": "El código 1654 debe ser igual a la suma de los códigos 1651, 1652 menos el código1653"
   },
   {
     "ruleId": "a.45",
     "targetFieldRaw": "[1096]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1358] - [1184]}",
+    "formulaRaw": "POS{[1358] - [1184]}",
     "guidanceText": "El monto del código 1096 del recuadro N° 7 debe ser el igual al código 1358 menos el código 1184."
   },
   {
     "ruleId": "a.46",
     "targetFieldRaw": "[1097]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1359] - [1362]}",
+    "formulaRaw": "POS{[1359] - [1362]}",
     "guidanceText": "El monto del código 1097 del recuadro N° 7 debe ser el igual al código 1359 menos el código 1362."
   },
   {
     "ruleId": "a.47",
     "targetFieldRaw": "[1106]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1360] - [1363]}",
-    "guidanceText": "El monto del código 1106  del recuadro N° 7 debe ser el igual al código 1360 menos el código 1363."
+    "formulaRaw": "POS{[1360] - [1363]}",
+    "guidanceText": "El monto del código 1106 del recuadro N° 7 debe ser el igual al código 1360 menos el código 1363."
   },
   {
     "ruleId": "a.48",
     "targetFieldRaw": "[1372]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1361] - [1364]}",
+    "formulaRaw": "POS{[1361] - [1364]}",
     "guidanceText": "El monto registrado en código 1372 debe ser igual al resultado de los códigos 1361 menos 1364. Recuadro N°7"
   },
   {
@@ -147,7 +147,7 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1672]",
     "operatorRaw": "=",
     "formulaRaw": "[1657] + [1658] + [1659] + [1660] - [1661] - [1662] - [1140] - [1663] - [1664] - [1665] - [1666] - [1667] - [1668] - [1141] - [1142] - [1669] - [1670] - [1671]",
-    "guidanceText": "El monto registrado en código 1672 debe ser igual al resultado de los códigos :1657 más 1658, 1659, 1660 menos 1661, 1662, 1140,  1663 menos 1664, 1665, 1666, 1667, 1668,  1141, 1142, 1669, 1670, 1671. Recuadro N°12"
+    "guidanceText": "El monto registrado en código 1672 debe ser igual al resultado de los códigos :1657 más 1658, 1659, 1660 menos 1661, 1662, 1140, 1663 menos 1664, 1665, 1666, 1667, 1668, 1141, 1142, 1669, 1670, 1671. Recuadro N°12"
   },
   {
     "ruleId": "a.52",
@@ -160,57 +160,57 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.53",
     "targetFieldRaw": "[1690]",
     "operatorRaw": "=",
-    "formulaRaw": "Si[1728] > 0;entoncesPOS {[1728] - [1154] - [1157]}Sino[1728]",
+    "formulaRaw": "Si [1728] > 0; entonces POS{[1728] - [1154] - [1157]} Sino [1728]",
     "guidanceText": "El código 1690 del recuadro N° 12 debe ser igual al código 1728 menos los códigos 1154 y 1157."
   },
   {
     "ruleId": "a.55",
     "targetFieldRaw": "[1718]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([1698] > 0);entonces([1698] + [1692] + [1699])SinoPOS {[1692] + [1699] - [1717]}",
+    "formulaRaw": "Si ([1698] > 0); entonces ([1698] + [1692] + [1699]) Sino POS{[1692] + [1699] - [1717]}",
     "guidanceText": "El monto registrado en código 1718 debe ser igual al resultado de los códigos 1698 menos el código 1717 más los códigos 1692, 1699 del recuadro N°13"
   },
   {
     "ruleId": "a.56",
     "targetFieldRaw": "[1199]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1718] - [1693] - [844] - [982] - [1198]}",
-    "guidanceText": "El monto registrado en código 1199 debe ser igual a resultado de los códigos 1718  menos  1693, 844, 982, 1198. Recuadro N°13"
+    "formulaRaw": "POS{[1718] - [1693] - [844] - [982] - [1198]}",
+    "guidanceText": "El monto registrado en código 1199 debe ser igual a resultado de los códigos 1718 menos 1693, 844, 982, 1198. Recuadro N°13"
   },
   {
     "ruleId": "a.58",
     "targetFieldRaw": "[1150]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A;entonces([1184] + [1362])Sino0",
+    "formulaRaw": "Si atributo = M14A; entonces ([1184] + [1362]) Sino 0",
     "guidanceText": "El monto registrado en el código 1150, del recuadro N°12, debe ser igual a la suma de los códigos 1184. y 1362 del recuadro N°7."
   },
   {
     "ruleId": "a.59",
     "targetFieldRaw": "[1698]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(atributo = M14A);entonces[645]Sino0",
+    "formulaRaw": "Si (atributo = M14A); entonces [645] Sino 0",
     "guidanceText": "El monto registrado en código 1698 debe ser igual a código 645 del recuadro N°14"
   },
   {
     "ruleId": "a.60",
     "targetFieldRaw": "[1717]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(atributo = M14A);entonces[646]Sino0",
+    "formulaRaw": "Si (atributo = M14A); entonces [646] Sino 0",
     "guidanceText": "El monto registrado en código 1717 debe ser igual a código 646 del recuadro N°14"
   },
   {
     "ruleId": "a.61",
     "targetFieldRaw": "[1694]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1690]}",
+    "formulaRaw": "POS{[1690]}",
     "guidanceText": "El monto registrado en código 1694 del recuadro N°14 debe ser igual a código 1690 del recuadro N°12"
   },
   {
     "ruleId": "a.62",
     "targetFieldRaw": "[1695]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1690]",
-    "guidanceText": "El código 1695  del recuadro N°14, debe ser igual al código 1690 del recuadro N°12"
+    "formulaRaw": "NEG{[1690]}",
+    "guidanceText": "El código 1695 del recuadro N°14, debe ser igual al código 1690 del recuadro N°12"
   },
   {
     "ruleId": "a.63",
@@ -224,14 +224,14 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1700]",
     "operatorRaw": "=",
     "formulaRaw": "[1150]",
-    "guidanceText": "El valor registrado en código 1700  del recuadro N°14 debe ser igual a código 1150 del recuadro  N°12"
+    "guidanceText": "El valor registrado en código 1700 del recuadro N°14 debe ser igual a código 1150 del recuadro N°12"
   },
   {
     "ruleId": "a.66",
     "targetFieldRaw": "[1701]",
     "operatorRaw": "=",
     "formulaRaw": "[1154]",
-    "guidanceText": "El valor registrado en código 1701  del recuadro N°14 debe ser igual a código 1154 del recuadro  N°12"
+    "guidanceText": "El valor registrado en código 1701 del recuadro N°14 debe ser igual a código 1154 del recuadro N°12"
   },
   {
     "ruleId": "a.67",
@@ -244,42 +244,42 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.68",
     "targetFieldRaw": "[645]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1145] - [1146] + [1177] + [893] - [894] + [1694] - [1695] + [1696] + [1178] - [1179] + [1180] - [1182] - [1697] + [1186] - [1187] - [1700] - [1188] + [1701] + [1702] + [1189] - [1190]}",
+    "formulaRaw": "POS{[1145] - [1146] + [1177] + [893] - [894] + [1694] - [1695] + [1696] + [1178] - [1179] + [1180] - [1182] - [1697] + [1186] - [1187] - [1700] - [1188] + [1701] + [1702] + [1189] - [1190]}",
     "guidanceText": "El capital propio tributario positivo final registrado en el código 645 debe ser igual al resultado positivo de la suma de los códigos 1145, 1177, 893, 1694, 1178, 1186, 1701, 1702, 1189, y la resta de los códigos 1146, 894, 1695, 1179, 1182, 1697, 1187, 1700, 1188 y 1190."
   },
   {
     "ruleId": "a.69",
     "targetFieldRaw": "[646]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1145] - [1146] + [1177] + [893] - [894] + [1694] - [1695] + [1696] + [1178] - [1179] + [1180] - [1182] - [1697] + [1186] - [1187] - [1700] - [1188] + [1701] + [1702] + [1189] - [1190]}",
+    "formulaRaw": "NEG{[1145] - [1146] + [1177] + [893] - [894] + [1694] - [1695] + [1696] + [1178] - [1179] + [1180] - [1182] - [1697] + [1186] - [1187] - [1700] - [1188] + [1701] + [1702] + [1189] - [1190]}",
     "guidanceText": "El capital propio tributario positivo final registrado en el código 645 debe ser igual al resultado negativo de la suma de los códigos 1145, 1177, 893, 1694, 1178, 1186, 1701, 1702, 1189, y la resta de los códigos 1146, 894, 1695, 1179, 1182, 1697, 1187, 1700, 1188 y 1190. El resultado se debe registrar sin signo negativo."
   },
   {
     "ruleId": "a.70",
     "targetFieldRaw": "[1210]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1200] - [1933] + [[1202]  - [1203] - [1204] + [1205] + [1206] - [1207] - [1208] - [1209]}",
+    "formulaRaw": "POS{[1200] - [1933] + [1202] - [1203] - [1204] + [1205] + [1206] - [1207] - [1208] - [1209]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1210 del recuadro N° 15 debe ser igual al resultado positivo de la suma de los códigos 1200 , 1202, 1205, y 1206, menos los códigos 1933, 1203, 1204, 1207, 1208 y 1209."
   },
   {
     "ruleId": "a.72",
     "targetFieldRaw": "[1220]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1211] + [1212] - [1213] - [1214] + [1215] + [1216] - [1217] -[1218] - [1219]}",
-    "guidanceText": "El valor registrado en código 1220 debe ser igual a la operatoria de los códigos 1211 más 1212 menos  1213, 1214 más 1215, 1216 menos 1217, 1218, 1219. Recuadro  N°15"
+    "formulaRaw": "POS{[1211] + [1212] - [1213] - [1214] + [1215] + [1216] - [1217] - [1218] - [1219]}",
+    "guidanceText": "El valor registrado en código 1220 debe ser igual a la operatoria de los códigos 1211 más 1212 menos 1213, 1214 más 1215, 1216 menos 1217, 1218, 1219. Recuadro N°15"
   },
   {
     "ruleId": "a.73",
     "targetFieldRaw": "[1232]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1221] - [1222] + [1224] - [1225] - [1226] + [1228] - [1229] - [1230] - [1231]}",
-    "guidanceText": "El monto registrado en código 1232 debe ser igual al resultado positivo de la operatoria de los códigos 1221 menos 1222 más 1224 menos 1225, 1226  más 1228 menos 1229, 1230, 1231 . Recuadro N°15"
+    "formulaRaw": "POS{[1221] - [1222] + [1224] - [1225] - [1226] + [1228] - [1229] - [1230] - [1231]}",
+    "guidanceText": "El monto registrado en código 1232 debe ser igual al resultado positivo de la operatoria de los códigos 1221 menos 1222 más 1224 menos 1225, 1226 más 1228 menos 1229, 1230, 1231 . Recuadro N°15"
   },
   {
     "ruleId": "a.74",
     "targetFieldRaw": "[1233]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1221] - [1222] + [1224] - [1225] - [1226] + [1228] - [1229] - [1230] - [1231]}",
+    "formulaRaw": "NEG{[1221] - [1222] + [1224] - [1225] - [1226] + [1228] - [1229] - [1230] - [1231]}",
     "guidanceText": "El monto registrado en código 1233 debe ser igual al resultado negativo de la operatoria de los códigos 1221 menos 1222 más 1224 menos 1225, 1226 más 1228 menos 1229, 1230, 1231 . Recuadro N°15"
   },
   {
@@ -287,112 +287,112 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1749]",
     "operatorRaw": "=",
     "formulaRaw": "[1730] + [1934] + [1733] - [1735] - [1737] + [1741] - [1743] - [1745] - [1747]",
-    "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1749 del recuadro N° 15, debe ser igual al resultado positivo de la suma de los códigos 1730, 1934, 1733, 1741,  menos los códigos 1735, 1737, 1743, 1745, 1747."
+    "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1749 del recuadro N° 15, debe ser igual al resultado positivo de la suma de los códigos 1730, 1934, 1733, 1741, menos los códigos 1735, 1737, 1743, 1745, 1747."
   },
   {
     "ruleId": "a.76",
     "targetFieldRaw": "[1750]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1731] - [1843] + [1734] - [1736] - [1738] + [1740] + [1742] - [1744] - [1746] - [1748]}",
-    "guidanceText": "El monto registrado en código 1750 debe ser igual a la operatoria de los códigos  1731 menos 1843 más 1734 menos 1736, 1738 más 1740, 1742 menos 1744, 1746, 1748. Recuadro N°15"
+    "formulaRaw": "POS{[1731] - [1843] + [1734] - [1736] - [1738] + [1740] + [1742] - [1744] - [1746] - [1748]}",
+    "guidanceText": "El monto registrado en código 1750 debe ser igual a la operatoria de los códigos 1731 menos 1843 más 1734 menos 1736, 1738 más 1740, 1742 menos 1744, 1746, 1748. Recuadro N°15"
   },
   {
     "ruleId": "a.78",
     "targetFieldRaw": "[1244]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1234] - [1235] + [1236] - [1237] - [1238] + [1239] + [1240] - [1241] - [1242] - [1243]}",
-    "guidanceText": "El monto registrado en código 1244 debe ser igual a la operatoria de los códigos  1234 menos 1235 más 1236 menos 1237, 1238 más 1239, 1240 menos 1241, 1242, 1243. Recuadro N°15"
+    "formulaRaw": "POS{[1234] - [1235] + [1236] - [1237] - [1238] + [1239] + [1240] - [1241] - [1242] - [1243]}",
+    "guidanceText": "El monto registrado en código 1244 debe ser igual a la operatoria de los códigos 1234 menos 1235 más 1236 menos 1237, 1238 más 1239, 1240 menos 1241, 1242, 1243. Recuadro N°15"
   },
   {
     "ruleId": "a.79",
     "targetFieldRaw": "[1245]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1234] - [1235] + [1236] - [1237] - [1238] + [1239] + [1240] - [1241] - [1242] - [1243]}",
-    "guidanceText": "El monto registrado en código 1245 debe ser igual a la operatoria de los códigos  1234 menos 1235 más 1236 menos 1237, 1238 más 1239, 1240 menos 1241, 1242, 1243. Recuadro N°15"
+    "formulaRaw": "NEG{[1234] - [1235] + [1236] - [1237] - [1238] + [1239] + [1240] - [1241] - [1242] - [1243]}",
+    "guidanceText": "El monto registrado en código 1245 debe ser igual a la operatoria de los códigos 1234 menos 1235 más 1236 menos 1237, 1238 más 1239, 1240 menos 1241, 1242, 1243. Recuadro N°15"
   },
   {
     "ruleId": "a.80",
     "targetFieldRaw": "[1256]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1246] - [1247] + [1248] - [1249] - [1250]  + [1251] + [1252] - [1253] - [1254] - [1255]}",
-    "guidanceText": "El monto registrado en código 1256 debe ser igual a la operatoria de los códigos  1246 menos 1247 más 1248 menos 1249, 1250 más 1251, 1252 menos 1253, 1254, 1255. Recuadro N°15"
+    "formulaRaw": "POS{[1246] - [1247] + [1248] - [1249] - [1250] + [1251] + [1252] - [1253] - [1254] - [1255]}",
+    "guidanceText": "El monto registrado en código 1256 debe ser igual a la operatoria de los códigos 1246 menos 1247 más 1248 menos 1249, 1250 más 1251, 1252 menos 1253, 1254, 1255. Recuadro N°15"
   },
   {
     "ruleId": "a.81",
     "targetFieldRaw": "[1257]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1246] - [1247] + [1248] - [1249] - [1250]  + [1251]  + [1252] - [1253] - [1254] - [1255]}",
-    "guidanceText": "El monto registrado en código 1257 debe ser igual a la operatoria de los códigos  1246 menos 1247 más 1248 menos 1249, 1250 más 1251, 1252 menos 1253, 1254, 1255. Recuadro N°15"
+    "formulaRaw": "NEG{[1246] - [1247] + [1248] - [1249] - [1250] + [1251] + [1252] - [1253] - [1254] - [1255]}",
+    "guidanceText": "El monto registrado en código 1257 debe ser igual a la operatoria de los códigos 1246 menos 1247 más 1248 menos 1249, 1250 más 1251, 1252 menos 1253, 1254, 1255. Recuadro N°15"
   },
   {
     "ruleId": "a.82",
     "targetFieldRaw": "[1269]",
     "operatorRaw": "=",
     "formulaRaw": "[1260] - [1935] + [1262] - [1263] - [1264] + [1265] - [1266] - [1267] - [1268]",
-    "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1269 del recuadro N° 15, debe ser igual al resultado positivo de la suma de los códigos  1260, 1262, 1265, menos los códigos 1935, 1263, 1264, 1266, 1267, 1268."
+    "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1269 del recuadro N° 15, debe ser igual al resultado positivo de la suma de los códigos 1260, 1262, 1265, menos los códigos 1935, 1263, 1264, 1266, 1267, 1268."
   },
   {
     "ruleId": "a.83",
     "targetFieldRaw": "[1278]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1270] - [1821] - [1936] + [1271] - [1272]  + [1273] + [1274] - [1275] - [1276] - [1277]}",
+    "formulaRaw": "POS{[1270] - [1821] - [1936] + [1271] - [1272] + [1273] + [1274] - [1275] - [1276] - [1277]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1278 del recuadro N° 16, debe ser igual al resultado positivo de la suma de los códigos 1270, 1271, 1273, 1274 menos los códigos 1821, 1936, 1272, 1275, 1276, 1277."
   },
   {
     "ruleId": "a.84",
     "targetFieldRaw": "[1723]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1270] - [1821] - [1936] + [1271] - [1272] + [1273] + [1274] - [1275] - [1276] - [1277]}",
+    "formulaRaw": "NEG{[1270] - [1821] - [1936] + [1271] - [1272] + [1273] + [1274] - [1275] - [1276] - [1277]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1723 del recuadro N° 16, debe ser igual al resultado negativo de la suma de los códigos 1270, 1271, 1273, 1274 menos los códigos 1821, 1936, 1272, 1275, 1276, 1277."
   },
   {
     "ruleId": "a.85",
     "targetFieldRaw": "[1287]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1279] - [1822] - [1937] + [1280] - [1281] + [1282] + [1283] - [1284] - [1285] - [1286]}",
+    "formulaRaw": "POS{[1279] - [1822] - [1937] + [1280] - [1281] + [1282] + [1283] - [1284] - [1285] - [1286]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1287 del recuadro N° 16, debe ser igual al resultado positivo de la suma de los códigos 1279, 1280, 1282, 1283 menos los códigos 1822, 1937, 1281, 1284, 1285, 1286."
   },
   {
     "ruleId": "a.86",
     "targetFieldRaw": "[1724]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1279] - [1822] - [1937] + [1280] - [1281] + [1282] + [1283] - [1284] - [1285] - [1286]}",
+    "formulaRaw": "NEG{[1279] - [1822] - [1937] + [1280] - [1281] + [1282] + [1283] - [1284] - [1285] - [1286]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1724 del recuadro N° 16, debe ser igual al resultado negativo de la suma de los códigos 1279, 1280, 1282, 1283 menos los códigos 1822, 1937, 1281, 1284, 1285, 1286."
   },
   {
     "ruleId": "a.87",
     "targetFieldRaw": "[1312]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1288] - [1289] - [1938] + [1290] - [1291] + [1292] + [1293] + [1294] - [1295] - [1296] - [1297] - [1298]}",
+    "formulaRaw": "POS{[1288] - [1289] - [1938] + [1290] - [1291] + [1292] + [1293] + [1294] - [1295] - [1296] - [1297] - [1298]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1312 del recuadro N° 16, debe ser igual al resultado positivo de la suma de los códigos 1288, 1290, 1292, 1293, 1294 menos los códigos 1289, 1938, 1291, 1295, 1296, 1297, 1298."
   },
   {
     "ruleId": "a.88",
     "targetFieldRaw": "[1299]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1288] - [1289] - [1938] + [1290] - [1291] + [1292] + [1293] + [1294] - [1295] - [1296] - [1297] - [1298]}",
+    "formulaRaw": "NEG{[1288] - [1289] - [1938] + [1290] - [1291] + [1292] + [1293] + [1294] - [1295] - [1296] - [1297] - [1298]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1299 del recuadro N° 16, debe ser igual al resultado negativo de la suma de los códigos 1288, 1290, 1292, 1293, 1294 menos los códigos 1289, 1938, 1291, 1295, 1296, 1297, 1298."
   },
   {
     "ruleId": "a.89",
     "targetFieldRaw": "[1300]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1301] - [1302] - [1939] + [1303] - [1304] + [1305] + [1306] + [1307]  - [1308] - [1309] - [1310] - [1311]}",
+    "formulaRaw": "POS{[1301] - [1302] - [1939] + [1303] - [1304] + [1305] + [1306] + [1307] - [1308] - [1309] - [1310] - [1311]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1300 del recuadro N° 16, debe ser igual al resultado positivo de la suma de los códigos 1301, 1303, 1305, 1306 menos los códigos 1302, 1939, 1304, 1307, 1308, 1309, 1310, 1311."
   },
   {
     "ruleId": "a.90",
     "targetFieldRaw": "[1373]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1301] - [1302] - [1939] + [1303] - [1304] + [1305] + [1306] + [1307] - [1308] - [1309] - [1310] - [1311]}",
+    "formulaRaw": "NEG{[1301] - [1302] - [1939] + [1303] - [1304] + [1305] + [1306] + [1307] - [1308] - [1309] - [1310] - [1311]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1373 del recuadro N° 16, debe ser igual al resultado negativo de la suma de los códigos 1301, 1303, 1305, 1306, 1307 menos los códigos 1302, 1939, 1308, 1309, 1310, 1311."
   },
   {
     "ruleId": "a.91",
     "targetFieldRaw": "[1323]",
     "operatorRaw": "=",
-    "formulaRaw": "[1313] + [1314] - [1315] + [1316] + [1317] + [1318] - [1319] - [1320] -[1321] - [1322]",
-    "guidanceText": "El monto registrado en código 1323 debe ser igual a la operatoria de los códigos 1313  más 1314 menos 1315 más 1316, 1317, 1318 menos 1319, 1320, 1321, 1322. Recuadro N°16"
+    "formulaRaw": "[1313] + [1314] - [1315] + [1316] + [1317] + [1318] - [1319] - [1320] - [1321] - [1322]",
+    "guidanceText": "El monto registrado en código 1323 debe ser igual a la operatoria de los códigos 1313 más 1314 menos 1315 más 1316, 1317, 1318 menos 1319, 1320, 1321, 1322. Recuadro N°16"
   },
   {
     "ruleId": "a.92",
@@ -420,13 +420,13 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1410]",
     "operatorRaw": "=",
     "formulaRaw": "[1400] + [1817] + [1401] + [1402] + [1403] + [1587] + [1588] + [1404] + [1405]",
-    "guidanceText": "El monto registrado en código 1410 debe ser igual a la suma de los códigos1400 más 1817, 1401,  1402, 1403, 1587, 1588, 1404, 1405. Recuadro N°17"
+    "guidanceText": "El monto registrado en código 1410 debe ser igual a la suma de los códigos1400 más 1817, 1401, 1402, 1403, 1587, 1588, 1404, 1405. Recuadro N°17"
   },
   {
     "ruleId": "a.98",
     "targetFieldRaw": "[1430]",
     "operatorRaw": "=",
-    "formulaRaw": "[1406] + [1407] + [1408] + [1409] + [1818] + [1429] + [1411] + [1412] + [1413]  + [1415] + [1416] + [1417] + [1418] + [1419] + [1421] + [1422] + [1423] + [1424] + [1425] + [1426] + [1427] + [1428]",
+    "formulaRaw": "[1406] + [1407] + [1408] + [1409] + [1818] + [1429] + [1411] + [1412] + [1413] + [1415] + [1416] + [1417] + [1418] + [1419] + [1421] + [1422] + [1423] + [1424] + [1425] + [1426] + [1427] + [1428]",
     "guidanceText": "El monto registrado en código 1430 debe ser igual a la suma de los códigos1406, 1407, 1408, 1409, 1818, 1429, 1411, 1412, 1413, 1415, 1416, 1417, 1418, 1419, 1421, 1422, 1423, 1424, 1425, 1426, 1427, 1428. Recuadro N° 17"
   },
   {
@@ -440,49 +440,49 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.100",
     "targetFieldRaw": "[1440]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([1729] > 0;entoncesPOS {[1729] - [1432] - [1433]})Sino[1729]",
+    "formulaRaw": "Si [1729] > 0; entonces POS{[1729] - [1432] - [1433]} Sino [1729]",
     "guidanceText": "El monto registrado en código 1440 debe ser igual a la operatoria de 1729 menos 1432 y 1433. Recuadro N°17"
   },
   {
     "ruleId": "a.102",
     "targetFieldRaw": "[1720]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1703]  - [1719] +  [1492] + [1704]}",
-    "guidanceText": "El monto registrado en código 1720 debe ser igual a la  operatoria de los códigos1703 menos 1719 más 1492, 1704. Recuadro N°18"
+    "formulaRaw": "POS{[1703] - [1719] + [1492] + [1704]}",
+    "guidanceText": "El monto registrado en código 1720 debe ser igual a la operatoria de los códigos1703 menos 1719 más 1492, 1704. Recuadro N°18"
   },
   {
     "ruleId": "a.103",
     "targetFieldRaw": "[1500]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([1720] - [1493] - [1494] - [1725] -[1727]) > 0;entonces([1720] - [1493] - [1494] - [1725] -[1727])Sino0",
-    "guidanceText": "El monto registrado en código 1500 debe ser igual a la  operatoria de los códigos1720 menos 1493, 1494, 1725, 1727. Recuadro N°18"
+    "formulaRaw": "Si ([1720] - [1493] - [1494] - [1725] - [1727]) > 0; entonces ([1720] - [1493] - [1494] - [1725] - [1727]) Sino 0",
+    "guidanceText": "El monto registrado en código 1500 debe ser igual a la operatoria de los códigos1720 menos 1493, 1494, 1725, 1727. Recuadro N°18"
   },
   {
     "ruleId": "a.104",
     "targetFieldRaw": "[1545]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1445] - [1446] + [1374]+  [1375] - [1376] + [1705] - [1706] + [1707] + [1377] - [1378] + [1726] - [1479]-  [1708] - [1709] - [1379] + [1710] + [1711] + [1380] - [1381]}",
-    "guidanceText": "El capital propio tributario simplificado positivo final registrado en código 1545 del recuadro N°19, debe ser igual al resultado positivo de la suma de los códigos1445, 1374, 1375, 1705, 1707, 1377, 1726, 1710, 1711, 1380  menos los códigos 1446, 1376, 1706, 1378, 1479, 1708, 1709, 1379, 1381."
+    "formulaRaw": "POS{[1445] - [1446] + [1374] + [1375] - [1376] + [1705] - [1706] + [1707] + [1377] - [1378] + [1726] - [1479] - [1708] - [1709] - [1379] + [1710] + [1711] + [1380] - [1381]}",
+    "guidanceText": "El capital propio tributario simplificado positivo final registrado en código 1545 del recuadro N°19, debe ser igual al resultado positivo de la suma de los códigos1445, 1374, 1375, 1705, 1707, 1377, 1726, 1710, 1711, 1380 menos los códigos 1446, 1376, 1706, 1378, 1479, 1708, 1709, 1379, 1381."
   },
   {
     "ruleId": "a.105",
     "targetFieldRaw": "[1546]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1445] - [1446] + [1374] + [1375] - [1376] + [1705] - [1706] + [1707] + [1377] - [1378] + [1726] - [1479] - [1708] - [1709] - [1379] + [1710] + [1711] + [1380] - [1381]}",
-    "guidanceText": "El capital propio tributario simplificado negativo final registrado en código 1546 del recuadro N°19, debe ser igual al resultado negativo de la suma de los códigos1445, 1374, 1375, 1705, 1707, 1377, 1726, 1710, 1711, 1380  menos los códigos 1446, 1376, 1706, 1378, 1479, 1708, 1709, 1379, 1381."
+    "formulaRaw": "NEG{[1445] - [1446] + [1374] + [1375] - [1376] + [1705] - [1706] + [1707] + [1377] - [1378] + [1726] - [1479] - [1708] - [1709] - [1379] + [1710] + [1711] + [1380] - [1381]}",
+    "guidanceText": "El capital propio tributario simplificado negativo final registrado en código 1546 del recuadro N°19, debe ser igual al resultado negativo de la suma de los códigos1445, 1374, 1375, 1705, 1707, 1377, 1726, 1710, 1711, 1380 menos los códigos 1446, 1376, 1706, 1378, 1479, 1708, 1709, 1379, 1381."
   },
   {
     "ruleId": "a.106",
     "targetFieldRaw": "[1705]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1440]}",
+    "formulaRaw": "POS{[1440]}",
     "guidanceText": "El valor registrado en código 1705 debe ser igual a código 1440 del recuadro N°17. Recuadro N°19"
   },
   {
     "ruleId": "a.107",
     "targetFieldRaw": "[1706]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1440]}",
+    "formulaRaw": "NEG{[1440]}",
     "guidanceText": "La pérdida tributario del ejercicio al 31 de diciembre registrada en el código 1706 del recuadro N° 19, debe ser igual al código 1440 del recuadro N°17."
   },
   {
@@ -490,28 +490,28 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1479]",
     "operatorRaw": "=",
     "formulaRaw": "[1704]",
-    "guidanceText": "El valor registrado en código 1479  del recuadro N°19 debe ser igual a valor del código 1704 del recuadro N°18"
+    "guidanceText": "El valor registrado en código 1479 del recuadro N°19 debe ser igual a valor del código 1704 del recuadro N°18"
   },
   {
     "ruleId": "a.110",
     "targetFieldRaw": "[1709]",
     "operatorRaw": "=",
     "formulaRaw": "[1404]",
-    "guidanceText": "El valor registrado en código 1709 debe ser igual a valor del código 1404 del  recuadro N°17"
+    "guidanceText": "El valor registrado en código 1709 debe ser igual a valor del código 1404 del recuadro N°17"
   },
   {
     "ruleId": "a.111",
     "targetFieldRaw": "[1710]",
     "operatorRaw": "=",
     "formulaRaw": "[1432]",
-    "guidanceText": "El valor registrado en código 1710 debe ser igual a valor del código 1432 del  recuadro N°17"
+    "guidanceText": "El valor registrado en código 1710 debe ser igual a valor del código 1432 del recuadro N°17"
   },
   {
     "ruleId": "a.112",
     "targetFieldRaw": "[1711]",
     "operatorRaw": "=",
     "formulaRaw": "[1433]",
-    "guidanceText": "El valor registrado en código 1711 debe ser igual a valor del código 1433 del  recuadro N°17"
+    "guidanceText": "El valor registrado en código 1711 debe ser igual a valor del código 1433 del recuadro N°17"
   },
   {
     "ruleId": "a.113",
@@ -538,162 +538,162 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.117",
     "targetFieldRaw": "[1484]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1451] - [1942] + [1392] - [1396] - [1459] + [1463] + [1467] - [1471] - [1475] - [1480]}",
+    "formulaRaw": "POS{[1451] - [1942] + [1392] - [1396] - [1459] + [1463] + [1467] - [1471] - [1475] - [1480]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1484 del recuadro N° 20, debe ser igual al resultado positivo de la suma de los códigos 1451, 1392, 1463, 1467,menos los códigos 1942, 1396, 1459, 1471, 1475, 1480."
   },
   {
     "ruleId": "a.119",
     "targetFieldRaw": "[1485]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1452] - [1589] + [1393] - [1397] - [1460] + [1468] - [1472] - [1476] - [1481]}",
-    "guidanceText": "Elmontodel código 1485 debe ser igual a la operatoria de loscódigos1452 menos 1589 más 1393 menos 1397, 1460 más 1468 menos 1472, 1476, 1481. Recuadro N°20"
+    "formulaRaw": "POS{[1452] - [1589] + [1393] - [1397] - [1460] + [1468] - [1472] - [1476] - [1481]}",
+    "guidanceText": "El monto del código 1485 debe ser igual a la operatoria de loscódigos1452 menos 1589 más 1393 menos 1397, 1460 más 1468 menos 1472, 1476, 1481. Recuadro N°20"
   },
   {
     "ruleId": "a.120",
     "targetFieldRaw": "[1489]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1452] - [1589] + [1393] - [1397] - [1460] + [1468] - [1472] - [1476] - [1481]}",
-    "guidanceText": "Elmontodel código 1489 debe ser igual a la operatoria de loscódigos1452 menos 1589 más 1393 menos 1397, 1460 más 1468 menos 1472, 1476, 1481.  Recuadro N°20"
+    "formulaRaw": "NEG{[1452] - [1589] + [1393] - [1397] - [1460] + [1468] - [1472] - [1476] - [1481]}",
+    "guidanceText": "El monto del código 1489 debe ser igual a la operatoria de loscódigos1452 menos 1589 más 1393 menos 1397, 1460 más 1468 menos 1472, 1476, 1481. Recuadro N°20"
   },
   {
     "ruleId": "a.121",
     "targetFieldRaw": "[1771]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1752] + [1943] + [1755] - [1757] - [1759] + [1763] - [1765] - [1767] - [1769]}",
+    "formulaRaw": "POS{[1752] + [1943] + [1755] - [1757] - [1759] + [1763] - [1765] - [1767] - [1769]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1771 del recuadro N° 20, debe ser igual al resultado positivo de la suma de los códigos 1752, 1943, 1755, 1763,menos los códigos 1757, 1759, 1765, 1767, 1769."
   },
   {
     "ruleId": "a.122",
     "targetFieldRaw": "[1772]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1753] - [1845] + [1756] - [1758] - [1760] + [1762] + [1764] - [1766] - [1768] - [1770]}",
+    "formulaRaw": "POS{[1753] - [1845] + [1756] - [1758] - [1760] + [1762] + [1764] - [1766] - [1768] - [1770]}",
     "guidanceText": "El monto del código 1772 debe ser igual a la operatoria de los códigos 1753 menos 1845 más 1756 menos 1758, 1760 más 1762, 1764 menos 1766, 1768, 1770. Recuadro N°20"
   },
   {
     "ruleId": "a.124",
     "targetFieldRaw": "[1486]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1453] - [1455] + [1394] - [1398] - [1461] + [1465] + [1469] - [1473] - [1477] - [1482]}",
-    "guidanceText": "Elmontodel código 1486 debe ser igual a la operatoria de loscódigos1453 menos 1455 más  1394 menos 1398, 1461 más 1465, 1469 menos 1473, 1477, 1482. Recuadro N°20"
+    "formulaRaw": "POS{[1453] - [1455] + [1394] - [1398] - [1461] + [1465] + [1469] - [1473] - [1477] - [1482]}",
+    "guidanceText": "El monto del código 1486 debe ser igual a la operatoria de loscódigos1453 menos 1455 más 1394 menos 1398, 1461 más 1465, 1469 menos 1473, 1477, 1482. Recuadro N°20"
   },
   {
     "ruleId": "a.125",
     "targetFieldRaw": "[1490]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1453] - [1455] + [1394] - [1398] - [1461] + [1465] + [1469] - [1473] - [1477] - [1482]}",
-    "guidanceText": "Elmontodel código 1490 debe ser igual a la operatoria de loscódigos1453 menos 1455 más 1394 menos 1398, 1461 más 1465, 1469 menos 1473, 1477, 1482. Recuadro N°20"
+    "formulaRaw": "NEG{[1453] - [1455] + [1394] - [1398] - [1461] + [1465] + [1469] - [1473] - [1477] - [1482]}",
+    "guidanceText": "El monto del código 1490 debe ser igual a la operatoria de loscódigos1453 menos 1455 más 1394 menos 1398, 1461 más 1465, 1469 menos 1473, 1477, 1482. Recuadro N°20"
   },
   {
     "ruleId": "a.126",
     "targetFieldRaw": "[1487]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1454] - [1456] + [1395] - [1399] - [1462] + [1466] + [1470] -  [1474] - [1478] - [1483]}",
-    "guidanceText": "Elmontodel código 1487 debe ser igual a la operatoria de loscódigos1454 menos 1456 más 1395 menos 1399, 1462 más 1466, 1470 menos 1474, 1478, 1483. Recuadro N°20"
+    "formulaRaw": "POS{[1454] - [1456] + [1395] - [1399] - [1462] + [1466] + [1470] - [1474] - [1478] - [1483]}",
+    "guidanceText": "El monto del código 1487 debe ser igual a la operatoria de loscódigos1454 menos 1456 más 1395 menos 1399, 1462 más 1466, 1470 menos 1474, 1478, 1483. Recuadro N°20"
   },
   {
     "ruleId": "a.127",
     "targetFieldRaw": "[1491]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1454] - [1456] + [1395] - [1399] - [1462] + [1466] + [1470] -  [1474] - [1478] - [1483]}",
-    "guidanceText": "Elmontodel código 1491 debe ser igual a la operatoria de loscódigos1454 menos 1456 más 1395 menos 1399, 1462 más 1466, 1470 menos 1474, 1478, 1483. Recuadro N°20"
+    "formulaRaw": "NEG{[1454] - [1456] + [1395] - [1399] - [1462] + [1466] + [1470] - [1474] - [1478] - [1483]}",
+    "guidanceText": "El monto del código 1491 debe ser igual a la operatoria de loscódigos1454 menos 1456 más 1395 menos 1399, 1462 más 1466, 1470 menos 1474, 1478, 1483. Recuadro N°20"
   },
   {
     "ruleId": "a.128",
     "targetFieldRaw": "[1391]",
     "operatorRaw": "=",
-    "formulaRaw": "[1382] - [1944] + [1384] - [1385] - [1386] + [1387] - [1388] - [1389]  - [1390]",
+    "formulaRaw": "[1382] - [1944] + [1384] - [1385] - [1386] + [1387] - [1388] - [1389] - [1390]",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1391 del recuadro N° 20, debe ser igual al resultado positivo de la suma de los códigos 1382, 1384, 1387,menos los códigos 1944, 1385, 1386, 1388, 1389, 1390."
   },
   {
     "ruleId": "a.129",
     "targetFieldRaw": "[1563]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1495] - [1655] - [1945] + [1590] - [1444] + [1512] + [1515] + [1523] - [1531] - [1539] - [1549] - [1557]}",
+    "formulaRaw": "POS{[1495] - [1655] - [1945] + [1590] - [1444] + [1512] + [1515] + [1523] - [1531] - [1539] - [1549] - [1557]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1563 del recuadro N° 21, debe ser igual al resultado positivo de la suma de los códigos 1495, 1590, 1512, 1515, 1523 menos los códigos 1655, 1945, 1444, 1531, 1539, 1549, 1557."
   },
   {
     "ruleId": "a.130",
     "targetFieldRaw": "[1368]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1495] - [1655] - [1945] + [1590] - [1444] + [1512] + [1515] + [1523] - [1531] - [1539] - [1549] - [1557]}",
+    "formulaRaw": "NEG{[1495] - [1655] - [1945] + [1590] - [1444] + [1512] + [1515] + [1523] - [1531] - [1539] - [1549] - [1557]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1368 del recuadro N° 21, debe ser igual al resultado negativo de la suma de los códigos 1495, 1590, 1512, 1515, 1523 menos los códigos 1655, 1945, 1444, 1531, 1539, 1549, 1557."
   },
   {
     "ruleId": "a.131",
     "targetFieldRaw": "[1564]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1496] - [1656] - [1946] + [1436] - [1447] + [1513] + [1516] + [1524] - [1532] - [1540] - [1550] - [1558]}",
+    "formulaRaw": "POS{[1496] - [1656] - [1946] + [1436] - [1447] + [1513] + [1516] + [1524] - [1532] - [1540] - [1550] - [1558]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1564 del recuadro N° 21, debe ser igual al resultado positivo de la suma de los códigos 1496, 1436, 1513, 1516, 1524 menos los códigos 1656, 1946, 1447, 1532, 1540, 1550, 1558."
   },
   {
     "ruleId": "a.132",
     "targetFieldRaw": "[1371]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1496] - [1656] - [1946] + [1436] - [1447] + [1513] + [1516] + [1524] - [1532] - [1540] - [1550] - [1558]}",
+    "formulaRaw": "NEG{[1496] - [1656] - [1946] + [1436] - [1447] + [1513] + [1516] + [1524] - [1532] - [1540] - [1550] - [1558]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1371 del recuadro N° 21, debe ser igual al resultado negativo de la suma de los códigos 1496, 1436, 1513, 1516, 1524 menos los códigos 1656, 1946, 1447, 1532, 1540, 1550, 1558."
   },
   {
     "ruleId": "a.133",
     "targetFieldRaw": "[1565]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1497] - [1504] - [1947] + [1437] - [1448] + [1517] + [1525] - [1533] - [1541] -[1551]}",
+    "formulaRaw": "POS{[1497] - [1504] - [1947] + [1437] - [1448] + [1517] + [1525] - [1533] - [1541] - [1551]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1565 del recuadro N° 21, debe ser igual al resultado positivo de la suma de los códigos 1497, 1437, 1517, 1525 menos los códigos 1504, 1947, 1448, 1533, 1541, 1551."
   },
   {
     "ruleId": "a.134",
     "targetFieldRaw": "[1571]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1497] - [1504] - [1947] + [1437] - [1448] + [1517] + [1525] - [1533] - [1541] - [1551]}",
+    "formulaRaw": "NEG{[1497] - [1504] - [1947] + [1437] - [1448] + [1517] + [1525] - [1533] - [1541] - [1551]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1571 del recuadro N° 21, debe ser igual al resultado negativo de la suma de los códigos 1497, 1437, 1517, 1525 menos los códigos 1504, 1947, 1448, 1533, 1541, 1551."
   },
   {
     "ruleId": "a.135",
     "targetFieldRaw": "[1566]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1498] - [1505] - [1948] +  [1438] - [1449] + [1518] + [1526] - [1534] - [1542] - [1552]}",
+    "formulaRaw": "POS{[1498] - [1505] - [1948] + [1438] - [1449] + [1518] + [1526] - [1534] - [1542] - [1552]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1566 del recuadro N° 21, debe ser igual al resultado positivo de la suma de los códigos 1498, 1438, 1518, 1526 menos los códigos 1505, 1948, 1449, 1534, 1542, 1552."
   },
   {
     "ruleId": "a.136",
     "targetFieldRaw": "[1572]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1498] - [1505] - [1948] + [1438] - [1449] + [1518] + [1526] - [1534] - [1542] - [1552]}",
+    "formulaRaw": "NEG{[1498] - [1505] - [1948] + [1438] - [1449] + [1518] + [1526] - [1534] - [1542] - [1552]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1572 del recuadro N° 21, debe ser igual al resultado negativo de la suma de los códigos 1498, 1438, 1518, 1526 menos los códigos 1505, 1948, 1449, 1534, 1542, 1552."
   },
   {
     "ruleId": "a.137",
     "targetFieldRaw": "[1567]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1499 ] + [1439] - [1508] + [1514] + [1519] + [1527] - [1535] - [1543] - [1553] - [1559]}",
-    "guidanceText": "El montodel código 1567 debe ser igual al resultado positivo de loscódigos1499 más 1439 menos  1508 más 1514, 1519, 1527 menos 1535, 1543, 1553, 1559. Recuadro  N°21"
+    "formulaRaw": "POS{[1499 ] + [1439] - [1508] + [1514] + [1519] + [1527] - [1535] - [1543] - [1553] - [1559]}",
+    "guidanceText": "El montodel código 1567 debe ser igual al resultado positivo de loscódigos1499 más 1439 menos 1508 más 1514, 1519, 1527 menos 1535, 1543, 1553, 1559. Recuadro N°21"
   },
   {
     "ruleId": "a.138",
     "targetFieldRaw": "[1568]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1501] - [1949] + [1441] - [1509] + [1520] + [1528] - [1536] - [1544] - [1554] - [1560]}",
+    "formulaRaw": "POS{[1501] - [1949] + [1441] - [1509] + [1520] + [1528] - [1536] - [1544] - [1554] - [1560]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1568 del recuadro N° 21, debe ser igual al resultado positivo de la suma de los códigos 1501, 1441, 1520, 1528 menos los códigos 1949, 1509, 1536, 1544, 1554, 1560."
   },
   {
     "ruleId": "a.139",
     "targetFieldRaw": "[1569]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1502] - [1950] + [1442] - [1510] + [1521] + [1529] - [1537] - [1547] - [1555] - [1561]}",
+    "formulaRaw": "POS{[1502] - [1950] + [1442] - [1510] + [1521] + [1529] - [1537] - [1547] - [1555] - [1561]}",
     "guidanceText": "El remanente para el ejercicio siguiente registrado en el código 1502 del recuadro N° 21, debe ser igual al resultado positivo de la suma de los códigos 1502, 1442, 1521, 1529 menos los códigos 1950, 1510, 1537, 1547, 1555, 1561."
   },
   {
     "ruleId": "a.140",
     "targetFieldRaw": "[1570]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1503] + [1443] - [1511] + [1522] + [1530] - [1538] - [1548] - [1556] - [1562]}",
-    "guidanceText": "El montodel código 1570 debe ser igual al resultado positivo de loscódigos1503 más 1443 menos  1511 más 1522, 1530 menos 1538, 1548, 1556, 1562. Recuadro  N°21"
+    "formulaRaw": "POS{[1503] + [1443] - [1511] + [1522] + [1530] - [1538] - [1548] - [1556] - [1562]}",
+    "guidanceText": "El montodel código 1570 debe ser igual al resultado positivo de loscódigos1503 más 1443 menos 1511 más 1522, 1530 menos 1538, 1548, 1556, 1562. Recuadro N°21"
   },
   {
     "ruleId": "a.141",
     "targetFieldRaw": "[1610]",
     "operatorRaw": "=",
     "formulaRaw": "[1600] + [1819] + [1601] + [1602] + [1603] + [ 1604] + [1605] + [1606] + [1607] + [1608] + [1609]",
-    "guidanceText": "Elmontodel código 1610 debe ser la suma de los códigos 1600, 1819, 1601, 1602, 1603, 1604, 1605, 1606, 1607,  1608, 1609. Recuadro  N°22"
+    "guidanceText": "El monto del código 1610 debe ser la suma de los códigos 1600, 1819, 1601, 1602, 1603, 1604, 1605, 1606, 1607, 1608, 1609. Recuadro N°22"
   },
   {
     "ruleId": "a.142",
@@ -713,42 +713,42 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.144",
     "targetFieldRaw": "[1581]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1580] - [1582] + [1573] + [1574] - [1575] + [1712] - [1713]  + [1714] - [1576] - [1715] - [1577] - [1716] - [1578] + [1584] - [1585]}",
-    "guidanceText": "Elmontodel código 1581  debe ser la operatoria de los códigos 1580 menos 1582 más 1573, 1574 menos 1575 más 1712 menos 1713  más 1714 menos 1576, 1715, 1577,  1716, 1578, más 1584 menos 1585. Recuadro N°23"
+    "formulaRaw": "POS{[1580] - [1582] + [1573] + [1574] - [1575] + [1712] - [1713] + [1714] - [1576] - [1715] - [1577] - [1716] - [1578] + [1584] - [1585]}",
+    "guidanceText": "El monto del código 1581 debe ser la operatoria de los códigos 1580 menos 1582 más 1573, 1574 menos 1575 más 1712 menos 1713 más 1714 menos 1576, 1715, 1577, 1716, 1578, más 1584 menos 1585. Recuadro N°23"
   },
   {
     "ruleId": "a.145",
     "targetFieldRaw": "[1583]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1580] - [1582] + [1573] + [1574] - [1575] + [1712] - [1713]  + [1714] - [1576] - [1715] - [1577] - [1716] - [1578] + [1584] - [1585]}",
-    "guidanceText": "Elmontodel código 1583  debe ser la suma de los códigos 1580 menos 1582 más 1573, 1574 menos 1575 más 1712 menos 1713  más 1714 menos 1576, 1715, 1577, 1716, 1578, más 1584 menos 1585. Recuadro N°23"
+    "formulaRaw": "NEG{[1580] - [1582] + [1573] + [1574] - [1575] + [1712] - [1713] + [1714] - [1576] - [1715] - [1577] - [1716] - [1578] + [1584] - [1585]}",
+    "guidanceText": "El monto del código 1583 debe ser la suma de los códigos 1580 menos 1582 más 1573, 1574 menos 1575 más 1712 menos 1713 más 1714 menos 1576, 1715, 1577, 1716, 1578, más 1584 menos 1585. Recuadro N°23"
   },
   {
     "ruleId": "a.146",
     "targetFieldRaw": "[1463]",
     "operatorRaw": "=",
     "formulaRaw": "[1500]",
-    "guidanceText": "Elmontodel código 1463, del recuadro N°20, deber ser igual al código 1500 del recuadro N°18"
+    "guidanceText": "El monto del código 1463, del recuadro N°20, deber ser igual al código 1500 del recuadro N°18"
   },
   {
     "ruleId": "a.154",
     "targetFieldRaw": "[1707]",
     "operatorRaw": "=",
     "formulaRaw": "[1408] + [1426]",
-    "guidanceText": "El valor del código 1707del recuadro N°19 debe ser igual al valor del código 1408  o 1426 F172del recuadro N°17"
+    "guidanceText": "El valor del código 1707del recuadro N°19 debe ser igual al valor del código 1408 o 1426 F172del recuadro N°17"
   },
   {
     "ruleId": "a.157",
     "targetFieldRaw": "[1608]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = 14TT;entonces([1184] + [1362])Sino0",
+    "formulaRaw": "Si atributo = 14TT; entonces ([1184] + [1362]) Sino 0",
     "guidanceText": "El monto registrado en el código 1608, del recuadro N°22, debe ser igual a la suma de los códigos 1184, y 1362, del recuadro N°7"
   },
   {
     "ruleId": "a.160",
     "targetFieldRaw": "[705]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[704] - [930]}",
+    "formulaRaw": "POS{[704] - [930]}",
     "guidanceText": "El código 705 debe ser igual al resultado positivo del código 704 menos el código 930."
   },
   {
@@ -762,14 +762,14 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.162",
     "targetFieldRaw": "[1404]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = 14D1 ;entonces([1184] + [1362])Sino0",
+    "formulaRaw": "Si atributo = 14D1; entonces ([1184] + [1362]) Sino 0",
     "guidanceText": "El monto registrado en el código 1404, del recuadro N°17, debe ser igual a la suma de los códigos 1184, y 1362 del recuadro N°7."
   },
   {
     "ruleId": "a.167",
     "targetFieldRaw": "[1182]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A = 1 ;entonces[1699]Sino; 0",
+    "formulaRaw": "Si atributo = M14A; entonces [1699] Sino 0",
     "guidanceText": "El valor del código 1182 del recuadro N°14 debe ser igual al valor del código 1699 recuadro N°13"
   },
   {
@@ -783,28 +783,28 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.169",
     "targetFieldRaw": "[1712]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([1580] + [1582] + [1573]) > 0;entoncesPOS {[1630]}Sino0",
+    "formulaRaw": "Si ([1580] + [1582] + [1573]) > 0; entonces POS{[1630]} Sino 0",
     "guidanceText": "El valor registrado en código 1712 debe ser igual a la base imponible del ejercicio, asignable a los propietarios, registrada en código 1630 del recuadro N°22. Recuadro N°23"
   },
   {
     "ruleId": "a.170",
     "targetFieldRaw": "[1713]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([1580] + [1582] + [1573]) > 0;entoncesNEG {[1630]}Sino0",
+    "formulaRaw": "Si ([1580] + [1582] + [1573]) > 0; entonces NEG{[1630]} Sino 0",
     "guidanceText": "El valor registrado en código 1713 debe ser igual a la pérdida tributaria registrada en código 1630 del recuadro N°22. Recuadro N°23"
   },
   {
     "ruleId": "a.172",
     "targetFieldRaw": "[1715]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([1580] + [1582] + [1573]) > 0; entonces[1608]Sino0",
+    "formulaRaw": "Si ([1580] + [1582] + [1573]) > 0; entonces [1608] Sino 0",
     "guidanceText": "El valor del código 1715 del recuadro N°23 debe ser igual al valor del código 1608 del recuadro N°22"
   },
   {
     "ruleId": "a.173",
     "targetFieldRaw": "[1716]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([1580] + [1582] + [1573]) > 0; entonces[1609]Sino0",
+    "formulaRaw": "Si ([1580] + [1582] + [1573]) > 0; entonces [1609] Sino 0",
     "guidanceText": "El valor del código 1716 del recuadro N°23 debe ser igual al valor del código 1609 del recuadro N°22"
   },
   {
@@ -818,56 +818,56 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.181",
     "targetFieldRaw": "[1204]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1200] - [1933] + [1202] - [1203]}",
+    "formulaRaw": "POS{[1200] - [1933] + [1202] - [1203]}",
     "guidanceText": "El reverso y/o disminución del ejercicio registrado en el código 1204 del recuadro N°15, debe ser igual al resultado positivo de la suma de los códigos 1200, 1202, menos los códigos 1933, y 1203."
   },
   {
     "ruleId": "a.182",
     "targetFieldRaw": "[1459]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1451] - [1942] + [1392] - [1396]}",
+    "formulaRaw": "POS{[1451] - [1942] + [1392] - [1396]}",
     "guidanceText": "El reverso y/o disminución del ejercicio registrado en el código 1459 del recuadro N°15, debe ser igual al resultado positivo de la suma de los códigos 1451, 1392, menos los códigos 1942, y 1396."
   },
   {
     "ruleId": "a.183",
     "targetFieldRaw": "[1692]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {([1221] - [1222] + [1224] - [1225] - [1226] + [1228] - [1229]) + ([1730] + [1934] + [1733] - [1735] - [1737] + [1741] - [1743]) + ([1731] - [1843] + [1734] - [1736] - [1738] + [1740] + [1742] - [1744]) + ([1234] - [1235] + [1236] - [1237] - [1238] + [1239] + [1240] - [1241]) + ([1246] - [1247] + [1248] - [1249] - [1250] + [1251] + [1252] - [1253])}",
+    "formulaRaw": "NEG{([1221] - [1222] + [1224] - [1225] - [1226] + [1228] - [1229]) + ([1730] + [1934] + [1733] - [1735] - [1737] + [1741] - [1743]) + ([1731] - [1843] + [1734] - [1736] - [1738] + [1740] + [1742] - [1744]) + ([1234] - [1235] + [1236] - [1237] - [1238] + [1239] + [1240] - [1241]) + ([1246] - [1247] + [1248] - [1249] - [1250] + [1251] + [1252] - [1253])}",
     "guidanceText": "El saldo negativo del registro REX al término del ejercicio registrado en el código 1692 del recuadro N° 13 debe ser igual al resultado negativo de la suma de los códigos 1221, 1224, 1228, 1730, 1934, 1733, 1741, 1731, 1734, 1740, 1742, 1234, 1236, 1239, 1240, 1246, 1248, 1251, 1252, menos los códigos 1222, 1225, 1226, 1229, 1735, 1737, 1743, 1843, 1736, 1738, 1235, 1237, 1238, 1241, 1247, 1249, 1250, 1253."
   },
   {
     "ruleId": "a.184",
     "targetFieldRaw": "[1693]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {([1221] - [1222] + [1224] - [1225] - [1226] + [1228] - [1229]) + ([1730] + [1934] + [1733] - [1735] - [1737] + [1741] - [1743]) + ([1731] - [1843] + [1734] - [1736] - [1738] + [1740] + [1742] - [1744]) + ([1234] - [1235] + [1236] - [1237] - [1238] + [1239] + [1240] - [1241]) + ([1246] - [1247] + [1248] - [1249] - [1250] + [1251] + [1252] - [1253])}",
+    "formulaRaw": "POS{([1221] - [1222] + [1224] - [1225] - [1226] + [1228] - [1229]) + ([1730] + [1934] + [1733] - [1735] - [1737] + [1741] - [1743]) + ([1731] - [1843] + [1734] - [1736] - [1738] + [1740] + [1742] - [1744]) + ([1234] - [1235] + [1236] - [1237] - [1238] + [1239] + [1240] - [1241]) + ([1246] - [1247] + [1248] - [1249] - [1250] + [1251] + [1252] - [1253])}",
     "guidanceText": "El saldo positivo del registro REX al término del ejercicio registrado en el código 1692 del recuadro N° 13 debe ser igual al resultado positivo de la suma de los códigos 1221, 1224, 1228, 1730, 1934, 1733, 1741, 1731, 1734, 1740, 1742, 1234, 1236, 1239, 1240, 1246, 1248, 1251, 1252, menos los códigos 1222, 1225, 1226, 1229, 1735, 1737, 1743, 1843, 1736, 1738, 1235, 1237, 1238, 1241, 1247, 1249, 1250, 1253."
   },
   {
     "ruleId": "a.185",
     "targetFieldRaw": "[1492]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {([1452] - [1589] + [1393] - [1397] - [1460] + [1468] - [1472]) + ([1752] + [1943] + [1755] - [1757] - [1759]  + [1763] - [1765]) + ([1753] - [1845] + [1756] - [1758] - [1760] + [1762] + [1764] - [1766]) + ([1453] - [1455] + [1394] - [1398] - [1461] + [1465] + [1469] - [1473]) + ([1454] - [1456] + [1395] - [1399] - [1462] + [1466] + [1470] - [1474])}",
+    "formulaRaw": "NEG{([1452] - [1589] + [1393] - [1397] - [1460] + [1468] - [1472]) + ([1752] + [1943] + [1755] - [1757] - [1759] + [1763] - [1765]) + ([1753] - [1845] + [1756] - [1758] - [1760] + [1762] + [1764] - [1766]) + ([1453] - [1455] + [1394] - [1398] - [1461] + [1465] + [1469] - [1473]) + ([1454] - [1456] + [1395] - [1399] - [1462] + [1466] + [1470] - [1474])}",
     "guidanceText": "El saldo negativo del registro REX al término del ejercicio registrado en el código 1692 del recuadro N° 18 debe ser igual al resultado negativo de la suma de los códigos 1452, 1393, 1468, 1752, 1943, 1755, 1763, 1753, 1756, 1762, 1764, 1453, 1394, 1465, 1469, 1454, 1395, 1466, 1470, menos los códigos 1589, 1397, 1460, 1472, 1757, 1759, 1765, 1845, 1758, 1760, 1766, 1455, 1398, 1461, 1473, 1456, 1399, 1462, 1474."
   },
   {
     "ruleId": "a.186",
     "targetFieldRaw": "[1493]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {([1452] - [1589] + [1393] - [1397] - [1460]  + [1468] - [1472]) + ([1752] + [1943] + [1755] - [1757] - [1759] + [1763] - [1765]) + ([1753] - [1845] + [1756] - [1758] - [1760] + [1762] + [1764] - [1766]) + ([1453] - [1455] + [1394] - [1398] - [1461] + [1465] + [1469] - [1473]) + ([1454] - [1456] + [1395] - [1399] - [1462] + [1466] + [1470] - [1474])}",
+    "formulaRaw": "POS{([1452] - [1589] + [1393] - [1397] - [1460] + [1468] - [1472]) + ([1752] + [1943] + [1755] - [1757] - [1759] + [1763] - [1765]) + ([1753] - [1845] + [1756] - [1758] - [1760] + [1762] + [1764] - [1766]) + ([1453] - [1455] + [1394] - [1398] - [1461] + [1465] + [1469] - [1473]) + ([1454] - [1456] + [1395] - [1399] - [1462] + [1466] + [1470] - [1474])}",
     "guidanceText": "El saldo positivo del registro REX al término del ejercicio registrado en el código 1692 del recuadro N° 18 debe ser igual al resultado positivo de la suma de los códigos 1452, 1393, 1468, 1752, 1943, 1755, 1763, 1753, 1756, 1762, 1764, 1453, 1394, 1465, 1469, 1454, 1395, 1466, 1470, menos los códigos 1589, 1397, 1460, 1472, 1757, 1759, 1765, 1845, 1758, 1760, 1766, 1455, 1398, 1461, 1473, 1456, 1399, 1462, 1474."
   },
   {
     "ruleId": "a.187",
     "targetFieldRaw": "[1784]",
     "operatorRaw": "=",
-    "formulaRaw": "SiF22 NO es Rectificatoria;(SiTIPO{[03]} = 1 .y. ((atributo = BHEP .o. PSCD .o. PSEI .o.  PCD2 .o. PEI2).o.Vx014720 > 0) ;entonces[170] * P725Sino\nSiVX010183 = 2.y. ((atributo = BHEP .o. PSCD .o. PSEI .o.  PCD2 .o. PEI2).o. Vx014720 > 0);entonces[618] * P725)SinoVx014433",
-    "guidanceText": "El valor del código 1784 del recuadro N° 24 debe ser igual al resultado de la multiplicacion del código 170 por el 5%,  En el caso de sociedades de profesionales código 1784 debe ser igual al resultado de la multiplicacion del código 618 por el 5%"
+    "formulaRaw": "Si F22 NO es Rectificatoria; entonces (Si TIPO{[03]} = 1 .y. ((atributo = 0HEP .o. PSCD .o. PSEI .o. PCD2 .o. PEI2) .o. Vx014720 > 0); entonces [170] * P725 Sino Si Vx010183 = 2 .y. ((atributo = 0HEP .o. PSCD .o. PSEI .o. PCD2 .o. PEI2).o. Vx014720 > 0); entonces [618] * P725 Sino 0) Sino Vx014433",
+    "guidanceText": "El valor del código 1784 del recuadro N° 24 debe ser igual al resultado de la multiplicacion del código 170 por el 5%, En el caso de sociedades de profesionales código 1784 debe ser igual al resultado de la multiplicacion del código 618 por el 5%"
   },
   {
     "ruleId": "a.189",
     "targetFieldRaw": "[1788]",
     "operatorRaw": "=",
-    "formulaRaw": "POS ([1802] - [1787])",
+    "formulaRaw": "POS{[1802] - [1787]}",
     "guidanceText": "El monto a pagar de la(s) cuota(s) después de anticipos registrado en el código 1788 del recuadro N° 24, debe ser igual al código 1802 menos el código 1787."
   },
   {
@@ -881,29 +881,29 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.191",
     "targetFieldRaw": "[1794]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1788] - [1793]}",
+    "formulaRaw": "POS{[1788] - [1793]}",
     "guidanceText": "El monto a pagar de la cuota registrado en el código 1794 del recuadro N° 24 debe ser igual al resultado positivo de la resta del código 1788 y el código 1793."
   },
   {
     "ruleId": "a.192",
     "targetFieldRaw": "[1795]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG{1788] - [1793]}",
+    "formulaRaw": "NEG{[1788] - [1793]}",
     "guidanceText": "El saldo a devolver por retenciones adicionales y PPMA en exceso registrado en el código 1795 del recuadro N° 24 debe ser igual al código 1788 menos el código 1793."
   },
   {
     "ruleId": "a.193",
     "targetFieldRaw": "[1205]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A;entonces[1199]Sino0",
+    "formulaRaw": "Si atributo = M14A; entonces [1199] Sino 0",
     "guidanceText": "El monto registrado en el código 1205 del recuadro N°15, debe ser igual al código 1199 del recuadro N°13"
   },
   {
     "ruleId": "a.194",
     "targetFieldRaw": "[1714]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([1580] + [1582] + [1573]) > 0; entonces([1613] + [1627])Sino0",
-    "guidanceText": "El valor del código 1714 del recuadro N°23 debe ser igual al valor del código 1613  o 1627 del recuadro N°22"
+    "formulaRaw": "Si ([1580] + [1582] + [1573]) > 0; entonces ([1613] + [1627]) Sino 0",
+    "guidanceText": "El valor del código 1714 del recuadro N°23 debe ser igual al valor del código 1613 o 1627 del recuadro N°22"
   },
   {
     "ruleId": "a.195",
@@ -916,29 +916,29 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.196",
     "targetFieldRaw": "[1816]",
     "operatorRaw": "=",
-    "formulaRaw": "[1814]+ [1815]",
+    "formulaRaw": "[1814] + [1815]",
     "guidanceText": "El código 1816 del recuadro N°4 debe ser igual al código 1814 más el código 1815."
   },
   {
     "ruleId": "a.197",
     "targetFieldRaw": "[1802]",
     "operatorRaw": "=",
-    "formulaRaw": "MIN {[1784]; [1801] + [1799]}",
+    "formulaRaw": "MIN{[1784]; [1801] + [1799]}",
     "guidanceText": "El código 1802 del recuadro N° 24 debe ser el minimo entre el código 1784 y la suma de los códigos 1801 y 1799."
   },
   {
     "ruleId": "a.200",
     "targetFieldRaw": "[1846]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1753] - {1845] + [1756] - [1758] - [1760] + [1762] + [1764] - [1766] - [1768] - [1770]}",
+    "formulaRaw": "NEG{[1753] - [1845] + [1756] - [1758] - [1760] + [1762] + [1764] - [1766] - [1768] - [1770]}",
     "guidanceText": "El montodel código 1846 debe ser igual a la operatoria de loscódigos1753 menos 1845 más 1756 menos 1758, 1760 más 1762, 1764 menos 1766, 1768, 1770. Recuadro N°20"
   },
   {
     "ruleId": "a.201",
     "targetFieldRaw": "[1844]",
     "operatorRaw": "=",
-    "formulaRaw": "NEG {[1731] - [1843] + [1734] - [1736] - [1738] + [1740] + [1742] - [1744] - [1746] - [1748]}",
-    "guidanceText": "El monto del código 1844 debe ser igual a la operatoria de los códigos  1731 menos 1843 más 1734 menos 1736, 1738 más 1740, 1742 menos 1744, 1746, 1748. Recuadro N°15"
+    "formulaRaw": "NEG{[1731] - [1843] + [1734] - [1736] - [1738] + [1740] + [1742] - [1744] - [1746] - [1748]}",
+    "guidanceText": "El monto del código 1844 debe ser igual a la operatoria de los códigos 1731 menos 1843 más 1734 menos 1736, 1738 más 1740, 1742 menos 1744, 1746, 1748. Recuadro N°15"
   },
   {
     "ruleId": "a.202",
@@ -951,14 +951,14 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.203",
     "targetFieldRaw": "[1699]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A;entonces[1208] + [1218] + [1230] + [1745] + {1746] + [1242] + [1254] + [1193] + [1194]Sino0",
-    "guidanceText": "El valor registrado en código 1699 debe ser igual a la suma de los retiros, remesas y distribuciones repartidos registrados en los códigos 1208, 1218, 1230, 1745, 1746, 1242, 1254 del recuadro N° 15 más el valor registrado en los códigos 1193, y  1194 del recuadro N° 6"
+    "formulaRaw": "Si atributo = M14A; entonces [1208] + [1218] + [1230] + [1745] + [1746] + [1242] + [1254] + [1193] + [1194] Sino 0",
+    "guidanceText": "El valor registrado en código 1699 debe ser igual a la suma de los retiros, remesas y distribuciones repartidos registrados en los códigos 1208, 1218, 1230, 1745, 1746, 1242, 1254 del recuadro N° 15 más el valor registrado en los códigos 1193, y 1194 del recuadro N° 6"
   },
   {
     "ruleId": "a.204",
     "targetFieldRaw": "[1704]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = 14D1;entonces[1475] + [1476] + [1767] + [1768] + {1477] + [1478] + [1193]Sino0",
+    "formulaRaw": "Si atributo = 14D1; entonces [1475] + [1476] + [1767] + [1768] + [1477] + [1478] + [1193] Sino 0",
     "guidanceText": "El valor registrado en código 1704 debe ser igual a la suma de los retiros, remesas y distribuciones repartidos registrados en los códigos 1475, 1476, 1767, 1768, 1477, 1478, del recuadro N° 20 más el valor registrado en el código 1193 del recuadro N° 6"
   },
   {
@@ -966,20 +966,20 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1987]",
     "operatorRaw": "=",
     "formulaRaw": "[1981] - [1983] - [1985]",
-    "guidanceText": "El mayor o menor valor percibido o devengado en la enajenación de bienes raíces  registrado en el código 1987 del recuadro N° 2, debe ser igual al código 1981 menos los códigos 1983 y 1985."
+    "guidanceText": "El mayor o menor valor percibido o devengado en la enajenación de bienes raíces registrado en el código 1987 del recuadro N° 2, debe ser igual al código 1981 menos los códigos 1983 y 1985."
   },
   {
     "ruleId": "a.206",
     "targetFieldRaw": "[1988]",
     "operatorRaw": "=",
     "formulaRaw": "[1982] - [1984] - [1986]",
-    "guidanceText": "El mayor o menor valor percibido o devengado en la enajenación de bienes raíces  registrado en el código 1988 del recuadro N° 2, debe ser igual al código 1982 menos los códigos 1984 y 1986."
+    "guidanceText": "El mayor o menor valor percibido o devengado en la enajenación de bienes raíces registrado en el código 1988 del recuadro N° 2, debe ser igual al código 1982 menos los códigos 1984 y 1986."
   },
   {
     "ruleId": "a.209",
     "targetFieldRaw": "[1967]",
     "operatorRaw": "=",
-    "formulaRaw": "SiABS {[1954] + [1955] + [1956] + [1957] + [1958] + [1959] + [1960] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966]} > 0;entonces[1954] + [1955] + [1956] + [1957] + [1958] + [1959] + [1960] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966] + [1996]Sino0",
+    "formulaRaw": "Si ABS{[1954] + [1955] + [1956] + [1957] + [1958] + [1959] + [1960] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966]} > 0; entonces [1954] + [1955] + [1956] + [1957] + [1958] + [1959] + [1960] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966] + [1996] Sino 0",
     "guidanceText": "La renta imponible operacional minera ajustada declarada en el código 1967 debe ser igual a la suma de los códigos 1996, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, menos los códigos 1964, 1965 y 1966."
   },
   {
@@ -1000,8 +1000,8 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.214",
     "targetFieldRaw": "[1960]",
     "operatorRaw": "=",
-    "formulaRaw": "SiABS { ([1955] + [1956] + [1957] + [1958] + [1959] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966]) > 0; entonces[1689]Sino0",
-    "guidanceText": "La pérdida de ejercicios anteriores registrada en el código 1960 debe  ser igual al código 1689 del recuadro N° 12."
+    "formulaRaw": "Si ABS{[1955] + [1956] + [1957] + [1958] + [1959] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966]} > 0; entonces [1689] Sino 0",
+    "guidanceText": "La pérdida de ejercicios anteriores registrada en el código 1960 debe ser igual al código 1689 del recuadro N° 12."
   },
   {
     "ruleId": "a.216",
@@ -1021,35 +1021,35 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "a.219",
     "targetFieldRaw": "[1292]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. [95] ≠ 1 .y. [1111]> 0 .y. ([365] + [841]) > 0; entoncesAlfa + BetaSinoSiatributo = M14A .y. [95] = 1; entoncesROUND {[1685] * P647)}Sino0\n--------------------------------------------------------------------------------------------Alfa=Si([1111] - [373] - [382] - [761] - [773]) ≥ [365]; entonces[365]SinoPOS{[1111] - [373] - [382] - [761] - [773]}Beta= ([1111] - [373] - [382] - [761] - [773] - [365] - [366] - [392] - [984] - [839] - [384] - [390] - [742]) ≥ [841]; entonces[841]SinoPOS{[1111] - [373] - [382] - [761] - [773] - [365] - [366] - [392] - [984] - [839] - [384] - [390] - [742]}",
+    "formulaRaw": "Alfa=Si ([1111] - [373] - [382] - [761] - [773]) >= [365]; entonces [365] Sino POS{[1111] - [373] - [382] - [761] - [773]}---Beta=Si ([1111] - [373] - [382] - [761] - [773] - [365] - [366] - [392] - [984] - [839] - [384] - [390] - [742]) >= [841]; entonces [841] Sino POS{[1111] - [373] - [382] - [761] - [773] - [365] - [366] - [392] - [984] - [839] - [384] - [390] - [742]}---Si atributo = M14A .y. [95] != 1 .y. [1111] > 0 .y. ([365] + [841]) > 0; entonces Alfa + Beta Sino Si atributo = M14A .y. [95] = 1; entonces ROUND{[1685] * P647} Sino 0",
     "guidanceText": "El crédito sin derecho a devolución y sujeto a restitución registrado en el código 1292 debe ser igual Crédito por impuesto territorial (código 365) y/o Crédito por impuestos soportados en el extranjero (código 841) utilizado en el ejercicio."
   },
   {
     "ruleId": "a.220",
     "targetFieldRaw": "[1305]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. [95] ≠ 1; entonces[1111] - [1292] + [1113]SinoSiatributo = M14A .y. [95] = 1; entonces[1111] + [1113]Sino0",
+    "formulaRaw": "Si atributo = M14A .y. [95] !=​ 1; entonces [1111] - [1292] + [1113] Sino Si atributo = M14A .y. [95] = 1; entonces [1111] + [1113] Sino 0",
     "guidanceText": "Debe registrar el crédito por Impuesto de primera categoría sujeto a restitución, con derecho a devolución correspondiente a la RLI del ejercicio."
   },
   {
     "ruleId": "a.221",
     "targetFieldRaw": "[1512]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = 14D1 .y. [95] ≠ 1 .y. [19]> 0 .y. ([365] + [841]) > 0; entoncesAlfa + BetaSinoSiatributo = 14D1 .y. [95] = 1; entoncesROUND {[1377] * P704)}Sino0\n--------------------------------------------------------------------------------------------Alfa=Si([19] - [373] - [382] - [761] - [773]) ≥ [365]; entonces[365]SinoPOS{[1111] - [373] - [382] - [761] - [773]}Beta= ([19] - [373] - [382] - [761] - [773] - [365] - [366] - [392] - [984] - [839] - [384] - [390] - [742]) ≥ [841]; entonces[841]SinoPOS{[1111] - [373] - [382] - [761] - [773] - [365] - [366] - [392] - [984] - [839] - [384] - [390] - [742]}",
+    "formulaRaw": "Alfa=Si ([19] - [373] - [382] - [761] - [773]) >= [365]; entonces [365] Sino POS{[19] - [373] - [382] - [761] - [773]}---Beta=Si ([19] - [373] - [382] - [761] - [773] - [365] - [366] - [392] - [984] - [839] - [384] - [390] - [742]) >= [841]; entonces [841] Sino POS{[19] - [373] - [382] - [761] - [773] - [365] - [366] - [392] - [984] - [839] - [384] - [390] - [742]}---Si atributo = 14D1 .y. [95] != 1 .y. [19] > 0 .y. ([365] + [841]) > 0; entonces Alfa + Beta Sino Si atributo = 14D1 .y. [95] = 1; entonces ROUND{[1377] * P704} Sino 0",
     "guidanceText": "El crédito sin derecho a devolución y no sujeto a restitución registrado en el código 1512 debe ser igual Crédito por impuesto territorial (código 365) y/o Crédito por impuestos soportados en el extranjero (código 841) utilizado en el ejercicio."
   },
   {
     "ruleId": "a.222",
     "targetFieldRaw": "[1513]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = 14D1 .y. [95] ≠ 1; entonces[19] - [1512] + [20]SinoSiatributo = 14D1 .y. [95] = 1; entonces[19] + [20]Sino0",
-    "guidanceText": "Debe registrar el crédito por Impuesto de primera categoría no sujeto  a restitución, con derecho a devolución correspondiente a la RLI del ejercicio."
+    "formulaRaw": "Si atributo = 14D1 .y. [95] !=​ 1; entonces [19] - [1512] + [20] Sino Si atributo = 14D1 .y. [95] = 1; entonces [19] + [20] Sino 0",
+    "guidanceText": "Debe registrar el crédito por Impuesto de primera categoría no sujeto a restitución, con derecho a devolución correspondiente a la RLI del ejercicio."
   },
   {
     "ruleId": "a.223",
     "targetFieldRaw": "[1996]",
     "operatorRaw": "=",
-    "formulaRaw": "SiABS { ([1954] + [1955] + [1956] + [1957] + [1958] + [1959] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966]) > 0; entonces[1728]Sino0",
+    "formulaRaw": "Si ABS{[1954] + [1955] + [1956] + [1957] + [1958] + [1959] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966]} > 0; entonces [1728] Sino 0",
     "guidanceText": "El monto del código 1996 del recuadro N° 11 debe ser igual al monto del código 1728 del recuadro N° 12."
   },
   {
@@ -1063,7 +1063,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.2",
     "targetFieldRaw": "[110]",
     "operatorRaw": "=",
-    "formulaRaw": "SiTIPO {[03]} = 1;entoncesPOS {POS {[547] - [770]} - [872] - [465] -[494] - [850]} + POS {[617] - POS{[770] - [547]}} + [479]Sino; 0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces POS{POS{[547] - [770]} - [872] - [465] - [494] - [850]} + POS{[617] - POS{[770] - [547]}} + [479] Sino 0",
     "guidanceText": "El monto registrado en el código 110 es incorrecto"
   },
   {
@@ -1098,14 +1098,14 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.8",
     "targetFieldRaw": "[157]",
     "operatorRaw": "=",
-    "formulaRaw": "TGL{ [170] - (([152] + [749] - [169] ) * [l])}\n\n[l] = Si ([104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] + [1030] = 0) .y. { [161] > 0 .o. [152] > 0}; entonces 1\nsino 0",
+    "formulaRaw": "TGL{ [170] - (([152] + [749] - [169] ) * [l])} [l] = Si ([104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] + [1030] = 0) .y. { [161] > 0 .o. [152] > 0}; entonces 1 Sino 0",
     "guidanceText": "El monto registrado en el código 157 es incorrecto"
   },
   {
     "ruleId": "b.9",
     "targetFieldRaw": "[304]",
     "operatorRaw": "=",
-    "formulaRaw": "[157] + [1017] + [1033] +  [201] + [1035] + [910] - [1036] - [1101] - [135] - [136] - [176] - [752] - [608] - [1636] - [1637] - [1638] - [895] - [867] - [609] - [1639] - [1018] - [162] - [174] - [610] - [746] - [866] - [607]",
+    "formulaRaw": "[157] + [1017] + [1033] + [201] + [1035] + [910] - [1036] - [1101] - [135] - [136] - [176] - [752] - [608] - [1636] - [1637] - [1638] - [895] - [867] - [609] - [1639] - [1018] - [162] - [174] - [610] - [746] - [866] - [607]",
     "guidanceText": "El monto registrado en el código 304 debe ser igual a la suma de los códigos 157, 1017, 1033, 201, 1035 y 910 menos 1036, 1101, 135, 136, 176, 752, 608, 1636, 1637, 1638,895, 867, 609, 1639, 1018, 162, 174, 610, 746, 866 y 607."
   },
   {
@@ -1119,7 +1119,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.12",
     "targetFieldRaw": "[20]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {ROUND {P704*[18] - [19]}}",
+    "formulaRaw": "POS{ROUND{P704 * [18] - [19]}}",
     "guidanceText": "El valor del código 20 no corresponde."
   },
   {
@@ -1148,7 +1148,7 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[198]",
     "operatorRaw": "=",
     "formulaRaw": "[619]",
-    "guidanceText": "El monto registrado en el código 198 debe ser igual al  código 619."
+    "guidanceText": "El monto registrado en el código 198 debe ser igual al código 619."
   },
   {
     "ruleId": "b.23",
@@ -1161,7 +1161,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.25",
     "targetFieldRaw": "[305]",
     "operatorRaw": "=",
-    "formulaRaw": "[31] + [20] + [1113] + [1642] + [189] + [1039] + [79] + [1041] + [1042] + [825] + [1976] + [1044] + [114] + [1830] + [1837] + [909] + [952]  + [755] + [134] + POS{[34] - [1910]}+ [1644] + [911] + {913] + [923] + [924] + [1051] + [1052] + [21] + [43] + [767] + [862] - [71] - [36] - [848] - [82] - [1123] - [83] - [173] - [198] - [54] - [832] - [1907] - [833] - [1908] - [757] - [58] - [1645] - [181] - [881] - [1646] - [1647] - [1915] + [900] + [1796] + [1827]",
+    "formulaRaw": "[31] + [20] + [1113] + [1642] + [189] + [1039] + [79] + [1041] + [1042] + [825] + [1976] + [1044] + [114] + [1830] + [1837] + [909] + [952] + [755] + [134] + POS{[34] - [1910]} + [1644] + [911] + [913] + [923] + [924] + [1051] + [1052] + [21] + [43] + [767] + [862] - [71] - [36] - [848] - [82] - [1123] - [83] - [173] - [198] - [54] - [832] - [1907] - [833] - [1908] - [757] - [58] - [1645] - [181] - [881] - [1646] - [1647] - [1915] + [900] + [1796] + [1827]",
     "guidanceText": "El resultado liquidación anual impuesto a la renta registrado en el código 305 debe ser igual a la suma de los códigos 31, 20, 1113, 1642, 189, 1039, 79, 1041, 1042, 825, 1044, 114, 1830, 1837, 909, 952, 755, 134, 34, 1644, 911, 913, 923, 924, 1051, 1052, 21, 43, 767, 862, 900, 1796, y 1827 menos los códigos 71, 36, 848, 82, 1123, 83, 173, 198, 54, 832, 1907, 833, 1908, 757, 58, 1645, 181, 881, 1646, 1647, 1910, y 1915."
   },
   {
@@ -1189,7 +1189,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.30",
     "targetFieldRaw": "[39]",
     "operatorRaw": "=",
-    "formulaRaw": "P56 * [90]; si MES{[315}] = 01/AT\nP57 * [90]; si MES{[315}] = 02/AT\nP58 * [90]; si MES{[315}] = 03/AT\n\nP30 * [90]; si no\nNota: Esta validación no debe ser aplicada en caso de declaraciones en moneda extranjera. El código [315] corresponde a la fecha de declaración.",
+    "formulaRaw": "P56 * [90]; Si MES{[315}] = 01 / AT P57 * [90]; Si MES{[315}] = 02 / AT P58 * [90]; Si MES{[315}] = 03 / AT P30 * [90]; Si no Nota: Esta validación no debe ser aplicada en caso de declaraciones en moneda extranjera. El código [315] corresponde a la fecha de declaración.",
     "guidanceText": "El monto registrado de reajuste art.72 línea 88 es incorrecto"
   },
   {
@@ -1203,21 +1203,21 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.36",
     "targetFieldRaw": "[116]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1104] + [166]) > 0 .y. [304] < 0;entoncesMIN{ ([1638] + [610]);  POS {(NEG{[304]}) - [746] - [866] }}SinoMIN{ ([1638] +  [610]) ; POS {(NEG {[304]}) - [866] }}",
+    "formulaRaw": "Si ([104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1104] + [166]) > 0 .y. [304] < 0; entonces MIN{ ([1638] + [610]); POS{(NEG{[304]}) - [746] - [866] }} Sino MIN{([1638] + [610]); POS{(NEG{[304]}) - [866]}}",
     "guidanceText": "El monto registrado en el código 116 es incorrecto"
   },
   {
     "ruleId": "b.37",
     "targetFieldRaw": "[119]",
     "operatorRaw": "=",
-    "formulaRaw": "Si{[104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1104] + [166] > 0 .y. [304] < 0};entoncesMIN { {[174] + [162]};  POS{ (NEG[304]) - [1638] - [610] - [746] - [866] }}Sino; MIN { {[174] + [162]};  POS{ (NEG[304]) - [610] - [866] }}",
+    "formulaRaw": "Si {[104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1104] + [166] > 0 .y. [304] < 0}; entonces MIN{ {[174] + [162]}; POS{ (NEG{[304]}) - [1638] - [610] - [746] - [866] }} Sino MIN{ {[174] + [162]}; POS{ (NEG{[304]}) - [610] - [866] }}",
     "guidanceText": "El monto registrado en el código 119 es incorrecto"
   },
   {
     "ruleId": "b.38",
     "targetFieldRaw": "[98]",
     "operatorRaw": "=",
-    "formulaRaw": "Si[823] > 0;entonces[91] - [823]Sinono existe",
+    "formulaRaw": "Si [823] > 0; entonces [91] - [823] Sino 0",
     "guidanceText": "El monto registrado en el código 98 es incorrecto"
   },
   {
@@ -1252,7 +1252,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.67",
     "targetFieldRaw": "[1041]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(atributo = M14A);entoncesPOS {ROUND{P647 * [1040]}}SinoPOS {ROUND{P704 * [1040]}}",
+    "formulaRaw": "Si (atributo = M14A); entonces POS{ROUND{P647 * [1040]}} Sino POS{ROUND{P704 * [1040]}}",
     "guidanceText": "El monto debe ser igual a la base imponible declarada en el código 1040 multiplicado por tasa vigente"
   },
   {
@@ -1273,7 +1273,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.74",
     "targetFieldRaw": "[1113]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {ROUND{P647 * [1109]} - [1111]}",
+    "formulaRaw": "POS{ROUND{P647 * [1109]} - [1111]}",
     "guidanceText": "El código 1113 debe ser igual al código 1109 multiplicado por la tasa vigente, menos el código 1111."
   },
   {
@@ -1294,42 +1294,42 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.82",
     "targetFieldRaw": "[18]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(((POS {[1440]}+ [1892] + [1895] + [1898] + [1901] + [1912] + [1924] + [1927] + [1929] + [1931]) >P720)  .y. TIPO{[03]} = 1 .y. atributo = 14D1) .o. ([1440] > 0 .y. TIPO {[03]} = 2, 3, 4, 5, 6, 7, 8  .y. atributo = 14D1);entoncesPOS {[1440]}Sino0",
-    "guidanceText": "El IDPC de empresas acogidas al régimen Pro Pyme registrado en código 18 debe ser igual al valor positivo declarado en el código 1440 del recuadro N°17.\nEn el caso de los empresarios individuales el valor registrado en el código 18 debe ser mayor a 1 UTA."
+    "formulaRaw": "Si (((POS{[1440]} + [1892] + [1895] + [1898] + [1901] + [1912] + [1924] + [1927] + [1929] + [1931]) >P720) .y. TIPO{[03]} = 1 .y. atributo = 14D1) .o. ([1440] > 0 .y. TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8 .y. atributo = 14D1); entonces POS{[1440]} Sino 0",
+    "guidanceText": "El IDPC de empresas acogidas al régimen Pro Pyme registrado en código 18 debe ser igual al valor positivo declarado en el código 1440 del recuadro N°17. En el caso de los empresarios individuales el valor registrado en el código 18 debe ser mayor a 1 UTA."
   },
   {
     "ruleId": "b.83",
     "targetFieldRaw": "[1109]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(((POS {[1690]} + [1892] + [1895] + [1898] + [1901] + [1912] + [1924] + [1927] + [1929] + [1931]) > P720)  .y. TIPO{[03]} = 1 .y. atributo = M14A) .o. ([1690] > 0 .y. TIPO {[03]} = 2, 3, 4, 5, 6, 7, 8  .y. atributo = M14A);entoncesPOS {[1690]}Sino0",
-    "guidanceText": "El IDPC de empresas acogidas al régimen de imputación parcial de créditos registrado en el código 1109 debe ser igual al valor declarado en el código 1690 del recuadro N°12. \nEn el caso de los empresarios individuales el valor registrado en el código 18 debe ser mayor a 1 UTA."
+    "formulaRaw": "Si (((POS{[1690]} + [1892] + [1895] + [1898] + [1901] + [1912] + [1924] + [1927] + [1929] + [1931]) > P720) .y. TIPO{[03]} = 1 .y. atributo = M14A) .o. ([1690] > 0 .y. TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8 .y. atributo = M14A); entonces POS{[1690]} Sino 0",
+    "guidanceText": "El IDPC de empresas acogidas al régimen de imputación parcial de créditos registrado en el código 1109 debe ser igual al valor declarado en el código 1690 del recuadro N°12. En el caso de los empresarios individuales el valor registrado en el código 18 debe ser mayor a 1 UTA."
   },
   {
     "ruleId": "b.84",
     "targetFieldRaw": "[1640]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([1690] > 0 . y. [1109]=0 .y. atributo = M14G);entonces[1690]Sino0",
+    "formulaRaw": "Si ([1690] > 0 . y. [1109]=0 .y. atributo = M14G); entonces [1690] Sino 0",
     "guidanceText": "El valor anotado en código 1640 debe ser igual al valor registardo en recuadro N° 12 , código 1690."
   },
   {
     "ruleId": "b.88",
     "targetFieldRaw": "[1111]",
     "operatorRaw": "=",
-    "formulaRaw": "Si{atributo = M14A .y. ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855]) > 0};entoncesMIN {ROUND{[1109] * P647}; ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855])}Sino0",
+    "formulaRaw": "Si {atributo = M14A .y. ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855]) > 0}; entonces MIN{ROUND{[1109] * P647}; ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855])} Sino 0",
     "guidanceText": "El valor del código 1111 debe ser igual al valor registrado en los códigos 898, 373, 382, 761, 773, 365, 366, 392, 1153, 984, 839, 384, 390, 742, 841, 855 del recuadro N° 8, solo hasta el monto que sea necesario para cubrir el IDPC determinado."
   },
   {
     "ruleId": "b.89",
     "targetFieldRaw": "[19]",
     "operatorRaw": "=",
-    "formulaRaw": "Si{atributo = 14D1 .y. ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855]) > 0};entoncesMIN {ROUND{[18] * P704}; ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855])}Sino0",
+    "formulaRaw": "Si {atributo = 14D1 .y. ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855]) > 0}; entonces MIN{ROUND{[18] * P704}; ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855])} Sino 0",
     "guidanceText": "El valor del código 19 debe ser igual al valor registrado en los códigos 898, 373, 382, 761, 773, 365, 366, 392, 1153, 984, 839, 384, 390, 742, 841, 855 del recuadro N° 8, solo hasta el monto que sea necesario para cubrir el IDPC determinado."
   },
   {
     "ruleId": "b.90",
     "targetFieldRaw": "[1641]",
     "operatorRaw": "=",
-    "formulaRaw": "Si{atributo = M14G .y. ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855]) > 0};entoncesMIN {ROUND{[1640] * P84}; ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855])}Sino0",
+    "formulaRaw": "Si {atributo = M14G .y. ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855]) > 0}; entonces MIN{ROUND{[1640] * P84}; ([898] + [373] + [382] + [761] + [773] + [365] + [366] + [392] + [1153] + [984] + [839] + [384] + [390] + [742] + [841] + [855])} Sino 0",
     "guidanceText": "El valor del código 1641 debe ser igual al valor registrado en los códigos 898, 373, 382, 761, 773, 365, 366, 392, 1153, 984, 839, 384, 390, 742, 841, 855 del recuadro N° 8, solo hasta el monto que sea necesario para cubrir el IDPC determinado."
   },
   {
@@ -1343,35 +1343,35 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.92",
     "targetFieldRaw": "[608]",
     "operatorRaw": "=",
-    "formulaRaw": "Si{([32] + [133]) > 0 .y. [158] > 0} .o. {([104] + [105] + [106] + [955] + [1632] + [110] + [155] + [1032] + [1104]) = 0};entonces0sino([1592] + [1593] + [1594] + [1595] + [1721] + [1596] + [1597] + [1599] + [1633] + [1634] + [1635])",
+    "formulaRaw": "Si {([32] + [133]) > 0 .y. [158] > 0} .o. {([104] + [105] + [106] + [955] + [1632] + [110] + [155] + [1032] + [1104]) = 0}; entonces 0 Sino ([1592] + [1593] + [1594] + [1595] + [1721] + [1596] + [1597] + [1599] + [1633] + [1634] + [1635])",
     "guidanceText": "El crédito al Impuesto Global Complementario (IGC) por Impuesto de Primera Categoría (IDPC) sin derecho a devolución que debe o intenta declarar en el código 608 tiene que ser igual al valor registrado en los códigos 1592, 1593, 1594, 1595, 1721, 1596, 1597, 1599, 1633, 1634, y 1635, de éste mismo formulario 22."
   },
   {
     "ruleId": "b.93",
     "targetFieldRaw": "[610]",
     "operatorRaw": "=",
-    "formulaRaw": "Si([32] + [133]) = 0;entonces([1024] + [1025] + [1026] + [1027] + [603] + [1722] + [954] + [1598] +  [1631] + [605] + [1105] + [606] + [1031] + [1890] + [1914])sino0",
+    "formulaRaw": "Si ([32] + [133]) = 0; entonces ([1024] + [1025] + [1026] + [1027] + [603] + [1722] + [954] + [1598] + [1631] + [605] + [1105] + [606] + [1031] + [1890] + [1914]) Sino 0",
     "guidanceText": "El valor del código 610 debe ser igual al valor registrado en los códigos 1024, 1025, 1026, 1027, 603, 1722, 954, 1598, 1631, 605, 1105, 606, 1031, 1890 y 1914."
   },
   {
     "ruleId": "b.94",
     "targetFieldRaw": "[34]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {ROUND{P62 * [32]} - [76]}",
+    "formulaRaw": "POS{ROUND{P62 * [32]} - [76]}",
     "guidanceText": "El valor del código 34 no corresponde."
   },
   {
     "ruleId": "b.96",
     "targetFieldRaw": "[1829]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1816]}",
+    "formulaRaw": "POS{[1816]}",
     "guidanceText": "El valor registrado en código 1829 debe ser igual al valor positivo anotado en el código 1816"
   },
   {
     "ruleId": "b.97",
     "targetFieldRaw": "[1830]",
     "operatorRaw": "=",
-    "formulaRaw": "ROUND {[1829] * P24}",
+    "formulaRaw": "ROUND{[1829] * P24}",
     "guidanceText": "El monto registrado en el código [1830] debe ser igual al código [1829] multiplicado por 10%."
   },
   {
@@ -1490,42 +1490,42 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.114",
     "targetFieldRaw": "[1894]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) ≤ P720);entonces0SinoPOS {ROUND {([1892] * P84) - [1893]}}",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) <=​ P720); entonces 0 Sino POS{ROUND{([1892] * P84) - [1893]}}",
     "guidanceText": "El IDPC sobre rentas del arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma de uso o goce temporal de bienes raíces agrícolas y no agrícolas registrado en el código 1894 debe ser igual a base imponible código 1892 multiplicado por tasa vigente, menos el código 1893."
   },
   {
     "ruleId": "b.115",
     "targetFieldRaw": "[1897]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) ≤ P720);entonces0SinoROUND {[1895] * P84}",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) <=​ P720); entonces 0 Sino ROUND{[1895] * P84}",
     "guidanceText": "El IDPC sobre el mayor valor en la enajenación de bienes raíces situados en Chile registrado en el código 1897, debe ser igual a base imponible código 1895 multiplicado por la tasa vigente, menos el código 1896."
   },
   {
     "ruleId": "b.116",
     "targetFieldRaw": "[1900]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) ≤ P720);entonces0SinoPOS {ROUND {([1898] * P84) - [1899]}}",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) <=​ P720); entonces 0 Sino POS{ROUND{([1898] * P84) - [1899]}}",
     "guidanceText": "El IDPC sobre rentas obtenidas por contribuyentes con contabilidad simplificada registrado en el código 1900, debe ser igual a base imponible código 1898 multiplicado por la tasa vigente, menos el código 1899."
   },
   {
     "ruleId": "b.117",
     "targetFieldRaw": "[1903]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) ≤ P720);entonces0SinoPOS {ROUND {([1901] * P84) - [1902]}}",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) <=​ P720); entonces 0 Sino POS{ROUND{([1901] * P84) - [1902]}}",
     "guidanceText": "El IDPC sobre otras rentas efectivas registradas en el código 1903 , debe ser igual a base imponible código 1901 multiplicado por la tasa vigente, menos el código 1902."
   },
   {
     "ruleId": "b.118",
     "targetFieldRaw": "[1913]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) ≤ P720);entonces0SinoPOS {ROUND {([1912] * P84) - [1918]}}",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) <=​ P720); entonces 0 Sino POS{ROUND{([1912] * P84) - [1918]}}",
     "guidanceText": "El IDPC otras rentas de fuente extranjera afectas registrado en el código 1913, debe ser igual a base imponible código 1912 multiplicado por la tasa vigente."
   },
   {
     "ruleId": "b.119",
     "targetFieldRaw": "[1916]",
     "operatorRaw": "=",
-    "formulaRaw": "SiSUBTIPO{[03]} = 112 .o. 113 .o. 411; entonces=  [829]Sino0",
+    "formulaRaw": "Si SUBTIPO{[03]} = 112 .o. 113 .o. 411; entonces [829] Sino 0",
     "guidanceText": "El valor registrado en el código 1916 debe ser igual al monto registrado en el código 829 del recuadro N° 8 de este Formulario 22"
   },
   {
@@ -1560,49 +1560,49 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.126",
     "targetFieldRaw": "[1926]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) ≤ P720);entonces0SinoPOS {ROUND {P84 * [1924] - [1925]}}",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) <=​ P720); entonces 0 Sino POS{ROUND{P84 * [1924] - [1925]}}",
     "guidanceText": "El impuesto de primera categoría que debe o intenta declarar en el código 1926 tiene que ser igual a la multiplicación del código 1924 por la tasa vigente del impuesto de primera categoría, menos el código 1925. En el caso de los empresarios individuales se deberá tener en cuenta la exención de 1 UTA, según lo dispuesto en el N° del artículo 40 de la Ley sobre Impuesto a la Renta."
   },
   {
     "ruleId": "b.127",
     "targetFieldRaw": "[1928]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) ≤ P720);entonces0SinoPOS {ROUND {{P84 * [1927]}}",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) <=​ P720); entonces 0 Sino POS{ROUND{P84 * [1927]}}",
     "guidanceText": "El impuesto de primera categoría que debe o intenta declarar en el código 1928 tiene que ser igual a la multiplicación del código 1927 por la tasa vigente del impuesto de primera categoría. En el caso de los empresarios individuales se deberá tener en cuenta la exención de 1 UTA, según lo dispuesto en el N° del artículo 40 de la Ley sobre Impuesto a la Renta."
   },
   {
     "ruleId": "b.128",
     "targetFieldRaw": "[1930]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) ≤ P720);entonces0SinoPOS {ROUND {P84 * [1929]}}",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) <=​ P720); entonces 0 Sino POS{ROUND{P84 * [1929]}}",
     "guidanceText": "El impuesto de primera categoría que debe o intenta declarar en el código 1930 tiene que ser igual a la multiplicación del código 1929 por la tasa vigente del impuesto de primera categoría. En el caso de los empresarios individuales se deberá tener en cuenta la exención de 1 UTA, según lo dispuesto en el N° del artículo 40 de la Ley sobre Impuesto a la Renta."
   },
   {
     "ruleId": "b.129",
     "targetFieldRaw": "[1932]",
     "operatorRaw": "=",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) ≤ P720);entonces0SinoPOS {ROUND {{P84 * [1931]}}",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. ([1892] + [1895] + [1898] + [1901] + [1912] + [18] + [1109] + [1924] + [1927] + [1929] + [1931]) <=​ P720); entonces 0 Sino POS{ROUND{P84 * [1931]}}",
     "guidanceText": "El impuesto de primera categoría que debe o intenta declarar en el código 1932 tiene que ser igual a la multiplicación del código 1931 por la tasa vigente del impuesto de primera categoría. En el caso de los empresarios individuales se deberá tener en cuenta la exención de 1 UTA, según lo dispuesto en el N° del artículo 40 de la Ley sobre Impuesto a la Renta."
   },
   {
     "ruleId": "b.130",
     "targetFieldRaw": "[201]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {ROUND {[705] * P16}}",
+    "formulaRaw": "POS{ROUND{[705] * P16}}",
     "guidanceText": "El débito fiscal por ahorro neto negativo que debe o intenta declarar en el código 201 tiene que ser igual a la multiplicación del código 705 por la tasa del 15%."
   },
   {
     "ruleId": "b.131",
     "targetFieldRaw": "[1977]",
     "operatorRaw": "=",
-    "formulaRaw": "Si[1968] > P751;entonces[1970]Sino0",
+    "formulaRaw": "Si [1968] > P751; entonces [1970] Sino 0",
     "guidanceText": "El Componente Ad Valorem registrado en el código 1977 debe ser igual al código 1970 total ingresos de productos mineros del ejercicio, cuando el promedio de toneladas metricas sea superior a 50.000"
   },
   {
     "ruleId": "b.132",
     "targetFieldRaw": "[1979]",
     "operatorRaw": "=",
-    "formulaRaw": "POS {[1967]}",
+    "formulaRaw": "POS{[1967]}",
     "guidanceText": "El componente del margen declarado en el código 1979 debe ser igual al código 1967 del recuadro N° 11."
   },
   {
@@ -1616,14 +1616,14 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.134",
     "targetFieldRaw": "[1921]",
     "operatorRaw": "=",
-    "formulaRaw": "SiTIPO {[03]} = 1;entonces[1924] + [1927] + [1929] + [1931]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1924] + [1927] + [1929] + [1931] Sino 0",
     "guidanceText": "Las rentas propias de la actividad de renta presunta registrado en el código 1921 deben ser igual al monto registrado en los códigos 1924, 1927, 1929, y 1931."
   },
   {
     "ruleId": "b.135",
     "targetFieldRaw": "[1920]",
     "operatorRaw": "=",
-    "formulaRaw": "SiTIPO {[03]} = 1;entonces[1926] + [1928] + [1930] + [1932]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1926] + [1928] + [1930] + [1932] Sino 0",
     "guidanceText": "El crédito por impuesto de primera categoría (IDPC) sin obligación de restitución, con y con derecho a devolución registrado en el código 1920 debe ser igual al monto registrado en los códigos 1926, 1928, 1930 y 1932."
   },
   {
@@ -1665,7 +1665,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.141",
     "targetFieldRaw": "[2009]",
     "operatorRaw": "=",
-    "formulaRaw": "SiTIPO{[03]} = 1;entonces([1208] + [1218] + ([1209] + [1219] + [1475] + [1480] + [1193] + [1194]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces ([1208] + [1218] + ([1209] + [1219] + [1475] + [1480] + [1193] + [1194])) Sino 0",
     "guidanceText": "El código 2009 debe ser igual a la suma de los códigos 1208, 1218, 1209, 1219 del recuadro N° 15 o los códigos 1475, 1480 del recuadro N° 20, y/o los códigos 1193, 1194 del recuadro N° 6"
   },
   {
@@ -1707,28 +1707,28 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.147",
     "targetFieldRaw": "[2014]",
     "operatorRaw": "=",
-    "formulaRaw": "Si TIPO{[03]} = 1; entonces POS {[1630]}\nSino 0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces POS{[1630]} Sino 0",
     "guidanceText": "El código 2014 debe ser igual código 1630."
   },
   {
     "ruleId": "c.1",
     "targetFieldRaw": "[111]",
     "operatorRaw": "validation",
-    "formulaRaw": "MIN {P27 / P13; [104] + [1024] + [1025] + [1592] + [1593]}",
+    "formulaRaw": "MIN{P27 / P13; [104] + [1024] + [1025] + [1592] + [1593]}",
     "guidanceText": "Las cotizaciones previsionales que registra en el código 111 debe ser menor o igual al monto máximo imponible anual, o al monto de los retiros tributables debidamente declarados en la línea 1."
   },
   {
     "ruleId": "c.4",
     "targetFieldRaw": "[136]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si[170] > 0 .y. [l] = 0;entonces([157] / [170]) * MAX {[152] / P13; [152] + [606] + [1105]} + P390Sino0\n\n(1er Factor: [157] / [170] redondear a 3 decimales y luego operar).\n\n[l] =Si[104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] = 0 .y. [161] > 0;entonces1Sino0",
+    "formulaRaw": "l=Si [104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] = 0 .y. [161] > 0; entonces 1 Sino 0---Si [170] > 0 .y. l = 0; entonces ([157] / [170]) * MAX{[152] / P13; [152] + [606] + [1105]} + P390 Sino 0",
     "guidanceText": "El crédito proporcional al Impuesto Global Complementario registrado en el código 136 supera el máximo permitido."
   },
   {
     "ruleId": "c.5",
     "targetFieldRaw": "[169]",
     "operatorRaw": "validation",
-    "formulaRaw": "( ((([105] + [155] + [152] + [1032] + [1104]) * (1 + P651))+ P390)+ [1891])* [e]\n___________________________________________\n[e] =Si{[104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] = 0 .y. [161] > 0};entonces0Sino1",
+    "formulaRaw": "e=Si [104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] = 0 .y. [161] > 0; entonces 0 Sino 1---( ((([105] + [155] + [152] + [1032] + [1104]) * (1 + P651)) + P390) + [1891]) * e",
     "guidanceText": "Las pérdidas en operaciones de capitales mobiliarios y ganancias de capital superan el máximo permitido."
   },
   {
@@ -1742,35 +1742,35 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.9",
     "targetFieldRaw": "[607]",
     "operatorRaw": "validation",
-    "formulaRaw": "MIN { P343; (P22 * [170]) }",
+    "formulaRaw": "MIN{ P343; (P22 * [170]) }",
     "guidanceText": "El crédito al Impuesto Global Complementario (IGC) o Impuesto Unico de Segunda Categoría (IUSC) por donaciones para fines culturales registrado en el código 607 debe ser menor a 320 UTM o el 20% de la base imponible del Impuesto Global Complementario o del Impuesto Unico de Segunda Categoría."
   },
   {
     "ruleId": "c.10",
     "targetFieldRaw": "[609]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si[104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] = 0 .y. [161] > 0; entonces0SinoMIN { P37; MIN { P343; (P22 * [170]) }}",
+    "formulaRaw": "Si [104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] = 0 .y. [161] > 0; entonces 0 Sino MIN{ P37; MIN{ P343; (P22 * [170]) }}",
     "guidanceText": "El crédito al Impuesto Global Complementario por donaciones a universidades, institutos profesionales y centros de formación técnica valor registrado en el código 609 debe ser menor o igual a 320 unidades tributables mensuales o el 20% de la base imponible del Impuesto Global Complementario o del impuesto Unico de Segunda Categoría o 14.000 unidades tributables mensuales."
   },
   {
     "ruleId": "c.11",
     "targetFieldRaw": "[373]",
     "operatorRaw": "validation",
-    "formulaRaw": "MIN {[986] * P02; P641}",
+    "formulaRaw": "MIN{[986] * P02; P641}",
     "guidanceText": "Las donaciones para fines culturales registradas en el código 373 deben ser igual o menor que 20.000 unidades tributables mensuales o a 50% de de las donaciones registradas en el código 986."
   },
   {
     "ruleId": "c.22",
     "targetFieldRaw": "[114]",
     "operatorRaw": "validation",
-    "formulaRaw": "POS {P60 * [113] - [1007]}",
+    "formulaRaw": "POS{P60 * [113] - [1007]}",
     "guidanceText": "El Impuesto único sobre gastos rechazados y otras partidas registrado en el código 114 supera el monto máximo."
   },
   {
     "ruleId": "c.23",
     "targetFieldRaw": "[134]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si[106] = 0  .y. [133] > 0 .y. [158] > 0;entoncesPOS {(P61 * [133]) - [138]} + P48SinoSi[106] > 0.y.  [133] > 0 .y. [158] > 0;entonces([106] * P60) + POS {(([133] - [106]) - [138]) * P61} + P48Sino0",
+    "formulaRaw": "Si [106] = 0 .y. [133] > 0 .y. [158] > 0; entonces POS{(P61 * [133]) - [138]} + P48 Sino Si [106] > 0.y. [133] > 0 .y. [158] > 0; entonces ([106] * P60) + POS{(([133] - [106]) - [138]) * P61} + P48 Sino 0",
     "guidanceText": "El Impuesto Adicional según ex D.L. N° 600 de 1974 registrado en el código 134 supera el monto máximo."
   },
   {
@@ -1791,28 +1791,28 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.27",
     "targetFieldRaw": "[114]",
     "operatorRaw": "validation",
-    "formulaRaw": "POS {P62 * [113] - [1007]}",
+    "formulaRaw": "POS{P62 * [113] - [1007]}",
     "guidanceText": "El Impuesto único sobre gastos rechazados y otras partidas registrado en el código 114 es inferior al mínimo establecido."
   },
   {
     "ruleId": "c.28",
     "targetFieldRaw": "[134]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si[106] = 0 .y.[133]>0 .y. [158] > 0;entoncesPOS {(P16 * [133]) - [138]} + P48Sino \nSi[106] > 0 .y. [133]>0 .y. [158] > 0;entonces([106] * P648) + POS {(([133] - [106]) - [138]) * P16} + P48Sino0",
-    "guidanceText": "El Impuesto Adicional según ex D.L. N° 600 de 1974 registrado en el código 134  es inferior al mínimo establecido."
+    "formulaRaw": "Si [106] = 0 .y.[133]>0 .y. [158] > 0; entonces POS{(P16 * [133]) - [138]} + P48 Sino Si [106] > 0 .y. [133]>0 .y. [158] > 0; entonces ([106] * P648) + POS{(([133] - [106]) - [138]) * P16} + P48 Sino 0",
+    "guidanceText": "El Impuesto Adicional según ex D.L. N° 600 de 1974 registrado en el código 134 es inferior al mínimo establecido."
   },
   {
     "ruleId": "c.30",
     "targetFieldRaw": "[133] + [32]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si[133] + [32] + [138] + [76] + [134] + [34] > 0; entonces [158]Sino0",
-    "guidanceText": "El valor en código 133  y/o en código 32 es (son) inferior(es) al mínimo permitido."
+    "formulaRaw": "Si [133] + [32] + [138] + [76] + [134] + [34] > 0; entonces [158] Sino 0",
+    "guidanceText": "El valor en código 133 y/o en código 32 es (son) inferior(es) al mínimo permitido."
   },
   {
     "ruleId": "c.31",
     "targetFieldRaw": "[21]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si(atributo = PTAO .y. (Vx011357 <  P311);entoncesMAX {P03; Vx010017}SinoSi(atributo = PTAO .y. (P311£Vx011357£P312),entoncesMAX {P03 / 12; Vx010017}Sino0",
+    "formulaRaw": "Si atributo = PTAO .y. Vx011357 < P311; entonces MAX{P03; Vx010017} Sino Si atributo = PTAO .y. P311 <= Vx011357 .y. Vx011357 <= P312; entonces MAX{P03 / 12; Vx010017} Sino 0",
     "guidanceText": "El monto del Impuesto único talleres artesanales es inferior al mínimo entre el valor de 2 UTM y los PPM obligatorios. En caso que ya no cumpla los requisitos de taller artesanal deberá regularizar su situación en la unidad o direccion regional que le corresponda a su domicilio."
   },
   {
@@ -1826,21 +1826,21 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.33",
     "targetFieldRaw": "[752]",
     "operatorRaw": "validation",
-    "formulaRaw": "MIN { P343; (P22 * [170]) }",
+    "formulaRaw": "MIN{ P343; (P22 * [170]) }",
     "guidanceText": "El crédito al Impuesto al Global Complementario por donaciones para fines deportivos registrado en el código 752 debe ser menor o igual a 320 unidades tributables mensuales o el 20% de la base imponible del Impuesto Global Complementario."
   },
   {
     "ruleId": "c.34",
     "targetFieldRaw": "[823]",
     "operatorRaw": "validation",
-    "formulaRaw": "Vx010799\n(Nota: Validación exclusiva de Internet)",
+    "formulaRaw": "Vx010799 (Nota: Validación exclusiva de Internet)",
     "guidanceText": "El monto registrado en el código 823 debe ser menor o igual al monto solicitado por usted en la Unidad del SII."
   },
   {
     "ruleId": "c.35",
     "targetFieldRaw": "[823]",
     "operatorRaw": "validation",
-    "formulaRaw": "[91]\n(Nota: Validación exclusiva de Internet)",
+    "formulaRaw": "[91] (Nota: Validación exclusiva de Internet)",
     "guidanceText": "El monto registrado en código 823 debe ser menor o igual al monto registrado en el código 91."
   },
   {
@@ -1882,7 +1882,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.76",
     "targetFieldRaw": "[1026] + [1027] + [1594] + [1595]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si[748] > 0;entonces([105] * P651) + [748] + P390Sino([105] * P651) + P390",
+    "formulaRaw": "Si [748] > 0; entonces ([105] * P651) + [748] + P390 Sino([105] * P651) + P390",
     "guidanceText": "El valor registrado en los códigos 1024 más 1025, 1592 y 1593 es superior al máximo establecido."
   },
   {
@@ -1896,7 +1896,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.83",
     "targetFieldRaw": "[491]",
     "operatorRaw": "validation",
-    "formulaRaw": "P474 * [479];  si SUBTIPO{[03]} = 112 .o. 113 .o. 114 .o.115\nP22 * [479], sino",
+    "formulaRaw": "P474 * [479]; Si SUBTIPO{[03]} = 112 .o. 113 .o. 114 .o.115 P22 * [479], Sino",
     "guidanceText": "El valor declarado en el código 491 es incorrecto."
   },
   {
@@ -1904,62 +1904,62 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1177]",
     "operatorRaw": "validation",
     "formulaRaw": "[1145] * P34",
-    "guidanceText": "El código 1177 debe ser menor o igual a código 1145 multiplicado por el  IPC anual."
+    "guidanceText": "El código 1177 debe ser menor o igual a código 1145 multiplicado por el IPC anual."
   },
   {
     "ruleId": "c.94",
     "targetFieldRaw": "[1154]",
     "operatorRaw": "validation",
-    "formulaRaw": "Sino es rectificatoria .y. [315]£P377 .y. [91] > 0;entoncesMIN (P103; ROUND {POS {[1728]}} * P02)SinoSino es rectificatoria .y. [315]£P52 .y. [87] ≥ 0;entoncesMIN (P103; ROUND { POS {[1728]}} * P02)SinoSies rectificatoria .y. P_[1154] >  (ROUND { POS {[1728]}} * P02);entoncesROUND { POS {[1728]}} * P02SinoP_[1154]",
+    "formulaRaw": "Si F22 es Rectificatoria .y. [315]<=P377 .y. [91] > 0; entonces MIN{P103; ROUND{POS{[1728]}} * P02} Sino Si F22 NO es Rectificatoria .y. [315]<=P52 .y. [87] >= 0; entonces MIN{P103; ROUND{POS{[1728]}} * P02} Sino Si F22 es Rectificatoria .y. [1154] > (ROUND{POS{[1728]}} * P02); entonces ROUND{POS{[1728]}} * P02 Sino [1154]",
     "guidanceText": "El Incentivo al ahorro registrado en el código 1154 debe ser menor o igual al 50% del código 1728 o al valor en pesos de U.F 5.000."
   },
   {
     "ruleId": "c.95",
     "targetFieldRaw": "[1157]",
     "operatorRaw": "validation",
-    "formulaRaw": "POS {[1728] - [1154]}",
+    "formulaRaw": "POS{[1728] - [1154]}",
     "guidanceText": "El código 1157 debe ser menor o igual código 1728 menos el código 1154."
   },
   {
     "ruleId": "c.99",
     "targetFieldRaw": "[1433]",
     "operatorRaw": "validation",
-    "formulaRaw": "POS {[1729] - [1432]}",
-    "guidanceText": "El valor del código 1433 debe ser menor o igual  ala operatoria del código 1729 menos 1432"
+    "formulaRaw": "POS{[1729] - [1432]}",
+    "guidanceText": "El valor del código 1433 debe ser menor o igual ala operatoria del código 1729 menos 1432"
   },
   {
     "ruleId": "c.104",
     "targetFieldRaw": "[910] + [913]",
     "operatorRaw": "validation",
-    "formulaRaw": "POS { P24 * [106]}",
-    "guidanceText": "El valor del código 910 más 913 debe ser mayor  o igual a código 106 por tasa adicional 10%"
+    "formulaRaw": "POS{ P24 * [106]}",
+    "guidanceText": "El valor del código 910 más 913 debe ser mayor o igual a código 106 por tasa adicional 10%"
   },
   {
     "ruleId": "c.107",
     "targetFieldRaw": "[1636]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si([170] > P722) .y. (([1592] + [1024] + [1594] + [1026]) > 0);entoncesMIN {(([170] - P722) * P11) + P390; (((([104] + [105]) * (1 + P651)) + [748]) * P11) + P390}Sino0",
-    "guidanceText": "El monto registrado en el  código  1636  debe ser menor o igual al 5% aplicado sobre la parte de la renta que exceda las 310 UTA y que corresponda a retiros o dividendos debidamente incrementados"
+    "formulaRaw": "Si ([170] > P722) .y. (([1592] + [1024] + [1594] + [1026]) > 0); entonces MIN{(([170] - P722) * P11) + P390; (((([104] + [105]) * (1 + P651)) + [748]) * P11) + P390} Sino 0",
+    "guidanceText": "El monto registrado en el código 1636 debe ser menor o igual al 5% aplicado sobre la parte de la renta que exceda las 310 UTA y que corresponda a retiros o dividendos debidamente incrementados"
   },
   {
     "ruleId": "c.111",
     "targetFieldRaw": "[1184]",
     "operatorRaw": "validation",
     "formulaRaw": "[1358] * P24",
-    "guidanceText": "El monto registrado en código 1184 debe ser al menos un decimo de la  cantidad anotada en el código 1358. Recuadro N°7"
+    "guidanceText": "El monto registrado en código 1184 debe ser al menos un decimo de la cantidad anotada en el código 1358. Recuadro N°7"
   },
   {
     "ruleId": "c.112",
     "targetFieldRaw": "[1362]",
     "operatorRaw": "validation",
     "formulaRaw": "[1359] * P24",
-    "guidanceText": "El monto registrado en código 1362 debe ser al menos un decimo de la  cantidad anotada en el código 1359. Recuadro N°7"
+    "guidanceText": "El monto registrado en código 1362 debe ser al menos un decimo de la cantidad anotada en el código 1359. Recuadro N°7"
   },
   {
     "ruleId": "c.113",
     "targetFieldRaw": "[1432]",
     "operatorRaw": "validation",
-    "formulaRaw": "Sino es rectificatoria .y. [315]£P377 .y. [91] > 0;entoncesMIN {P103; POS {ROUND{[1729]} * P02}}SinoSino es rectificatoria .y. [315]£P52 .y. [87] ≥ 0;entoncesMIN (P103; ROUND { POS {[1729]}} * P02)\nSinoSies rectificatoria .y. P_[1432] >  (ROUND { POS {[1729]}} * P02);entoncesROUND { POS {[1729]}} * P02\nSino P_[1432]",
+    "formulaRaw": "Si F22 es Rectificatoria .y. [315]<=P377 .y. [91] > 0; entonces MIN{P103; POS{ROUND{[1729]} * P02}} Sino Si F22 NO es Rectificatoria .y. [315]<=P52 .y. [87] >= 0; entonces MIN{P103; ROUND{POS{[1729]}} * P02} Sino Si F22 es Rectificatoria .y. [1432] > (ROUND{POS{[1729]}} * P02); entonces ROUND{POS{[1729]}} * P02 Sino [1432]",
     "guidanceText": "El Incentivo al ahorro registrado en el código 1432 debe ser menor o igual al 50% del código 1729 o al valor en pesos de U.F 5.000."
   },
   {
@@ -1974,14 +1974,14 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1178]",
     "operatorRaw": "validation",
     "formulaRaw": "POS{[1685] + [1688] - [1147] - [1148]}",
-    "guidanceText": "El valor registrado en el código 1178 debe ser mayor o igual al resultado positivo del código 1685 más  1688 menos 1147 y 1148"
+    "guidanceText": "El valor registrado en el código 1178 debe ser mayor o igual al resultado positivo del código 1685 más 1688 menos 1147 y 1148"
   },
   {
     "ruleId": "c.118",
     "targetFieldRaw": "[1179]",
     "operatorRaw": "validation",
     "formulaRaw": "NEG{[1685] + [1688] - [1147] - [1148]}",
-    "guidanceText": "El valor registrado en el código 1179 debe ser mayor o igual al resultado negativo del código 1685 más  1688 menos 1147 y 1148"
+    "guidanceText": "El valor registrado en el código 1179 debe ser mayor o igual al resultado negativo del código 1685 más 1688 menos 1147 y 1148"
   },
   {
     "ruleId": "c.120",
@@ -2015,49 +2015,49 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.126",
     "targetFieldRaw": "[1637]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si{TIPO{[03]} = 1 .y. [1849] > 0 .y. [170] > 0};entonces(eta * [1849]) + P390Sino0\n\neta = ([157] / [170]) redondear a 3 decimales y luego operar).",
+    "formulaRaw": "Si{TIPO{[03]} = 1 .y. [1849] > 0 .y. [170] > 0}; entonces (eta * [1849]) + P390 Sino 0 eta = ([157] / [170]) redondear a 3 decimales y luego operar).",
     "guidanceText": "El valor registrado en el código 1637 supera el máximo permitido."
   },
   {
     "ruleId": "c.127",
     "targetFieldRaw": "[76]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si[32] > 0;entonces([1592] + [1593] + [1594] + [1595] + [1721] + [1596] + [1597] + [1599] + [1633] + [1634] + [1635]) + ([1024] + [1025] + [1026] + [1027] + [603] + [1722] + [954] + [1598] + [1631] + [605] + [1105] + [606] + [1031] + [1890] + [1914])Sino0",
-    "guidanceText": "El valor del código 76 debe ser al menos igual a la sumatoria de los códigos 1592 + 1593 + 1594 + 1595 + 1721 + 1596 + 1597 + 1599 + 1633 + 1634 + 1635 + 1024 + 1025 + 1026 + 1027 + 603 + 1722 + 954 + 1598 +  1631 + 605 + 1105 + 606 + 1031"
+    "formulaRaw": "Si [32] > 0; entonces ([1592] + [1593] + [1594] + [1595] + [1721] + [1596] + [1597] + [1599] + [1633] + [1634] + [1635]) + ([1024] + [1025] + [1026] + [1027] + [603] + [1722] + [954] + [1598] + [1631] + [605] + [1105] + [606] + [1031] + [1890] + [1914]) Sino 0",
+    "guidanceText": "El valor del código 76 debe ser al menos igual a la sumatoria de los códigos 1592 + 1593 + 1594 + 1595 + 1721 + 1596 + 1597 + 1599 + 1633 + 1634 + 1635 + 1024 + 1025 + 1026 + 1027 + 603 + 1722 + 954 + 1598 + 1631 + 605 + 1105 + 606 + 1031"
   },
   {
     "ruleId": "c.130",
     "targetFieldRaw": "[113]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si {[1682] > 0 .y. atributo = M14A .y. (SUBTIPO{[03]} = 111 .o. 211 .o. 212 .o. 213 .o. 214 .o. 215 .o. 216 .o. 217 .o. 218. o . 219. o . 220. o. 221 .o. 222 .o. 223 .o. 224 .o. 311 .o. 312 .o. 313 .o. 411 .o. 811 .o. 812 .o. 815 .o. 816 .o. 817 .o. 818)};entonces[1682]Sino0",
+    "formulaRaw": "Si {[1682] > 0 .y. atributo = M14A .y. (SUBTIPO{[03]} = 111 .o. 211 .o. 212 .o. 213 .o. 214 .o. 215 .o. 216 .o. 217 .o. 218. o . 219. o . 220. o. 221 .o. 222 .o. 223 .o. 224 .o. 311 .o. 312 .o. 313 .o. 411 .o. 811 .o. 812 .o. 815 .o. 816 .o. 817 .o. 818)}; entonces [1682] Sino 0",
     "guidanceText": "El valor del código 113 debe ser al menos igual a lo declarado en el código 1682 del recuadro N° 12"
   },
   {
     "ruleId": "c.131",
     "targetFieldRaw": "[1638]",
     "operatorRaw": "validation",
-    "formulaRaw": "SiTIPO{[03]} = 1;entonces[1609]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1609] Sino 0",
     "guidanceText": "El valor del código 1638 debe ser mayor o igual código 1609"
   },
   {
     "ruleId": "c.132",
     "targetFieldRaw": "[1035]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si[32] = 0;entoncesPOS {((beta - ([1024] * eta))* P654) + MIN {MIN {(alfa -([1592] * eta)) * P654; (((beta - ([1024] * eta)) * P654) + [157] + [1017] + [1033] + [201] + [910]) * (1 + P59) * P654}; [608]} - P390}Sino0\n----------------------------------------------------------------\nalfa = [1592] + [1594] + [1721] + [1597] + [1633]\nBeta = [1024] + [1026] + [1722] + [1598] + [1105]\neta = ([1592] + [1024]) > 0 .y. 170 < P12; 1; 0",
+    "formulaRaw": "alfa=[1592] + [1594] + [1721] + [1597] + [1633]---beta=[1024] + [1026] + [1722] + [1598] + [1105]---eta=Si ([1592] + [1024]) > 0 .y. [170] < P12; entonces 1 Sino 0---Si [32] = 0; entonces POS{((beta - ([1024] * eta)) * P654) + MIN{MIN{(alfa - ([1592] * eta)) * P654; (((beta - ([1024] * eta)) * P654) + [157] + [1017] + [1033] + [201] + [910]) * (1 + P59) * P654}; [608]} - P390} Sino 0",
     "guidanceText": "El débito fiscal por restitución crédito por Impuesto de Primera Categoría registrado en el código 1035 es inferior al monto a restituir."
   },
   {
     "ruleId": "c.134",
     "targetFieldRaw": "[1833]",
     "operatorRaw": "validation",
-    "formulaRaw": "MIN { P732; POS(([104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [152] + [1032] + [1891] + [1104] + [161] + [749] - [166] - [907] - [169] - [111] - [750] - [740] - [822] - [765] )* P655) }",
+    "formulaRaw": "MIN{ P732; POS{([104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [152] + [1032] + [1891] + [1104] + [161] + [749] - [166] - [907] - [169] - [111] - [750] - [740] - [822] - [765]) * P655} }",
     "guidanceText": "La rebaja por donaciones a entidades sin fines de lucro registrada en el código 1833 debe ser menor o igual al limite entre 10.000 unidades tributaria mensuales y el 5% de la base imponible del Impuesto Global Complementario o Impuesto Unico Segunda Categoría."
   },
   {
     "ruleId": "c.135",
     "targetFieldRaw": "[867]",
     "operatorRaw": "validation",
-    "formulaRaw": "MIN { P343; (P22 * [170]) }",
+    "formulaRaw": "MIN{ P343; (P22 * [170]) }",
     "guidanceText": "El crédito al Impuesto Global Complementario o Impuesto Unico de Segunda Categoría por donaciones para fines sociales valor registrado en el código 867 debe ser menor o igual a 320 unidades tributarias mensuales o al 205 de la base imponible del Impuesto Global Complementario."
   },
   {
@@ -2078,56 +2078,56 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.164",
     "targetFieldRaw": "[1215]",
     "operatorRaw": "validation",
-    "formulaRaw": "POS {[1066]}",
+    "formulaRaw": "POS{[1066]}",
     "guidanceText": "El valor del código 1215 del recuadro N° 15 debe ser mayor o igual código 1066 del recuadro N° 10"
   },
   {
     "ruleId": "c.165",
     "targetFieldRaw": "[1740]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si(TIPO {[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = M14A;entoncesPOS {[1814]}Sino0",
+    "formulaRaw": "Si (TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = M14A; entonces POS{[1814]} Sino 0",
     "guidanceText": "El valor del código 1740 del recuadro N° 15 debe ser al menos el valor del código 1814 del recuadro N° 4"
   },
   {
     "ruleId": "c.167",
     "targetFieldRaw": "[1189]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si(TIPO {[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = M14A;entoncesPOS[1814]Sino0",
+    "formulaRaw": "Si (TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = M14A; entonces POS{[1814]} Sino 0",
     "guidanceText": "El monto de las otras partidas a agregar que debe o intenta declarar en el código 1189 del recuadro N° 14 tiene que ser mayor o igual al resultado neto de las operaciones del ejercicio por enajenaciones de acciones o cuotas de fondos mutuos y/o de inversión declaradas en el código 1814 del recuadro N°4 de éste formulario 22."
   },
   {
     "ruleId": "c.168",
     "targetFieldRaw": "[1190]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si(TIPO {[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = M14A;entoncesNEG[1814]Sino0",
+    "formulaRaw": "Si (TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = M14A; entonces NEG{[1814]} Sino 0",
     "guidanceText": "El monto de las otras partidas a deducir que debe o intenta declarar en el código 1190 del recuadro N° 14 tiene que ser mayor o igual al resultado neto (pérdidas) de las operaciones del ejercicio por enajenaciones de acciones o cuotas de fondos mutuos y/o de inversión declaradas en el código 1814 del recuadro N°4 de éste formulario 22."
   },
   {
     "ruleId": "c.169",
     "targetFieldRaw": "[1380]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si(TIPO {[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = 14D1;entoncesPOS[1814]Sino0",
+    "formulaRaw": "Si (TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = 14D1; entonces POS{[1814]} Sino 0",
     "guidanceText": "El valor registrado en el código 1380 debe ser mayor o igual al valor positivo del código 1814 del recuadro N°4."
   },
   {
     "ruleId": "c.170",
     "targetFieldRaw": "[1381]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si(TIPO {[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = 14D1;entoncesNEG[1814]Sino0",
+    "formulaRaw": "Si (TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = 14D1; entonces NEG{[1814]} Sino 0",
     "guidanceText": "El valor registrado en el código 1381 debe ser mayor o igual al valor negativo del código 1814 del recuadro N°4."
   },
   {
     "ruleId": "c.171",
     "targetFieldRaw": "[1584]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si(TIPO {[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = 14TT;entoncesPOS[1814]Sino0",
+    "formulaRaw": "Si (TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = 14TT; entonces POS{[1814]} Sino 0",
     "guidanceText": "El valor registrado en el código 1584 debe ser mayor o igual al valor negativo del código 1814 del recuadro N°4."
   },
   {
     "ruleId": "c.172",
     "targetFieldRaw": "[1585]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si(TIPO {[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = 14TT;entoncesNEG[1814]Sino0",
+    "formulaRaw": "Si (TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8) .y. atributo = 14TT; entonces NEG{[1814]} Sino 0",
     "guidanceText": "El valor registrado en el código 1585 debe ser mayor o igual al valor negativo del código 1814 del recuadro N°4."
   },
   {
@@ -2141,7 +2141,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.184",
     "targetFieldRaw": "[1879] + [1880] + [1881] + [1882]",
     "operatorRaw": "validation",
-    "formulaRaw": "P651*[1883] + P390; si [748] = 0\nP59*[1883] + P390 ; si no",
+    "formulaRaw": "P651 * [1883] + P390; Si [748] = 0 P59 * [1883] + P390 ; Si no",
     "guidanceText": "La suma de los códigos 1879, 1880, 1881, 1882 supera el maximo permitivo"
   },
   {
@@ -2162,56 +2162,56 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.187",
     "targetFieldRaw": "[1849]",
     "operatorRaw": "validation",
-    "formulaRaw": "SiTIPO {[03]} = 1;entonces[1892]Sino0",
-    "guidanceText": "El valor  de las rentas del arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma del uso o goce temporal de bienes raíces agrícolas y no agrícolas registrado en el código 1849 debe ser al menos el monto registrado en el código 1892."
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1892] Sino 0",
+    "guidanceText": "El valor de las rentas del arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma del uso o goce temporal de bienes raíces agrícolas y no agrícolas registrado en el código 1849 debe ser al menos el monto registrado en el código 1892."
   },
   {
     "ruleId": "c.192",
     "targetFieldRaw": "[1915]",
     "operatorRaw": "validation",
     "formulaRaw": "P738",
-    "guidanceText": "El crédito por la compra de viviendas nuevas adquiridas con créditos con garantía hipotecaria registrado en el código 1915 supera el máximo de 16 UTM a diciembre AT-1."
+    "guidanceText": "El crédito por la compra de viviendas nuevas adquiridas con créditos con garantía hipotecaria registrado en el código 1915 supera el máximo de 16 UTM a diciembre AT - 1."
   },
   {
     "ruleId": "c.194",
     "targetFieldRaw": "[1848]",
     "operatorRaw": "validation",
-    "formulaRaw": "SiTIPO {[03]} = 1;entonces[1894]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1894] Sino 0",
     "guidanceText": "El crédito por impuesto de primera categoría (IDPC) sin obligación de restitución, con y con derecho a devolución registrado en el código 1848 debe ser a lo menos el monto registrado en el código 1894."
   },
   {
     "ruleId": "c.195",
     "targetFieldRaw": "[1890]",
     "operatorRaw": "validation",
-    "formulaRaw": "SiTIPO {[03]} = 1;entonces[1897]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1897] Sino 0",
     "guidanceText": "El crédito por impuesto de primera categoría (IDPC) sin obligación de restitución, con y con derecho a devolución registrado en el código 1890 debe ser a lo menos el monto registrado en el código 1897."
   },
   {
     "ruleId": "c.196",
     "targetFieldRaw": "[1891]",
     "operatorRaw": "validation",
-    "formulaRaw": "SiTIPO {[03]} = 1;entonces[1063] + [1989] + [1990]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1063] + [1989] + [1990] Sino 0",
     "guidanceText": "El mayor valor en la enajenación de bienes raíces situados en Chile registrado en el código 1891 debe ser mayor o igual al monto registrado en los códigos 1063, 1989 y 1990."
   },
   {
     "ruleId": "c.197",
     "targetFieldRaw": "[1864] + [1866] + [1031]",
     "operatorRaw": "validation",
-    "formulaRaw": "SiTIPO {[03]} = 1;entonces[1903]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1903] Sino 0",
     "guidanceText": "El valor registrado en los códigos1864, 1866, y/o 1031 debe ser a lo menos el monto registrado en el código 1903."
   },
   {
     "ruleId": "c.198",
     "targetFieldRaw": "[1865] + [1867] + [1032]",
     "operatorRaw": "validation",
-    "formulaRaw": "SiTIPO {[03]} = 1;entonces[1901]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1901] Sino 0",
     "guidanceText": "El valor registrado en los códigos 1865, 1867 y/o 1032 debe ser mayor o igual al monto registrado en el código 1901."
   },
   {
     "ruleId": "c.199",
     "targetFieldRaw": "[1609]",
     "operatorRaw": "validation",
-    "formulaRaw": "((POS{[1600] + [1819] + [1601] + {1602] + [1603] + [1604] + [1605] + [1606] + [1607] + [1608] - [1629]}/(1 - P704))* P704)+ P736",
+    "formulaRaw": "((POS{[1600] + [1819] + [1601] + [1602] + [1603] + [1604] + [1605] + [1606] + [1607] + [1608] - [1629]} / (1 - P704)) * P704) + P736",
     "guidanceText": "El crédito por activos fijos adquiridos en el ejercicio (art. 33 bis LIR) declarado en el código 1609 no puede exceder del IDPC (12,5%) que habría gravado la base imponible en el caso de que aquella hubiese estado afecta a dicho impuesto."
   },
   {
@@ -2232,7 +2232,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.205",
     "targetFieldRaw": "[1852]",
     "operatorRaw": "validation",
-    "formulaRaw": "SiTIPO {[03]} = 1;entonces[1898]Sino0",
+    "formulaRaw": "Si TIPO{[03]} = 1; entonces [1898] Sino 0",
     "guidanceText": "Las rentas por participaciones o cuotas de comunidad obtenidas por la empresa que determina su renta efectiva sin contabilidad completa que debe o intenta declarar en el código 1852 debe ser a lo menos el monto registrado en el código 1898 de éste mismo formulario."
   },
   {
@@ -2288,14 +2288,14 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.214",
     "targetFieldRaw": "[1959]",
     "operatorRaw": "validation",
-    "formulaRaw": "SiABS { [1955] + [1956] + [1957] + [1958] + [1959] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966]} > 0; entonces[938] + [949]Sino0",
+    "formulaRaw": "Si ABS{ [1955] + [1956] + [1957] + [1958] + [1959] + [1961] + [1962] + [1963] - [1964] - [1965] - [1966]} > 0; entonces [938] + [949] Sino 0",
     "guidanceText": "La depreciacion acelerada declarada en el código 1959 del recuadro N° 11 debe ser al menos el valor declarado en los códigos 938 y 949."
   },
   {
     "ruleId": "c.215",
     "targetFieldRaw": "[1989] + [1990]",
     "operatorRaw": "validation",
-    "formulaRaw": "POS {[1987] + [1988]}",
+    "formulaRaw": "POS{[1987] + [1988]}",
     "guidanceText": "El mayor valor en la enajenación de bienes raíces registrado en los códigos 1989 y 1990 debe ser mayor o igual al monto registrado en los códigos 1987 y 1988."
   },
   {
@@ -2351,7 +2351,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.223",
     "targetFieldRaw": "[1945]",
     "operatorRaw": "validation",
-    "formulaRaw": "[1495] +  [1590]",
+    "formulaRaw": "[1495] + [1590]",
     "guidanceText": "El monto imputado por ISIF que debe declarar en el código 1945 debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1495 y/o al aumento del ejercicio por reorganizaciones registrado en el código 1590."
   },
   {
@@ -2366,48 +2366,48 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1947]",
     "operatorRaw": "validation",
     "formulaRaw": "[1497] + [1437]",
-    "guidanceText": "El monto imputado por ISIF que debe declarar en el código 1947 debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1497  y/o al aumento del ejercicio por reorganizaciones registrado en el código 1437."
+    "guidanceText": "El monto imputado por ISIF que debe declarar en el código 1947 debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1497 y/o al aumento del ejercicio por reorganizaciones registrado en el código 1437."
   },
   {
     "ruleId": "c.226",
     "targetFieldRaw": "[1948]",
     "operatorRaw": "validation",
     "formulaRaw": "[1498] + [1438]",
-    "guidanceText": "El monto imputado por ISIF que debe declarar en el código 1948 debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1498  y/o al aumento del ejercicio por reorganizaciones registrado en el código 1438."
+    "guidanceText": "El monto imputado por ISIF que debe declarar en el código 1948 debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1498 y/o al aumento del ejercicio por reorganizaciones registrado en el código 1438."
   },
   {
     "ruleId": "c.227",
     "targetFieldRaw": "[1949]",
     "operatorRaw": "validation",
     "formulaRaw": "[1501] + [1441]",
-    "guidanceText": "El monto imputado por ISIF que debe declarar en el código 1949 debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1501  y/o al aumento del ejercicio por reorganizaciones registrado en el código 1441."
+    "guidanceText": "El monto imputado por ISIF que debe declarar en el código 1949 debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1501 y/o al aumento del ejercicio por reorganizaciones registrado en el código 1441."
   },
   {
     "ruleId": "c.228",
     "targetFieldRaw": "[1950]",
     "operatorRaw": "validation",
-    "formulaRaw": "[1502] + {1442]",
-    "guidanceText": "El monto imputado por ISIF que debe declarar en el código 1950 debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1502  y/o al aumento del ejercicio por reorganizaciones registrado en el código 1442."
+    "formulaRaw": "[1502] + [1442]",
+    "guidanceText": "El monto imputado por ISIF que debe declarar en el código 1950 debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1502 y/o al aumento del ejercicio por reorganizaciones registrado en el código 1442."
   },
   {
     "ruleId": "c.229",
     "targetFieldRaw": "[1942]",
     "operatorRaw": "validation",
     "formulaRaw": "[1451] + [1392]",
-    "guidanceText": "El monto acogido al ISIF que debe declarar en el código 1942 del recuadro N°20, debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1451   y/o al aumento del ejercicio por reorganizaciones registrado en el código 1392."
+    "guidanceText": "El monto acogido al ISIF que debe declarar en el código 1942 del recuadro N°20, debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1451 y/o al aumento del ejercicio por reorganizaciones registrado en el código 1392."
   },
   {
     "ruleId": "c.230",
     "targetFieldRaw": "[1933]",
     "operatorRaw": "validation",
     "formulaRaw": "[1200] + [1202]",
-    "guidanceText": "El monto acogido al ISIF que debe declarar en el código 1933 del recuadro N°15, debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1200  y/o al aumento del ejercicio por reorganizaciones registrado en el código 1202."
+    "guidanceText": "El monto acogido al ISIF que debe declarar en el código 1933 del recuadro N°15, debe ser menor o igual al remanente ejercicio anterior o saldo inicial positivo registrado en el código 1200 y/o al aumento del ejercicio por reorganizaciones registrado en el código 1202."
   },
   {
     "ruleId": "c.231",
     "targetFieldRaw": "([1735] + [1737] + [1743] + [1745] + [1747])",
     "operatorRaw": "validation",
-    "formulaRaw": "([1730] + [1934] + [1733] +1741])",
+    "formulaRaw": "([1730] + [1934] + [1733] + 1741])",
     "guidanceText": "Los montos registrados en los códigos 1735, 1737, 1743, 1745, y 1747, deben ser menor o igual que los valores registrados en los códigos 1730, 1934, 1733, y 1741."
   },
   {
@@ -2436,7 +2436,7 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "([1941] + [1338] + [1341] + [1342] + [1343] + [1344])",
     "operatorRaw": "validation",
     "formulaRaw": "([1335] + [1337] + [1339] + [1340])",
-    "guidanceText": "Los montos registrados en los códigos 1941, 1338, 1341, 1342, 1343,  y 1344, deben ser menor o igual que los valores registrados en los códigos 1335, 1337, 1339, 1340."
+    "guidanceText": "Los montos registrados en los códigos 1941, 1338, 1341, 1342, 1343, y 1344, deben ser menor o igual que los valores registrados en los códigos 1335, 1337, 1339, 1340."
   },
   {
     "ruleId": "c.236",
@@ -2491,14 +2491,14 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "c.271",
     "targetFieldRaw": "[2000] + [2001] + [2002] + [2003]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si[748] > 0;entonces([2004] * P651) + [748] + P390Sino([2004] * P651) + P390",
+    "formulaRaw": "Si [748] > 0; entonces ([2004] * P651) + [748] + P390 Sino([2004] * P651) + P390",
     "guidanceText": "El valor registrado en los códigos 2000, 2001, 2002 y 2003 es superior al máximo establecido."
   },
   {
     "ruleId": "c.272",
     "targetFieldRaw": "[1639]",
     "operatorRaw": "validation",
-    "formulaRaw": "Si(TIPO{[03]} = 1 .y. [1608] > 0 );  entonces([1608] * ([157]/[170]))",
+    "formulaRaw": "Si (TIPO{[03]} = 1 .y. [1608] > 0 ); entonces ([1608] * ([157] / [170]))",
     "guidanceText": "Se debe registrar el crédito asociado al ingreso diferido que se impute en el año comercial 2024, el que no debe exceder de la cantidad que se determine al aplicar la tasa efectiva de IF del propietario sobre el ingreso diferido incrementado que le corresponde reconocer en dicho año comercial"
   },
   {
@@ -2517,7 +2517,7 @@ export const RAW_RULES: RawRule[] = [
   },
   {
     "ruleId": "d.5",
-    "targetFieldRaw": "[754]  > 0",
+    "targetFieldRaw": "[754] > 0",
     "operatorRaw": "validation",
     "formulaRaw": "[753] > 0",
     "guidanceText": "Como ingresó datos en el código 754 debe ingresar datos en el código 753."
@@ -2526,7 +2526,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "d.6",
     "targetFieldRaw": "[138] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[133] > 0 .y. [68]¹B",
+    "formulaRaw": "[133] > 0 .y. [68] > 0",
     "guidanceText": "Si registra valor en el código 138, debe ingresar un valor en el código 133 y seleccionar el código 68."
   },
   {
@@ -2547,28 +2547,28 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "d.12",
     "targetFieldRaw": "[51] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[63] + [71]  > 0",
+    "formulaRaw": "[63] + [71] > 0",
     "guidanceText": "Como ingresó datos en el código 51 debe ingresar datos en el código 63 o en el código 71."
   },
   {
     "ruleId": "d.13",
     "targetFieldRaw": "[71] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[51]  > 0",
+    "formulaRaw": "[51] > 0",
     "guidanceText": "Como ingresó datos en el código 71 debe ingresar datos en el código 51."
   },
   {
     "ruleId": "d.18",
-    "targetFieldRaw": "[301]¹B",
+    "targetFieldRaw": "[301] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[306]¹B .y. [780]¹B",
+    "formulaRaw": "[306] > 0 .y. [780] > 0",
     "guidanceText": "Como ingresó datos en el código 301 debe ingresar datos en el código 306 y en el código 780."
   },
   {
     "ruleId": "d.19",
-    "targetFieldRaw": "[306]¹B",
+    "targetFieldRaw": "[306] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[301]¹B .y. [780]¹B",
+    "formulaRaw": "[301] > 0 .y. [780] > 0",
     "guidanceText": "Como ingresó datos el en código 306 debe ingresar datos en el código 301 y en el código 780."
   },
   {
@@ -2610,21 +2610,21 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "d.52",
     "targetFieldRaw": "TIPO{[03]} = 2, 3, 4, 5, 6, 7 o 8",
     "operatorRaw": "validation",
-    "formulaRaw": "[01]¹B  .y.  [02] = B  .y.  [05] = B",
+    "formulaRaw": "[01] > 0 .y. [02] = 0 .y. [05] = 0",
     "guidanceText": "Debe ingresar sólo razón social"
   },
   {
     "ruleId": "d.53",
     "targetFieldRaw": "TIPO{[03]} = 1",
     "operatorRaw": "validation",
-    "formulaRaw": "{ [05]¹B .y. ( [01]¹B .o. [02]¹B ) }",
+    "formulaRaw": "{ [05] > 0 .y. ( [01] > 0 .o. [02] > 0 ) }",
     "guidanceText": "Debe indicar Nombre(s) y Apellidos (códigos 01,02 y 05)"
   },
   {
     "ruleId": "d.54",
     "targetFieldRaw": "[86] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "TIPO{[03]}=2, 3, 4, 5, 6, 7 o 8",
+    "formulaRaw": "TIPO{[03]} =2, 3, 4, 5, 6, 7 o 8",
     "guidanceText": "En el código 86 no puede registrar saldo a disposición de los socios."
   },
   {
@@ -2638,7 +2638,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "d.56",
     "targetFieldRaw": "TIPO{[03]} = 2, 3, 4, 5, 6, 7, 8",
     "operatorRaw": "validation",
-    "formulaRaw": "[903]¹B",
+    "formulaRaw": "[903] > 0",
     "guidanceText": "Debe ingresar el RUT del Representante Legal (código 903)"
   },
   {
@@ -2650,23 +2650,23 @@ export const RAW_RULES: RawRule[] = [
   },
   {
     "ruleId": "d.65",
-    "targetFieldRaw": "[780]¹B",
+    "targetFieldRaw": "[780] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[306]¹B .y. [301]¹B",
+    "formulaRaw": "[306] > 0 .y. [301] > 0",
     "guidanceText": "Como ingresó datos en el código 780 debe ingresar datos en el código 306 y en el código 301."
   },
   {
     "ruleId": "d.66",
     "targetFieldRaw": "[133] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[68]¹B",
+    "formulaRaw": "[68] > 0",
     "guidanceText": "Como ingresó datos en el código 133 debe marcar el código 68."
   },
   {
     "ruleId": "d.68",
     "targetFieldRaw": "[134] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[68]¹B",
+    "formulaRaw": "[68] > 0",
     "guidanceText": "Como ingresó datos en el código 134 debe marcar el código 68."
   },
   {
@@ -2744,11 +2744,11 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1192] > 0",
     "operatorRaw": "validation",
     "formulaRaw": "{atributo = M14A .y. ((([1324] + [1335]) > 0 .y. [1260] > 0).o. (([1326] + [1337]) > 0 .y. [1262] > 0) .o. ( ([1328] + [1339]) > 0))} .o. {atributo = 14D1 .y.((([1501] + [1502]) > 0 .y. [1382] > 0) .o. (([1441] + [1442]) > 0 .y. [1384] > 0) .o. (([1520] + [1521]) > 0)) }",
-    "guidanceText": "Como ingreso valor en el código 1192 debe ingresar datos en los códigos 1324, 1335 del recuadro N° 16 y 1260 del recuadro  N° R15 o 1326, 1337 del recuadro N° 16 y 1262 del recuadro N° 15 o 1328, 1339 del recuadro N°16 y, o 1501, 1502 del recuadro N°21 1382 recuadro N° 20 o 1441, 1442 del recuadro N°21 y 1384 del recuadro N°20 o 1520, 1521 del recuadro N°21."
+    "guidanceText": "Como ingreso valor en el código 1192 debe ingresar datos en los códigos 1324, 1335 del recuadro N° 16 y 1260 del recuadro N° R15 o 1326, 1337 del recuadro N° 16 y 1262 del recuadro N° 15 o 1328, 1339 del recuadro N°16 y, o 1501, 1502 del recuadro N°21 1382 recuadro N° 20 o 1441, 1442 del recuadro N°21 y 1384 del recuadro N°20 o 1520, 1521 del recuadro N°21."
   },
   {
     "ruleId": "d.120",
-    "targetFieldRaw": "([1606] + [1600]) > (P92*P87)",
+    "targetFieldRaw": "([1606] + [1600]) > (P92 * P87)",
     "operatorRaw": "validation",
     "formulaRaw": "[1581] > 0 .o. [1583] > 0",
     "guidanceText": "Debe declarar el código 1583, ya que sus ingresos son superirores a 50.000 UF"
@@ -2827,8 +2827,8 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "d.142",
     "targetFieldRaw": "[830] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "([828] + [138]) > 0 .y.  SUBTIPO{[03]} = 112 .o. 113 .o. 411 .y. (Atributo = M14A .o. 14D1 .o. M14G)",
-    "guidanceText": "Si registra valor en el código 830, debe ingresar un valor en el código 828 y /o en el código 138"
+    "formulaRaw": "([828] + [138]) > 0 .y. SUBTIPO{[03]} = 112 .o. 113 .o. 411 .y. (Atributo = M14A .o. 14D1 .o. M14G)",
+    "guidanceText": "Si registra valor en el código 830, debe ingresar un valor en el código 828 y/o en el código 138"
   },
   {
     "ruleId": "d.143",
@@ -2841,14 +2841,14 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "d.144",
     "targetFieldRaw": "[832] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "SiVx010659 = 1;entonces[767]  ≥ 0Sino[767] > 0",
+    "formulaRaw": "Si Vx010659 = 1; entonces [767] >=​ 0 Sino [767] > 0",
     "guidanceText": "Como ingresó datos en el código 832 debe ingresar datos en el código 767."
   },
   {
     "ruleId": "d.145",
     "targetFieldRaw": "([1823] + [1824] + [1825] + [1826]) > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[616]¹B",
+    "formulaRaw": "[616] > 0",
     "guidanceText": "Como ingresó datos en los códigos 1823, 1824, 1825 o 1826 debe seleccionar código 616 Asociacion o cuentas en participación"
   },
   {
@@ -2863,7 +2863,7 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1686] > 0",
     "operatorRaw": "validation",
     "formulaRaw": "([1657] + [1660]) > 0",
-    "guidanceText": "Como ingresó datos en código 1686 debe ingresar datos en código 1657  y/o 1660."
+    "guidanceText": "Como ingresó datos en código 1686 debe ingresar datos en código 1657 y/o 1660."
   },
   {
     "ruleId": "d.148",
@@ -2911,21 +2911,21 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "d.154",
     "targetFieldRaw": "([741] + [742]) > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "(ABS[1440] + ABS[1690]) > 0",
+    "formulaRaw": "(ABS{1440} + ABS{1690}) > 0",
     "guidanceText": "Si registra valor en el código 741 y/o en el código 742, debe registrar un valor en el código 1440 y/o en el código 1690, según corresponda su regimen de tributación."
   },
   {
     "ruleId": "d.155",
     "targetFieldRaw": "([815] + [390]) > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "(ABS[1440] + ABS[1690]) > 0",
+    "formulaRaw": "(ABS{1440} + ABS{1690}) > 0",
     "guidanceText": "Si declara los códigos 815 y/o 390, debe declarar una una base imponible en el recuadro N°12 o N°17 según su regimen de tributación."
   },
   {
     "ruleId": "d.157",
     "targetFieldRaw": "([87] + [1795]) > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[780]¹B",
+    "formulaRaw": "[780] > 0",
     "guidanceText": "Si declara el código 87 y/o 1795, debe completar el código 780"
   },
   {
@@ -2967,7 +2967,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "d.166",
     "targetFieldRaw": "[1908] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "SiTIPO{[03]} = 1 .y.([187] + [1037] + [18] + [1109])< P01;entonces([189] + [1039] + [20] + [1113])= 0Sino([[187] + [1037] + ABS{[1440]} + ABS{[1690]} + ABS {[1630]})> 0",
+    "formulaRaw": "Si TIPO{[03]} = 1 .y.([187] + [1037] + [18] + [1109])< P01; entonces ([189] + [1039] + [20] + [1113])= 0 Sino([187] + [1037] + ABS{[1440]} + ABS{[1690]} + ABS{[1630]})> 0",
     "guidanceText": "Si declara el código 1908, debe ingresar un valor en los códigos 187, 1037, 1440, 1690, o 1630. Si es empresario individual la suma de los códigos 18, 187, 1037, y 1109 debe ser mayor a 1 UTA."
   },
   {
@@ -3038,11 +3038,11 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "([1657] + [1658] + [1659] + [1660] + [1661] + [1662] + [1140] + [1663] + [1664] + [1665] + [1666] + [1667] + [1668] + [1141] + [1142] + [1669] + [1670] + [1671] + [1672] + [1673] + [1674] + [1144] + [1675] + [1175] + [1676] + [1677] + [1678] + [1150] + [1147] + [1148] + [1149] + [1151] + [1991] + [1152] + [1176] + [1679] + [1680] + [1681] + [1974] + [1975] + [1682] + [1683] + [1684] + [1685] + [1686] + [1183] + [1687] + [1688] + [1689] + [1154] + [1157]) > 0",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. M14G .o. TIPO{[03]} = 5, 6, 7",
-    "guidanceText": "El recuadro N° 12 debe ser declarado por contribuyentes acogidos al regimen  14 letra A), o 14 letra G), ambos del artículo 14 de la LIR."
+    "guidanceText": "El recuadro N° 12 debe ser declarado por contribuyentes acogidos al regimen 14 letra A), o 14 letra G), ambos del artículo 14 de la LIR."
   },
   {
     "ruleId": "d.177",
-    "targetFieldRaw": "([1400] + [1817] + [1401] +  [1402] + [1403] + [1587] + [1588] + [1405] + [1410] + [1406] + [1407] + [1408] + [1409] + [1818] + [1429] + [1411] + [1412] + [1413] + [1415] + [1416] + [1417] + [1418] + [1419] + [1421] + [1422] + [1423] + [1424] + [1425] + [1426] + [1427] + [1428] + [1431] + [1432] + [1433])> 0",
+    "targetFieldRaw": "([1400] + [1817] + [1401] + [1402] + [1403] + [1587] + [1588] + [1405] + [1410] + [1406] + [1407] + [1408] + [1409] + [1818] + [1429] + [1411] + [1412] + [1413] + [1415] + [1416] + [1417] + [1418] + [1419] + [1421] + [1422] + [1423] + [1424] + [1425] + [1426] + [1427] + [1428] + [1431] + [1432] + [1433])> 0",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = 14D1 .o. TIPO{[03]} = 5, 6, 7",
     "guidanceText": "El recuadro N° 17 debe ser declarado por contribuyentes acogidos al regimen del N° 3 de la letra D) del artículo 14 de la LIR."
@@ -3059,25 +3059,25 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "([1200] + [1933] + [1202] + [1203] + [1204] + [1205] + [1206] + [1207] + [1208] + [1209] + [1211] + [1212] + [1213] + [1214] + [1215] + [1216] + [1217] + [1218] + [1219] + [1221] + [1222] + [1224] + [1225] + [1226] + [1228] + [1229] + [1230] + [1231] + [1730] + [1934] + [1733] + [1735] + [1737] + [1741] + [1743] + [1745] + [1747] + [1731] + [1843] + [1734] + [1736] + [1738] + [1740] + [1742] + [1744] + [1746] + [1748] + [1234] + [1235] + [1236] + [1237] + [1238] + [1239] + [1240] + [1241] + [1242] + [1243] + [1246] + [1247] + [1248] + [1249] + [1250] + [1251] + [1252] + [1253] + [1254] + [1255] + [1260] + [1935] + [1262] + [1263] + [1264] + [1265] + [1266] + [1267] + [1268]) > 0",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A",
-    "guidanceText": "El recuadro N° 15 debe ser declarado por contribuyentes acogidos al regimen  14 letra Adel artículo 14 de la LIR."
+    "guidanceText": "El recuadro N° 15 debe ser declarado por contribuyentes acogidos al regimen 14 letra Adel artículo 14 de la LIR."
   },
   {
     "ruleId": "d.181",
-    "targetFieldRaw": "([1270] + [1821] + [1936] + [1271] + [1272] + [1273] + [1274] + [1275] + [1276] + [1277] + [1279] + [1822] + [1937] + [1280] + [1281] + [1282] + [1283] + [1283] + [1284] + [1285] + [1286] + [1288] + [1289] + [1938] + [1290] + [1291] + [1292] + [1293] + [1294] + [1295] + [1296] + [1297] + [1298] + [1301] + [1302] + [1939] + [1303] + [1304] + [1305] + [1306] + [1307] + [1308] + [1309] + [1310] + [1311] + [1313] + [1314] + [1315] + [1316] + [1317] + [1318] + [1319] + [1320] + [1321] + [1322] + [1324] + [1940] + [1326] + [1327] + [1328] + [1329] + [1330] + [1331] + [1332] + [1333] + [1335] + [1941] + [1337] + [1338] + [1339] + [1340] + [1341] + [1342] + [1343] + [1344] + [1346] + [1347] + [1348] + [1349] + [1350]  + [1351] + [1352] + [1353] + [1354]) > 0",
+    "targetFieldRaw": "([1270] + [1821] + [1936] + [1271] + [1272] + [1273] + [1274] + [1275] + [1276] + [1277] + [1279] + [1822] + [1937] + [1280] + [1281] + [1282] + [1283] + [1283] + [1284] + [1285] + [1286] + [1288] + [1289] + [1938] + [1290] + [1291] + [1292] + [1293] + [1294] + [1295] + [1296] + [1297] + [1298] + [1301] + [1302] + [1939] + [1303] + [1304] + [1305] + [1306] + [1307] + [1308] + [1309] + [1310] + [1311] + [1313] + [1314] + [1315] + [1316] + [1317] + [1318] + [1319] + [1320] + [1321] + [1322] + [1324] + [1940] + [1326] + [1327] + [1328] + [1329] + [1330] + [1331] + [1332] + [1333] + [1335] + [1941] + [1337] + [1338] + [1339] + [1340] + [1341] + [1342] + [1343] + [1344] + [1346] + [1347] + [1348] + [1349] + [1350] + [1351] + [1352] + [1353] + [1354]) > 0",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A",
-    "guidanceText": "El recuadro N° 16 debe ser declarado por contribuyentes acogidos al regimen  14 letra Adel artículo 14 de la LIR."
+    "guidanceText": "El recuadro N° 16 debe ser declarado por contribuyentes acogidos al regimen 14 letra Adel artículo 14 de la LIR."
   },
   {
     "ruleId": "d.182",
-    "targetFieldRaw": "([1145] + [1146] + [1177] + [893] + [894] + [1694] + [1695] + {1696] + [1178] + [1179] + [1180] + {1182] + [1697] + [1186] + [1187] + [1700] + [1188] + [1701] + [1702] + [1189] + [1190]) > 0",
+    "targetFieldRaw": "([1145] + [1146] + [1177] + [893] + [894] + [1694] + [1695] + [1696] + [1178] + [1179] + [1180] + [1182] + [1697] + [1186] + [1187] + [1700] + [1188] + [1701] + [1702] + [1189] + [1190]) > 0",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A",
-    "guidanceText": "El recuadro N° 14 debe ser declarado por contribuyentes acogidos al regimen  14 letra Adel artículo 14 de la LIR."
+    "guidanceText": "El recuadro N° 14 debe ser declarado por contribuyentes acogidos al regimen 14 letra Adel artículo 14 de la LIR."
   },
   {
     "ruleId": "d.183",
-    "targetFieldRaw": "([1451] + [1942] + [1392] + [1396] + [1459] + [1463] + [1467] + [1471] + [1475] + [1480] + [1452] + [1589] + [1393] + [1397] + [1460] + [1468] + [1472] + [1476] + [1481] + [1752] + [1943] + [1755] + [1757] + [1759] + [1763] + [1765] + {1767] + [1769] + [1753] + [1845] + [1756] + [1758] + [1760] + [1762] + [1764] + [1766] + [1768] + [1770] + [1453] + [1455] + [1394] + [1398] + [1461] + [1465] + [1469] + [1473] + [1477] + [1482} + [1454] + [1456] + [1395] + [1399] + [1462] + [1466] + [1470] + {1474] + [1478] + [1483] + [1382] + [1944] + [1384] + [1385] + [1386] + [1387] + [1388] + [1389] + [1390]) > 0",
+    "targetFieldRaw": "([1451] + [1942] + [1392] + [1396] + [1459] + [1463] + [1467] + [1471] + [1475] + [1480] + [1452] + [1589] + [1393] + [1397] + [1460] + [1468] + [1472] + [1476] + [1481] + [1752] + [1943] + [1755] + [1757] + [1759] + [1763] + [1765] + [1767] + [1769] + [1753] + [1845] + [1756] + [1758] + [1760] + [1762] + [1764] + [1766] + [1768] + [1770] + [1453] + [1455] + [1394] + [1398] + [1461] + [1465] + [1469] + [1473] + [1477] + [1482} + [1454] + [1456] + [1395] + [1399] + [1462] + [1466] + [1470] + [1474] + [1478] + [1483] + [1382] + [1944] + [1384] + [1385] + [1386] + [1387] + [1388] + [1389] + [1390]) > 0",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = 14D1",
     "guidanceText": "El recuadro N° 20 debe ser declarado por contribuyentes acogidos al regimen del N° 3 de la letra D) del artículo 14 de la LIR."
@@ -3091,7 +3091,7 @@ export const RAW_RULES: RawRule[] = [
   },
   {
     "ruleId": "d.185",
-    "targetFieldRaw": "([1445] +  [1446] +  [1374] + {1375] + [1376] + [1705] + [1706] + [1707] + [1377] + [1378] + [1726] + [1479] + [1708] + [1709] + [1379] + [1710] + [1711] + [1380] + [1381]) > 0",
+    "targetFieldRaw": "([1445] + [1446] + [1374] + [1375] + [1376] + [1705] + [1706] + [1707] + [1377] + [1378] + [1726] + [1479] + [1708] + [1709] + [1379] + [1710] + [1711] + [1380] + [1381]) > 0",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = 14D1",
     "guidanceText": "El recuadro N° 19 debe ser declarado por contribuyentes acogidos al regimen del N° 3 de la letra D) del artículo 14 de la LIR."
@@ -3107,12 +3107,12 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "d.187",
     "targetFieldRaw": "([994] + [986] + [987] + [988] + [792] + [772] + [873] + [1120] + [1838] + [1775] + [1911] + [1992]) > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo =  M14A .o. M14G; entonces[1665] + [1677] + [1687] > 0Sino[1428] > 0",
+    "formulaRaw": "Si atributo = M14A .o. M14G; entonces [1665] + [1677] + [1687] > 0 Sino [1428] > 0",
     "guidanceText": "Si declara el código 994, 986 987, 988, 792, 772, 873, 1120, 1838, 1775, 1911, y/o 1992 en el recuadro N°8, los códigos 1665, 1677, y/o 1687 del recuadro N° 12 deben ser mayor que cero."
   },
   {
     "ruleId": "e.1",
-    "targetFieldRaw": "[21] > 0  .y. [104] + [105] + [106] + [108] +  [955] + [1632] + [110] + [155] + [152] + [1032] + [1891] + [1104] + [161] + [159] + [748] + [749] + [166] + [907] + [169] + [1833] + [158] + [111] + [740] + [750] + [751] + [822] + [765] + [170] + [157] + [1017] + [1033] + [201] + [1035] + [910] + [1036] + [1101] + [135] + [136] + [176] + [607] + [752] + [608] + [1636]+ [1637]+ [1638] + [895] + [867] + [609] +[1639] + [1018] + [162] + [174] + [610] + [746] + [866] +  POS{[304]} + [31] + [18] + [19] + [20] + [187] + [188] + [189] + [1109] + [1111] + [1113] + [1640] + [1641] + [1642] + [77] + [74] + [79] + [113] + [1007] + [114] + [908] + [909] + [951] + [952] + [753] + [754] + [755] + [133] + [138] + [134] + [32] + [76] + [34] + [119] + [1037] + [1038] + [1039] +  [1040] + [1041] + [1042] + [1043] + [1102] + [1044] + [1051] + [1052] + [1053] = 0",
+    "targetFieldRaw": "[21] > 0 .y. [104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [152] + [1032] + [1891] + [1104] + [161] + [159] + [748] + [749] + [166] + [907] + [169] + [1833] + [158] + [111] + [740] + [750] + [751] + [822] + [765] + [170] + [157] + [1017] + [1033] + [201] + [1035] + [910] + [1036] + [1101] + [135] + [136] + [176] + [607] + [752] + [608] + [1636] + [1637] + [1638] + [895] + [867] + [609] + [1639] + [1018] + [162] + [174] + [610] + [746] + [866] + POS{[304]} + [31] + [18] + [19] + [20] + [187] + [188] + [189] + [1109] + [1111] + [1113] + [1640] + [1641] + [1642] + [77] + [74] + [79] + [113] + [1007] + [114] + [908] + [909] + [951] + [952] + [753] + [754] + [755] + [133] + [138] + [134] + [32] + [76] + [34] + [119] + [1037] + [1038] + [1039] + [1040] + [1041] + [1042] + [1043] + [1102] + [1044] + [1051] + [1052] + [1053] = 0",
     "operatorRaw": "validation",
     "formulaRaw": "[87] = 0",
     "guidanceText": "Según los datos ingresados, Ud. No puede solicitar devolución en código 87"
@@ -3129,7 +3129,7 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[58] > 0",
     "operatorRaw": "validation",
     "formulaRaw": "[86] = 0",
-    "guidanceText": "No puede hacer uso de crédito puesto a su disposición en el código 58 por  registrar saldo a disposición de los socios en el código 86."
+    "guidanceText": "No puede hacer uso de crédito puesto a su disposición en el código 58 por registrar saldo a disposición de los socios en el código 86."
   },
   {
     "ruleId": "e.5",
@@ -3177,21 +3177,21 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "e.16",
     "targetFieldRaw": "[805] = X",
     "operatorRaw": "validation",
-    "formulaRaw": "[813]  =  B",
+    "formulaRaw": "[813] = 0",
     "guidanceText": "Si marca en el código 805 (Agricultor Contabilidad Simplificada D.S. N°3344/2004), no puede marcar el código 813 (Retiro)."
   },
   {
     "ruleId": "e.17",
     "targetFieldRaw": "[813] = X",
     "operatorRaw": "validation",
-    "formulaRaw": "[805]  =  B",
+    "formulaRaw": "[805] = 0",
     "guidanceText": "Si marca en el código 813 (Retiro) no puede marcar el código 805 (Agricultor Contabilidad Simplificada D.S. N°3344/2004)."
   },
   {
     "ruleId": "e.21",
-    "targetFieldRaw": "[87]¹B",
+    "targetFieldRaw": "[87] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[823]  =  0    (Nota: Validación exclusiva de Internet)",
+    "formulaRaw": "[823] = 0",
     "guidanceText": "Si solicita devolución en el código 87, el código 823 debe ser cero."
   },
   {
@@ -3212,21 +3212,21 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "e.38",
     "targetFieldRaw": "Si existe [87] > 0 en el F22",
     "operatorRaw": "validation",
-    "formulaRaw": "NO debe Existir [98]",
+    "formulaRaw": "[98] = 0",
     "guidanceText": "Si solicita devolución en el código [87] no puede registrar Monto efectivo a pagar, al declarar en el código [98]."
   },
   {
     "ruleId": "e.40",
     "targetFieldRaw": "[750] = 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[m] > P80\n[j]  = [104] + [105] + [106] + [108] + [110] + [155] + [748] + [955]\n_______________________________________\n[m] =Si[j] = 0;entonces[161] - [765]SinoSi[j] > 0;entonces[j] + [152] + [159] + [161] - [765]Sino0",
+    "formulaRaw": "j=[104] + [105] + [106] + [108] + [110] + [155] + [748] + [955]---m=Si j = 0; entonces [161] - [765] Sino Si j > 0; entonces j + [152] + [159] + [161] - [765] Sino 0---m > P80",
     "guidanceText": "Según las rentas ingresadas, no le corresponde rebaja por intereses pagados por crédito con garantía hipotecaria, según Art.55 bis"
   },
   {
     "ruleId": "e.44",
-    "targetFieldRaw": "[104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032]+ [1104] = 0 .y. [161] > 0",
+    "targetFieldRaw": "[104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1104] = 0 .y. [161] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "[135] + [136] + [176] + [752] +[608] + [1636] + [1637] + [1638] +[609] + [746] + [866] = 0",
+    "formulaRaw": "[135] + [136] + [176] + [752] + [608] + [1636] + [1637] + [1638] + [609] + [746] + [866] = 0",
     "guidanceText": "Usted no puede registrar montos en los códigos de créditos al Global Complementario."
   },
   {
@@ -3290,14 +3290,14 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1374] > 0",
     "operatorRaw": "validation",
     "formulaRaw": "[1445] + [1446] = 0",
-    "guidanceText": "Sólo puedes declarar el capital inicial, no capital propio inicial  positivo o negativo. Recuadro N°19"
+    "guidanceText": "Sólo puedes declarar el capital inicial, no capital propio inicial positivo o negativo. Recuadro N°19"
   },
   {
     "ruleId": "e.83",
     "targetFieldRaw": "[1193] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo ≠ 14TT; ([1210] + [1220] + [1232] + [1749] + [1750] + [1244] + [1256] + [1484] + [1485] + [1486] + [1487] + [1771] + [1772]) = 0Sino0",
-    "guidanceText": "Como ingreso valor en el código 1193 en el recuadro N°6,  los códigos 1210, 1220, 1232, 1749, 1750, 1224, 1256 del recuadro N° 15 y los códigos 1484, 1485, 1486, 1487, 1771, 1772 del recuadro N° 20 deben ser cero."
+    "formulaRaw": "Si atributo !=​ 14TT; ([1210] + [1220] + [1232] + [1749] + [1750] + [1244] + [1256] + [1484] + [1485] + [1486] + [1487] + [1771] + [1772]) = 0 Sino 0",
+    "guidanceText": "Como ingreso valor en el código 1193 en el recuadro N°6, los códigos 1210, 1220, 1232, 1749, 1750, 1224, 1256 del recuadro N° 15 y los códigos 1484, 1485, 1486, 1487, 1771, 1772 del recuadro N° 20 deben ser cero."
   },
   {
     "ruleId": "e.86",
@@ -3332,7 +3332,7 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1222] > 0",
     "operatorRaw": "validation",
     "formulaRaw": "[1221] = 0",
-    "guidanceText": "Solo puedes declarar el remanente del ejercicio anterior negativo código 1222 del  recuadro N°15."
+    "guidanceText": "Solo puedes declarar el remanente del ejercicio anterior negativo código 1222 del recuadro N°15."
   },
   {
     "ruleId": "e.119",
@@ -3381,7 +3381,7 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[1279] > 0",
     "operatorRaw": "validation",
     "formulaRaw": "[1822] = 0",
-    "guidanceText": "Solo puedes declarar el remanente del ejercicio anterior positivo  código 1279 del recuadro N°16."
+    "guidanceText": "Solo puedes declarar el remanente del ejercicio anterior positivo código 1279 del recuadro N°16."
   },
   {
     "ruleId": "e.126",
@@ -3521,14 +3521,14 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "[91] + [87] + [1795] = 0",
     "operatorRaw": "validation",
     "formulaRaw": "[780] = sin tipo de cuenta",
-    "guidanceText": "Solo puedes declarar datos institucion bancaria si tienes devolución"
+    "guidanceText": "Solo puedes declarar datos institucion bancaria Si tienes devolución"
   },
   {
     "ruleId": "e.147",
     "targetFieldRaw": "[91] > 0 .y. {([87] + [1795]) = 0}",
     "operatorRaw": "validation",
     "formulaRaw": "[780] = sin tipo de cuenta",
-    "guidanceText": "Solo puedes declarar datos institucion bancaria si tienes devolución"
+    "guidanceText": "Solo puedes declarar datos institucion bancaria Si tienes devolución"
   },
   {
     "ruleId": "e.154",
@@ -3569,28 +3569,28 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "e.159",
     "targetFieldRaw": "[1194] > 0",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo ≠ 14TT; ([1210] + [1220] + [1232] + [1749] + [1750] + [1244] + [1256] + [1484] + [1485] + [1486] + [1487] + [1771] + [1772]) = 0Sino0",
-    "guidanceText": "Como ingreso valor en el código 1194 en el recuadro N°6,  los códigos 1210, 1220, 1232, 1749, 1750, 1224, 1256 del recuadro N° 15 y los códigos 1484, 1485, 1486, 1487, 1771, 1772 del recuadro N° 20 deben ser cero."
+    "formulaRaw": "Si atributo !=​ 14TT; ([1210] + [1220] + [1232] + [1749] + [1750] + [1244] + [1256] + [1484] + [1485] + [1486] + [1487] + [1771] + [1772]) = 0 Sino 0",
+    "guidanceText": "Como ingreso valor en el código 1194 en el recuadro N°6, los códigos 1210, 1220, 1232, 1749, 1750, 1224, 1256 del recuadro N° 15 y los códigos 1484, 1485, 1486, 1487, 1771, 1772 del recuadro N° 20 deben ser cero."
   },
   {
     "ruleId": "f.1",
     "targetFieldRaw": "si$[03]",
     "operatorRaw": "validation",
-    "formulaRaw": "TIPO{[03}]=1,2, 3, 4, 5, 6, 7 o 8",
+    "formulaRaw": "TIPO{[03]} = 1, 2, 3, 4, 5, 6, 7, 8",
     "guidanceText": "El RUT registrado en el código 03 es inconsistente."
   },
   {
     "ruleId": "f.2",
     "targetFieldRaw": "si$[903]",
     "operatorRaw": "validation",
-    "formulaRaw": "[903]< =46.999.999  .o.  48.000.000  < =   [903] < =  49.999.999  .y.  M11{ [903] } = 1",
+    "formulaRaw": "[903] <= 46999999 .o. (48000000 <= [903] .y. [903] <= 49999999) .y. M11{[903]} = 1",
     "guidanceText": "El RUT del representante legal (código 903) debe ser persona natural"
   },
   {
     "ruleId": "f.3",
     "targetFieldRaw": "si$[650]",
     "operatorRaw": "validation",
-    "formulaRaw": "M11 { [650] } = 1",
+    "formulaRaw": "M11{[650]} = 1",
     "guidanceText": "Debe ingresar un Rut válido en el código 650"
   },
   {
@@ -3611,56 +3611,56 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "f.13",
     "targetFieldRaw": "si$[616]",
     "operatorRaw": "validation",
-    "formulaRaw": "[616] = X",
+    "formulaRaw": "[616] != 0",
     "guidanceText": "En el código 616 debe marcar con una “X”"
   },
   {
     "ruleId": "f.15",
     "targetFieldRaw": "si$[95]",
     "operatorRaw": "validation",
-    "formulaRaw": "[95] = X",
+    "formulaRaw": "[95] != 0",
     "guidanceText": "En el código 95 debe marcar con una “X”"
   },
   {
     "ruleId": "f.16",
     "targetFieldRaw": "si$[68]",
     "operatorRaw": "validation",
-    "formulaRaw": "[68] = X",
+    "formulaRaw": "[68] != 0",
     "guidanceText": "En el código 68 debe marcar con una “X”"
   },
   {
     "ruleId": "f.17",
     "targetFieldRaw": "si$[72]",
     "operatorRaw": "validation",
-    "formulaRaw": "[72] = X",
+    "formulaRaw": "[72] != 0",
     "guidanceText": "En el código 72 debe marcar con una “X”"
   },
   {
     "ruleId": "f.18",
     "targetFieldRaw": "si$[69]",
     "operatorRaw": "validation",
-    "formulaRaw": "[69] = X",
+    "formulaRaw": "[69] != 0",
     "guidanceText": "En el código 69 debe marcar con una “X”"
   },
   {
     "ruleId": "f.19",
     "targetFieldRaw": "si$[73]",
     "operatorRaw": "validation",
-    "formulaRaw": "[73] = X",
+    "formulaRaw": "[73] != 0",
     "guidanceText": "En el código 73 debe marcar con una “X”"
   },
   {
     "ruleId": "f.22",
     "targetFieldRaw": "si$[301]",
     "operatorRaw": "validation",
-    "formulaRaw": "[780]¹B",
+    "formulaRaw": "[780] > 0",
     "guidanceText": "Como ingresó datos en el código 301 debe ingresar datos en el código 780."
   },
   {
     "ruleId": "f.23",
     "targetFieldRaw": "si$[306]",
     "operatorRaw": "validation",
-    "formulaRaw": "[780]¹B",
+    "formulaRaw": "[780] > 0",
     "guidanceText": "Como ingresó datos en el código 306 debe ingresar datos en el código 780."
   },
   {
@@ -3674,28 +3674,28 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "f.26",
     "targetFieldRaw": "si$[786]",
     "operatorRaw": "validation",
-    "formulaRaw": "[786] = X",
+    "formulaRaw": "[786] != 0",
     "guidanceText": "En el código 786 debe marcar con una “X”"
   },
   {
     "ruleId": "f.30",
     "targetFieldRaw": "si$[805]",
     "operatorRaw": "validation",
-    "formulaRaw": "[805] = X",
+    "formulaRaw": "[805] != 0",
     "guidanceText": "En el código 805 debe marcar con una “X”"
   },
   {
     "ruleId": "f.31",
     "targetFieldRaw": "si$[813]",
     "operatorRaw": "validation",
-    "formulaRaw": "[813] = X",
+    "formulaRaw": "[813] != 0",
     "guidanceText": "En el código 813 debe marcar con una “X”"
   },
   {
     "ruleId": "f.32",
     "targetFieldRaw": "si$[159]",
     "operatorRaw": "validation",
-    "formulaRaw": "[1592] + [1024] + [1025] + [1026] + [1027] + [606] + [1105] + [1592] + [1593] + [1594] + [1595]  + [1633] + [1634] > 0",
+    "formulaRaw": "[1592] + [1024] + [1025] + [1026] + [1027] + [606] + [1105] + [1592] + [1593] + [1594] + [1595] + [1633] + [1634] > 0",
     "guidanceText": "Si ingresó un monto en el código 159 debe haber ingresado valor en alguno de los siguientes códigos: 1024, 1025, 1026, 1027, 606, 1105, 1592, 1593, 1594, 1595, 1633, 1634."
   },
   {
@@ -3730,7 +3730,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "f.77",
     "targetFieldRaw": "si$[833]",
     "operatorRaw": "validation",
-    "formulaRaw": "{[104] + [106] + [108] + [955] + [1632] + [155] + [1032] + [908] + [951] + [32] + [187] + [1037] + [1829] + (ABS[1440]) + (ABS[1690]) + (ABS[1630]) + (ABS[1816]) } > 0",
+    "formulaRaw": "{[104] + [106] + [108] + [955] + [1632] + [155] + [1032] + [908] + [951] + [32] + [187] + [1037] + [1829] + (ABS{1440}) + (ABS{1690}) + (ABS{1630}) + (ABS{1816}) } > 0",
     "guidanceText": "Si ingresó un monto en el código 833 debe haber ingresado valor en alguno de los siguientes códigos: 104, 106, 108, 955, 1632, 155, 1032, 908, 951, 32, , 187, 1037, 1829, 1440, 1630, 1690 o 1816."
   },
   {
@@ -3801,160 +3801,160 @@ export const RAW_RULES: RawRule[] = [
     "targetFieldRaw": "si$[1191]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1",
-    "guidanceText": "El código 1191 debe ser declarado por los contribuyentes acogidos al regimen  14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
+    "guidanceText": "El código 1191 debe ser declarado por los contribuyentes acogidos al regimen 14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.88",
     "targetFieldRaw": "si$[1192]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1",
-    "guidanceText": "El código 1192 debe ser declarado por los contribuyentes acogidos al regimen  14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
+    "guidanceText": "El código 1192 debe ser declarado por los contribuyentes acogidos al regimen 14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.89",
     "targetFieldRaw": "si$[1193]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1",
-    "guidanceText": "El código 1193 debe ser declarado por los contribuyentes acogidos al regimen  14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
+    "guidanceText": "El código 1193 debe ser declarado por los contribuyentes acogidos al regimen 14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.90",
     "targetFieldRaw": "si$[1194]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1",
-    "guidanceText": "El código 1194 debe ser declarado por los contribuyentes acogidos al regimen  14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
+    "guidanceText": "El código 1194 debe ser declarado por los contribuyentes acogidos al regimen 14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.91",
     "targetFieldRaw": "si$[1195]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1",
-    "guidanceText": "El código 1195 debe ser declarado por los contribuyentes acogidos al regimen  14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
+    "guidanceText": "El código 1195 debe ser declarado por los contribuyentes acogidos al regimen 14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.92",
     "targetFieldRaw": "si$[1691]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1",
-    "guidanceText": "El código 1691 debe ser declarado por los contribuyentes acogidos al regimen  14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
+    "guidanceText": "El código 1691 debe ser declarado por los contribuyentes acogidos al regimen 14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.93",
     "targetFieldRaw": "si$[1196]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1",
-    "guidanceText": "El código1196debe ser declarado por los contribuyentes acogidos al regimen  14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
+    "guidanceText": "El código1196debe ser declarado por los contribuyentes acogidos al regimen 14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.94",
     "targetFieldRaw": "si$[1197]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1",
-    "guidanceText": "El código 1197 debe ser declarado por los contribuyentes acogidos al regimen  14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
+    "guidanceText": "El código 1197 debe ser declarado por los contribuyentes acogidos al regimen 14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.96",
     "targetFieldRaw": "si$[238]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1",
-    "guidanceText": "El código 238 debe ser declarado por los contribuyentes acogidos al regimen  14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
+    "guidanceText": "El código 238 debe ser declarado por los contribuyentes acogidos al regimen 14 A) o del N° 3 de la letra D), ambos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.98",
     "targetFieldRaw": "si$[898]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 898 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 898 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.99",
     "targetFieldRaw": "si$[373]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 373 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 373 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.100",
     "targetFieldRaw": "si$[382]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 382 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 382 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.101",
     "targetFieldRaw": "si$[761]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 761 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 761 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.102",
     "targetFieldRaw": "si$[773]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 773 debe ser declarado por los contribuyentes acogidos al regimen  114 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 773 debe ser declarado por los contribuyentes acogidos al regimen 114 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.103",
     "targetFieldRaw": "si$[365]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 365 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 365 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.104",
     "targetFieldRaw": "si$[366]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 366 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 366 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.105",
     "targetFieldRaw": "si$[392]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 392 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 392 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.107",
     "targetFieldRaw": "si$[984]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 984 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 984 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.108",
     "targetFieldRaw": "si$[390]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 390 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 390 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.109",
     "targetFieldRaw": "si$[742]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 742 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 742 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.110",
     "targetFieldRaw": "si$[841]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 841 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 841 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.111",
     "targetFieldRaw": "si$[855]",
     "operatorRaw": "validation",
     "formulaRaw": "Atributo = M14A .o. 14D1 .o. M14G",
-    "guidanceText": "El código 855 debe ser declarado por los contribuyentes acogidos al regimen  14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
+    "guidanceText": "El código 855 debe ser declarado por los contribuyentes acogidos al regimen 14 letra A), o del N° 3 de la letra D), o 14 letra G), todos del artículo 14 de la LIR"
   },
   {
     "ruleId": "f.113",
     "targetFieldRaw": "si$[77]",
     "operatorRaw": "validation",
-    "formulaRaw": "TIPO{[03]}¹(1 .o. 3 .o. 4)",
+    "formulaRaw": "TIPO{[03]} = 1 .o. 3 .o. 4",
     "guidanceText": "El código 77 debe ser declarado por empresas del Estado o en aquellas empresas en que tenga participacion"
   },
   {
@@ -3982,294 +3982,294 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "m.1",
     "targetFieldRaw": "[1208] + [1218] + [1209] + [1219] + [1193] + [1194]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014105 + Vx014106 + Vx014107 + Vx014108",
-    "guidanceText": "Los retiros, remesas o dividendos  de los códigos 1208, 1218, 1209, 1219, del recuadro N° 15 y/o en los códigos 1193, 1194 del recuadro N° 6, deben ser iguales a los retiros, remesas o dividendos de las columnas C5, C6, C7 y C8 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014105 + Vx014106 + Vx014107 + Vx014108",
+    "guidanceText": "Los retiros, remesas o dividendos de los códigos 1208, 1218, 1209, 1219, del recuadro N° 15 y/o en los códigos 1193, 1194 del recuadro N° 6, deben ser iguales a los retiros, remesas o dividendos de las columnas C5, C6, C7 y C8 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.2",
     "targetFieldRaw": "[1230] + [1231]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014109",
-    "guidanceText": "Los retiros, remesas o dividendos  de los códigos 1230, 1231 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de la columna C9 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014109",
+    "guidanceText": "Los retiros, remesas o dividendos de los códigos 1230, 1231 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de la columna C9 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.3",
     "targetFieldRaw": "[1745] + [1747]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014112 + Vx014113",
-    "guidanceText": "Los retiros, remesas o dividendos  de los códigos 1745, 1747 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de las columnas C12 y C13 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014112 + Vx014113",
+    "guidanceText": "Los retiros, remesas o dividendos de los códigos 1745, 1747 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de las columnas C12 y C13 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.4",
     "targetFieldRaw": "[1746] + [1748]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014110 + Vx014111",
-    "guidanceText": "Los retiros, remesas o dividendos  de los códigos 1746, 1748 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de las columnas C10 y C11 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014110 + Vx014111",
+    "guidanceText": "Los retiros, remesas o dividendos de los códigos 1746, 1748 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de las columnas C10 y C11 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.5",
     "targetFieldRaw": "[1242] + [1243]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014114 + Vx014115",
-    "guidanceText": "Los retiros, remesas o dividendos  de los códigos 1242, 1243 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de las columnas C14 y C15 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014114 + Vx014115",
+    "guidanceText": "Los retiros, remesas o dividendos de los códigos 1242, 1243 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de las columnas C14 y C15 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.6",
     "targetFieldRaw": "[1254] + [1255]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014116",
-    "guidanceText": "Los retiros, remesas o dividendos  de los códigos 1254, 1255 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de la columna C16 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014116",
+    "guidanceText": "Los retiros, remesas o dividendos de los códigos 1254, 1255 del recuadro N° 15, deben ser iguales a los retiros, remesas o dividendos de la columna C16 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.7",
     "targetFieldRaw": "[1276] + [1277]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014117 + Vx014119",
-    "guidanceText": "Los créditos por impuesto de primera categoría  de los códigos 1276, 1277 del recuadro N° 16, deben ser iguales a los créditos de las columnas C17 y C19 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014117 + Vx014119",
+    "guidanceText": "Los créditos por impuesto de primera categoría de los códigos 1276, 1277 del recuadro N° 16, deben ser iguales a los créditos de las columnas C17 y C19 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.8",
     "targetFieldRaw": "[1285] + [1286] + [1041]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014118 + Vx014120",
-    "guidanceText": "Los créditos por impuesto de primera categoría  de los códigos 1285, 1286 del recuadro N° 16, y/o el pago voluntario a título de IDPC del código 1041, deben ser iguales a los créditos de las columnas C18 y C20 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014118 + Vx014120",
+    "guidanceText": "Los créditos por impuesto de primera categoría de los códigos 1285, 1286 del recuadro N° 16, y/o el pago voluntario a título de IDPC del código 1041, deben ser iguales a los créditos de las columnas C18 y C20 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.9",
     "targetFieldRaw": "[1296] + [1297]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014121 + Vx014123",
-    "guidanceText": "Los créditos por impuesto de primera categoría  de los códigos 1296, 1297 del recuadro N° 16, deben ser iguales a los créditos de las columnas C21 y C23 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014121 + Vx014123",
+    "guidanceText": "Los créditos por impuesto de primera categoría de los códigos 1296, 1297 del recuadro N° 16, deben ser iguales a los créditos de las columnas C21 y C23 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.10",
     "targetFieldRaw": "[1309] + [1310]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014122 + Vx014124",
-    "guidanceText": "Los créditos por impuesto de primera categoría  de los códigos 1309, 1310 del recuadro N° 16, deben ser iguales a los créditos de las columnas C22 y C24 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014122 + Vx014124",
+    "guidanceText": "Los créditos por impuesto de primera categoría de los códigos 1309, 1310 del recuadro N° 16, deben ser iguales a los créditos de las columnas C22 y C24 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.11",
     "targetFieldRaw": "[1320] + [1321]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014125",
-    "guidanceText": "Los créditos por impuesto de primera categoría  de los códigos 1320, 1321 del recuadro N° 16, deben ser iguales al crédito de las columna C25 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014125",
+    "guidanceText": "Los créditos por impuesto de primera categoría de los códigos 1320, 1321 del recuadro N° 16, deben ser iguales al crédito de las columna C25 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.12",
     "targetFieldRaw": "[1331] + [1332]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014126 + Vx014128",
-    "guidanceText": "Los créditos por impuesto de primera categoría  de los códigos 1331, 1332 del recuadro N° 16, deben ser iguales a los créditos de las columnas C26 y C28 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014126 + Vx014128",
+    "guidanceText": "Los créditos por impuesto de primera categoría de los códigos 1331, 1332 del recuadro N° 16, deben ser iguales a los créditos de las columnas C26 y C28 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.13",
     "targetFieldRaw": "[1342] + [1343]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014127 + Vx014129",
-    "guidanceText": "Los créditos por impuesto de primera categoría  de los códigos 1342, 1343 del recuadro N° 16, deben ser iguales a los créditos de las columnas C27 y C29 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014127 + Vx014129",
+    "guidanceText": "Los créditos por impuesto de primera categoría de los códigos 1342, 1343 del recuadro N° 16, deben ser iguales a los créditos de las columnas C27 y C29 de la declaración jurada N°1948."
   },
   {
     "ruleId": "m.14",
     "targetFieldRaw": "[1352] + [1353]",
     "operatorRaw": "=",
-    "formulaRaw": "Siatributo = M14A .y. (Vx011264 = 0 .o. atributo ≠ ME22); entoncesVx014130",
-    "guidanceText": "Los créditos por impuesto de primera categoría  de los códigos 1352, 1353 del recuadro N° 16, deben ser iguales al crédito de la columna C30 de la declaración jurada N°1948."
+    "formulaRaw": "Si atributo = M14A .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014130",
+    "guidanceText": "Los créditos por impuesto de primera categoría de los códigos 1352, 1353 del recuadro N° 16, deben ser iguales al crédito de la columna C30 de la declaración jurada N°1948."
   },
   {
     "ruleId": "n.1",
     "targetFieldRaw": "[1475] + [1480] + [1193] + [1194]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22); entonces(Vx014105 + Vx014106 + Vx014107 + Vx014108) * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014105 + Vx014106 + Vx014107 + Vx014108) * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos de las columnas C5, C6, C7 y/o C8 (reajustadas), deben ser iguales a los códigos 1475, 1480 (sin reajuste) del recuadro N° 20 y/o los códigos 1193, y/o 1194 (sin reajuste) del recuadro N° 6, según corresponda."
   },
   {
     "ruleId": "n.2",
     "targetFieldRaw": "[1475] + [1480] + [1193] + [1194]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014105 + Vx014106 + Vx014107 + Vx014108",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014105 + Vx014106 + Vx014107 + Vx014108",
     "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1475, 1480 del recuadro N°20, y/o de los códigos 1193, y 1194 del recuadro N° 6, deben ser iguales a las columnas C5, C6, C7 y/o C8 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.3",
     "targetFieldRaw": "[1476] + [1481]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014109 * (2 - P34 - P747)",
-    "guidanceText": "Los retiros, remesas o dividendos de  la columna C9 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1476 y/o 1481 (sin reajustar) del recuadro N° 20."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014109 * (2 - P34 - P747)",
+    "guidanceText": "Los retiros, remesas o dividendos de la columna C9 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1476 y/o 1481 (sin reajustar) del recuadro N° 20."
   },
   {
     "ruleId": "n.4",
     "targetFieldRaw": "[1476] + [1481]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014109\nSino 0",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014109 Sino 0",
     "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1476, 1481 del recuadro N°20, deben ser iguales a la columna C09 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.5",
     "targetFieldRaw": "[1767] + [1769]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entonces(Vx014112 + Vx014113) * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014112 + Vx014113) * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos de las columnas C12 y/o C13 (reajustadas) de la declaración jurada N° 1948, deben ser iguales a los códigos 1767 y/o 1769 (sin reajuste) del recuadro N° 20."
   },
   {
     "ruleId": "n.6",
     "targetFieldRaw": "[1767] + [1769]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014112 + Vx014113",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014112 + Vx014113",
     "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1767, 1769 del recuadro N°20, deben ser iguales a las columnas C12, y/o C13 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.7",
     "targetFieldRaw": "[1768] + [1770]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entonces(Vx014110 + Vx014111) * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014110 + Vx014111) * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos de las columnas C10 y/o C11 (reajustadas) de la declaración jurada N° 1948, deben ser iguales a los códigos 1768 y/o 1770 (sin reajustar) del recuadro N° 20."
   },
   {
     "ruleId": "n.8",
     "targetFieldRaw": "[1768] + [1770]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014110 + Vx014111",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014110 + Vx014111",
     "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1768, 1770 del recuadro N°20, deben ser iguales a las columnas C10, y/o C11 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.9",
     "targetFieldRaw": "[1477] + [1482]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entonces(Vx014114 + Vx014115) * (2 - P34 - P747)",
-    "guidanceText": "Los retiros, remesas o dividendos de las columnas C14 y/o C15  (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1477 y/o 1482 (sin reajustar) del recuadro N° 20."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014114 + Vx014115) * (2 - P34 - P747)",
+    "guidanceText": "Los retiros, remesas o dividendos de las columnas C14 y/o C15 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1477 y/o 1482 (sin reajustar) del recuadro N° 20."
   },
   {
     "ruleId": "n.10",
     "targetFieldRaw": "[1477] + [1482]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014114 + Vx014115",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014114 + Vx014115",
     "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1477, 1482 del recuadro N°20, deben ser iguales a las columnas C14, y/o C15 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.11",
     "targetFieldRaw": "[1478] + [1483]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014116 * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014116 * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos de la columna C16 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1478 y/o 1483 (sin reajuste) del recuadro N° 20."
   },
   {
     "ruleId": "n.12",
     "targetFieldRaw": "[1478] + [1483]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014116",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014116",
     "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1478, 1483 del recuadro N°20, deben ser iguales a la columna C16 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.13",
     "targetFieldRaw": "[1539] + [1549]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entonces(Vx014117 + Vx014119) * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014117 + Vx014119) * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos de las columnas C17 y/o C19 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1539 y/o 1549 (sin reajustar) del recuadro N° 20."
   },
   {
     "ruleId": "n.14",
     "targetFieldRaw": "[1539] + [1549]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014117 + Vx014119",
-    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1539, 1549 del recuadro N°20,  deben ser iguales a las columnas C14, y/o C15 (reajustados) de la declaración jurada N° 1948."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014117 + Vx014119",
+    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1539, 1549 del recuadro N°20, deben ser iguales a las columnas C14, y/o C15 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.15",
     "targetFieldRaw": "[1540] + [1550] + [1041]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entonces(Vx014118 + Vx014120) * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014118 + Vx014120) * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos de las columnas C18 y/o C20 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1540 y/o 1550 (sin reajustar) del recuadro N° 20, o el código 1041 del anverso del Formulario 22."
   },
   {
     "ruleId": "n.16",
     "targetFieldRaw": "[1540] + [1550] + [1041]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014118 + Vx014120",
-    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1540, 1550 del recuadro N°20, o el código 1041 del anverso del Formulario 22,  deben ser iguales a las columnas C18, y/o C20 (reajustados) de la declaración jurada N° 1948."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014118 + Vx014120",
+    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1540, 1550 del recuadro N°20, o el código 1041 del anverso del Formulario 22, deben ser iguales a las columnas C18, y/o C20 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.17",
     "targetFieldRaw": "[1541] + [1551]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entonces(Vx014121 + Vx014123) * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014121 + Vx014123) * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos en las columnas C21 y/o C23 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1541 y/o 1551 (sin reajustar) del recuadro N° 20."
   },
   {
     "ruleId": "n.18",
     "targetFieldRaw": "[1541] + [1551]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014121 + Vx014123",
-    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1541, 1551 del recuadro N°20,  deben ser iguales a las columnas C21, y/o C23 (reajustados) de la declaración jurada N° 1948."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014121 + Vx014123",
+    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1541, 1551 del recuadro N°20, deben ser iguales a las columnas C21, y/o C23 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.19",
     "targetFieldRaw": "[1542] + [1552]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entonces(Vx014122 + Vx014124) * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014122 + Vx014124) * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos en las columnas C22 y/o C24 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1542 y/o 1552 (sin reajustar) del recuadro N° 20."
   },
   {
     "ruleId": "n.20",
     "targetFieldRaw": "[1542] + [1552]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014122 + Vx014124",
-    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1542, 1552 del recuadro N°20,  deben ser iguales a las columnas C22, y/o C24 (reajustados) de la declaración jurada N° 1948."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014122 + Vx014124",
+    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1542, 1552 del recuadro N°20, deben ser iguales a las columnas C22, y/o C24 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.21",
     "targetFieldRaw": "[1543] + [1553]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014125 * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014125 * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos en la columna C25 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1543 y/o 1553 (sin reajuste) del recuadro N° 20."
   },
   {
     "ruleId": "n.22",
     "targetFieldRaw": "[1543] + [1553]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014125",
-    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1543, 1553 del recuadro N°20,  deben ser iguales a la columna C25 (reajustados)  de la declaración jurada N° 1948."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014125",
+    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1543, 1553 del recuadro N°20, deben ser iguales a la columna C25 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.23",
     "targetFieldRaw": "[1544] + [1554]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y .(Vx011264 = 0 .o. atributo ≠ ME22);entonces(Vx014126 + Vx014128) * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y .(Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014126 + Vx014128) * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos en las columnas C26 y/o C28 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1544 y/o 1554 (sin reajustar) del recuadro N° 20."
   },
   {
     "ruleId": "n.24",
     "targetFieldRaw": "[1544] + [1554]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014126 + Vx014128",
-    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1544, 1554 del recuadro N°20,  deben ser iguales a las columnas C26, y/o C28 (reajustados) de la declaración jurada N° 1948."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014126 + Vx014128",
+    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1544, 1554 del recuadro N°20, deben ser iguales a las columnas C26, y/o C28 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.25",
     "targetFieldRaw": "[1547] + [1555]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entonces(Vx014127 + Vx014129) * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces (Vx014127 + Vx014129) * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos en las columnas C27 y/o C29 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1547 y/o 1555 (sin reajustar) del recuadro N° 20."
   },
   {
     "ruleId": "n.26",
     "targetFieldRaw": "[1547] + [1555]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014127 + Vx014129",
-    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1547, 1555 del recuadro N°20,  deben ser iguales a las columnas C27, y/o C29 (reajustados) de la declaración jurada N° 1948."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014127 + Vx014129",
+    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1547, 1555 del recuadro N°20, deben ser iguales a las columnas C27, y/o C29 (reajustados) de la declaración jurada N° 1948."
   },
   {
     "ruleId": "n.27",
     "targetFieldRaw": "[1548] + [1556]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014130 * (2 - P34 - P747)",
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014130 * (2 - P34 - P747)",
     "guidanceText": "Los retiros, remesas o dividendos en la columna C30 (reajustados) de la declaración jurada N° 1948, deben ser iguales a los códigos 1548 y/o 1556 (sin reajustar) del recuadro N° 20."
   },
   {
     "ruleId": "n.28",
     "targetFieldRaw": "[1548] + [1556]",
     "operatorRaw": "validation",
-    "formulaRaw": "Siatributo = 14D1 .y. (Vx011264 = 0 .o. atributo ≠ ME22);entoncesVx014130",
-    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1548, 1556 del recuadro N°20,  deben ser iguales a las columna C30 (reajustados) de la declaración jurada N° 1948."
+    "formulaRaw": "Si atributo = 14D1 .y. (Vx011264 = 0 .o. atributo !=​ ME22); entonces Vx014130",
+    "guidanceText": "Los retiros, remesas o dividendos (sin reajustar) de los códigos 1548, 1556 del recuadro N°20, deben ser iguales a las columna C30 (reajustados) de la declaración jurada N° 1948."
   }
 ];

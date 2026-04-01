@@ -4,6 +4,11 @@
 
 import type { ExprNode } from "./ast.ts";
 
+export interface RuleBinding {
+  name: string;
+  ast: ExprNode;
+}
+
 export interface RuleMetadata {
   referencedFields: number[];
   referencedParams: number[];
@@ -21,7 +26,9 @@ export interface Rule {
   operator: "=" | "validation";
   /** Raw formula string from spreadsheet */
   formulaRaw: string;
-  /** Parsed AST, null if parsing failed */
+  /** Pre-calculated variable bindings (Alfa, Beta, e, j, m…), in evaluation order */
+  bindings: RuleBinding[];
+  /** Parsed AST of the main expression (body after bindings), null if parsing failed */
   formulaAst: ExprNode | null;
   /** Parse error message if parsing failed */
   parseError?: string;

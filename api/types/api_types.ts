@@ -114,6 +114,8 @@ export interface FieldDTO {
   applicableRegimes?: string[];
   /** Tipos de entidad a los que aplica (null = todos). */
   applicableEntityTypes?: number[];
+  /** Si el campo debe ser ingresado por el usuario (false = auto-calculado). */
+  isUserEntered?: boolean;
 }
 
 export interface FieldsResponse {

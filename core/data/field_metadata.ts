@@ -127,7 +127,7 @@ export const FIELD_METADATA: Record<number, FieldMetadata> = {
   [547]: {
     fieldCode: 547,
     description: "Registra el total de ingresos brutos anuales actualizados, sumando los valores de los códigos 461, 545, 1650 y 856.",
-    isUserEntered: true,
+    isUserEntered: false,
   },
   [617]: {
     fieldCode: 617,

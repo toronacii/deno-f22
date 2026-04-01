@@ -116,11 +116,33 @@ export function tokenize(formula: string): Token[] {
     if (ch === ";") { advance(); addToken(TokenKind.SEMICOLON, ";", startPos); continue; }
     if (ch === ",") { advance(); addToken(TokenKind.COMMA, ",", startPos); continue; }
 
-    // Numbers (including decimals)
+    // Numbers (including decimals) — or regime IDs that start with digits (14D1, 14TT, 14G…)
     if (/\d/.test(ch) || (ch === "." && /\d/.test(formula[pos + 1] ?? ""))) {
       let numStr = "";
-      while (pos < formula.length && /[\d.]/.test(formula[pos])) {
-        numStr += formula[pos++];
+      while (pos < formula.length) {
+        const c = formula[pos];
+        if (/\d/.test(c)) {
+          numStr += formula[pos++];
+        } else if (c === "." && /\d/.test(formula[pos + 1] ?? "")) {
+          numStr += formula[pos++]; // decimal point followed by digit
+        } else {
+          break;
+        }
+      }
+      // If immediately followed by letters, check for a digit-prefixed regime ID
+      if (/[A-Za-z]/.test(formula[pos] ?? "")) {
+        const letterStart = pos;
+        let combined = numStr;
+        while (pos < formula.length && /[\w]/.test(formula[pos])) {
+          combined += formula[pos++];
+        }
+        const regimeMatch = combined.match(/^(M14A|M14G|14D[138]|14G|14TT|BHEP|0HEP|PRESUNTO|SIMPLIFICADO|OTFA|OTFI)$/i);
+        if (regimeMatch) {
+          addToken(TokenKind.REGIME_ID, combined.toUpperCase(), startPos);
+          continue;
+        }
+        // Not a regime ID — backtrack to after the numeric portion
+        pos = letterStart;
       }
       addToken(TokenKind.NUMBER, numStr, startPos);
       continue;
@@ -152,7 +174,7 @@ export function tokenize(formula: string): Token[] {
       }
 
       // Tax regime identifiers
-      const regimeMatch = word.match(/^(M14A|14D[138]|14G|14TT|BHEP|PRESUNTO|SIMPLIFICADO)$/i);
+      const regimeMatch = word.match(/^(M14A|M14G|14D[138]|14G|14TT|BHEP|0HEP|PRESUNTO|SIMPLIFICADO|OTFA|OTFI)$/i);
       if (regimeMatch) {
         addToken(TokenKind.REGIME_ID, word.toUpperCase(), startPos);
         continue;

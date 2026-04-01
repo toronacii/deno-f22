@@ -998,7 +998,6 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
-    "decimals": 6,
     "sourceRow": 108
   },
   {
@@ -1009,7 +1008,6 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
-    "decimals": 6,
     "sourceRow": 109
   },
   {
@@ -2070,7 +2068,6 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
-    "decimals": 2,
     "sourceRow": 213
   },
   {
@@ -2101,7 +2098,6 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
-    "decimals": 1,
     "sourceRow": 216
   },
   {
@@ -2112,7 +2108,6 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
-    "decimals": 2,
     "sourceRow": 217
   },
   {
@@ -7808,7 +7803,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1592,
     "label": "1",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7818,7 +7813,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1024,
     "label": "1",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7828,7 +7823,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1593,
     "label": "1",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7838,7 +7833,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1025,
     "label": "1",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7848,7 +7843,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 104,
     "label": "1",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7858,7 +7853,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2005,
     "label": "Campo 2005",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7868,7 +7863,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2006,
     "label": "Campo 2006",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7878,7 +7873,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2007,
     "label": "Campo 2007",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7888,7 +7883,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2008,
     "label": "Campo 2008",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7898,7 +7893,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2009,
     "label": "Campo 2009",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7908,7 +7903,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2000,
     "label": "Campo 2000",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7918,7 +7913,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2001,
     "label": "Campo 2001",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7928,7 +7923,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2002,
     "label": "Campo 2002",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7938,7 +7933,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2003,
     "label": "Campo 2003",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7948,7 +7943,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2004,
     "label": "Campo 2004",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7958,7 +7953,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1594,
     "label": "2",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7968,7 +7963,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1026,
     "label": "2",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7978,7 +7973,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1595,
     "label": "2",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7988,7 +7983,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1027,
     "label": "2",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -7998,7 +7993,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 105,
     "label": "2",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8008,7 +8003,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 106,
     "label": "3",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8018,7 +8013,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 603,
     "label": "4",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8028,7 +8023,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 108,
     "label": "4",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8038,7 +8033,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1920,
     "label": "Campo 1920",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8048,7 +8043,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1921,
     "label": "Campo 1921",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8058,7 +8053,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1922,
     "label": "Campo 1922",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8068,7 +8063,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1923,
     "label": "Campo 1923",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8078,7 +8073,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1721,
     "label": "5",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8088,7 +8083,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1722,
     "label": "5",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8098,7 +8093,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1596,
     "label": "5",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8108,7 +8103,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 954,
     "label": "5",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8118,7 +8113,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 955,
     "label": "5",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8128,7 +8123,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1917,
     "label": "Campo 1917",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8138,7 +8133,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1848,
     "label": "Campo 1848",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8148,7 +8143,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1849,
     "label": "Campo 1849",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8158,7 +8153,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1850,
     "label": "Campo 1850",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8168,7 +8163,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1851,
     "label": "Campo 1851",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8178,7 +8173,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1852,
     "label": "Campo 1852",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8188,7 +8183,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1853,
     "label": "Campo 1853",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8198,7 +8193,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1854,
     "label": "Campo 1854",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8208,7 +8203,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1855,
     "label": "Campo 1855",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8218,7 +8213,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1856,
     "label": "Campo 1856",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8228,7 +8223,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1857,
     "label": "Campo 1857",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8238,7 +8233,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1858,
     "label": "Campo 1858",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8248,7 +8243,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1859,
     "label": "Campo 1859",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8258,7 +8253,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1860,
     "label": "Campo 1860",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8268,7 +8263,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1861,
     "label": "Campo 1861",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8278,7 +8273,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1862,
     "label": "Campo 1862",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8288,7 +8283,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1872,
     "label": "Campo 1872",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8298,7 +8293,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1873,
     "label": "Campo 1873",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8308,7 +8303,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1863,
     "label": "Campo 1863",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8318,7 +8313,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1864,
     "label": "Campo 1864",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8328,7 +8323,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1865,
     "label": "Campo 1865",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8338,7 +8333,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1597,
     "label": "6",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8348,7 +8343,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1598,
     "label": "6",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8358,7 +8353,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1599,
     "label": "6",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8368,7 +8363,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1631,
     "label": "6",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8378,7 +8373,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1632,
     "label": "6",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8388,7 +8383,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2010,
     "label": "Campo 2010",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8398,7 +8393,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2011,
     "label": "Campo 2011",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8408,7 +8403,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2012,
     "label": "Campo 2012",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8418,7 +8413,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2013,
     "label": "Campo 2013",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8428,7 +8423,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2014,
     "label": "Campo 2014",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8438,7 +8433,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2015,
     "label": "Campo 2015",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8448,7 +8443,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2016,
     "label": "Campo 2016",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8458,7 +8453,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2017,
     "label": "Campo 2017",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8468,7 +8463,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2018,
     "label": "Campo 2018",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8478,7 +8473,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 2019,
     "label": "Campo 2019",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8488,7 +8483,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 110,
     "label": "7",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8498,7 +8493,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 605,
     "label": "8",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8508,7 +8503,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 155,
     "label": "8",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8518,7 +8513,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1866,
     "label": "Campo 1866",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8528,7 +8523,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1867,
     "label": "Campo 1867",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8538,7 +8533,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1869,
     "label": "Campo 1869",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8548,7 +8543,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1871,
     "label": "Campo 1871",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8558,7 +8553,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1633,
     "label": "9",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8568,7 +8563,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1105,
     "label": "9",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8578,7 +8573,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1634,
     "label": "9",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8588,7 +8583,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 606,
     "label": "9",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8598,7 +8593,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 152,
     "label": "9",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8608,7 +8603,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1874,
     "label": "Campo 1874",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8618,7 +8613,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1875,
     "label": "Campo 1875",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8628,7 +8623,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1876,
     "label": "Campo 1876",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8638,7 +8633,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1877,
     "label": "Campo 1877",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8648,7 +8643,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1878,
     "label": "Campo 1878",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8658,7 +8653,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1879,
     "label": "Campo 1879",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8668,7 +8663,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1880,
     "label": "Campo 1880",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8678,7 +8673,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1881,
     "label": "Campo 1881",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8688,7 +8683,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1882,
     "label": "Campo 1882",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8698,7 +8693,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1883,
     "label": "Campo 1883",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8708,7 +8703,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1884,
     "label": "Campo 1884",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8718,7 +8713,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1885,
     "label": "Campo 1885",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8728,7 +8723,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1886,
     "label": "Campo 1886",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8738,7 +8733,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1887,
     "label": "Campo 1887",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8748,7 +8743,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1888,
     "label": "Campo 1888",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8758,7 +8753,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1889,
     "label": "Campo 1889",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8768,7 +8763,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1635,
     "label": "10",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8778,7 +8773,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1031,
     "label": "10",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8788,7 +8783,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1032,
     "label": "10",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8798,7 +8793,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1890,
     "label": "11",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8808,7 +8803,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1891,
     "label": "11",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8818,7 +8813,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1914,
     "label": "12",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8828,7 +8823,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1104,
     "label": "12",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8838,7 +8833,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1098,
     "label": "Sueldos y otras rentas similares de fuente extranjera",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8848,7 +8843,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1030,
     "label": "Sueldos y otras rentas similares de fuente extranjera",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8858,7 +8853,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 161,
     "label": "13",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8868,7 +8863,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 159,
     "label": "Incremento por impuestos soportados en el exterior, según art. 41 A LIR",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8878,7 +8873,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 748,
     "label": "Incremento por impuestos soportados en el exterior, según art. 41 A LIR",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8888,7 +8883,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 749,
     "label": "14",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8898,7 +8893,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 166,
     "label": "15",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8908,7 +8903,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 907,
     "label": "16",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8918,7 +8913,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 169,
     "label": "17",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8928,7 +8923,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1833,
     "label": "18",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8938,7 +8933,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 158,
     "label": "19",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8948,7 +8943,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 111,
     "label": "20",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8958,7 +8953,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 750,
     "label": "Dividendos hipotecarios pagados por viviendas nuevas acogidas al D.F.L. Nº 2 de 1959, según Ley N°19.622",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8968,7 +8963,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 740,
     "label": "Dividendos hipotecarios pagados por viviendas nuevas acogidas al D.F.L. Nº 2 de 1959, según Ley N°19.622",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8978,7 +8973,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 751,
     "label": "21",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8988,7 +8983,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 822,
     "label": "22",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -8998,7 +8993,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 765,
     "label": "23",
-    "section": "RECUADRO 24",
+    "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9008,7 +9003,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 170,
     "label": "24",
-    "section": "RECUADRO 24",
+    "section": "BASE IMPONIBLE ANUAL",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9018,7 +9013,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 157,
     "label": "25",
-    "section": "RECUADRO 24",
+    "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9028,7 +9023,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1017,
     "label": "26",
-    "section": "RECUADRO 24",
+    "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9038,7 +9033,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1033,
     "label": "27",
-    "section": "RECUADRO 24",
+    "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9048,7 +9043,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 201,
     "label": "28",
-    "section": "RECUADRO 24",
+    "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9058,7 +9053,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1035,
     "label": "29",
-    "section": "RECUADRO 24",
+    "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9068,7 +9063,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 910,
     "label": "30",
-    "section": "RECUADRO 24",
+    "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9078,7 +9073,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1036,
     "label": "31",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9088,7 +9083,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1101,
     "label": "32",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9098,7 +9093,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 135,
     "label": "33",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9108,7 +9103,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 136,
     "label": "34",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9118,7 +9113,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 176,
     "label": "35",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9128,7 +9123,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 752,
     "label": "36",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9138,7 +9133,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 608,
     "label": "37",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9148,7 +9143,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1636,
     "label": "38",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9158,7 +9153,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1637,
     "label": "39",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9168,7 +9163,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1638,
     "label": "40",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9178,7 +9173,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 895,
     "label": "41",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9188,7 +9183,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 867,
     "label": "42",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9198,7 +9193,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 609,
     "label": "43",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9208,7 +9203,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1639,
     "label": "44",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9218,7 +9213,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1018,
     "label": "45",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9228,7 +9223,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 162,
     "label": "46",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9238,7 +9233,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 174,
     "label": "47",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9248,7 +9243,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 610,
     "label": "48",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9258,7 +9253,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 746,
     "label": "49",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9268,7 +9263,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 866,
     "label": "50",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9278,7 +9273,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 607,
     "label": "51",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9288,7 +9283,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 304,
     "label": "52",
-    "section": "RECUADRO 24",
+    "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9298,7 +9293,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 31,
     "label": "REBAJAS AL IMPUESTO",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9308,7 +9303,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 18,
     "label": "54",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9318,7 +9313,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 19,
     "label": "54",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9328,7 +9323,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 20,
     "label": "54",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9338,7 +9333,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1109,
     "label": "55",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9348,7 +9343,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1111,
     "label": "55",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9358,7 +9353,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1113,
     "label": "55",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9368,7 +9363,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1640,
     "label": "56",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9378,7 +9373,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1641,
     "label": "56",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9388,7 +9383,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1642,
     "label": "56",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9398,7 +9393,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 187,
     "label": "57",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9408,7 +9403,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 188,
     "label": "57",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9418,7 +9413,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 189,
     "label": "57",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9428,7 +9423,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1924,
     "label": "Campo 1924",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9438,7 +9433,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1925,
     "label": "Campo 1925",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9448,7 +9443,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1926,
     "label": "Campo 1926",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9458,7 +9453,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1927,
     "label": "Campo 1927",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9468,7 +9463,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1928,
     "label": "Campo 1928",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9478,7 +9473,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1929,
     "label": "Campo 1929",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9488,7 +9483,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1930,
     "label": "Campo 1930",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9498,7 +9493,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1931,
     "label": "Campo 1931",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9508,7 +9503,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1932,
     "label": "Campo 1932",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9518,7 +9513,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1037,
     "label": "58",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9528,7 +9523,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1038,
     "label": "58",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9538,7 +9533,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1039,
     "label": "58",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9548,7 +9543,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1892,
     "label": "Campo 1892",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9558,7 +9553,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1893,
     "label": "Campo 1893",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9568,7 +9563,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1894,
     "label": "Campo 1894",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9578,7 +9573,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1895,
     "label": "Campo 1895",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9588,7 +9583,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1897,
     "label": "Campo 1897",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9598,7 +9593,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1898,
     "label": "Campo 1898",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9608,7 +9603,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1899,
     "label": "Campo 1899",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9618,7 +9613,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1900,
     "label": "Campo 1900",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9628,7 +9623,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1901,
     "label": "Campo 1901",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9638,7 +9633,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1902,
     "label": "Campo 1902",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9648,7 +9643,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1903,
     "label": "Campo 1903",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9658,7 +9653,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1912,
     "label": "Campo 1912",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9668,7 +9663,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1918,
     "label": "Campo 1918",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9678,7 +9673,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1913,
     "label": "Campo 1913",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9688,7 +9683,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 77,
     "label": "59",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9698,7 +9693,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 74,
     "label": "59",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9708,7 +9703,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 79,
     "label": "59",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9718,7 +9713,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1040,
     "label": "60",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9728,7 +9723,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1041,
     "label": "60",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9738,7 +9733,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1042,
     "label": "61",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9748,7 +9743,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 824,
     "label": "62",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9758,7 +9753,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 825,
     "label": "62",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9768,7 +9763,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1976,
     "label": "63",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9778,7 +9773,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1977,
     "label": "Campo 1977",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9788,7 +9783,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1978,
     "label": "Campo 1978",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9798,7 +9793,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1979,
     "label": "Campo 1979",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9808,7 +9803,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1980,
     "label": "Campo 1980",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9818,7 +9813,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1043,
     "label": "64",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9828,7 +9823,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1102,
     "label": "64",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9838,7 +9833,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1044,
     "label": "64",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9848,7 +9843,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 113,
     "label": "65",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9858,7 +9853,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1007,
     "label": "65",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9868,7 +9863,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 114,
     "label": "65",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9878,7 +9873,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1829,
     "label": "66",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9888,7 +9883,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1830,
     "label": "66",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9898,7 +9893,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1835,
     "label": "67",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9908,7 +9903,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1836,
     "label": "67",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9918,7 +9913,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1837,
     "label": "67",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9928,7 +9923,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 908,
     "label": "68",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9938,7 +9933,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 909,
     "label": "68",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9948,7 +9943,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 951,
     "label": "69",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9958,7 +9953,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 952,
     "label": "69",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9968,7 +9963,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 753,
     "label": "70",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9978,7 +9973,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 754,
     "label": "70",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9988,7 +9983,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 755,
     "label": "70",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -9998,7 +9993,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 133,
     "label": "71",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10008,7 +10003,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 138,
     "label": "71",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10018,7 +10013,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 134,
     "label": "71",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10028,7 +10023,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 32,
     "label": "72",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10038,7 +10033,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 76,
     "label": "72",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10048,7 +10043,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 34,
     "label": "72",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10058,7 +10053,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1643,
     "label": "73",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10068,7 +10063,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1644,
     "label": "73",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10078,7 +10073,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 911,
     "label": "74",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10088,7 +10083,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 913,
     "label": "75",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10098,7 +10093,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 923,
     "label": "76",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10108,7 +10103,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 924,
     "label": "77",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10118,7 +10113,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1051,
     "label": "78",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10128,7 +10123,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1052,
     "label": "79",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10138,7 +10133,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 21,
     "label": "80",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10148,7 +10143,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 43,
     "label": "81",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10158,7 +10153,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 767,
     "label": "82",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10168,7 +10163,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 862,
     "label": "83",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10178,7 +10173,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 51,
     "label": "84",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10188,7 +10183,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 63,
     "label": "84",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10198,7 +10193,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 71,
     "label": "84",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10208,7 +10203,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 36,
     "label": "85",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10218,7 +10213,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1904,
     "label": "Campo 1904",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10228,7 +10223,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1905,
     "label": "Campo 1905",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10238,7 +10233,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1906,
     "label": "Campo 1906",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10248,7 +10243,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1916,
     "label": "Campo 1916",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10258,7 +10253,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 848,
     "label": "86",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10268,7 +10263,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 82,
     "label": "87",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10278,7 +10273,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1123,
     "label": "88",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10288,7 +10283,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 83,
     "label": "89",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10298,7 +10293,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 173,
     "label": "90",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10308,7 +10303,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 198,
     "label": "91",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10318,7 +10313,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 54,
     "label": "92",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10328,7 +10323,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 832,
     "label": "93",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10338,7 +10333,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1907,
     "label": "94",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10348,7 +10343,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 833,
     "label": "95",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10358,7 +10353,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1908,
     "label": "96",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10368,7 +10363,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 119,
     "label": "Remanente de crédito por IDPC proveniente de códigos 1638 y/o 610",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10378,7 +10373,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 116,
     "label": "Remanente de crédito por IDPC proveniente de códigos 1638 y/o 610",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10388,7 +10383,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 757,
     "label": "97",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10398,7 +10393,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 58,
     "label": "98",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10408,7 +10403,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1645,
     "label": "99",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10418,7 +10413,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 181,
     "label": "100",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10428,7 +10423,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 881,
     "label": "101",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10438,7 +10433,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1646,
     "label": "102",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10448,7 +10443,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1647,
     "label": "103",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10458,7 +10453,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1910,
     "label": "104",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10468,7 +10463,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1915,
     "label": "105",
-    "section": "RECUADRO 24",
+    "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10478,7 +10473,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 900,
     "label": "106",
-    "section": "RECUADRO 24",
+    "section": "OTROS CARGOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10488,7 +10483,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1796,
     "label": "107",
-    "section": "RECUADRO 24",
+    "section": "OTROS CARGOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10498,7 +10493,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 1827,
     "label": "108",
-    "section": "RECUADRO 24",
+    "section": "OTROS CARGOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10508,7 +10503,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 305,
     "label": "109",
-    "section": "RECUADRO 24",
+    "section": "OTROS CARGOS",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10518,7 +10513,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 85,
     "label": "110",
-    "section": "RECUADRO 24",
+    "section": "REMANENTE DE CRÉDITO",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10528,7 +10523,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 86,
     "label": "111",
-    "section": "RECUADRO 24",
+    "section": "REMANENTE DE CRÉDITO",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10538,7 +10533,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 87,
     "label": "112",
-    "section": "RECUADRO 24",
+    "section": "REMANENTE DE CRÉDITO",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10548,7 +10543,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 301,
     "label": "Nombre institución bancaria",
-    "section": "RECUADRO 24",
+    "section": "REMANENTE DE CRÉDITO",
     "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
@@ -10558,7 +10553,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 306,
     "label": "Número de cuenta",
-    "section": "RECUADRO 24",
+    "section": "REMANENTE DE CRÉDITO",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10568,7 +10563,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 780,
     "label": "Cuenta corriente",
-    "section": "RECUADRO 24",
+    "section": "REMANENTE DE CRÉDITO",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10578,7 +10573,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 90,
     "label": "113",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10588,7 +10583,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 39,
     "label": "114",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10598,7 +10593,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 91,
     "label": "115",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10608,7 +10603,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 92,
     "label": "116",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10618,7 +10613,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 93,
     "label": "117",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10628,7 +10623,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   {
     "code": 94,
     "label": "118",
-    "section": "RECUADRO 24",
+    "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
@@ -10787,6 +10782,56 @@ export const SECTION_INFOS: SectionInfo[] = [
     "id": "RECUADRO 24",
     "title": "RECUADRO N° 24: PAGO PRÉSTAMO TASA 0% PERCIBIDO EN EL AÑO COMERCIAL 2021 (PRÉSTAMO SOLIDARIO DEL ESTADO)",
     "startRow": 517
+  },
+  {
+    "id": "BASE IMPONIBLE IUSC O IGC O IA",
+    "title": "BASE IMPONIBLE IUSC O IGC O IA",
+    "startRow": 537
+  },
+  {
+    "id": "REBAJAS A LA RENTA",
+    "title": "REBAJAS A LA RENTA",
+    "startRow": 576
+  },
+  {
+    "id": "BASE IMPONIBLE ANUAL",
+    "title": "BASE IMPONIBLE ANUAL",
+    "startRow": 586
+  },
+  {
+    "id": "IUSC o IGC, Y DÉBITOS FISCALES",
+    "title": "IUSC o IGC, Y DÉBITOS FISCALES",
+    "startRow": 589
+  },
+  {
+    "id": "CRÉDITOS",
+    "title": "CRÉDITOS",
+    "startRow": 597
+  },
+  {
+    "id": "IMPUESTOS ANUALES A LA RENTA",
+    "title": "IMPUESTOS ANUALES A LA RENTA",
+    "startRow": 621
+  },
+  {
+    "id": "DEDUCCIONES A LOS IMPUESTOS",
+    "title": "DEDUCCIONES A LOS IMPUESTOS",
+    "startRow": 666
+  },
+  {
+    "id": "OTROS CARGOS",
+    "title": "OTROS CARGOS",
+    "startRow": 693
+  },
+  {
+    "id": "REMANENTE DE CRÉDITO",
+    "title": "REMANENTE DE CRÉDITO",
+    "startRow": 699
+  },
+  {
+    "id": "IMPUESTO A PAGAR",
+    "title": "IMPUESTO A PAGAR",
+    "startRow": 713
   }
 ];
 
@@ -12301,8 +12346,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 1,
             "label": "TEX",
-            "dataType": "number",
-            "decimals": 6
+            "dataType": "number"
           }
         ]
       },
@@ -12317,8 +12361,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 1,
             "label": "TEF",
-            "dataType": "number",
-            "decimals": 6
+            "dataType": "number"
           }
         ]
       },
@@ -13846,8 +13889,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 0,
             "label": "Promedio TMCF (incluídos los ingresos de explotadores mineros relacionados) art. 5 Ley N° 21.591",
-            "dataType": "number",
-            "decimals": 2
+            "dataType": "number"
           }
         ]
       },
@@ -13892,8 +13934,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 0,
             "label": "Margen operacional minero según N° 6 del art 1 Ley N° 21.591",
-            "dataType": "number",
-            "decimals": 1
+            "dataType": "number"
           }
         ]
       },
@@ -13908,8 +13949,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "",
             "slot": 0,
             "label": "Tasa componente sobre la rentabilidad, según art. 3 o art. 4 Ley N° 21.591",
-            "dataType": "number",
-            "decimals": 2
+            "dataType": "number"
           }
         ]
       }
@@ -20103,15 +20143,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
     "id": "RECUADRO 24",
     "title": "RECUADRO N° 24: PAGO PRÉSTAMO TASA 0% PERCIBIDO EN EL AÑO COMERCIAL 2021 (PRÉSTAMO SOLIDARIO DEL ESTADO)",
     "columnHeaders": [
-      "",
-      "",
-      "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
-      "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
-      "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
-      "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
-      "",
-      "RENTAS Y REBAJAS",
-      "RENTAS Y REBAJAS"
+      ""
     ],
     "rows": [
       {
@@ -20123,7 +20155,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1784,
             "operator": "",
-            "slot": 8,
+            "slot": 0,
             "label": "5% de las rentas que forman parte de la declaración anual de impuestos a la renta según art. 65 LIR (calculado sobre el código 170)",
             "dataType": "number"
           }
@@ -20145,7 +20177,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1801,
             "operator": "",
-            "slot": 8,
+            "slot": 0,
             "label": "Cuota anual (30% del monto del préstamo tasa 0%), según art. 11 inc. 1° Ley N° 21.323",
             "dataType": "number"
           }
@@ -20160,7 +20192,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1799,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "Saldo pendiente cuota año anterior",
             "dataType": "number"
           }
@@ -20175,7 +20207,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1802,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "Monto a pagar de la cuota",
             "dataType": "number"
           }
@@ -20197,7 +20229,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1787,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "Pago anticipado por reintegro del préstamo tasa 0% (F-50, F-10 o código 1842 del F-22 AT2025), según art. 11 inc. 3° Ley N° 21.323",
             "dataType": "number"
           }
@@ -20219,7 +20251,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1788,
             "operator": "=",
-            "slot": 8,
+            "slot": 0,
             "label": "Monto a pagar de la cuota después de anticipos",
             "dataType": "number"
           }
@@ -20241,7 +20273,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1789,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "Retención adicional sobre rentas del art. 42 N° 1 LIR con tasa del 3% (retención a trabajadores dependientes), por reintegro del préstamo tasa 0%,  según art. 11 letra a) Ley N° 21.323",
             "dataType": "number"
           }
@@ -20256,7 +20288,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1790,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "Retención adicional sobre rentas del art. 42 N° 2 LIR con tasa del 3% (retención a trabajadores independientes), por reintegro del préstamo tasa 0%, según  art. 11 letra b) Ley N° 21.323",
             "dataType": "number"
           }
@@ -20271,7 +20303,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1791,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "PPMA primera categoría art. 84 letra a) y 14 letra D) N° 3 letra (k) y N° 8 letra (a) numeral (viii) LIR, con tasa 3%, por reintegro de préstamo tasa 0%, según art. 11 letra c) Ley N° 21.323",
             "dataType": "number"
           }
@@ -20286,7 +20318,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1792,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "PPMA segunda categoría art. 84 letra b) LIR, con tasa 3%, por reintegro de préstamo  tasa 0%, (trabajadores independientes) según art. 11 letra b) Ley N° 21.323",
             "dataType": "number"
           }
@@ -20301,7 +20333,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1793,
             "operator": "=",
-            "slot": 8,
+            "slot": 0,
             "label": "Total retenciones adicionales y PPMA",
             "dataType": "number"
           }
@@ -20323,7 +20355,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1794,
             "operator": "=",
-            "slot": 8,
+            "slot": 0,
             "label": "Monto a pagar de la cuota después de retenciones adicionales y PPMA",
             "dataType": "number"
           }
@@ -20338,19 +20370,26 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1795,
             "operator": "",
-            "slot": 8,
+            "slot": 0,
             "label": "Saldo a devolver por retenciones adicionales y PPMA en exceso",
             "dataType": "number"
           }
         ]
-      },
-      {
-        "rowIndex": 537,
-        "type": "sub_header",
-        "text": "BASE IMPONIBLE IUSC O IGC O IA",
-        "bold": false,
-        "fields": []
-      },
+      }
+    ]
+  },
+  {
+    "id": "BASE IMPONIBLE IUSC O IGC O IA",
+    "title": "BASE IMPONIBLE IUSC O IGC O IA",
+    "columnHeaders": [
+      "",
+      "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
+      "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
+      "",
+      "RENTAS Y REBAJAS",
+      "RENTAS Y REBAJAS"
+    ],
+    "rows": [
       {
         "rowIndex": 538,
         "type": "col_header",
@@ -20359,9 +20398,6 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
         "fields": [],
         "colTexts": [
           "",
-          "",
-          "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
-          "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
           "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
           "CRÉDITO POR IMPUESTO DE PRIMERA CATEGORÍA",
           "",
@@ -20385,31 +20421,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1592,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1024,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1593,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1025,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 104,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20423,31 +20459,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 2005,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 2006,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 2007,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 2008,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 2009,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20461,31 +20497,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 2000,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 2001,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 2002,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 2003,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 2004,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20499,31 +20535,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1594,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1026,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1595,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1027,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 105,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20537,7 +20573,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 106,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "label": "3",
             "dataType": "number"
           }
@@ -20552,13 +20588,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 603,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 108,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20572,13 +20608,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1920,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1921,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20592,13 +20628,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1922,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1923,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20612,31 +20648,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1721,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1722,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1596,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 954,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 955,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20650,19 +20686,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1917,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1848,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1849,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20676,19 +20712,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1850,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1851,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1852,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20702,31 +20738,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1853,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1854,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1855,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1856,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1857,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20740,31 +20776,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1858,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1859,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1860,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1861,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1862,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20778,13 +20814,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1872,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1873,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20798,19 +20834,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1863,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1864,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1865,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20824,31 +20860,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1597,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1598,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1599,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1631,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1632,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20862,31 +20898,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 2010,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 2011,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 2012,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 2013,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 2014,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20900,31 +20936,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 2015,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 2016,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 2017,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 2018,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 2019,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20938,7 +20974,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 110,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "label": "7",
             "dataType": "number"
           }
@@ -20953,13 +20989,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 605,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 155,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20973,13 +21009,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1866,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1867,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -20993,7 +21029,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1869,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21007,7 +21043,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1871,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21021,31 +21057,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1633,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1105,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1634,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 606,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 152,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21059,31 +21095,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1874,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1875,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1876,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1877,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1878,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21097,31 +21133,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1879,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1880,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1881,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1882,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1883,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21135,7 +21171,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1884,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21149,31 +21185,31 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1885,
             "operator": "",
-            "slot": 3,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1886,
             "operator": "",
-            "slot": 5,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 1887,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1888,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1889,
             "operator": "",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21187,19 +21223,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1635,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "dataType": "number"
           },
           {
             "code": 1031,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1032,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21213,13 +21249,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1890,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1891,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21233,13 +21269,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1914,
             "operator": "",
-            "slot": 7,
+            "slot": 4,
             "dataType": "number"
           },
           {
             "code": 1104,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21260,14 +21296,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1030,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "label": "Sueldos y otras rentas similares de fuente extranjera",
             "dataType": "number"
           },
           {
             "code": 161,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
@@ -21288,25 +21324,29 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 748,
             "operator": "",
-            "slot": 6,
+            "slot": 3,
             "label": "Incremento por impuestos soportados en el exterior, según art. 41 A LIR",
             "dataType": "number"
           },
           {
             "code": 749,
             "operator": "+",
-            "slot": 8,
+            "slot": 5,
             "dataType": "number"
           }
         ]
-      },
-      {
-        "rowIndex": 576,
-        "type": "sub_header",
-        "text": "REBAJAS A LA RENTA",
-        "bold": false,
-        "fields": []
-      },
+      }
+    ]
+  },
+  {
+    "id": "REBAJAS A LA RENTA",
+    "title": "REBAJAS A LA RENTA",
+    "columnHeaders": [
+      "",
+      "",
+      ""
+    ],
+    "rows": [
       {
         "rowIndex": 577,
         "type": "field",
@@ -21316,7 +21356,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 166,
             "operator": "-",
-            "slot": 8,
+            "slot": 2,
             "label": "15",
             "dataType": "number"
           }
@@ -21331,7 +21371,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 907,
             "operator": "-",
-            "slot": 8,
+            "slot": 2,
             "label": "16",
             "dataType": "number"
           }
@@ -21346,7 +21386,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 169,
             "operator": "-",
-            "slot": 8,
+            "slot": 2,
             "label": "17",
             "dataType": "number"
           }
@@ -21361,7 +21401,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1833,
             "operator": "-",
-            "slot": 8,
+            "slot": 2,
             "label": "18",
             "dataType": "number"
           }
@@ -21376,7 +21416,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 158,
             "operator": "=",
-            "slot": 8,
+            "slot": 2,
             "label": "19",
             "dataType": "number"
           }
@@ -21391,7 +21431,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 111,
             "operator": "-",
-            "slot": 8,
+            "slot": 2,
             "label": "20",
             "dataType": "number"
           }
@@ -21413,14 +21453,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 740,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "label": "Dividendos hipotecarios pagados por viviendas nuevas acogidas al D.F.L. Nº 2 de 1959, según Ley N°19.622",
             "dataType": "number"
           },
           {
             "code": 751,
             "operator": "-",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -21434,7 +21474,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 822,
             "operator": "-",
-            "slot": 8,
+            "slot": 2,
             "label": "22",
             "dataType": "number"
           }
@@ -21449,19 +21489,21 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 765,
             "operator": "-",
-            "slot": 8,
+            "slot": 2,
             "label": "23",
             "dataType": "number"
           }
         ]
-      },
-      {
-        "rowIndex": 586,
-        "type": "sub_header",
-        "text": "BASE IMPONIBLE ANUAL",
-        "bold": false,
-        "fields": []
-      },
+      }
+    ]
+  },
+  {
+    "id": "BASE IMPONIBLE ANUAL",
+    "title": "BASE IMPONIBLE ANUAL",
+    "columnHeaders": [
+      ""
+    ],
+    "rows": [
       {
         "rowIndex": 587,
         "type": "field",
@@ -21471,19 +21513,21 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 170,
             "operator": "=",
-            "slot": 8,
+            "slot": 0,
             "label": "24",
             "dataType": "number"
           }
         ]
-      },
-      {
-        "rowIndex": 589,
-        "type": "sub_header",
-        "text": "IUSC o IGC, Y DÉBITOS FISCALES",
-        "bold": false,
-        "fields": []
-      },
+      }
+    ]
+  },
+  {
+    "id": "IUSC o IGC, Y DÉBITOS FISCALES",
+    "title": "IUSC o IGC, Y DÉBITOS FISCALES",
+    "columnHeaders": [
+      ""
+    ],
+    "rows": [
       {
         "rowIndex": 590,
         "type": "field",
@@ -21493,7 +21537,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 157,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "25",
             "dataType": "number"
           }
@@ -21508,7 +21552,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1017,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "26",
             "dataType": "number"
           }
@@ -21523,7 +21567,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1033,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "27",
             "dataType": "number"
           }
@@ -21538,7 +21582,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 201,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "28",
             "dataType": "number"
           }
@@ -21553,7 +21597,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1035,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "29",
             "dataType": "number"
           }
@@ -21568,19 +21612,21 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 910,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "30",
             "dataType": "number"
           }
         ]
-      },
-      {
-        "rowIndex": 597,
-        "type": "sub_header",
-        "text": "CRÉDITOS",
-        "bold": false,
-        "fields": []
-      },
+      }
+    ]
+  },
+  {
+    "id": "CRÉDITOS",
+    "title": "CRÉDITOS",
+    "columnHeaders": [
+      ""
+    ],
+    "rows": [
       {
         "rowIndex": 598,
         "type": "field",
@@ -21590,7 +21636,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1036,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "31",
             "dataType": "number"
           }
@@ -21605,7 +21651,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1101,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "32",
             "dataType": "number"
           }
@@ -21620,7 +21666,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 135,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "33",
             "dataType": "number"
           }
@@ -21635,7 +21681,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 136,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "34",
             "dataType": "number"
           }
@@ -21650,7 +21696,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 176,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "35",
             "dataType": "number"
           }
@@ -21665,7 +21711,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 752,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "36",
             "dataType": "number"
           }
@@ -21680,7 +21726,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 608,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "37",
             "dataType": "number"
           }
@@ -21695,7 +21741,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1636,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "38",
             "dataType": "number"
           }
@@ -21710,7 +21756,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1637,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "39",
             "dataType": "number"
           }
@@ -21725,7 +21771,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1638,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "40",
             "dataType": "number"
           }
@@ -21740,7 +21786,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 895,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "41",
             "dataType": "number"
           }
@@ -21755,7 +21801,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 867,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "42",
             "dataType": "number"
           }
@@ -21770,7 +21816,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 609,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "43",
             "dataType": "number"
           }
@@ -21785,7 +21831,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1639,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "44",
             "dataType": "number"
           }
@@ -21800,7 +21846,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1018,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "45",
             "dataType": "number"
           }
@@ -21815,7 +21861,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 162,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "46",
             "dataType": "number"
           }
@@ -21830,7 +21876,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 174,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "47",
             "dataType": "number"
           }
@@ -21845,7 +21891,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 610,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "48",
             "dataType": "number"
           }
@@ -21860,7 +21906,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 746,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "49",
             "dataType": "number"
           }
@@ -21875,7 +21921,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 866,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "50",
             "dataType": "number"
           }
@@ -21890,7 +21936,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 607,
             "operator": "-",
-            "slot": 8,
+            "slot": 0,
             "label": "51",
             "dataType": "number"
           }
@@ -21905,19 +21951,23 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 304,
             "operator": "=",
-            "slot": 8,
+            "slot": 0,
             "label": "52",
             "dataType": "number"
           }
         ]
-      },
-      {
-        "rowIndex": 621,
-        "type": "sub_header",
-        "text": "IMPUESTOS ANUALES A LA RENTA",
-        "bold": false,
-        "fields": []
-      },
+      }
+    ]
+  },
+  {
+    "id": "IMPUESTOS ANUALES A LA RENTA",
+    "title": "IMPUESTOS ANUALES A LA RENTA",
+    "columnHeaders": [
+      "",
+      "",
+      ""
+    ],
+    "rows": [
       {
         "rowIndex": 622,
         "type": "sub_header",
@@ -21934,7 +21984,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 31,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "REBAJAS AL IMPUESTO",
             "dataType": "number"
           }
@@ -21949,19 +21999,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 18,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 19,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 20,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -21975,19 +22025,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1109,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1111,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1113,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22001,19 +22051,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1640,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1641,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1642,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22027,19 +22077,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 187,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 188,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 189,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22053,19 +22103,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1924,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1925,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1926,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22079,13 +22129,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1927,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1928,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22099,13 +22149,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1929,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1930,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22119,13 +22169,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1931,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1932,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22139,19 +22189,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1037,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1038,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1039,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22165,19 +22215,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1892,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1893,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1894,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22191,13 +22241,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1895,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1897,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22211,19 +22261,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1898,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1899,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1900,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22237,19 +22287,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1901,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1902,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1903,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22263,19 +22313,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1912,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1918,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1913,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22289,19 +22339,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 77,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 74,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 79,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22315,13 +22365,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1040,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1041,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22335,7 +22385,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1042,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "61",
             "dataType": "number"
           }
@@ -22350,13 +22400,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 824,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 825,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22370,7 +22420,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1976,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "63",
             "dataType": "number"
           }
@@ -22385,13 +22435,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1977,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1978,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22405,13 +22455,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1979,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1980,
             "operator": "",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22425,19 +22475,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1043,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1102,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1044,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22451,19 +22501,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 113,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1007,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 114,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22477,13 +22527,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1829,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1830,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22497,19 +22547,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1835,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1836,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 1837,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22523,13 +22573,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 908,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 909,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22543,13 +22593,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 951,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 952,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22563,19 +22613,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 753,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 754,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 755,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22589,19 +22639,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 133,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 138,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 134,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22615,19 +22665,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 32,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 76,
             "operator": "",
-            "slot": 6,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 34,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22641,13 +22691,13 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1643,
             "operator": "",
-            "slot": 4,
+            "slot": 0,
             "dataType": "number"
           },
           {
             "code": 1644,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "dataType": "number"
           }
         ]
@@ -22661,7 +22711,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 911,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "74",
             "dataType": "number"
           }
@@ -22676,7 +22726,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 913,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "75",
             "dataType": "number"
           }
@@ -22691,7 +22741,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 923,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "76",
             "dataType": "number"
           }
@@ -22706,7 +22756,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 924,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "77",
             "dataType": "number"
           }
@@ -22721,7 +22771,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1051,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "78",
             "dataType": "number"
           }
@@ -22736,7 +22786,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1052,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "79",
             "dataType": "number"
           }
@@ -22751,7 +22801,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 21,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "80",
             "dataType": "number"
           }
@@ -22766,7 +22816,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 43,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "81",
             "dataType": "number"
           }
@@ -22781,7 +22831,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 767,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "82",
             "dataType": "number"
           }
@@ -22796,19 +22846,24 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 862,
             "operator": "+",
-            "slot": 8,
+            "slot": 2,
             "label": "83",
             "dataType": "number"
           }
         ]
-      },
-      {
-        "rowIndex": 666,
-        "type": "sub_header",
-        "text": "DEDUCCIONES A LOS IMPUESTOS",
-        "bold": false,
-        "fields": []
-      },
+      }
+    ]
+  },
+  {
+    "id": "DEDUCCIONES A LOS IMPUESTOS",
+    "title": "DEDUCCIONES A LOS IMPUESTOS",
+    "columnHeaders": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "rows": [
       {
         "rowIndex": 667,
         "type": "field",
@@ -22818,19 +22873,19 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 51,
             "operator": "",
-            "slot": 4,
+            "slot": 1,
             "dataType": "number"
           },
           {
             "code": 63,
             "operator": "",
-            "slot": 6,
+            "slot": 2,
             "dataType": "number"
           },
           {
             "code": 71,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "dataType": "number"
           }
         ]
@@ -22844,7 +22899,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 36,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "85",
             "dataType": "number"
           }
@@ -22859,7 +22914,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1904,
             "operator": "",
-            "slot": 8,
+            "slot": 3,
             "dataType": "number"
           }
         ]
@@ -22873,7 +22928,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1905,
             "operator": "",
-            "slot": 8,
+            "slot": 3,
             "dataType": "number"
           }
         ]
@@ -22887,7 +22942,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1906,
             "operator": "",
-            "slot": 8,
+            "slot": 3,
             "dataType": "number"
           }
         ]
@@ -22901,7 +22956,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1916,
             "operator": "",
-            "slot": 8,
+            "slot": 3,
             "dataType": "number"
           }
         ]
@@ -22915,7 +22970,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 848,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "86",
             "dataType": "number"
           }
@@ -22930,7 +22985,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 82,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "87",
             "dataType": "number"
           }
@@ -22945,7 +23000,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1123,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "88",
             "dataType": "number"
           }
@@ -22960,7 +23015,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 83,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "89",
             "dataType": "number"
           }
@@ -22975,7 +23030,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 173,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "90",
             "dataType": "number"
           }
@@ -22990,7 +23045,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 198,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "91",
             "dataType": "number"
           }
@@ -23005,7 +23060,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 54,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "92",
             "dataType": "number"
           }
@@ -23020,7 +23075,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 832,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "93",
             "dataType": "number"
           }
@@ -23035,7 +23090,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1907,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "94",
             "dataType": "number"
           }
@@ -23050,7 +23105,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 833,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "95",
             "dataType": "number"
           }
@@ -23065,7 +23120,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1908,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "96",
             "dataType": "number"
           }
@@ -23080,21 +23135,21 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 119,
             "operator": "",
-            "slot": 1,
+            "slot": 0,
             "label": "Remanente de crédito por IDPC proveniente de códigos 1638 y/o 610",
             "dataType": "number"
           },
           {
             "code": 116,
             "operator": "",
-            "slot": 6,
+            "slot": 2,
             "label": "Remanente de crédito por IDPC proveniente de códigos 1638 y/o 610",
             "dataType": "number"
           },
           {
             "code": 757,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "dataType": "number"
           }
         ]
@@ -23108,7 +23163,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 58,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "98",
             "dataType": "number"
           }
@@ -23123,7 +23178,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1645,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "99",
             "dataType": "number"
           }
@@ -23138,7 +23193,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 181,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "100",
             "dataType": "number"
           }
@@ -23153,7 +23208,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 881,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "101",
             "dataType": "number"
           }
@@ -23168,7 +23223,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1646,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "102",
             "dataType": "number"
           }
@@ -23183,7 +23238,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1647,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "103",
             "dataType": "number"
           }
@@ -23198,7 +23253,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1910,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "104",
             "dataType": "number"
           }
@@ -23213,19 +23268,21 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1915,
             "operator": "-",
-            "slot": 8,
+            "slot": 3,
             "label": "105",
             "dataType": "number"
           }
         ]
-      },
-      {
-        "rowIndex": 693,
-        "type": "sub_header",
-        "text": "OTROS CARGOS",
-        "bold": false,
-        "fields": []
-      },
+      }
+    ]
+  },
+  {
+    "id": "OTROS CARGOS",
+    "title": "OTROS CARGOS",
+    "columnHeaders": [
+      ""
+    ],
+    "rows": [
       {
         "rowIndex": 694,
         "type": "field",
@@ -23235,7 +23292,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 900,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "106",
             "dataType": "number"
           }
@@ -23250,7 +23307,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1796,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "107",
             "dataType": "number"
           }
@@ -23265,7 +23322,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 1827,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "108",
             "dataType": "number"
           }
@@ -23280,19 +23337,22 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 305,
             "operator": "=",
-            "slot": 8,
+            "slot": 0,
             "label": "109",
             "dataType": "number"
           }
         ]
-      },
-      {
-        "rowIndex": 699,
-        "type": "sub_header",
-        "text": "REMANENTE DE CRÉDITO",
-        "bold": false,
-        "fields": []
-      },
+      }
+    ]
+  },
+  {
+    "id": "REMANENTE DE CRÉDITO",
+    "title": "REMANENTE DE CRÉDITO",
+    "columnHeaders": [
+      "Cuenta vista",
+      ""
+    ],
+    "rows": [
       {
         "rowIndex": 700,
         "type": "field",
@@ -23302,7 +23362,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 85,
             "operator": "+",
-            "slot": 8,
+            "slot": 1,
             "label": "110",
             "dataType": "number"
           }
@@ -23317,7 +23377,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 86,
             "operator": "-",
-            "slot": 8,
+            "slot": 1,
             "label": "111",
             "dataType": "number"
           }
@@ -23339,7 +23399,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 87,
             "operator": "=",
-            "slot": 8,
+            "slot": 1,
             "label": "112",
             "dataType": "number"
           }
@@ -23361,7 +23421,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 301,
             "operator": "",
-            "slot": 2,
+            "slot": 0,
             "label": "Nombre institución bancaria",
             "dataType": "text"
           }
@@ -23376,7 +23436,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 306,
             "operator": "",
-            "slot": 2,
+            "slot": 0,
             "label": "Número de cuenta",
             "dataType": "number"
           }
@@ -23391,19 +23451,32 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 780,
             "operator": "",
-            "slot": 2,
+            "slot": 0,
             "label": "Cuenta corriente",
             "dataType": "number"
           }
         ]
       },
       {
-        "rowIndex": 713,
-        "type": "sub_header",
-        "text": "IMPUESTO A PAGAR",
+        "rowIndex": 708,
+        "type": "col_header",
+        "text": "",
         "bold": false,
-        "fields": []
-      },
+        "fields": [],
+        "colTexts": [
+          "Cuenta vista",
+          ""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "IMPUESTO A PAGAR",
+    "title": "IMPUESTO A PAGAR",
+    "columnHeaders": [
+      ""
+    ],
+    "rows": [
       {
         "rowIndex": 714,
         "type": "field",
@@ -23413,7 +23486,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 90,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "113",
             "dataType": "number"
           }
@@ -23428,7 +23501,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 39,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "114",
             "dataType": "number"
           }
@@ -23443,7 +23516,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 91,
             "operator": "=",
-            "slot": 8,
+            "slot": 0,
             "label": "115",
             "dataType": "number"
           }
@@ -23465,7 +23538,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 92,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "116",
             "dataType": "number"
           }
@@ -23480,7 +23553,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 93,
             "operator": "+",
-            "slot": 8,
+            "slot": 0,
             "label": "117",
             "dataType": "number"
           }
@@ -23495,7 +23568,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
           {
             "code": 94,
             "operator": "=",
-            "slot": 8,
+            "slot": 0,
             "label": "118",
             "dataType": "number"
           }

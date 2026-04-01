@@ -28,6 +28,7 @@ interface FieldDTO {
   dataType: string;
   isCalculated: boolean;
   isMandatory: boolean;
+  isUserEntered?: boolean;
   description?: string;
   warnings?: string[];
   applicableRegimes?: string[];
@@ -39,6 +40,7 @@ export interface FieldMetadataEntry {
   warnings?: string[];
   applicableRegimes?: string[];
   applicableEntityTypes?: number[];
+  isUserEntered?: boolean;
 }
 
 interface ParamDTO {
@@ -118,12 +120,13 @@ export async function initBrowserEngine(apiBase = "/api/v1"): Promise<BrowserEng
 
   const fieldMetadata = new Map<number, FieldMetadataEntry>();
   for (const f of fieldsData.fields) {
-    if (f.description || f.warnings?.length || f.applicableRegimes || f.applicableEntityTypes) {
+    if (f.description || f.warnings?.length || f.applicableRegimes || f.applicableEntityTypes || f.isUserEntered !== undefined) {
       fieldMetadata.set(f.code, {
         description: f.description,
         warnings: f.warnings,
         applicableRegimes: f.applicableRegimes,
         applicableEntityTypes: f.applicableEntityTypes,
+        isUserEntered: f.isUserEntered,
       });
     }
   }
@@ -144,7 +147,7 @@ const DEFAULT_PARAMS: ParamDTO[] = [
   { id: "P12", num: 12, value: 0.35, description: "Tasa max IGC" },
   { id: "P24", num: 24, value: 0.30, description: "Gastos presuntos" },
   { id: "P29", num: 29, value: 65887, description: "UTM diciembre" },
-  { id: "P42", num: 42, value: 15, description: "Limite gastos UTM" },
+  { id: "P42", num: 42, value: 12517560, description: "Límite deducción gastos presuntos (15 UT)" },
   { id: "P647", num: 647, value: 0.27, description: "Crédito IDPC semi" },
   { id: "P704", num: 704, value: 0.25, description: "Crédito IDPC pyme" },
 ];
