@@ -69,9 +69,28 @@ export function OnboardingPage() {
     setError(null);
     try {
       await api.post("/auth/register", { full_name: name });
-      await api.post("/auth/select-plan", { plan_code: selectedPlan, billing_cycle: billing });
-      await supabase.auth.updateUser({ data: { onboarding_completed: true } });
-      navigate("/dashboard", { replace: true });
+
+      const result = await api.post<{
+        requiresCard?: boolean;
+        redirectUrl?:  string;
+        success?:      boolean;
+      }>("/payments/checkout", {
+        planCode:    selectedPlan,
+        billingCycle: billing,
+        returnTo:    "/dashboard",
+      });
+
+      if (result.requiresCard && result.redirectUrl) {
+        // Redirect to Flow's card registration page — don't reset loading
+        window.location.href = result.redirectUrl;
+        return;
+      }
+
+      if (result.success) {
+        // Card already registered (returning user changing plan)
+        await supabase.auth.updateUser({ data: { onboarding_completed: true } });
+        navigate("/dashboard", { replace: true });
+      }
     } catch (err) {
       setError((err as Error).message);
       setLoading(false);
@@ -288,7 +307,7 @@ export function OnboardingPage() {
                 className="bg-brand-700 hover:bg-brand-800 disabled:bg-brand-300
                   text-white font-bold px-10 py-3 rounded-xl text-sm transition-colors"
               >
-                {loading ? "Configurando…" : "Comenzar con este plan"}
+                {loading ? "Redirigiendo al pago…" : "Comenzar con este plan"}
               </button>
             </div>
 

@@ -26,6 +26,7 @@ import { plansRouter }       from "./routes/plans.ts";
 import { subscriptionsRouter } from "./routes/subscriptions.ts";
 import { taxpayersRouter }   from "./routes/taxpayers.ts";
 import { formsSaasRouter }   from "./routes/forms_saas.ts";
+import { paymentsRouter }    from "./routes/payments.ts";
 
 const app = new Hono();
 
@@ -66,6 +67,7 @@ v1.route("/plans",         plansRouter);
 v1.route("/subscriptions", subscriptionsRouter);
 v1.route("/taxpayers",     taxpayersRouter);
 v1.route("/forms",         formsSaasRouter);
+v1.route("/payments",      paymentsRouter);
 
 // Any unmatched /api/v1/* path → JSON 404 (never fall through to SPA)
 v1.all("*", (c) => c.json({ error: "Not found" }, 404));
