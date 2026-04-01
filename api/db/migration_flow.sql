@@ -93,18 +93,35 @@ CREATE POLICY "subscriptions: update own" ON public.subscriptions
   FOR UPDATE USING (auth.uid() = user_id OR auth.role() = 'service_role');
 
 -- ---------------------------------------------------------------------------
--- Seed: Promoción Abril 2026 — Sinergy a $560 USD/mes
+-- Seed: Promoción Abril 2026 — Sinergy (base $759 → mensual $560, anual $467)
 -- ---------------------------------------------------------------------------
+
+-- Mensual: $759 → $560/mes
 INSERT INTO public.plan_promotions
   (plan_id, name, billing_cycle, discounted_price_usd, valid_from, valid_until, new_subscribers_only)
 SELECT
   id,
-  'Promo Abril 2026 — Sinergy',
-  NULL,          -- aplica a todos los ciclos de facturación
-  560.00,        -- precio fijo: $560 USD/mes durante toda la contratación
+  'Promo Abril 2026 — Sinergy mensual',
+  'monthly',
+  560.00,
   '2026-04-01',
   '2026-04-30',
-  true           -- solo nuevos suscriptores
+  true
+FROM public.membership_plans
+WHERE code = 'sinergy'
+ON CONFLICT DO NOTHING;
+
+-- Anual: $759 → $467/mes (= $5,604/año)
+INSERT INTO public.plan_promotions
+  (plan_id, name, billing_cycle, discounted_price_usd, valid_from, valid_until, new_subscribers_only)
+SELECT
+  id,
+  'Promo Abril 2026 — Sinergy anual',
+  'annual',
+  467.00,
+  '2026-04-01',
+  '2026-04-30',
+  true
 FROM public.membership_plans
 WHERE code = 'sinergy'
 ON CONFLICT DO NOTHING;

@@ -7,79 +7,90 @@
 export const UF_PER_USD = 900 / 38_500;
 
 export interface PlanMeta {
-  icon:        string;
-  donation:    number | null;   // % a causas benéficas, null si no aplica
-  rutLabel:    string;          // "1 RUT", "2 a 3", "Ilimitado"
-  rutSquares:  string[];        // clases Tailwind para los cuadros indicadores
+  icon:        string;    // clave para PlanIcon
+  description: string;
+  donation:    number | null;
+  rutLabel:    string;
+  rutDot:      string;    // clase Tailwind bg-* para el indicador circular
   features:    string[];
   popular:     boolean;
 }
 
 export const PLAN_META: Record<string, PlanMeta> = {
   f22digital: {
-    icon:       "📋",
-    donation:   null,
-    rutLabel:   "1 RUT",
-    rutSquares: ["bg-brand-500"],
+    icon:        "clipboard",
+    description: "Gestiona tu Declaración F22 con asistencia experta y sin errores. La forma más simple y segura de cumplir con la Operación Renta 2026.",
+    donation:    null,
+    rutLabel:    "1 RUT",
+    rutDot:      "bg-brand-700",
     features: [
-      "Auto gestión asistida con F22 Digital",
-      "RUT 1",
+      "Autogestión asistida con F22 Digital",
+      "RUT",
+      "Sistema automático de alertas de vencimientos",
     ],
     popular: false,
   },
   genesis: {
-    icon:       "🌱",
-    donation:   2,
-    rutLabel:   "1 RUT",
-    rutSquares: ["bg-emerald-500"],
+    icon:        "invoice",
+    description: "Ideal para profesionales, freelancers, consultores, conferencistas y estructuras simples. Ordena tu operación y comienza a automatizar tu gestión desde el primer día.",
+    donation:    1,
+    rutLabel:    "1 RUT",
+    rutDot:      "bg-emerald-500",
     features: [
-      "Auto gestión asistida con F22 Digital",
+      "Autogestión asistida con F22 Digital",
       "Soporte estándar",
-      "1 capacitación anual",
+      "1 Capacitación anual",
+      "Sistema automático de alertas de vencimientos",
     ],
     popular: false,
   },
   sinergy: {
-    icon:       "⚡",
-    donation:   4,
-    rutLabel:   "2 a 3 RUTs",
-    rutSquares: ["bg-gold-400"],
+    icon:        "gift",
+    description: "Pensado para empresas en crecimiento. Gana control, trazabilidad y reduce riesgos fiscales con una gestión más estructurada.",
+    donation:    2,
+    rutLabel:    "2 a 3 RUT",
+    rutDot:      "bg-gold-400",
     features: [
-      "Auto gestión asistida con F22 Digital",
-      "Diagnóstico de Ciberseguridad",
+      "Autogestión asistida con F22 Digital",
+      "Diagnóstico de ciberseguridad",
       "Revisión fiscal trimestral",
       "Soporte estándar",
-      "3 capacitaciones anuales",
+      "3 Capacitaciones anuales",
+      "Sistema automático de alertas de vencimientos",
     ],
     popular: true,
   },
   momentum: {
-    icon:       "📈",
-    donation:   6,
-    rutLabel:   "4 a 7 RUTs",
-    rutSquares: ["bg-blue-500"],
+    icon:        "trending",
+    description: "Para operaciones más complejas. Integramos procesos, optimizamos recursos y consolidamos tu estructura tributaria.",
+    donation:    3,
+    rutLabel:    "4 a 7 RUT",
+    rutDot:      "bg-blue-500",
     features: [
-      "Auto gestión asistida con F22 Digital",
-      "Diagnóstico de Ciberseguridad",
+      "Autogestión asistida con F22 Digital",
+      "Diagnóstico de ciberseguridad",
       "Asesoría contable",
       "Auditoría interna",
       "Revisión fiscal mensual",
+      "Sistema automático de alertas de vencimientos",
     ],
     popular: false,
   },
   horizon: {
-    icon:       "🌐",
-    donation:   6,
-    rutLabel:   "Ilimitado",
-    rutSquares: ["bg-violet-500"],
+    icon:        "globe",
+    description: "Para empresas que escalan o se internacionalizan. Planificación estratégica y control global para operar sin límites.",
+    donation:    4,
+    rutLabel:    "RUT Ilimitado",
+    rutDot:      "bg-violet-500",
     features: [
-      "Auto gestión asistida con F22 Digital",
-      "Diagnóstico de Ciberseguridad",
+      "Autogestión asistida con F22 Digital",
+      "Diagnóstico de ciberseguridad",
       "Asesoría contable",
       "Auditoría interna",
-      "Simulación de auditoría gubernamental",
+      "Simulación",
       "Soporte 24/7",
-      "7 capacitaciones anuales",
+      "7 Capacitaciones anuales",
+      "Sistema automático de alertas de vencimientos",
     ],
     popular: false,
   },
