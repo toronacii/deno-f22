@@ -74,7 +74,9 @@ async function flowGet<T>(path: string, params: Record<string, string>): Promise
   const signed = await buildParams(params);
   const qs     = new URLSearchParams(signed).toString();
   const url    = `${BASE_URL}${path}?${qs}`;
-  const res    = await fetch(url);
+  const res    = await fetch(url, {
+    headers: { "User-Agent": "Mozilla/5.0 (compatible; FlowClient/1.0)" },
+  });
   return parseFlowResponse<T>(res, url);
 }
 
@@ -83,7 +85,10 @@ async function flowPost<T>(path: string, params: Record<string, string>): Promis
   const url    = `${BASE_URL}${path}`;
   const res    = await fetch(url, {
     method:  "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "User-Agent":   "Mozilla/5.0 (compatible; FlowClient/1.0)",
+    },
     body:    new URLSearchParams(signed).toString(),
   });
   return parseFlowResponse<T>(res, url);
