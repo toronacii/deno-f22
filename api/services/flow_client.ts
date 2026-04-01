@@ -15,11 +15,11 @@
 // Config
 // ---------------------------------------------------------------------------
 
-const FLOW_ENV        = Deno.env.get("FLOW_ENV") ?? "sandbox";
-const FLOW_API_KEY    = Deno.env.get("FLOW_API_KEY")!;
-const FLOW_SECRET_KEY = Deno.env.get("FLOW_SECRET_KEY")!;
+const FLOW_ENV        = Deno.env.get("FLOW_ENV") ?? "dev";
+const FLOW_API_KEY    = Deno.env.get(FLOW_ENV === "prod" ? "FLOW_PROD_API_KEY" : "FLOW_DEV_API_KEY")!;
+const FLOW_SECRET_KEY = Deno.env.get(FLOW_ENV === "prod" ? "FLOW_PROD_SECRET_KEY" : "FLOW_DEV_SECRET_KEY")!;
 
-const BASE_URL = FLOW_ENV === "production"
+const BASE_URL = FLOW_ENV === "prod"
   ? "https://www.flow.cl/api"
   : "https://sandbox.flow.cl/api";
 
