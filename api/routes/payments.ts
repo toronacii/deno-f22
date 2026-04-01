@@ -32,6 +32,7 @@ import {
   regularPricePerMonth,
   periodAmountUsd,
 } from "../services/promotion_service.ts";
+import { sendContactIntentEmail } from "../services/resend_client.ts";
 
 export const paymentsRouter = new Hono();
 
@@ -469,6 +470,66 @@ paymentsRouter.get("/portal", authMiddleware, async (c) => {
         }
       : null,
   });
+});
+
+// ---------------------------------------------------------------------------
+// POST /payments/contact-intent
+// Guarda intención de pago manual y notifica al equipo por email.
+// Body: { planCode, planName, billingCycle, phone, message }
+// ---------------------------------------------------------------------------
+paymentsRouter.post("/contact-intent", authMiddleware, async (c) => {
+  const userId = c.get("userId") as string;
+  const body   = await c.req.json<{
+    planCode:     string;
+    planName:     string;
+    billingCycle: string;
+    phone:        string;
+    message:      string;
+  }>();
+
+  const { planCode, planName, billingCycle, phone, message } = body;
+
+  if (!planCode || !planName || !billingCycle || !phone?.trim()) {
+    return c.json({ error: "planCode, planName, billingCycle y phone son requeridos" }, 400);
+  }
+
+  const db = getAdminClient();
+
+  // 1. Fetch profile for name + email
+  const { data: profile } = await db
+    .from("profiles")
+    .select("email, full_name")
+    .eq("id", userId)
+    .single();
+
+  if (!profile) return c.json({ error: "Perfil no encontrado" }, 404);
+
+  // 2. Persist intent
+  await db.from("contact_intents").insert({
+    user_id:      userId,
+    plan_code:    planCode,
+    plan_name:    planName,
+    billing_cycle: billingCycle,
+    phone:        phone.trim(),
+    message:      message ?? "",
+    status:       "pending",
+  });
+
+  // 3. Send email to team (non-blocking — don't fail the request if email fails)
+  try {
+    await sendContactIntentEmail({
+      userName:     profile.full_name ?? profile.email,
+      userEmail:    profile.email,
+      phone:        phone.trim(),
+      planName,
+      billingCycle,
+      message:      message ?? "",
+    });
+  } catch (e) {
+    console.error("[contact-intent] Email failed (intent already saved):", e);
+  }
+
+  return c.json({ success: true });
 });
 
 // ---------------------------------------------------------------------------

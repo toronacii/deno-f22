@@ -1,7 +1,7 @@
 /**
  * OnboardingPage — wizard de 2 pasos post-registro.
  * Paso 1: confirmar nombre
- * Paso 2: elegir plan
+ * Paso 2: elegir plan → abre modal de intención de pago
  */
 
 import { useState } from "react";
@@ -27,6 +27,145 @@ interface Plan {
   min_commitment_months: number;
 }
 
+// ---------------------------------------------------------------------------
+// Modal de intención de pago
+// ---------------------------------------------------------------------------
+
+interface ContactIntentModalProps {
+  plan:        Plan;
+  billing:     "monthly" | "annual";
+  name:        string;
+  onClose:     () => void;
+  onSuccess:   () => void;
+}
+
+function ContactIntentModal({ plan, billing, name, onClose, onSuccess }: ContactIntentModalProps) {
+  const cycleLabel = billing === "monthly" ? "mensual" : "anual";
+  const defaultMsg = `Hola, soy ${name} y quiero contratar el plan ${plan.name} (${cycleLabel}). Me gustaría coordinar el pago con el equipo.`;
+
+  const [phone,   setPhone]   = useState("");
+  const [message, setMessage] = useState(defaultMsg);
+  const [loading, setLoading] = useState(false);
+  const [error,   setError]   = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!phone.trim()) return;
+    setLoading(true);
+    setError(null);
+    try {
+      await api.post("/payments/contact-intent", {
+        planCode:     plan.code,
+        planName:     plan.name,
+        billingCycle: billing,
+        phone:        phone.trim(),
+        message,
+      });
+      onSuccess();
+    } catch (err) {
+      setError((err as Error).message);
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+      {/* Overlay */}
+      <div
+        className="absolute inset-0 bg-stone-900/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Card */}
+      <div className="relative w-full max-w-md bg-white rounded-2xl border border-stone-200 shadow-2xl p-8">
+
+        {/* Plan badge */}
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-2xl">{PLAN_META[plan.code]?.icon}</span>
+          <div>
+            <div className="font-semibold text-stone-900">{plan.name}</div>
+            <div className="text-xs text-stone-400 capitalize">{cycleLabel}</div>
+          </div>
+        </div>
+
+        <h2 className="text-lg font-semibold text-stone-900 mb-1">
+          Coordinar pago con el equipo
+        </h2>
+        <p className="text-sm text-stone-500 mb-6">
+          Déjanos tu teléfono y te contactamos para completar tu suscripción.
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+
+          {/* Nombre (solo lectura) */}
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">Nombre</label>
+            <div className="w-full border border-stone-100 bg-stone-50 rounded-lg px-3 py-2.5 text-sm text-stone-500">
+              {name}
+            </div>
+          </div>
+
+          {/* Teléfono */}
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">
+              Teléfono <span className="text-danger-500">*</span>
+            </label>
+            <input
+              type="tel"
+              required
+              autoFocus
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="+56 9 1234 5678"
+              className="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm
+                focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400"
+            />
+          </div>
+
+          {/* Mensaje */}
+          <div>
+            <label className="block text-xs font-medium text-stone-600 mb-1">Mensaje</label>
+            <textarea
+              rows={3}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm resize-none
+                focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400"
+            />
+          </div>
+
+          {error && (
+            <div className="px-3 py-2.5 bg-danger-500/10 border border-danger-500/20 rounded-lg text-sm text-danger-600">
+              {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={!phone.trim() || loading}
+            className="w-full bg-brand-700 hover:bg-brand-800 disabled:bg-brand-300
+              text-white font-semibold py-2.5 rounded-lg text-sm transition-colors"
+          >
+            {loading ? "Enviando…" : "Solicitar contacto"}
+          </button>
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-full text-sm text-stone-400 hover:text-stone-600 transition-colors py-1"
+          >
+            Cancelar
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// OnboardingPage
+// ---------------------------------------------------------------------------
+
 export function OnboardingPage() {
   const { user } = useAuth();
   const navigate  = useNavigate();
@@ -42,8 +181,7 @@ export function OnboardingPage() {
   const [name,         setName]         = useState(user?.user_metadata?.full_name ?? "");
   const [selectedPlan, setSelectedPlan] = useState<string | null>(preselectedPlan ?? "sinergy");
   const [billing,      setBilling]      = useState<"monthly" | "annual">(preselectedBilling ?? "monthly");
-  const [loading,      setLoading]      = useState(false);
-  const [error,        setError]        = useState<string | null>(null);
+  const [showModal,    setShowModal]    = useState(false);
 
   const { data: plansData } = useQuery({
     queryKey: ["plans"],
@@ -51,10 +189,11 @@ export function OnboardingPage() {
   });
   const plans = plansData?.plans ?? [];
 
-  // Fallback to sinergy if preselected plan not found in API data
   const effectivePlan = plans.length > 0 && selectedPlan && !plans.some((p) => p.code === selectedPlan)
     ? "sinergy"
     : selectedPlan;
+
+  const activePlan = plans.find((p) => p.code === effectivePlan) ?? null;
 
   async function handleStep1(e: { preventDefault(): void }) {
     e.preventDefault();
@@ -63,45 +202,15 @@ export function OnboardingPage() {
     setStep(2);
   }
 
-  async function handleStep2() {
-    if (!selectedPlan) return;
-    setLoading(true);
-    setError(null);
-    try {
-      await api.post("/auth/register", { full_name: name });
-
-      const result = await api.post<{
-        requiresCard?: boolean;
-        redirectUrl?:  string;
-        success?:      boolean;
-      }>("/payments/checkout", {
-        planCode:    selectedPlan,
-        billingCycle: billing,
-        returnTo:    "/dashboard",
-      });
-
-      if (result.requiresCard && result.redirectUrl) {
-        // Redirect to Flow's card registration page — don't reset loading
-        window.location.href = result.redirectUrl;
-        return;
-      }
-
-      if (result.success) {
-        // Card already registered (returning user changing plan)
-        await supabase.auth.updateUser({ data: { onboarding_completed: true } });
-        navigate("/dashboard", { replace: true });
-      }
-    } catch (err) {
-      setError((err as Error).message);
-      setLoading(false);
-    }
+  async function handleIntentSuccess() {
+    await supabase.auth.updateUser({ data: { onboarding_completed: true } });
+    navigate("/dashboard", { replace: true });
   }
 
   function getMonthlyPrice(plan: Plan): number {
     return billing === "monthly" ? plan.price_monthly_usd : plan.price_annual_usd / 12;
   }
 
-  /** Devuelve [parteEntera, "99"] — e.g. 99 → ["99","99"], 119 → ["119","99"] */
   function splitPrice(price: number): [string, string] {
     return [Math.floor(price).toLocaleString("es-CL"), "99"];
   }
@@ -194,12 +303,6 @@ export function OnboardingPage() {
               </div>
             )}
 
-            {error && (
-              <div className="mb-4 px-3 py-2.5 bg-danger-500/10 border border-danger-500/20 rounded-lg text-sm text-danger-600 text-center">
-                {error}
-              </div>
-            )}
-
             {/* Grid de planes */}
             {plans.length === 0 ? (
               <div className="text-center text-brand-400 py-8">Cargando planes…</div>
@@ -225,7 +328,6 @@ export function OnboardingPage() {
                             : "bg-white border-stone-200 hover:border-brand-300 hover:shadow-md"
                       }`}
                     >
-                      {/* Badge "Más Popular" */}
                       {isPopular && (
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
                           <span className="bg-gold-300 text-stone-900 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -234,13 +336,9 @@ export function OnboardingPage() {
                         </div>
                       )}
 
-                      {/* Ícono */}
                       <div className="text-2xl mb-3">{meta?.icon}</div>
-
-                      {/* Nombre */}
                       <div className={`text-xl font-bold mb-1 ${selected ? "text-white" : "text-stone-900"}`}>{plan.name}</div>
 
-                      {/* Subtítulo donación */}
                       {meta?.donation != null ? (
                         <div className={`text-[11px] leading-snug mb-3 ${selected ? "text-gold-300/80" : "text-stone-400"}`}>
                           Destinamos {meta.donation}% de la facturación a causas benéficas
@@ -249,7 +347,6 @@ export function OnboardingPage() {
                         <div className="mb-3" />
                       )}
 
-                      {/* Precio */}
                       <div className="flex items-baseline gap-0.5 mb-0.5">
                         <span className={`text-xs font-semibold mr-1 ${selected ? "text-brand-400" : "text-stone-400"}`}>USD</span>
                         <span className={`text-3xl font-bold ${selected ? "text-white" : "text-brand-900"}`}>{int}</span>
@@ -258,10 +355,8 @@ export function OnboardingPage() {
                       </div>
                       <div className={`text-xs mb-4 ${selected ? "text-brand-400" : "text-stone-400"}`}>o {ufPrice} UF /mes</div>
 
-                      {/* Divider */}
                       <div className={`h-px mb-4 ${selected ? "bg-brand-700/50" : "bg-stone-100"}`} />
 
-                      {/* Indicador de RUTs */}
                       <div className="flex items-center gap-2 mb-4">
                         <div className="flex gap-0.5">
                           {(meta?.rutSquares ?? []).map((sq, i) => (
@@ -271,7 +366,6 @@ export function OnboardingPage() {
                         <span className={`text-sm font-semibold ${selected ? "text-white" : "text-stone-800"}`}>{meta?.rutLabel}</span>
                       </div>
 
-                      {/* Features */}
                       <ul className="space-y-2 flex-1 mb-5">
                         {(meta?.features ?? []).map((f) => (
                           <li key={f} className="flex items-start gap-2">
@@ -282,7 +376,6 @@ export function OnboardingPage() {
                           </li>
                         ))}
                       </ul>
-
                     </button>
                   );
                 })}
@@ -302,12 +395,12 @@ export function OnboardingPage() {
             {/* Botón principal */}
             <div className="flex justify-center mb-5">
               <button
-                onClick={handleStep2}
-                disabled={!selectedPlan || loading}
+                onClick={() => activePlan && setShowModal(true)}
+                disabled={!activePlan}
                 className="bg-brand-700 hover:bg-brand-800 disabled:bg-brand-300
                   text-white font-bold px-10 py-3 rounded-xl text-sm transition-colors"
               >
-                {loading ? "Redirigiendo al pago…" : "Comenzar con este plan"}
+                Comenzar con este plan
               </button>
             </div>
 
@@ -330,6 +423,17 @@ export function OnboardingPage() {
           </div>
         )}
       </div>
+
+      {/* Modal de intención de pago */}
+      {showModal && activePlan && (
+        <ContactIntentModal
+          plan={activePlan}
+          billing={billing}
+          name={name}
+          onClose={() => setShowModal(false)}
+          onSuccess={handleIntentSuccess}
+        />
+      )}
     </div>
   );
 }
