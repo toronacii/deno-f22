@@ -232,6 +232,43 @@ export async function getPlan(planId: string): Promise<FlowPlan> {
   return flowGet("/plans/get", { planId });
 }
 
+/**
+ * Actualiza el urlCallback de un plan. Solo funciona si el plan NO tiene
+ * suscriptores activos (restricción de Flow). Lanza FlowError si falla.
+ */
+export function updatePlanCallback(planId: string, urlCallback: string): Promise<FlowPlan> {
+  return flowPost("/plans/edit", { planId, urlCallback });
+}
+
+export function deletePlan(planId: string): Promise<FlowPlan> {
+  return flowPost("/plans/delete", { planId });
+}
+
+// ---------------------------------------------------------------------------
+// Customer charge (cargo a tarjeta registrada)
+// ---------------------------------------------------------------------------
+
+export interface FlowCustomerCharge {
+  flowOrder:     number;
+  commerceOrder: string;
+  status:        number; // 1=pendiente, 2=pagado, 3=rechazado, 4=anulado
+  amount:        number; // CLP
+  currency:      string;
+  subject:       string;
+  requestDate:   string;
+}
+
+/** Cobra directamente a la tarjeta registrada del cliente (sin redirigir). */
+export function chargeCustomer(params: {
+  customerId:     string;
+  amount:         string; // CLP como string
+  subject:        string;
+  commerceOrder:  string;
+  currency?:      string;
+}): Promise<FlowCustomerCharge> {
+  return flowPost("/customer/charge", params as Record<string, string>);
+}
+
 // ---------------------------------------------------------------------------
 // Subscriptions
 // ---------------------------------------------------------------------------
@@ -307,5 +344,19 @@ export function billingCycleToInterval(
 
 /** Construye el planId de Flow a partir del código del plan y el ciclo. */
 export function toFlowPlanId(planCode: string, billingCycle: string, isPromo = false): string {
-  return isPromo ? `${planCode}_${billingCycle}_promo` : `${planCode}_${billingCycle}`;
+  const version = Deno.env.get("FLOW_PLAN_VERSION") ? `_${Deno.env.get("FLOW_PLAN_VERSION")}` : "";
+  const base    = isPromo ? `${planCode}_${billingCycle}_promo` : `${planCode}_${billingCycle}`;
+  return `${base}${version}`;
+}
+
+/**
+ * Verifica la firma HMAC-SHA256 de un webhook entrante de Flow.
+ * Flow firma su payload con el mismo algoritmo que usamos para requests salientes.
+ * Devuelve true si la firma es válida, false si no o si falta el parámetro 's'.
+ */
+export async function verifyFlowSignature(params: Record<string, string>): Promise<boolean> {
+  const { s, ...rest } = params;
+  if (!s) return false;
+  const expected = await sign(rest);
+  return expected === s;
 }

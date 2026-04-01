@@ -20,6 +20,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import {
   createPlan,
   getPlan,
+  updatePlanCallback,
   usdToClp,
   billingCycleToInterval,
   toFlowPlanId,
@@ -62,7 +63,14 @@ async function ensurePlan(params: {
   try {
     const existing = await getPlan(planId);
     if (existing.status === 1) {
-      console.log(`  ⏭   ${planId} — already exists (amount: ${existing.amount} CLP), skipping`);
+      // Plan exists — update urlCallback in case it changed (only works if no active subscribers)
+      try {
+        await updatePlanCallback(planId, FLOW_WEBHOOK_URL);
+        console.log(`  ↺   ${planId} — already exists, urlCallback updated`);
+      } catch (updateErr) {
+        const msg = updateErr instanceof FlowError ? updateErr.message : String(updateErr);
+        console.log(`  ⏭   ${planId} — already exists (amount: ${existing.amount} CLP), urlCallback not updated: ${msg}`);
+      }
       return;
     }
   } catch (e) {

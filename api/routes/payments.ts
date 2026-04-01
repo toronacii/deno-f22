@@ -17,11 +17,15 @@ import {
   registerCard,
   getRegisterStatus,
   createSubscription,
+  getSubscription,
   cancelSubscription,
+  chargeCustomer,
   getPaymentStatus,
   usdToClp,
   toFlowPlanId,
   FlowError,
+  verifyFlowSignature,
+  type FlowSubscription,
 } from "../services/flow_client.ts";
 import {
   getActivePromo,
@@ -102,15 +106,38 @@ paymentsRouter.post("/checkout", authMiddleware, async (c) => {
     });
   }
 
-  // 8. Card already registered → create Flow subscription directly
+  // 8. Block if user already has an active subscription
+  const { data: existingSub } = await db
+    .from("subscriptions")
+    .select("id, billing_cycle")
+    .eq("user_id", userId)
+    .eq("status", "active")
+    .maybeSingle();
+
+  if (existingSub) {
+    return c.json({
+      error: "Ya tienes una suscripción activa. Cancela tu plan actual antes de suscribirte a uno nuevo.",
+      currentBillingCycle: existingSub.billing_cycle,
+    }, 409);
+  }
+
+  // 9. Card already registered → start subscription (charges 3 months upfront if monthly)
   const flowPlanId = promo
     ? toFlowPlanId(planCode, billingCycle, true)
     : toFlowPlanId(planCode, billingCycle);
 
-  const flowSub = await createSubscription({ planId: flowPlanId, customerId });
+  const { flowSub, initialChargeEventId } = await startSubscription({
+    db,
+    billingCycle,
+    flowPlanId,
+    customerId,
+    userId,
+    lockedPricePerMonthUsd,
+    planName: plan.name,
+  });
 
-  // 9. Persist subscription in DB
-  await persistSubscription(db, {
+  // 10. Persist subscription in DB
+  const { id: subId } = await persistSubscription(db, {
     userId,
     plan,
     billingCycle,
@@ -119,6 +146,13 @@ paymentsRouter.post("/checkout", authMiddleware, async (c) => {
     promoId:            promo?.id ?? null,
     lockedPriceUsd:     lockedPricePerMonthUsd,
   });
+
+  // 11. Link initial charge event to subscription (GAP #3)
+  if (initialChargeEventId) {
+    await db.from("flow_events")
+      .update({ subscription_id: subId })
+      .eq("id", initialChargeEventId);
+  }
 
   return c.json({ success: true, subscriptionId: flowSub.subscriptionId });
 });
@@ -184,18 +218,35 @@ async function handleCardCallback(c: Context<any>, token: string | undefined) {
       ? promo.discounted_price_usd
       : regularPricePerMonth(plan, cycle);
 
-    // 5. Create Flow subscription
+    // 5. Block if user already has an active subscription
+    const { data: existingSubCb } = await db
+      .from("subscriptions")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("status", "active")
+      .maybeSingle();
+
+    if (existingSubCb) {
+      return c.redirect(`${errorBase}&reason=already_subscribed`);
+    }
+
+    // 6. Start subscription (charges 3 months upfront if monthly)
     const flowPlanId = promo
       ? toFlowPlanId(planCode, cycle, true)
       : toFlowPlanId(planCode, cycle);
 
-    const flowSub = await createSubscription({
-      planId:     flowPlanId,
-      customerId: profile.flow_customer_id,
+    const { flowSub, initialChargeEventId } = await startSubscription({
+      db,
+      billingCycle:          cycle,
+      flowPlanId,
+      customerId:            profile.flow_customer_id,
+      userId,
+      lockedPricePerMonthUsd,
+      planName:              plan.name,
     });
 
-    // 6. Persist in DB
-    await persistSubscription(db, {
+    // 7. Persist in DB
+    const { id: subId } = await persistSubscription(db, {
       userId,
       plan,
       billingCycle:       cycle,
@@ -204,6 +255,13 @@ async function handleCardCallback(c: Context<any>, token: string | undefined) {
       promoId:            promo?.id ?? null,
       lockedPriceUsd:     lockedPricePerMonthUsd,
     });
+
+    // 8. Link initial charge event to subscription (GAP #3)
+    if (initialChargeEventId) {
+      await db.from("flow_events")
+        .update({ subscription_id: subId })
+        .eq("id", initialChargeEventId);
+    }
 
     return c.redirect(successRedirect);
   } catch (e) {
@@ -245,6 +303,18 @@ paymentsRouter.post("/webhook", async (c) => {
   if (!token) {
     console.warn("[webhook] Received call without token");
     return c.json({ ok: false }, 400);
+  }
+
+  // Verify Flow HMAC signature if present in payload
+  const bodyRecord = Object.fromEntries(
+    Object.entries(body).map(([k, v]) => [k, String(v)])
+  );
+  if (bodyRecord["s"]) {
+    const valid = await verifyFlowSignature(bodyRecord);
+    if (!valid) {
+      console.warn("[webhook] Invalid Flow signature — request rejected");
+      return c.json({ ok: false }, 401);
+    }
   }
 
   const db = getAdminClient();
@@ -372,6 +442,17 @@ paymentsRouter.get("/portal", authMiddleware, async (c) => {
     ? new Date() >= new Date(sub.earliest_cancel_at)
     : true;
 
+  // Fetch next invoice date from Flow (best effort)
+  let nextInvoiceDate: string | null = null;
+  if (sub?.flow_subscription_id) {
+    try {
+      const flowSubData = await getSubscription(sub.flow_subscription_id);
+      nextInvoiceDate = flowSubData.next_invoice_date ?? null;
+    } catch {
+      // Non-critical — omit if Flow is unreachable
+    }
+  }
+
   return c.json({
     card: card?.flow_card_last4
       ? { type: card.flow_card_type, last4: card.flow_card_last4 }
@@ -384,10 +465,91 @@ paymentsRouter.get("/portal", authMiddleware, async (c) => {
           earliestCancelAt:  sub.earliest_cancel_at,
           hasPromo:          sub.promotion_id !== null,
           canCancel,
+          nextInvoiceDate,
         }
       : null,
   });
 });
+
+// ---------------------------------------------------------------------------
+// Helper: start a subscription, handling Option B monthly billing
+// Monthly → charge 3× monthly upfront, then create subscription starting in 3 months
+// Annual  → create subscription immediately
+// ---------------------------------------------------------------------------
+async function startSubscription(params: {
+  db:                     ReturnType<typeof getAdminClient>;
+  billingCycle:           string;
+  flowPlanId:             string;
+  customerId:             string;
+  userId:                 string;
+  lockedPricePerMonthUsd: number;
+  planName:               string;
+}): Promise<{ flowSub: FlowSubscription; initialChargeEventId?: string }> {
+  const { db, billingCycle, flowPlanId, customerId, userId, lockedPricePerMonthUsd, planName } = params;
+
+  if (billingCycle === "monthly") {
+    // 1. Charge 3 months upfront (CLP) — reuse rate to avoid double API call (GAP #4)
+    const { clp: monthlyClp, rate } = await usdToClp(lockedPricePerMonthUsd);
+    const upfrontClp                = monthlyClp * 3;
+    const commerceOrder             = `init_${userId}_${Date.now()}`;
+
+    const charge = await chargeCustomer({
+      customerId,
+      amount:         String(upfrontClp),
+      subject:        `${planName} — 3 meses iniciales`,
+      commerceOrder,
+      currency:       "CLP",
+    });
+
+    // 2. Log initial charge regardless of status; subscription_id linked after persist (GAP #3)
+    const { data: eventRow } = await db.from("flow_events").insert({
+      event_type:      "initial_charge",
+      flow_order:      String(charge.flowOrder),
+      subscription_id: null,
+      user_id:         userId,
+      status:          charge.status,
+      amount_clp:      charge.amount,
+      usd_to_clp_rate: rate,
+      raw_payload:     charge,
+    }).select("id").single();
+
+    // GAP #1: Reject if charge was declined or cancelled — do NOT create subscription
+    if (charge.status === 3 || charge.status === 4) {
+      throw new FlowError(402, {
+        message: `Cargo inicial rechazado por Flow (status ${charge.status})`,
+      });
+    }
+
+    // 3. Create subscription starting 3 months from now
+    const startDate = new Date();
+    startDate.setMonth(startDate.getMonth() + 3);
+    const subscriptionStart = startDate.toISOString().split("T")[0]; // yyyy-mm-dd
+
+    let flowSub: FlowSubscription;
+    try {
+      flowSub = await createSubscription({
+        planId:             flowPlanId,
+        customerId,
+        subscription_start: subscriptionStart,
+      });
+    } catch (e) {
+      // GAP #2: Charge succeeded but subscription creation failed — critical orphan state
+      console.error("[CRITICAL] Cargo inicial exitoso pero fallo la creacion de suscripcion", {
+        userId,
+        chargeFlowOrder: charge.flowOrder,
+        chargeStatus:    charge.status,
+        error:           String(e),
+      });
+      throw e;
+    }
+
+    return { flowSub, initialChargeEventId: eventRow?.id };
+  }
+
+  // Annual or quarterly: create subscription immediately
+  const flowSub = await createSubscription({ planId: flowPlanId, customerId });
+  return { flowSub };
+}
 
 // ---------------------------------------------------------------------------
 // Helper: persist a new subscription record in Supabase
@@ -403,7 +565,7 @@ async function persistSubscription(
     promoId:            string | null;
     lockedPriceUsd:     number;
   },
-) {
+): Promise<{ id: string }> {
   const { userId, plan, billingCycle, flowSubscriptionId, flowPlanId, promoId, lockedPriceUsd } = params;
 
   // Cancel any existing active subscription first
@@ -412,20 +574,23 @@ async function persistSubscription(
     .eq("user_id", userId)
     .eq("status", "active");
 
-  const startedAt       = new Date();
-  const earliestCancel  = new Date(startedAt);
+  const startedAt      = new Date();
+  const earliestCancel = new Date(startedAt);
   earliestCancel.setMonth(earliestCancel.getMonth() + plan.min_commitment_months);
 
-  await db.from("subscriptions").insert({
-    user_id:             userId,
-    plan_id:             plan.id,
-    billing_cycle:       billingCycle,
-    status:              "active",
-    started_at:          startedAt.toISOString(),
-    earliest_cancel_at:  earliestCancel.toISOString(),
+  const { data, error } = await db.from("subscriptions").insert({
+    user_id:              userId,
+    plan_id:              plan.id,
+    billing_cycle:        billingCycle,
+    status:               "active",
+    started_at:           startedAt.toISOString(),
+    earliest_cancel_at:   earliestCancel.toISOString(),
     flow_subscription_id: flowSubscriptionId,
-    flow_plan_id:        flowPlanId,
-    promotion_id:        promoId,
-    locked_price_usd:    lockedPriceUsd,
-  });
+    flow_plan_id:         flowPlanId,
+    promotion_id:         promoId,
+    locked_price_usd:     lockedPriceUsd,
+  }).select("id").single();
+
+  if (error || !data) throw new Error(`Failed to persist subscription: ${error?.message}`);
+  return { id: data.id };
 }

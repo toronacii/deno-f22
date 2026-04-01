@@ -1,0 +1,29 @@
+# Secrets
+.env
+
+# Dev dependencies
+web/node_modules/
+web/dist/
+
+# Deno cache
+.deno/
+api/.deno/
+
+# Source data files (not needed at runtime — engine uses pre-built TS modules)
+*.xlsx
+*.pdf
+*.docx
+
+# Git
+.git/
+.gitignore
+
+# Scripts & tests
+scripts/
+core/tests/
+api/tests/
+
+# Misc
+*.log
+.playwright-mcp/
+supabase/
