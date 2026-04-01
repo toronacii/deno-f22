@@ -15,6 +15,7 @@ import { AccountPage }            from "./pages/AccountPage.tsx";
 import { DashboardPage }          from "./pages/DashboardPage.tsx";
 import { TaxpayerWorkspacePage }  from "./pages/TaxpayerWorkspacePage.tsx";
 import { FormEditorPage }         from "./pages/FormEditorPage.tsx";
+import { PaymentCallbackPage }    from "./pages/PaymentCallbackPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/forgot-password"  element={<ForgotPasswordPage />} />
             <Route path="/reset-password"   element={<ResetPasswordPage />} />
             <Route path="/auth/callback"    element={<AuthCallbackPage />} />
+            <Route path="/payment-callback" element={<PaymentCallbackPage />} />
 
             {/* Post-login: onboarding no requiere onboarding previo */}
             <Route path="/onboarding" element={
