@@ -58,25 +58,35 @@ async function buildParams(params: Record<string, string>): Promise<Record<strin
 // HTTP helpers
 // ---------------------------------------------------------------------------
 
-async function flowGet<T>(path: string, params: Record<string, string>): Promise<T> {
-  const signed = await buildParams(params);
-  const qs     = new URLSearchParams(signed).toString();
-  const res    = await fetch(`${BASE_URL}${path}?${qs}`);
-  const body   = await res.json();
+async function parseFlowResponse<T>(res: Response, url: string): Promise<T> {
+  const text        = await res.text();
+  const contentType = res.headers.get("content-type") ?? "";
+  if (!contentType.includes("application/json") && !contentType.includes("text/json")) {
+    console.error(`[flow_client] Non-JSON response from ${url} (${res.status}):`, text.slice(0, 300));
+    throw new FlowError(res.status, { message: `Flow returned non-JSON (${res.status}): ${text.slice(0, 200)}` });
+  }
+  const body = JSON.parse(text);
   if (!res.ok) throw new FlowError(res.status, body);
   return body as T;
 }
 
+async function flowGet<T>(path: string, params: Record<string, string>): Promise<T> {
+  const signed = await buildParams(params);
+  const qs     = new URLSearchParams(signed).toString();
+  const url    = `${BASE_URL}${path}?${qs}`;
+  const res    = await fetch(url);
+  return parseFlowResponse<T>(res, url);
+}
+
 async function flowPost<T>(path: string, params: Record<string, string>): Promise<T> {
   const signed = await buildParams(params);
-  const res    = await fetch(`${BASE_URL}${path}`, {
+  const url    = `${BASE_URL}${path}`;
+  const res    = await fetch(url, {
     method:  "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body:    new URLSearchParams(signed).toString(),
   });
-  const body = await res.json();
-  if (!res.ok) throw new FlowError(res.status, body);
-  return body as T;
+  return parseFlowResponse<T>(res, url);
 }
 
 export class FlowError extends Error {
