@@ -212,7 +212,8 @@ export function OnboardingPage() {
   }
 
   function splitPrice(price: number): [string, string] {
-    return [Math.floor(price).toLocaleString("es-CL"), "99"];
+    const cents = Math.round(price * 100) % 100;
+    return [Math.floor(price).toLocaleString("es-CL"), cents.toString().padStart(2, "0")];
   }
 
   return (
@@ -350,7 +351,7 @@ export function OnboardingPage() {
                       <div className="flex items-baseline gap-0.5 mb-0.5">
                         <span className={`text-xs font-semibold mr-1 ${selected ? "text-brand-400" : "text-stone-400"}`}>USD</span>
                         <span className={`text-3xl font-bold ${selected ? "text-white" : "text-brand-900"}`}>{int}</span>
-                        <span className={`text-base font-bold ${selected ? "text-white" : "text-brand-900"}`}>.{dec}</span>
+                        {dec !== "00" && <span className={`text-base font-bold ${selected ? "text-white" : "text-brand-900"}`}>.{dec}</span>}
                         <span className={`text-xs ml-0.5 ${selected ? "text-brand-400" : "text-stone-400"}`}>/mes</span>
                       </div>
                       <div className={`text-xs mb-4 ${selected ? "text-brand-400" : "text-stone-400"}`}>o {ufPrice} UF /mes</div>
