@@ -39,6 +39,7 @@ export async function fieldsHandler(c: Context): Promise<Response> {
       ...(meta?.warnings?.length   && { warnings: meta.warnings }),
       ...(meta?.applicableRegimes  && { applicableRegimes: meta.applicableRegimes }),
       ...(meta?.applicableEntityTypes && { applicableEntityTypes: meta.applicableEntityTypes }),
+      ...(meta?.isUserEntered !== undefined && { isUserEntered: meta.isUserEntered }),
     };
   });
 

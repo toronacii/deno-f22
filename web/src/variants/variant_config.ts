@@ -55,6 +55,21 @@ const RECUADRO_14D3 = "RECUADRO 16";             // Registro tributario 14D3
 const RECUADRO_PRESUNTO = "RECUADRO 17";         // Base imponible 14D3
 const RECUADRO_ART21 = "RECUADRO 18";            // Determinación IDPC 14D3
 
+// Final determination sections — always shown regardless of variant.
+// These correspond to the tax calculation area at the bottom of the F22.
+const FINAL_SECTIONS = [
+  "BASE IMPONIBLE IUSC O IGC O IA",
+  "REBAJAS A LA RENTA",
+  "BASE IMPONIBLE ANUAL",
+  "IUSC o IGC, Y DÉBITOS FISCALES",
+  "CRÉDITOS",
+  "IMPUESTOS ANUALES A LA RENTA",
+  "DEDUCCIONES A LOS IMPUESTOS",
+  "OTROS CARGOS",
+  "REMANENTE DE CRÉDITO",
+  "IMPUESTO A PAGAR",
+];
+
 // Sections for all personas naturales
 const PERSONA_NATURAL_SECTIONS = [
   RECUADRO_INFO_BASE,
@@ -70,6 +85,7 @@ const PERSONA_NATURAL_SECTIONS = [
   RECUADRO_RESULTADO,
   RECUADRO_PAGO,
   RECUADRO_TOTAL,
+  ...FINAL_SECTIONS,
 ];
 
 // Sections for companies with IDPC
@@ -82,6 +98,7 @@ const EMPRESA_SECTIONS = [
   RECUADRO_CREDITOS,
   RECUADRO_PAGO,
   RECUADRO_TOTAL,
+  ...FINAL_SECTIONS,
 ];
 
 // ---------------------------------------------------------------------------
@@ -141,6 +158,7 @@ export const VARIANTS: VariantConfig[] = [
       RECUADRO_RESULTADO,
       RECUADRO_PAGO,
       RECUADRO_TOTAL,
+      ...FINAL_SECTIONS,
     ],
     hiddenFields: [],
   },
@@ -186,6 +204,7 @@ export const VARIANTS: VariantConfig[] = [
       RECUADRO_PROPIETARIOS,
       RECUADRO_PAGO,
       RECUADRO_TOTAL,
+      ...FINAL_SECTIONS,
     ],
     hiddenFields: [],
   },
@@ -296,6 +315,7 @@ export const VARIANTS: VariantConfig[] = [
       RECUADRO_CREDITOS,
       RECUADRO_PAGO,
       RECUADRO_TOTAL,
+      ...FINAL_SECTIONS,
     ],
     hiddenFields: [],
   },

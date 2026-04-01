@@ -25,9 +25,20 @@ export function F22Form({ optimizableFields, readOnly }: Props) {
   const computedValues = useFormStore((s) => s.computedValues);
 
   // Set of computed field codes (for read-only rendering)
+  // Includes both fields in computedValues and fields marked as isUserEntered: false
   const computedCodes = useMemo(
-    () => new Set(Object.keys(computedValues).map(Number)),
-    [computedValues],
+    () => {
+      const codes = new Set(Object.keys(computedValues).map(Number));
+      if (fieldMetadata) {
+        for (const [code, meta] of fieldMetadata) {
+          if (meta.isUserEntered === false) {
+            codes.add(code);
+          }
+        }
+      }
+      return codes;
+    },
+    [computedValues, fieldMetadata],
   );
 
   useEffect(() => {

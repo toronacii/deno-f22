@@ -34,7 +34,7 @@
   { "id": "P39", "num": 39, "value": 0.01, "description": "Porcentaje máximo donaciones políticas (1%)", "unit": "tasa" },
   { "id": "P40", "num": 40, "value": 0.50, "description": "Factor integración crédito IDPC en IGC régimen semi (50%)", "unit": "tasa" },
   { "id": "P41", "num": 41, "value": 1.0, "description": "Factor integración crédito IDPC en IGC régimen atribuido (100%)", "unit": "tasa" },
-  { "id": "P42", "num": 42, "value": 15, "description": "Límite deducción gastos presuntos honorarios en UTM", "unit": "UTM" },
+  { "id": "P42", "num": 42, "value": 12517560, "description": "Límite deducción gastos presuntos honorarios (15 UT)", "unit": "pesos" },
   { "id": "P43", "num": 43, "value": 0.30, "description": "Tasa IDPC régimen renta atribuida propietario empresa (30%)", "unit": "tasa" },
   { "id": "P44", "num": 44, "value": 0.0, "description": "Tasa impuesto para personas naturales sin actividad (0%)", "unit": "tasa" },
   { "id": "P100", "num": 100, "value": 0, "description": "Parámetro 100 (reservado)", "unit": "" },

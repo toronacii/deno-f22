@@ -256,9 +256,9 @@ export const RAW_PARAMS: Parameter[] = [
   {
     "id": "P42",
     "num": 42,
-    "value": 15,
-    "description": "Límite deducción gastos presuntos honorarios en UTM",
-    "unit": "UTM"
+    "value": 12517560,
+    "description": "Límite deducción gastos presuntos honorarios (15 UT)",
+    "unit": "pesos"
   },
   {
     "id": "P43",

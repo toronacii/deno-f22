@@ -3,9 +3,25 @@
  * Also responsible for building Rules from RawRules (parsing formulas).
  */
 
-import type { Rule, RawRule, RuleMetadata } from "../models/rule.ts";
+import type { Rule, RawRule, RuleBinding, RuleMetadata } from "../models/rule.ts";
+import type { ExprNode } from "../models/ast.ts";
 import { parseFormula } from "../parser/parser.ts";
 import { collectMetadata } from "./metadata_collector.ts";
+
+/**
+ * Extracts top-level binding nodes from the parsed AST into a flat ordered
+ * array, returning the bindings and the residual body expression separately.
+ *
+ * e.g. binding(Alfa=…, binding(Beta=…, body)) →
+ *   bindings: [{name:"Alfa",ast:…},{name:"Beta",ast:…}], body: body
+ */
+function extractBindings(
+  ast: ExprNode,
+): { bindings: RuleBinding[]; body: ExprNode } {
+  if (ast.kind !== "binding") return { bindings: [], body: ast };
+  const { bindings, body } = extractBindings(ast.body);
+  return { bindings: [{ name: ast.name, ast: ast.value }, ...bindings], body };
+}
 
 /** Parse a field code from strings like "[547]", "547", "0547" */
 function parseFieldCode(raw: string): number {
@@ -59,15 +75,18 @@ export function buildRuleRegistry(rawRules: RawRule[]): RuleRegistry {
     const fieldCode = parseFieldCode(raw.targetFieldRaw);
     const { ast, error } = parseFormula(raw.formulaRaw);
 
+    const { bindings, body } = ast ? extractBindings(ast) : { bindings: [], body: ast };
+
     return {
       ruleId: raw.ruleId,
       targetField: isNaN(fieldCode) ? 0 : fieldCode,
       operator: raw.operatorRaw as "=" | "validation",
       formulaRaw: raw.formulaRaw,
-      formulaAst: ast,
+      bindings,
+      formulaAst: body,
       parseError: error,
       guidanceText: raw.guidanceText,
-      metadata: ast ? collectMetadata(ast) : emptyMetadata(),
+      metadata: body ? collectMetadata(body) : emptyMetadata(),
     };
   });
 

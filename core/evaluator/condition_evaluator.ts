@@ -34,7 +34,8 @@ export function evaluateCondition(cond: CondNode, ctx: EvalContext): boolean {
 
     case "atributo_check": {
       const regime = ctx.context.taxRegime;
-      return cond.values.some((v) => v.toUpperCase() === regime.toUpperCase());
+      const match = cond.values.some((v) => v.toUpperCase() === regime.toUpperCase());
+      return cond.negated ? !match : match;
     }
 
     case "rectificatoria": {

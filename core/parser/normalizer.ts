@@ -12,6 +12,9 @@
 export function normalizeFormula(raw: string): string {
   let s = raw;
 
+  // Strip zero-width spaces (U+200B) that appear after operators in source data
+  s = s.replace(/\u200B/g, "");
+
   // Replace Unicode comparison operators
   s = s.replace(/≤/g, "<=");
   s = s.replace(/≥/g, ">=");
@@ -45,6 +48,9 @@ export function normalizeFormula(raw: string): string {
   s = s.replace(/\.\s*[yY]\s*\./g, ".y.");
   s = s.replace(/\.\s*[oO]\s*\./g, ".o.");
 
+  // Normalize "Atributo" → "atributo" (keyword is case-sensitive in tokenizer)
+  s = s.replace(/\bAtributo\b/g, "atributo");
+
   // Normalize "Si" keyword variants
   s = s.replace(/\bSI\b/g, "Si");
 
@@ -54,6 +60,9 @@ export function normalizeFormula(raw: string): string {
 
   // Normalize "Sino" / "SINO" → "Sino"
   s = s.replace(/\bSINO\b/g, "Sino");
+
+  // Ensure space between Sino and an immediately following field ref (Sino[547] → Sino [547])
+  s = s.replace(/\bSino\[/g, "Sino [");
 
   // Collapse multiple spaces into one
   s = s.replace(/[ \t]+/g, " ");
