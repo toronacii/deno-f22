@@ -352,7 +352,7 @@ class Parser {
     return [
       TokenKind.FUNC_POS, TokenKind.FUNC_NEG, TokenKind.FUNC_MIN,
       TokenKind.FUNC_MAX, TokenKind.FUNC_ABS, TokenKind.FUNC_ROUND,
-      TokenKind.FUNC_TIPO,
+      TokenKind.FUNC_TIPO, TokenKind.FUNC_TGL,
     ].includes(kind);
   }
 
@@ -386,6 +386,7 @@ class Parser {
       case TokenKind.FUNC_ABS: return "ABS";
       case TokenKind.FUNC_ROUND: return "ROUND";
       case TokenKind.FUNC_TIPO: return "TIPO";
+      case TokenKind.FUNC_TGL:  return "TGL";
       default: throw new ParseError(`Not a function token: ${kind}`, -1);
     }
   }

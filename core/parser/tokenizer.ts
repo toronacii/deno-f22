@@ -20,6 +20,7 @@ const KEYWORDS: Record<string, TokenKind> = {
   "ABS": TokenKind.FUNC_ABS,
   "ROUND": TokenKind.FUNC_ROUND,
   "TIPO": TokenKind.FUNC_TIPO,
+  "TGL": TokenKind.FUNC_TGL,
 };
 
 export function tokenize(formula: string): Token[] {

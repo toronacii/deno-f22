@@ -17,6 +17,7 @@ export enum TokenKind {
   FUNC_ABS = "FUNC_ABS",
   FUNC_ROUND = "FUNC_ROUND",
   FUNC_TIPO = "FUNC_TIPO",
+  FUNC_TGL = "FUNC_TGL",
 
   // Keywords
   KW_SI = "KW_SI",                // Si
