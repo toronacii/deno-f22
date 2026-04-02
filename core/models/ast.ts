@@ -3,7 +3,7 @@
  * Formulas come from the CSW Set rules (5_CSW_Set_1.0_AT2026.xlsx).
  */
 
-export type FuncName = "POS" | "NEG" | "MIN" | "MAX" | "ABS" | "ROUND" | "TIPO";
+export type FuncName = "POS" | "NEG" | "MIN" | "MAX" | "ABS" | "ROUND" | "TIPO" | "TGL";
 
 export type ExprNode =
   | { kind: "number"; value: number }

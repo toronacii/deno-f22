@@ -151,7 +151,10 @@ export async function loadLayout(xlsxPath: string): Promise<LayoutLoadResult> {
       continue;
     }
 
-    const label = colB || "";
+    // When col B is empty or a line number (integer), use col C as the label.
+    // This handles the IGC/IUSC final table where col B holds sequential line
+    // numbers (1, 2, 3…) and the actual row description lives in col C.
+    const label = (colB && !isInteger(colB)) ? colB : getCellStr(sheet, row, 2);
     const rowFields = extractRowFields(sheet, row);
 
     for (const { code, adjacentLabel } of rowFields) {
@@ -226,7 +229,8 @@ export async function loadLayoutSections(xlsxPath: string): Promise<LayoutSectio
     let foundColHeaders = false;
 
     for (let row = sec.startRow + 1; row <= sec.endRow; row++) {
-      const label = getCellStr(sheet, row, COL_LABEL).trim();
+      const colB = getCellStr(sheet, row, COL_LABEL).trim();
+      const label = (colB && !isInteger(colB)) ? colB : getCellStr(sheet, row, 2).trim();
       const rowFields = extractRowFields(sheet, row);
       const rowTexts = extractRowTexts(sheet, row);
 

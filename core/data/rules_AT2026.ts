@@ -1098,7 +1098,7 @@ export const RAW_RULES: RawRule[] = [
     "ruleId": "b.8",
     "targetFieldRaw": "[157]",
     "operatorRaw": "=",
-    "formulaRaw": "TGL{ [170] - (([152] + [749] - [169] ) * [l])} [l] = Si ([104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] + [1030] = 0) .y. { [161] > 0 .o. [152] > 0}; entonces 1 Sino 0",
+    "formulaRaw": "l=Si ([104] + [105] + [106] + [108] + [955] + [1632] + [110] + [155] + [1032] + [1891] + [1104] + [166] + [1030] = 0) .y. ([161] > 0 .o. [152] > 0); entonces 1 Sino 0---TGL{[170] - (([152] + [749] - [169]) * l)}",
     "guidanceText": "El monto registrado en el código 157 es incorrecto"
   },
   {

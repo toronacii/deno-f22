@@ -214,7 +214,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "code": 547,
     "label": "Total ingresos brutos",
     "section": "RECUADRO 1",
-    "dataType": "text",
+    "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -224,7 +224,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
     "code": 617,
     "label": "Participación en sociedades de profesionales de 2ª Categoría",
     "section": "RECUADRO 1",
-    "dataType": "text",
+    "dataType": "number",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -7802,7 +7802,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1592,
-    "label": "1",
+    "label": "Retiros o remesas afectos al IGC o IA, según art. 14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7812,7 +7812,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1024,
-    "label": "1",
+    "label": "Retiros o remesas afectos al IGC o IA, según art. 14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7822,7 +7822,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1593,
-    "label": "1",
+    "label": "Retiros o remesas afectos al IGC o IA, según art. 14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7832,7 +7832,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1025,
-    "label": "1",
+    "label": "Retiros o remesas afectos al IGC o IA, según art. 14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7842,7 +7842,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 104,
-    "label": "1",
+    "label": "Retiros o remesas afectos al IGC o IA, según art. 14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7852,7 +7852,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2005,
-    "label": "Campo 2005",
+    "label": "a) Propios",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7862,7 +7862,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2006,
-    "label": "Campo 2006",
+    "label": "a) Propios",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7872,7 +7872,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2007,
-    "label": "Campo 2007",
+    "label": "a) Propios",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7882,7 +7882,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2008,
-    "label": "Campo 2008",
+    "label": "a) Propios",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7892,7 +7892,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2009,
-    "label": "Campo 2009",
+    "label": "a) Propios",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7902,7 +7902,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2000,
-    "label": "Campo 2000",
+    "label": "b) Por partipaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7912,7 +7912,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2001,
-    "label": "Campo 2001",
+    "label": "b) Por partipaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7922,7 +7922,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2002,
-    "label": "Campo 2002",
+    "label": "b) Por partipaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7932,7 +7932,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2003,
-    "label": "Campo 2003",
+    "label": "b) Por partipaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7942,7 +7942,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2004,
-    "label": "Campo 2004",
+    "label": "b) Por partipaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7952,7 +7952,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1594,
-    "label": "2",
+    "label": "Dividendos afectos al IGC o IA, según art.14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7962,7 +7962,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1026,
-    "label": "2",
+    "label": "Dividendos afectos al IGC o IA, según art.14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7972,7 +7972,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1595,
-    "label": "2",
+    "label": "Dividendos afectos al IGC o IA, según art.14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7982,7 +7982,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1027,
-    "label": "2",
+    "label": "Dividendos afectos al IGC o IA, según art.14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -7992,7 +7992,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 105,
-    "label": "2",
+    "label": "Dividendos afectos al IGC o IA, según art.14 letras A) y/o D) N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8002,7 +8002,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 106,
-    "label": "3",
+    "label": "Gastos rechazados y otras partidas referidos en el art. 21 inc. 3° LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8012,7 +8012,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 603,
-    "label": "4",
+    "label": "Rentas presuntas propias o por participaciones, según art. 14 letra B) N° 2 y art. 34 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8022,7 +8022,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 108,
-    "label": "4",
+    "label": "Rentas presuntas propias o por participaciones, según art. 14 letra B) N° 2 y art. 34 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8032,7 +8032,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1920,
-    "label": "Campo 1920",
+    "label": "a) Propios",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8042,7 +8042,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1921,
-    "label": "Campo 1921",
+    "label": "a) Propios",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8052,7 +8052,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1922,
-    "label": "Campo 1922",
+    "label": "b) Por partipaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8062,7 +8062,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1923,
-    "label": "Campo 1923",
+    "label": "b) Por partipaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8072,7 +8072,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1721,
-    "label": "5",
+    "label": "Rentas propias o por participaciones, según art. 14 letra B) N° 1 LIR (renta efectiva sin contabilidad completa)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8082,7 +8082,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1722,
-    "label": "5",
+    "label": "Rentas propias o por participaciones, según art. 14 letra B) N° 1 LIR (renta efectiva sin contabilidad completa)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8092,7 +8092,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1596,
-    "label": "5",
+    "label": "Rentas propias o por participaciones, según art. 14 letra B) N° 1 LIR (renta efectiva sin contabilidad completa)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8102,7 +8102,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 954,
-    "label": "5",
+    "label": "Rentas propias o por participaciones, según art. 14 letra B) N° 1 LIR (renta efectiva sin contabilidad completa)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8112,7 +8112,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 955,
-    "label": "5",
+    "label": "Rentas propias o por participaciones, según art. 14 letra B) N° 1 LIR (renta efectiva sin contabilidad completa)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8122,7 +8122,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1917,
-    "label": "Campo 1917",
+    "label": "a) Rentas propias por concepto de arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma del uso o goce temporal de bienes raíces agrícolas y no agrícolas, determinadas mediante el respectivo contrato",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8132,7 +8132,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1848,
-    "label": "Campo 1848",
+    "label": "a) Rentas propias por concepto de arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma del uso o goce temporal de bienes raíces agrícolas y no agrícolas, determinadas mediante el respectivo contrato",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8142,7 +8142,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1849,
-    "label": "Campo 1849",
+    "label": "a) Rentas propias por concepto de arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma del uso o goce temporal de bienes raíces agrícolas y no agrícolas, determinadas mediante el respectivo contrato",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8152,7 +8152,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1850,
-    "label": "Campo 1850",
+    "label": "b) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8162,7 +8162,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1851,
-    "label": "Campo 1851",
+    "label": "b) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8172,7 +8172,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1852,
-    "label": "Campo 1852",
+    "label": "b) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8182,7 +8182,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1853,
-    "label": "Campo 1853",
+    "label": "c) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8192,7 +8192,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1854,
-    "label": "Campo 1854",
+    "label": "c) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8202,7 +8202,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1855,
-    "label": "Campo 1855",
+    "label": "c) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8212,7 +8212,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1856,
-    "label": "Campo 1856",
+    "label": "c) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8222,7 +8222,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1857,
-    "label": "Campo 1857",
+    "label": "c) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8232,7 +8232,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1858,
-    "label": "Campo 1858",
+    "label": "d) Por participaciones en empresas acogidas al régimen de renta presunta (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8242,7 +8242,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1859,
-    "label": "Campo 1859",
+    "label": "d) Por participaciones en empresas acogidas al régimen de renta presunta (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8252,7 +8252,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1860,
-    "label": "Campo 1860",
+    "label": "d) Por participaciones en empresas acogidas al régimen de renta presunta (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8262,7 +8262,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1861,
-    "label": "Campo 1861",
+    "label": "d) Por participaciones en empresas acogidas al régimen de renta presunta (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8272,7 +8272,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1862,
-    "label": "Campo 1862",
+    "label": "d) Por participaciones en empresas acogidas al régimen de renta presunta (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8282,7 +8282,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1872,
-    "label": "Campo 1872",
+    "label": "e) Rentas esporádicas propias",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8292,7 +8292,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1873,
-    "label": "Campo 1873",
+    "label": "e) Rentas esporádicas propias",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8302,7 +8302,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1863,
-    "label": "Campo 1863",
+    "label": "f) Otras rentas",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8312,7 +8312,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1864,
-    "label": "Campo 1864",
+    "label": "f) Otras rentas",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8322,7 +8322,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1865,
-    "label": "Campo 1865",
+    "label": "f) Otras rentas",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8332,7 +8332,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1597,
-    "label": "6",
+    "label": "Rentas propias o por participaciones, según art. 14 letra D) N° 8 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8342,7 +8342,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1598,
-    "label": "6",
+    "label": "Rentas propias o por participaciones, según art. 14 letra D) N° 8 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8352,7 +8352,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1599,
-    "label": "6",
+    "label": "Rentas propias o por participaciones, según art. 14 letra D) N° 8 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8362,7 +8362,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1631,
-    "label": "6",
+    "label": "Rentas propias o por participaciones, según art. 14 letra D) N° 8 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8372,7 +8372,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1632,
-    "label": "6",
+    "label": "Rentas propias o por participaciones, según art. 14 letra D) N° 8 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8382,7 +8382,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2010,
-    "label": "Campo 2010",
+    "label": "a) Propias",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8392,7 +8392,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2011,
-    "label": "Campo 2011",
+    "label": "a) Propias",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8402,7 +8402,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2012,
-    "label": "Campo 2012",
+    "label": "a) Propias",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8412,7 +8412,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2013,
-    "label": "Campo 2013",
+    "label": "a) Propias",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8422,7 +8422,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2014,
-    "label": "Campo 2014",
+    "label": "a) Propias",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8432,7 +8432,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2015,
-    "label": "Campo 2015",
+    "label": "b) Por participaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8442,7 +8442,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2016,
-    "label": "Campo 2016",
+    "label": "b) Por participaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8452,7 +8452,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2017,
-    "label": "Campo 2017",
+    "label": "b) Por participaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8462,7 +8462,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2018,
-    "label": "Campo 2018",
+    "label": "b) Por participaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8472,7 +8472,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 2019,
-    "label": "Campo 2019",
+    "label": "b) Por participaciones",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8482,7 +8482,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 110,
-    "label": "7",
+    "label": "Rentas percibidas de los arts. 42 Nº 2 (honorarios) y 48 (rem. directores S.A.) LIR, según Recuadro N° 1",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8492,7 +8492,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 605,
-    "label": "8",
+    "label": "Rentas de capitales mobiliarios (art. 20 N° 2 LIR), mayor valor en la enajenación o rescate de cuotas fondos mutuos y fondos de inversión y enajenación de acciones y derechos sociales (art. 17 N° 8 LIR) y retiros de ELD (arts. 42 ter y quáter LIR)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8502,7 +8502,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 155,
-    "label": "8",
+    "label": "Rentas de capitales mobiliarios (art. 20 N° 2 LIR), mayor valor en la enajenación o rescate de cuotas fondos mutuos y fondos de inversión y enajenación de acciones y derechos sociales (art. 17 N° 8 LIR) y retiros de ELD (arts. 42 ter y quáter LIR)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8512,7 +8512,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1866,
-    "label": "Campo 1866",
+    "label": "a) Rentas de capitales mobiliarios (art. 20 N° 2 LIR)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8522,7 +8522,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1867,
-    "label": "Campo 1867",
+    "label": "a) Rentas de capitales mobiliarios (art. 20 N° 2 LIR)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8532,7 +8532,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1869,
-    "label": "Campo 1869",
+    "label": "b) Mayor valor obtenido en la enajenación o rescate de cuotas fondos mutuos y fondos de inversión y en la enajenación de acciones y derechos sociales (art. 17 N° 8 LIR)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8542,7 +8542,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1871,
-    "label": "Campo 1871",
+    "label": "c) Retiros de ELD (arts. 42 ter y quáter LIR)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8552,7 +8552,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1633,
-    "label": "9",
+    "label": "Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8562,7 +8562,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1105,
-    "label": "9",
+    "label": "Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8572,7 +8572,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1634,
-    "label": "9",
+    "label": "Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8582,7 +8582,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 606,
-    "label": "9",
+    "label": "Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8592,7 +8592,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 152,
-    "label": "9",
+    "label": "Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8602,7 +8602,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1874,
-    "label": "Campo 1874",
+    "label": "a) Rentas comprendidas en el art. 57 LIR, que no excedan los límites de 20 o 30 UTM, según corresponda",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8612,7 +8612,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1875,
-    "label": "Campo 1875",
+    "label": "a) Rentas comprendidas en el art. 57 LIR, que no excedan los límites de 20 o 30 UTM, según corresponda",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8622,7 +8622,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1876,
-    "label": "Campo 1876",
+    "label": "a) Rentas comprendidas en el art. 57 LIR, que no excedan los límites de 20 o 30 UTM, según corresponda",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8632,7 +8632,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1877,
-    "label": "Campo 1877",
+    "label": "a) Rentas comprendidas en el art. 57 LIR, que no excedan los límites de 20 o 30 UTM, según corresponda",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8642,7 +8642,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1878,
-    "label": "Campo 1878",
+    "label": "a) Rentas comprendidas en el art. 57 LIR, que no excedan los límites de 20 o 30 UTM, según corresponda",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8652,7 +8652,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1879,
-    "label": "Campo 1879",
+    "label": "b) Retiros y/o dividendos informados por las empresas y sociedades administradoras de FI y FM",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8662,7 +8662,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1880,
-    "label": "Campo 1880",
+    "label": "b) Retiros y/o dividendos informados por las empresas y sociedades administradoras de FI y FM",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8672,7 +8672,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1881,
-    "label": "Campo 1881",
+    "label": "b) Retiros y/o dividendos informados por las empresas y sociedades administradoras de FI y FM",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8682,7 +8682,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1882,
-    "label": "Campo 1882",
+    "label": "b) Retiros y/o dividendos informados por las empresas y sociedades administradoras de FI y FM",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8692,7 +8692,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1883,
-    "label": "Campo 1883",
+    "label": "b) Retiros y/o dividendos informados por las empresas y sociedades administradoras de FI y FM",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8702,7 +8702,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1884,
-    "label": "Campo 1884",
+    "label": "c) Retiros de ELD del art. 42 ter LIR efectuados durante el año2025, que no excedan los límites exentos de impuesto de 200 u 800 UTM",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8712,7 +8712,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1885,
-    "label": "Campo 1885",
+    "label": "d) Otras Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8722,7 +8722,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1886,
-    "label": "Campo 1886",
+    "label": "d) Otras Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8732,7 +8732,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1887,
-    "label": "Campo 1887",
+    "label": "d) Otras Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8742,7 +8742,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1888,
-    "label": "Campo 1888",
+    "label": "d) Otras Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8752,7 +8752,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1889,
-    "label": "Campo 1889",
+    "label": "d) Otras Rentas exentas del IGC, según art. 54 N° 3 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8762,7 +8762,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1635,
-    "label": "10",
+    "label": "Otras rentas de fuente chilena afectas al IGC o IA (según instrucciones)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8772,7 +8772,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1031,
-    "label": "10",
+    "label": "Otras rentas de fuente chilena afectas al IGC o IA (según instrucciones)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8782,7 +8782,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1032,
-    "label": "10",
+    "label": "Otras rentas de fuente chilena afectas al IGC o IA (según instrucciones)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8792,7 +8792,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1890,
-    "label": "11",
+    "label": "Mayor valor en la enajenación de bienes raíces situados en Chile",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8802,7 +8802,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1891,
-    "label": "11",
+    "label": "Mayor valor en la enajenación de bienes raíces situados en Chile",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8812,7 +8812,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1914,
-    "label": "12",
+    "label": "Otras rentas de fuente extranjera afectas al IGC o IA (según instrucciones)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8822,7 +8822,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1104,
-    "label": "12",
+    "label": "Otras rentas de fuente extranjera afectas al IGC o IA (según instrucciones)",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8852,7 +8852,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 161,
-    "label": "13",
+    "label": "Sueldos, pensiones y otras rentas similares de fuente nacional",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8882,7 +8882,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 749,
-    "label": "14",
+    "label": "Incremento por IDPC, según arts. 54 N° 1 y 62 LIR",
     "section": "BASE IMPONIBLE IUSC O IGC O IA",
     "dataType": "number",
     "isCalculated": false,
@@ -8892,7 +8892,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 166,
-    "label": "15",
+    "label": "Impuesto Territorial pagado en el año2025, según art. 55 letra a) LIR",
     "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -8902,7 +8902,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 907,
-    "label": "16",
+    "label": "Donaciones, según art. 7° Ley N° 16.282 y D.L. N° 45 de 1973",
     "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -8912,7 +8912,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 169,
-    "label": "17",
+    "label": "Pérdida en operaciones de capitales mobiliarios y ganancias de capital según códigos 105, 155, 152,1032, 1891, 1104, 1058 y 1987 (arts. 54 N° 1 y 62 LIR)",
     "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -8922,7 +8922,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1833,
-    "label": "18",
+    "label": "Rebaja por donaciones a entidades sin fines de lucro según Título VIII bis D.L. N° 3.063 de 1979 (incorporado por Ley N° 21.440), efectuadas por contribuyentes del IUSC, IGC o IA",
     "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -8932,7 +8932,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 158,
-    "label": "19",
+    "label": "SUB TOTAL (Si declara IA trasladar a código 133 o  32)",
     "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -8942,7 +8942,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 111,
-    "label": "20",
+    "label": "Cotizaciones previsionales correspondientes al empresario o socio, según art. 55 letra b) LIR",
     "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -8972,7 +8972,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 751,
-    "label": "21",
+    "label": "Intereses pagados por créditos con garantía hipotecaria, según art. 55 bis LIR",
     "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -8982,7 +8982,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 822,
-    "label": "22",
+    "label": "20% cuotas fondos de inversión adquiridas antes del 04.06.93, según art. 6 Transitorio Ley N° 19.247",
     "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -8992,7 +8992,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 765,
-    "label": "23",
+    "label": "Ahorro previsional, según art. 42 bis inc. 1° LIR",
     "section": "REBAJAS A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9002,7 +9002,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 170,
-    "label": "24",
+    "label": "BASE IMPONIBLE ANUAL DE IUSC o IGC",
     "section": "BASE IMPONIBLE ANUAL",
     "dataType": "number",
     "isCalculated": false,
@@ -9012,7 +9012,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 157,
-    "label": "25",
+    "label": "IGC o IUSC, según tabla (arts. 47, 52 o 52 bis LIR)",
     "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
@@ -9022,7 +9022,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1017,
-    "label": "26",
+    "label": "IGC sobre intereses y otros rendimientos, según art. 54 bis LIR",
     "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
@@ -9032,7 +9032,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1033,
-    "label": "27",
+    "label": "Reliquidación IGC por ganancias de capital, según art. 17 N° 8 letras a) literal v) y b) LIR",
     "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
@@ -9042,7 +9042,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 201,
-    "label": "28",
+    "label": "Débito fiscal por ahorro neto negativo (Recuadro N° 3), según art. 3° transitorio numeral VI) Ley N° 20.780 (ex. art. 57 bis LIR)",
     "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
@@ -9052,7 +9052,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1035,
-    "label": "29",
+    "label": "Débito fiscal por restitución crédito por IDPC, según art. 56 N° 3 inc. final LIR",
     "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
@@ -9062,7 +9062,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 910,
-    "label": "30",
+    "label": "Tasa adicional de 10% de IGC, sobre cantidades declaradas en código 106, según art. 21 inc. 3° LIR",
     "section": "IUSC o IGC, Y DÉBITOS FISCALES",
     "dataType": "number",
     "isCalculated": false,
@@ -9072,7 +9072,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1036,
-    "label": "31",
+    "label": "Crédito al IGC, según art. 52 bis LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9082,7 +9082,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1101,
-    "label": "32",
+    "label": "Crédito por asignaciones por causa de muerte Ley N° 16.271, según art. 17 N° 8 letra b) literal vi) LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9092,7 +9092,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 135,
-    "label": "33",
+    "label": "Crédito al IGC por fomento forestal, según D.L. N° 701 de 1974",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9102,7 +9102,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 136,
-    "label": "34",
+    "label": "Crédito proporcional al IGC por rentas exentas declaradas en código 152, según art. 56 N° 2 LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9112,7 +9112,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 176,
-    "label": "35",
+    "label": "Crédito al IGC por Impuesto Tasa Adicional, según ex. art. 21 LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9122,7 +9122,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 752,
-    "label": "36",
+    "label": "Crédito al IGC por donaciones para fines deportivos, según art. 62 y sgtes. Ley N° 19.712",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9132,7 +9132,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 608,
-    "label": "37",
+    "label": "Crédito al IGC por IDPC sin derecho a devolución, según arts. 20 N° 1 letra a), 41 A N° 4 letra A) letra a) y 56 N° 3 LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9142,7 +9142,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1636,
-    "label": "38",
+    "label": "Crédito al IGC del 5% sobre total de retiros o dividendos que excedan de 310 UTA que tengan derecho a crédito por IDPC con obligación de restitución, según art. 56 N° 4 LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9152,7 +9152,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1637,
-    "label": "39",
+    "label": "Crédito al IGC por Impuesto Territorial pagado por explotación de bienes raíces no agrícolas, según art. 56 N° 5 LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9162,7 +9162,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1638,
-    "label": "40",
+    "label": "Crédito al IGC por art. 33 bis LIR, según art. 14 letra D) N°8 letra a) numeral (v) LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9172,7 +9172,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 895,
-    "label": "41",
+    "label": "Crédito al IGC o IUSC por gastos en educación, según art. 55 ter LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9182,7 +9182,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 867,
-    "label": "42",
+    "label": "Crédito al IGC o IUSC por donaciones para fines sociales, según art. 1° bis Ley N° 19.885",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9192,9 +9192,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 609,
-    "label": "43",
+    "label": "Crédito al IGC por donaciones a universidades, institutos profesionales y centros de formación técnica, según art. 69 Ley N° 18.681",
     "section": "CRÉDITOS",
-    "dataType": "number",
+    "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -9202,7 +9202,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1639,
-    "label": "44",
+    "label": "Crédito al IGC por ingreso diferido, según art. 14 letra D) N°8 letra d) numeral (ii) LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9212,7 +9212,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1018,
-    "label": "45",
+    "label": "Crédito al IUSC  o IGC por impuestos soportados en el exterior, según arts. 41 A N°4 letra B) o N° 5 LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9222,17 +9222,17 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 162,
-    "label": "46",
+    "label": "Crédito al IGC o IUSC por IUSC, según art. 56 N° 2 LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
-    "isCalculated": false,
+    "isCalculated": true,
     "isMandatory": false,
     "canBeNegative": false,
     "sourceRow": 613
   },
   {
     "code": 174,
-    "label": "47",
+    "label": "Crédito al IGC o IUSC por ahorro neto positivo (Recuadro N° 3), según art. 3° transitorio numeral VI) Ley N° 20.780 (ex. art. 57 bis LIR)",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9242,7 +9242,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 610,
-    "label": "48",
+    "label": "Crédito al IGC o IUSC por IDPC con derecho a devolución, según art. 56 N° 3 LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9252,7 +9252,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 746,
-    "label": "49",
+    "label": "Crédito al IGC por impuestos soportados en el exterior, según art. 41 A N° 4 letra A) letra b) LIR",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9262,7 +9262,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 866,
-    "label": "50",
+    "label": "Crédito al IGC por donaciones al Fondo Nacional de Reconstrucción, según arts. 5 y 9 Ley N° 20.444",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9272,7 +9272,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 607,
-    "label": "51",
+    "label": "Crédito al IGC o IUSC por donaciones para fines culturales, según art. 8 Ley N° 18.985",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9282,7 +9282,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 304,
-    "label": "52",
+    "label": "IGC O IUSC, DÉBITO FISCAL Y/O TASA ADICIONAL DETERMINADO",
     "section": "CRÉDITOS",
     "dataType": "number",
     "isCalculated": false,
@@ -9302,7 +9302,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 18,
-    "label": "54",
+    "label": "IDPC de empresas acogidas al régimen Pro Pyme, según art. 14 letra D) N° 3 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9312,7 +9312,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 19,
-    "label": "54",
+    "label": "IDPC de empresas acogidas al régimen Pro Pyme, según art. 14 letra D) N° 3 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9322,7 +9322,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 20,
-    "label": "54",
+    "label": "IDPC de empresas acogidas al régimen Pro Pyme, según art. 14 letra D) N° 3 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9332,7 +9332,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1109,
-    "label": "55",
+    "label": "IDPC de empresas acogidas al régimen de imputación parcial de créditos, según art. 14 letra A) LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9342,7 +9342,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1111,
-    "label": "55",
+    "label": "IDPC de empresas acogidas al régimen de imputación parcial de créditos, según art. 14 letra A) LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9352,7 +9352,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1113,
-    "label": "55",
+    "label": "IDPC de empresas acogidas al régimen de imputación parcial de créditos, según art. 14 letra A) LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9362,7 +9362,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1640,
-    "label": "56",
+    "label": "IDPC contribuyentes  o entidades sin vínculo directo o indirecto con propietarios afectos a IGC o IA, según art. 14 letra G) LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9372,7 +9372,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1641,
-    "label": "56",
+    "label": "IDPC contribuyentes  o entidades sin vínculo directo o indirecto con propietarios afectos a IGC o IA, según art. 14 letra G) LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9382,7 +9382,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1642,
-    "label": "56",
+    "label": "IDPC contribuyentes  o entidades sin vínculo directo o indirecto con propietarios afectos a IGC o IA, según art. 14 letra G) LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9392,7 +9392,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 187,
-    "label": "57",
+    "label": "IDPC sobre rentas presuntas, según art. 34 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9402,7 +9402,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 188,
-    "label": "57",
+    "label": "IDPC sobre rentas presuntas, según art. 34 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9412,7 +9412,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 189,
-    "label": "57",
+    "label": "IDPC sobre rentas presuntas, según art. 34 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9422,7 +9422,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1924,
-    "label": "Campo 1924",
+    "label": "a) Rentas de la explotación de bienes raíces agrícolas",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9432,7 +9432,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1925,
-    "label": "Campo 1925",
+    "label": "a) Rentas de la explotación de bienes raíces agrícolas",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9442,7 +9442,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1926,
-    "label": "Campo 1926",
+    "label": "a) Rentas de la explotación de bienes raíces agrícolas",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9452,7 +9452,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1927,
-    "label": "Campo 1927",
+    "label": "b) Rentas del transporte de pasajeros",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9462,7 +9462,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1928,
-    "label": "Campo 1928",
+    "label": "b) Rentas del transporte de pasajeros",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9472,7 +9472,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1929,
-    "label": "Campo 1929",
+    "label": "c) Rentas del transporte de carga",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9482,7 +9482,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1930,
-    "label": "Campo 1930",
+    "label": "c) Rentas del transporte de carga",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9492,9 +9492,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1931,
-    "label": "Campo 1931",
+    "label": "d) Rentas de la actividad minera",
     "section": "IMPUESTOS ANUALES A LA RENTA",
-    "dataType": "number",
+    "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -9502,9 +9502,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1932,
-    "label": "Campo 1932",
+    "label": "d) Rentas de la actividad minera",
     "section": "IMPUESTOS ANUALES A LA RENTA",
-    "dataType": "number",
+    "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -9512,7 +9512,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1037,
-    "label": "58",
+    "label": "IDPC sobre rentas efectivas determinadas sin contabilidad completa",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9522,7 +9522,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1038,
-    "label": "58",
+    "label": "IDPC sobre rentas efectivas determinadas sin contabilidad completa",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9532,7 +9532,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1039,
-    "label": "58",
+    "label": "IDPC sobre rentas efectivas determinadas sin contabilidad completa",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9542,7 +9542,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1892,
-    "label": "Campo 1892",
+    "label": "a) Rentas del arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma de uso o goce temporal de bienes raíces agrícolas y no agrícolas",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9552,7 +9552,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1893,
-    "label": "Campo 1893",
+    "label": "a) Rentas del arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma de uso o goce temporal de bienes raíces agrícolas y no agrícolas",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9562,7 +9562,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1894,
-    "label": "Campo 1894",
+    "label": "a) Rentas del arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma de uso o goce temporal de bienes raíces agrícolas y no agrícolas",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9572,7 +9572,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1895,
-    "label": "Campo 1895",
+    "label": "b) Mayor valor obtenido en la enajenación de bienes raíces situados en Chile",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9582,7 +9582,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1897,
-    "label": "Campo 1897",
+    "label": "b) Mayor valor obtenido en la enajenación de bienes raíces situados en Chile",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9592,7 +9592,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1898,
-    "label": "Campo 1898",
+    "label": "c) Rentas obtenidas por contribuyentes con contabilidad simplificada",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9602,7 +9602,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1899,
-    "label": "Campo 1899",
+    "label": "c) Rentas obtenidas por contribuyentes con contabilidad simplificada",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9612,7 +9612,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1900,
-    "label": "Campo 1900",
+    "label": "c) Rentas obtenidas por contribuyentes con contabilidad simplificada",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9622,7 +9622,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1901,
-    "label": "Campo 1901",
+    "label": "d) Otras rentas efectivas afectas a lDPC e impuestos finales",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9632,7 +9632,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1902,
-    "label": "Campo 1902",
+    "label": "d) Otras rentas efectivas afectas a lDPC e impuestos finales",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9642,7 +9642,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1903,
-    "label": "Campo 1903",
+    "label": "d) Otras rentas efectivas afectas a lDPC e impuestos finales",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9652,7 +9652,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1912,
-    "label": "Campo 1912",
+    "label": "e) Otras rentas de fuente extranjera afectas",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9662,7 +9662,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1918,
-    "label": "Campo 1918",
+    "label": "e) Otras rentas de fuente extranjera afectas",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9672,7 +9672,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1913,
-    "label": "Campo 1913",
+    "label": "e) Otras rentas de fuente extranjera afectas",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9682,7 +9682,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 77,
-    "label": "59",
+    "label": "Impuesto de 40% empresas del Estado, según art. 2º D.L. N° 2.398 de 1978",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9692,7 +9692,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 74,
-    "label": "59",
+    "label": "Impuesto de 40% empresas del Estado, según art. 2º D.L. N° 2.398 de 1978",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9702,7 +9702,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 79,
-    "label": "59",
+    "label": "Impuesto de 40% empresas del Estado, según art. 2º D.L. N° 2.398 de 1978",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9712,7 +9712,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1040,
-    "label": "60",
+    "label": "Pago voluntario a título de IDPC, según art. 14 letra A) N° 6 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9722,7 +9722,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1041,
-    "label": "60",
+    "label": "Pago voluntario a título de IDPC, según art. 14 letra A) N° 6 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9732,7 +9732,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1042,
-    "label": "61",
+    "label": "Diferencia de créditos por IDPC otorgados en forma indebida o en exceso, según art. 14 letra A) N° 7 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9742,9 +9742,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 824,
-    "label": "62",
+    "label": "Impuesto específico a la actividad minera, según ex. art. 64 bis LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
-    "dataType": "number",
+    "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -9752,9 +9752,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 825,
-    "label": "62",
+    "label": "Impuesto específico a la actividad minera, según ex. art. 64 bis LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
-    "dataType": "number",
+    "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -9762,7 +9762,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1976,
-    "label": "63",
+    "label": "Royalty minero Ley N° 21.591",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9772,7 +9772,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1977,
-    "label": "Campo 1977",
+    "label": "a) Componente ad valorem, según art. 2 Ley N° 21.591",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9782,7 +9782,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1978,
-    "label": "Campo 1978",
+    "label": "a) Componente ad valorem, según art. 2 Ley N° 21.591",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9792,7 +9792,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1979,
-    "label": "Campo 1979",
+    "label": "b) Componente sobre la rentabilidad, según art. 3 o art. 4 Ley N° 21.591",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9802,7 +9802,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1980,
-    "label": "Campo 1980",
+    "label": "b) Componente sobre la rentabilidad, según art. 3 o art. 4 Ley N° 21.591",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9812,7 +9812,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1043,
-    "label": "64",
+    "label": "Impuesto único de 10% por enajenación de bienes raíces, según art. 17 N° 8 letra b) LIR y/o art. 4 Ley N° 21.078",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9822,7 +9822,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1102,
-    "label": "64",
+    "label": "Impuesto único de 10% por enajenación de bienes raíces, según art. 17 N° 8 letra b) LIR y/o art. 4 Ley N° 21.078",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9832,7 +9832,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1044,
-    "label": "64",
+    "label": "Impuesto único de 10% por enajenación de bienes raíces, según art. 17 N° 8 letra b) LIR y/o art. 4 Ley N° 21.078",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9842,7 +9842,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 113,
-    "label": "65",
+    "label": "Impuesto único de 40% sobre gastos rechazados y otras partidas, según art. 21 inc. 1°, art. 14 letra A) N° 9 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9852,7 +9852,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1007,
-    "label": "65",
+    "label": "Impuesto único de 40% sobre gastos rechazados y otras partidas, según art. 21 inc. 1°, art. 14 letra A) N° 9 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9862,7 +9862,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 114,
-    "label": "65",
+    "label": "Impuesto único de 40% sobre gastos rechazados y otras partidas, según art. 21 inc. 1°, art. 14 letra A) N° 9 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9872,7 +9872,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1829,
-    "label": "66",
+    "label": "Impuesto único de 10% por enajenación o rescate de acciones de S.A. con presencia bursátil, de cuotas de fondos de inversión y fondos mutuos, según art. 107 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9882,7 +9882,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1830,
-    "label": "66",
+    "label": "Impuesto único de 10% por enajenación o rescate de acciones de S.A. con presencia bursátil, de cuotas de fondos de inversión y fondos mutuos, según art. 107 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9892,7 +9892,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1835,
-    "label": "67",
+    "label": "Contribución para el desarrollo regional según art. 32 Ley N° 21.210",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9902,7 +9902,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1836,
-    "label": "67",
+    "label": "Contribución para el desarrollo regional según art. 32 Ley N° 21.210",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9912,7 +9912,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1837,
-    "label": "67",
+    "label": "Contribución para el desarrollo regional según art. 32 Ley N° 21.210",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9922,7 +9922,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 908,
-    "label": "68",
+    "label": "IA en carácter de único (activos subyacentes), según art. 58 N° 3 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9932,7 +9932,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 909,
-    "label": "68",
+    "label": "IA en carácter de único (activos subyacentes), según art. 58 N° 3 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9942,7 +9942,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 951,
-    "label": "69",
+    "label": "Impuesto único de 10%, según art. 82 del art. 1° Ley N° 20.712",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9952,7 +9952,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 952,
-    "label": "69",
+    "label": "Impuesto único de 10%, según art. 82 del art. 1° Ley N° 20.712",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9962,7 +9962,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 753,
-    "label": "70",
+    "label": "Impuesto único por exceso de endeudamiento, según art. 41 F LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9972,7 +9972,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 754,
-    "label": "70",
+    "label": "Impuesto único por exceso de endeudamiento, según art. 41 F LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9982,7 +9982,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 755,
-    "label": "70",
+    "label": "Impuesto único por exceso de endeudamiento, según art. 41 F LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -9992,7 +9992,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 133,
-    "label": "71",
+    "label": "IA según ex D.L. N° 600 de 1974",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10002,7 +10002,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 138,
-    "label": "71",
+    "label": "IA según ex D.L. N° 600 de 1974",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10012,7 +10012,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 134,
-    "label": "71",
+    "label": "IA según ex D.L. N° 600 de 1974",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10022,7 +10022,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 32,
-    "label": "72",
+    "label": "IA según arts. 58 N° 1 y 2 y 60 inc. 1° LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10032,7 +10032,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 76,
-    "label": "72",
+    "label": "IA según arts. 58 N° 1 y 2 y 60 inc. 1° LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10042,7 +10042,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 34,
-    "label": "72",
+    "label": "IA según arts. 58 N° 1 y 2 y 60 inc. 1° LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10052,7 +10052,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1643,
-    "label": "73",
+    "label": "Impuesto único tasa 25% por distribuciones desproporcionadas, según art. 39° transitorio Ley N° 21.210",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10062,7 +10062,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1644,
-    "label": "73",
+    "label": "Impuesto único tasa 25% por distribuciones desproporcionadas, según art. 39° transitorio Ley N° 21.210",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10072,7 +10072,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 911,
-    "label": "74",
+    "label": "Diferencia de IA por crédito indebido por IDPC o por crédito indebido del art. 41 A en caso de empresas acogidas al régimen del art. 14 letras A) y D) N° 3, según art. 74 N° 4 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10082,7 +10082,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 913,
-    "label": "75",
+    "label": "Tasa adicional de 10% de IA, sobre cantidades declaradas en código 106, según art. 21 inc 3° LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10092,7 +10092,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 923,
-    "label": "76",
+    "label": "Retención de impuesto sobre gastos rechazados y otras partidas (tasa 45%), según art. 74 N° 4 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10102,7 +10102,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 924,
-    "label": "77",
+    "label": "Retención de IA en carácter de único (activos subyacentes) (tasa 20% y/o 35%), según art. 74 N° 4 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10112,7 +10112,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1051,
-    "label": "78",
+    "label": "Retención del IA sobre rentas asignadas empresas acogidas al régimen de los arts. 14 letra B) N° 1 , 2 y/o 14 letra D) N° 8, según art. 74 N° 4 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10122,7 +10122,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1052,
-    "label": "79",
+    "label": "Débito fiscal por restitución crédito por IDPC, según art. 63 inc. final LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10132,7 +10132,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 21,
-    "label": "80",
+    "label": "Impuesto único talleres artesanales",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10142,7 +10142,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 43,
-    "label": "81",
+    "label": "Impuesto único pescadores artesanales",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10152,7 +10152,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 767,
-    "label": "82",
+    "label": "Impuesto único por retiros de ahorro previsional, según art. 42 bis inc. 1° N° 3 LIR",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10162,7 +10162,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 862,
-    "label": "83",
+    "label": "Restitución crédito por gastos de capacitación excesivo, según  art. 6° Ley N° 20.326",
     "section": "IMPUESTOS ANUALES A LA RENTA",
     "dataType": "number",
     "isCalculated": false,
@@ -10172,9 +10172,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 51,
-    "label": "84",
+    "label": "Reliquidación IGC por término de giro de empresa acogida al régimen del art. 14 letras A) y D) N° 3 y 8, según art. 38 bis N° 3 LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
-    "dataType": "number",
+    "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -10182,9 +10182,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 63,
-    "label": "84",
+    "label": "Reliquidación IGC por término de giro de empresa acogida al régimen del art. 14 letras A) y D) N° 3 y 8, según art. 38 bis N° 3 LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
-    "dataType": "number",
+    "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -10192,9 +10192,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 71,
-    "label": "84",
+    "label": "Reliquidación IGC por término de giro de empresa acogida al régimen del art. 14 letras A) y D) N° 3 y 8, según art. 38 bis N° 3 LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
-    "dataType": "number",
+    "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -10202,7 +10202,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 36,
-    "label": "85",
+    "label": "PPM y remanente del IEAM",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10212,7 +10212,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1904,
-    "label": "Campo 1904",
+    "label": "a) PPM arts. 84 letras a), c) , e), y h) y 14 D N° 3 letra (k) LIR  y PPM royalty minero según art. 7 Ley N° 21.591",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10222,7 +10222,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1905,
-    "label": "Campo 1905",
+    "label": "b) PPM de segunda categoría art. 84 letra b) LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10232,7 +10232,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1906,
-    "label": "Campo 1906",
+    "label": "c) PPM Voluntario, según art. 88 incs. 1° y 2° LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10242,7 +10242,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1916,
-    "label": "Campo 1916",
+    "label": "d) Remanente del IEAM anotado en el código 829 del recuadro N° 8",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10252,7 +10252,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 848,
-    "label": "86",
+    "label": "Crédito fiscal AFP, según art. 23 D.L. N° 3.500 de 1980",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10262,7 +10262,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 82,
-    "label": "87",
+    "label": "Crédito por gastos de capacitación, según Ley N° 19.518",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10272,7 +10272,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1123,
-    "label": "88",
+    "label": "Crédito por desembolsos directos por trazabilidad (art. 60 quinquies Código Tributario)",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10282,7 +10282,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 83,
-    "label": "89",
+    "label": "Crédito empresas constructoras",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10292,7 +10292,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 173,
-    "label": "90",
+    "label": "Crédito por reintegro de peajes, según art. 1° Ley N° 19.764",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10302,7 +10302,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 198,
-    "label": "91",
+    "label": "Retenciones por rentas declaradas en código 110 (Recuadro N°1)",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10312,7 +10312,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 54,
-    "label": "92",
+    "label": "Mayor retención por sueldos, pensiones y otras rentas similares declaradas en código 1098, según art. 88 inc. final LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10322,9 +10322,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 832,
-    "label": "93",
+    "label": "Retenciones efectuadas por instituciones autorizadas con tasa 15%, sobre los retiros de ahorro previsional, según art. 42 bis N° 3 incs. 2° y 3° LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
-    "dataType": "number",
+    "dataType": "boolean",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -10332,7 +10332,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1907,
-    "label": "94",
+    "label": "Retenciones por retiros de seguros de vida con ahorro y seguros dotales, y retenciones efectuadas sobre las rentas de capitales mobiliarios",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10342,7 +10342,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 833,
-    "label": "95",
+    "label": "Retenciones por rentas declaradas en códigos 104, 106, 108, 955, 1632, 155, 1032, 1891, 908, 951, 32 y 1829",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10352,9 +10352,9 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1908,
-    "label": "96",
+    "label": "Retenciones por actividades mineras según el N° 6 del art. 74 LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
-    "dataType": "number",
+    "dataType": "text",
     "isCalculated": false,
     "isMandatory": false,
     "canBeNegative": false,
@@ -10382,7 +10382,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 757,
-    "label": "97",
+    "label": "Remanente de crédito por reliquidación del IUSC y/o por ahorro neto positivo, proveniente de códigos 162 y/o 174",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10392,7 +10392,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 58,
-    "label": "98",
+    "label": "Créditos puestos a disposición de los socios por la sociedad respectiva, según instrucciones",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10402,7 +10402,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1645,
-    "label": "99",
+    "label": "PPM puestos a disposición de los propietarios de empresas del régimen de transparencia tributaria del art. 14 letra D) N° 8 LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10412,7 +10412,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 181,
-    "label": "100",
+    "label": "Pago provisional exportadores, según ex-art. 13 Ley N° 18.768",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10422,7 +10422,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 881,
-    "label": "101",
+    "label": "Retenciones sobre intereses, según art. 74 N° 7 y 8 LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10432,7 +10432,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1646,
-    "label": "102",
+    "label": "Impuestos declarados y pagados en conformidad al art. 69N° 4 LIR",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10442,7 +10442,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1647,
-    "label": "103",
+    "label": "Excedente crédito por IDPC del código 76",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10452,7 +10452,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1910,
-    "label": "104",
+    "label": "Deducción de impuesto por tasas rebajadas en virtud de convenios para evitar la doble tributación",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10462,7 +10462,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1915,
-    "label": "105",
+    "label": "Crédito por la compra de viviendas nuevas adquiridas con créditos con garantía hipotecaria, según Ley N° 21.631",
     "section": "DEDUCCIONES A LOS IMPUESTOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10472,7 +10472,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 900,
-    "label": "106",
+    "label": "Cargo por cotizaciones previsionales, según arts. 89 y sgtes. D.L. N° 3.500 de 1980",
     "section": "OTROS CARGOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10482,7 +10482,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1796,
-    "label": "107",
+    "label": "Monto a pagar cuota préstamo tasa 0% (préstamo solidario del Estado)",
     "section": "OTROS CARGOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10492,7 +10492,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 1827,
-    "label": "108",
+    "label": "Monto a pagar cuota anticipo solidario para pago de cotizaciones, según art. 21 inc. 1° y 3° Ley N° 21.354",
     "section": "OTROS CARGOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10502,7 +10502,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 305,
-    "label": "109",
+    "label": "RESULTADO LIQUIDACIÓN ANUAL IMPUESTO A LA RENTA",
     "section": "OTROS CARGOS",
     "dataType": "number",
     "isCalculated": false,
@@ -10512,7 +10512,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 85,
-    "label": "110",
+    "label": "SALDO A FAVOR",
     "section": "REMANENTE DE CRÉDITO",
     "dataType": "number",
     "isCalculated": false,
@@ -10522,7 +10522,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 86,
-    "label": "111",
+    "label": "Menos: saldo puesto a disposición de los socios",
     "section": "REMANENTE DE CRÉDITO",
     "dataType": "number",
     "isCalculated": false,
@@ -10532,7 +10532,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 87,
-    "label": "112",
+    "label": "Monto",
     "section": "REMANENTE DE CRÉDITO",
     "dataType": "number",
     "isCalculated": false,
@@ -10572,7 +10572,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 90,
-    "label": "113",
+    "label": "Impuesto adeudado",
     "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
@@ -10582,7 +10582,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 39,
-    "label": "114",
+    "label": "Reajuste art.72 LIR, código 305      %",
     "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
@@ -10592,7 +10592,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 91,
-    "label": "115",
+    "label": "TOTAL A PAGAR (códigos 90 + 39)",
     "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
@@ -10602,7 +10602,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 92,
-    "label": "116",
+    "label": "MÁS: reajustes declaración fuera de plazo",
     "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
@@ -10612,7 +10612,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 93,
-    "label": "117",
+    "label": "MÁS: intereses y multas declaración fuera de plazo",
     "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
@@ -10622,7 +10622,7 @@ export const LAYOUT_FIELDS: FieldDefinition[] = [
   },
   {
     "code": 94,
-    "label": "118",
+    "label": "TOTAL A PAGAR (códigos 91+92+ 93)",
     "section": "IMPUESTO A PAGAR",
     "dataType": "number",
     "isCalculated": false,
@@ -10929,7 +10929,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 7,
         "type": "field",
-        "text": "",
+        "text": "95",
         "bold": false,
         "fields": [
           {
@@ -10951,7 +10951,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 8,
         "type": "field",
-        "text": "",
+        "text": "616",
         "bold": false,
         "fields": [
           {
@@ -10973,7 +10973,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 9,
         "type": "field",
-        "text": "",
+        "text": "69",
         "bold": false,
         "fields": [
           {
@@ -10995,7 +10995,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 10,
         "type": "field",
-        "text": "",
+        "text": "68",
         "bold": false,
         "fields": [
           {
@@ -11024,7 +11024,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 13,
         "type": "field",
-        "text": "",
+        "text": "805",
         "bold": false,
         "fields": [
           {
@@ -11142,7 +11142,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "=",
             "slot": 0,
             "label": "Total ingresos brutos",
-            "dataType": "text"
+            "dataType": "number"
           }
         ]
       },
@@ -11157,7 +11157,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
             "operator": "+",
             "slot": 0,
             "label": "Participación en sociedades de profesionales de 2ª Categoría",
-            "dataType": "text"
+            "dataType": "number"
           }
         ]
       },
@@ -20415,7 +20415,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 542,
         "type": "field",
-        "text": "1",
+        "text": "Retiros o remesas afectos al IGC o IA, según art. 14 letras A) y/o D) N° 3 LIR",
         "bold": false,
         "fields": [
           {
@@ -20453,7 +20453,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 543,
         "type": "field",
-        "text": "",
+        "text": "a) Propios",
         "bold": false,
         "fields": [
           {
@@ -20491,7 +20491,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 544,
         "type": "field",
-        "text": "",
+        "text": "b) Por partipaciones",
         "bold": false,
         "fields": [
           {
@@ -20529,7 +20529,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 545,
         "type": "field",
-        "text": "2",
+        "text": "Dividendos afectos al IGC o IA, según art.14 letras A) y/o D) N° 3 LIR",
         "bold": false,
         "fields": [
           {
@@ -20567,14 +20567,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 546,
         "type": "field",
-        "text": "3",
+        "text": "Gastos rechazados y otras partidas referidos en el art. 21 inc. 3° LIR",
         "bold": false,
         "fields": [
           {
             "code": 106,
             "operator": "+",
             "slot": 5,
-            "label": "3",
+            "label": "Gastos rechazados y otras partidas referidos en el art. 21 inc. 3° LIR",
             "dataType": "number"
           }
         ]
@@ -20582,7 +20582,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 547,
         "type": "field",
-        "text": "4",
+        "text": "Rentas presuntas propias o por participaciones, según art. 14 letra B) N° 2 y art. 34 LIR",
         "bold": false,
         "fields": [
           {
@@ -20602,7 +20602,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 548,
         "type": "field",
-        "text": "",
+        "text": "a) Propios",
         "bold": false,
         "fields": [
           {
@@ -20622,7 +20622,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 549,
         "type": "field",
-        "text": "",
+        "text": "b) Por partipaciones",
         "bold": false,
         "fields": [
           {
@@ -20642,7 +20642,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 550,
         "type": "field",
-        "text": "5",
+        "text": "Rentas propias o por participaciones, según art. 14 letra B) N° 1 LIR (renta efectiva sin contabilidad completa)",
         "bold": false,
         "fields": [
           {
@@ -20680,7 +20680,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 551,
         "type": "field",
-        "text": "",
+        "text": "a) Rentas propias por concepto de arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma del uso o goce temporal de bienes raíces agrícolas y no agrícolas, determinadas mediante el respectivo contrato",
         "bold": false,
         "fields": [
           {
@@ -20706,7 +20706,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 552,
         "type": "field",
-        "text": "",
+        "text": "b) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa",
         "bold": false,
         "fields": [
           {
@@ -20732,7 +20732,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 553,
         "type": "field",
-        "text": "",
+        "text": "c) Por participaciones en empresas que determinan su renta efectiva sin contabilidad completa (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
         "bold": false,
         "fields": [
           {
@@ -20770,7 +20770,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 554,
         "type": "field",
-        "text": "",
+        "text": "d) Por participaciones en empresas acogidas al régimen de renta presunta (siempre que a su vez correspondan a rentas efectivas provenientes de terceros)",
         "bold": false,
         "fields": [
           {
@@ -20808,7 +20808,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 555,
         "type": "field",
-        "text": "",
+        "text": "e) Rentas esporádicas propias",
         "bold": false,
         "fields": [
           {
@@ -20828,7 +20828,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 556,
         "type": "field",
-        "text": "",
+        "text": "f) Otras rentas",
         "bold": false,
         "fields": [
           {
@@ -20854,7 +20854,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 557,
         "type": "field",
-        "text": "6",
+        "text": "Rentas propias o por participaciones, según art. 14 letra D) N° 8 LIR",
         "bold": false,
         "fields": [
           {
@@ -20892,7 +20892,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 558,
         "type": "field",
-        "text": "",
+        "text": "a) Propias",
         "bold": false,
         "fields": [
           {
@@ -20930,7 +20930,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 559,
         "type": "field",
-        "text": "",
+        "text": "b) Por participaciones",
         "bold": false,
         "fields": [
           {
@@ -20968,14 +20968,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 560,
         "type": "field",
-        "text": "7",
+        "text": "Rentas percibidas de los arts. 42 Nº 2 (honorarios) y 48 (rem. directores S.A.) LIR, según Recuadro N° 1",
         "bold": false,
         "fields": [
           {
             "code": 110,
             "operator": "+",
             "slot": 5,
-            "label": "7",
+            "label": "Rentas percibidas de los arts. 42 Nº 2 (honorarios) y 48 (rem. directores S.A.) LIR, según Recuadro N° 1",
             "dataType": "number"
           }
         ]
@@ -20983,7 +20983,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 561,
         "type": "field",
-        "text": "8",
+        "text": "Rentas de capitales mobiliarios (art. 20 N° 2 LIR), mayor valor en la enajenación o rescate de cuotas fondos mutuos y fondos de inversión y enajenación de acciones y derechos sociales (art. 17 N° 8 LIR) y retiros de ELD (arts. 42 ter y quáter LIR)",
         "bold": false,
         "fields": [
           {
@@ -21003,7 +21003,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 562,
         "type": "field",
-        "text": "",
+        "text": "a) Rentas de capitales mobiliarios (art. 20 N° 2 LIR)",
         "bold": false,
         "fields": [
           {
@@ -21023,13 +21023,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 563,
         "type": "field",
-        "text": "",
+        "text": "b) Mayor valor obtenido en la enajenación o rescate de cuotas fondos mutuos y fondos de inversión y en la enajenación de acciones y derechos sociales (art. 17 N° 8 LIR)",
         "bold": false,
         "fields": [
           {
             "code": 1869,
             "operator": "",
             "slot": 5,
+            "label": "b) Mayor valor obtenido en la enajenación o rescate de cuotas fondos mutuos y fondos de inversión y en la enajenación de acciones y derechos sociales (art. 17 N° 8 LIR)",
             "dataType": "number"
           }
         ]
@@ -21037,13 +21038,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 564,
         "type": "field",
-        "text": "",
+        "text": "c) Retiros de ELD (arts. 42 ter y quáter LIR)",
         "bold": false,
         "fields": [
           {
             "code": 1871,
             "operator": "",
             "slot": 5,
+            "label": "c) Retiros de ELD (arts. 42 ter y quáter LIR)",
             "dataType": "number"
           }
         ]
@@ -21051,7 +21053,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 565,
         "type": "field",
-        "text": "9",
+        "text": "Rentas exentas del IGC, según art. 54 N° 3 LIR",
         "bold": false,
         "fields": [
           {
@@ -21089,7 +21091,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 566,
         "type": "field",
-        "text": "",
+        "text": "a) Rentas comprendidas en el art. 57 LIR, que no excedan los límites de 20 o 30 UTM, según corresponda",
         "bold": false,
         "fields": [
           {
@@ -21127,7 +21129,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 567,
         "type": "field",
-        "text": "",
+        "text": "b) Retiros y/o dividendos informados por las empresas y sociedades administradoras de FI y FM",
         "bold": false,
         "fields": [
           {
@@ -21165,13 +21167,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 568,
         "type": "field",
-        "text": "",
+        "text": "c) Retiros de ELD del art. 42 ter LIR efectuados durante el año2025, que no excedan los límites exentos de impuesto de 200 u 800 UTM",
         "bold": false,
         "fields": [
           {
             "code": 1884,
             "operator": "",
             "slot": 5,
+            "label": "c) Retiros de ELD del art. 42 ter LIR efectuados durante el año2025, que no excedan los límites exentos de impuesto de 200 u 800 UTM",
             "dataType": "number"
           }
         ]
@@ -21179,7 +21182,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 569,
         "type": "field",
-        "text": "",
+        "text": "d) Otras Rentas exentas del IGC, según art. 54 N° 3 LIR",
         "bold": false,
         "fields": [
           {
@@ -21217,7 +21220,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 570,
         "type": "field",
-        "text": "10",
+        "text": "Otras rentas de fuente chilena afectas al IGC o IA (según instrucciones)",
         "bold": false,
         "fields": [
           {
@@ -21243,7 +21246,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 571,
         "type": "field",
-        "text": "11",
+        "text": "Mayor valor en la enajenación de bienes raíces situados en Chile",
         "bold": false,
         "fields": [
           {
@@ -21263,7 +21266,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 572,
         "type": "field",
-        "text": "12",
+        "text": "Otras rentas de fuente extranjera afectas al IGC o IA (según instrucciones)",
         "bold": false,
         "fields": [
           {
@@ -21283,7 +21286,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 573,
         "type": "field",
-        "text": "13",
+        "text": "Sueldos, pensiones y otras rentas similares de fuente nacional",
         "bold": false,
         "fields": [
           {
@@ -21311,7 +21314,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 574,
         "type": "field",
-        "text": "14",
+        "text": "Incremento por IDPC, según arts. 54 N° 1 y 62 LIR",
         "bold": false,
         "fields": [
           {
@@ -21350,14 +21353,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 577,
         "type": "field",
-        "text": "15",
+        "text": "Impuesto Territorial pagado en el año2025, según art. 55 letra a) LIR",
         "bold": false,
         "fields": [
           {
             "code": 166,
             "operator": "-",
             "slot": 2,
-            "label": "15",
+            "label": "Impuesto Territorial pagado en el año2025, según art. 55 letra a) LIR",
             "dataType": "number"
           }
         ]
@@ -21365,14 +21368,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 578,
         "type": "field",
-        "text": "16",
+        "text": "Donaciones, según art. 7° Ley N° 16.282 y D.L. N° 45 de 1973",
         "bold": false,
         "fields": [
           {
             "code": 907,
             "operator": "-",
             "slot": 2,
-            "label": "16",
+            "label": "Donaciones, según art. 7° Ley N° 16.282 y D.L. N° 45 de 1973",
             "dataType": "number"
           }
         ]
@@ -21380,14 +21383,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 579,
         "type": "field",
-        "text": "17",
+        "text": "Pérdida en operaciones de capitales mobiliarios y ganancias de capital según códigos 105, 155, 152,1032, 1891, 1104, 1058 y 1987 (arts. 54 N° 1 y 62 LIR)",
         "bold": false,
         "fields": [
           {
             "code": 169,
             "operator": "-",
             "slot": 2,
-            "label": "17",
+            "label": "Pérdida en operaciones de capitales mobiliarios y ganancias de capital según códigos 105, 155, 152,1032, 1891, 1104, 1058 y 1987 (arts. 54 N° 1 y 62 LIR)",
             "dataType": "number"
           }
         ]
@@ -21395,14 +21398,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 580,
         "type": "field",
-        "text": "18",
+        "text": "Rebaja por donaciones a entidades sin fines de lucro según Título VIII bis D.L. N° 3.063 de 1979 (incorporado por Ley N° 21.440), efectuadas por contribuyentes del IUSC, IGC o IA",
         "bold": false,
         "fields": [
           {
             "code": 1833,
             "operator": "-",
             "slot": 2,
-            "label": "18",
+            "label": "Rebaja por donaciones a entidades sin fines de lucro según Título VIII bis D.L. N° 3.063 de 1979 (incorporado por Ley N° 21.440), efectuadas por contribuyentes del IUSC, IGC o IA",
             "dataType": "number"
           }
         ]
@@ -21410,14 +21413,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 581,
         "type": "field",
-        "text": "19",
+        "text": "SUB TOTAL (Si declara IA trasladar a código 133 o  32)",
         "bold": false,
         "fields": [
           {
             "code": 158,
             "operator": "=",
             "slot": 2,
-            "label": "19",
+            "label": "SUB TOTAL (Si declara IA trasladar a código 133 o  32)",
             "dataType": "number"
           }
         ]
@@ -21425,14 +21428,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 582,
         "type": "field",
-        "text": "20",
+        "text": "Cotizaciones previsionales correspondientes al empresario o socio, según art. 55 letra b) LIR",
         "bold": false,
         "fields": [
           {
             "code": 111,
             "operator": "-",
             "slot": 2,
-            "label": "20",
+            "label": "Cotizaciones previsionales correspondientes al empresario o socio, según art. 55 letra b) LIR",
             "dataType": "number"
           }
         ]
@@ -21440,7 +21443,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 583,
         "type": "field",
-        "text": "21",
+        "text": "Intereses pagados por créditos con garantía hipotecaria, según art. 55 bis LIR",
         "bold": false,
         "fields": [
           {
@@ -21468,14 +21471,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 584,
         "type": "field",
-        "text": "22",
+        "text": "20% cuotas fondos de inversión adquiridas antes del 04.06.93, según art. 6 Transitorio Ley N° 19.247",
         "bold": false,
         "fields": [
           {
             "code": 822,
             "operator": "-",
             "slot": 2,
-            "label": "22",
+            "label": "20% cuotas fondos de inversión adquiridas antes del 04.06.93, según art. 6 Transitorio Ley N° 19.247",
             "dataType": "number"
           }
         ]
@@ -21483,14 +21486,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 585,
         "type": "field",
-        "text": "23",
+        "text": "Ahorro previsional, según art. 42 bis inc. 1° LIR",
         "bold": false,
         "fields": [
           {
             "code": 765,
             "operator": "-",
             "slot": 2,
-            "label": "23",
+            "label": "Ahorro previsional, según art. 42 bis inc. 1° LIR",
             "dataType": "number"
           }
         ]
@@ -21507,14 +21510,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 587,
         "type": "field",
-        "text": "24",
+        "text": "BASE IMPONIBLE ANUAL DE IUSC o IGC",
         "bold": false,
         "fields": [
           {
             "code": 170,
             "operator": "=",
             "slot": 0,
-            "label": "24",
+            "label": "BASE IMPONIBLE ANUAL DE IUSC o IGC",
             "dataType": "number"
           }
         ]
@@ -21531,14 +21534,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 590,
         "type": "field",
-        "text": "25",
+        "text": "IGC o IUSC, según tabla (arts. 47, 52 o 52 bis LIR)",
         "bold": false,
         "fields": [
           {
             "code": 157,
             "operator": "+",
             "slot": 0,
-            "label": "25",
+            "label": "IGC o IUSC, según tabla (arts. 47, 52 o 52 bis LIR)",
             "dataType": "number"
           }
         ]
@@ -21546,14 +21549,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 591,
         "type": "field",
-        "text": "26",
+        "text": "IGC sobre intereses y otros rendimientos, según art. 54 bis LIR",
         "bold": false,
         "fields": [
           {
             "code": 1017,
             "operator": "+",
             "slot": 0,
-            "label": "26",
+            "label": "IGC sobre intereses y otros rendimientos, según art. 54 bis LIR",
             "dataType": "number"
           }
         ]
@@ -21561,14 +21564,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 592,
         "type": "field",
-        "text": "27",
+        "text": "Reliquidación IGC por ganancias de capital, según art. 17 N° 8 letras a) literal v) y b) LIR",
         "bold": false,
         "fields": [
           {
             "code": 1033,
             "operator": "+",
             "slot": 0,
-            "label": "27",
+            "label": "Reliquidación IGC por ganancias de capital, según art. 17 N° 8 letras a) literal v) y b) LIR",
             "dataType": "number"
           }
         ]
@@ -21576,14 +21579,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 593,
         "type": "field",
-        "text": "28",
+        "text": "Débito fiscal por ahorro neto negativo (Recuadro N° 3), según art. 3° transitorio numeral VI) Ley N° 20.780 (ex. art. 57 bis LIR)",
         "bold": false,
         "fields": [
           {
             "code": 201,
             "operator": "+",
             "slot": 0,
-            "label": "28",
+            "label": "Débito fiscal por ahorro neto negativo (Recuadro N° 3), según art. 3° transitorio numeral VI) Ley N° 20.780 (ex. art. 57 bis LIR)",
             "dataType": "number"
           }
         ]
@@ -21591,14 +21594,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 594,
         "type": "field",
-        "text": "29",
+        "text": "Débito fiscal por restitución crédito por IDPC, según art. 56 N° 3 inc. final LIR",
         "bold": false,
         "fields": [
           {
             "code": 1035,
             "operator": "+",
             "slot": 0,
-            "label": "29",
+            "label": "Débito fiscal por restitución crédito por IDPC, según art. 56 N° 3 inc. final LIR",
             "dataType": "number"
           }
         ]
@@ -21606,14 +21609,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 595,
         "type": "field",
-        "text": "30",
+        "text": "Tasa adicional de 10% de IGC, sobre cantidades declaradas en código 106, según art. 21 inc. 3° LIR",
         "bold": false,
         "fields": [
           {
             "code": 910,
             "operator": "+",
             "slot": 0,
-            "label": "30",
+            "label": "Tasa adicional de 10% de IGC, sobre cantidades declaradas en código 106, según art. 21 inc. 3° LIR",
             "dataType": "number"
           }
         ]
@@ -21630,14 +21633,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 598,
         "type": "field",
-        "text": "31",
+        "text": "Crédito al IGC, según art. 52 bis LIR",
         "bold": false,
         "fields": [
           {
             "code": 1036,
             "operator": "-",
             "slot": 0,
-            "label": "31",
+            "label": "Crédito al IGC, según art. 52 bis LIR",
             "dataType": "number"
           }
         ]
@@ -21645,14 +21648,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 599,
         "type": "field",
-        "text": "32",
+        "text": "Crédito por asignaciones por causa de muerte Ley N° 16.271, según art. 17 N° 8 letra b) literal vi) LIR",
         "bold": false,
         "fields": [
           {
             "code": 1101,
             "operator": "-",
             "slot": 0,
-            "label": "32",
+            "label": "Crédito por asignaciones por causa de muerte Ley N° 16.271, según art. 17 N° 8 letra b) literal vi) LIR",
             "dataType": "number"
           }
         ]
@@ -21660,14 +21663,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 600,
         "type": "field",
-        "text": "33",
+        "text": "Crédito al IGC por fomento forestal, según D.L. N° 701 de 1974",
         "bold": false,
         "fields": [
           {
             "code": 135,
             "operator": "-",
             "slot": 0,
-            "label": "33",
+            "label": "Crédito al IGC por fomento forestal, según D.L. N° 701 de 1974",
             "dataType": "number"
           }
         ]
@@ -21675,14 +21678,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 601,
         "type": "field",
-        "text": "34",
+        "text": "Crédito proporcional al IGC por rentas exentas declaradas en código 152, según art. 56 N° 2 LIR",
         "bold": false,
         "fields": [
           {
             "code": 136,
             "operator": "-",
             "slot": 0,
-            "label": "34",
+            "label": "Crédito proporcional al IGC por rentas exentas declaradas en código 152, según art. 56 N° 2 LIR",
             "dataType": "number"
           }
         ]
@@ -21690,14 +21693,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 602,
         "type": "field",
-        "text": "35",
+        "text": "Crédito al IGC por Impuesto Tasa Adicional, según ex. art. 21 LIR",
         "bold": false,
         "fields": [
           {
             "code": 176,
             "operator": "-",
             "slot": 0,
-            "label": "35",
+            "label": "Crédito al IGC por Impuesto Tasa Adicional, según ex. art. 21 LIR",
             "dataType": "number"
           }
         ]
@@ -21705,14 +21708,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 603,
         "type": "field",
-        "text": "36",
+        "text": "Crédito al IGC por donaciones para fines deportivos, según art. 62 y sgtes. Ley N° 19.712",
         "bold": false,
         "fields": [
           {
             "code": 752,
             "operator": "-",
             "slot": 0,
-            "label": "36",
+            "label": "Crédito al IGC por donaciones para fines deportivos, según art. 62 y sgtes. Ley N° 19.712",
             "dataType": "number"
           }
         ]
@@ -21720,14 +21723,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 604,
         "type": "field",
-        "text": "37",
+        "text": "Crédito al IGC por IDPC sin derecho a devolución, según arts. 20 N° 1 letra a), 41 A N° 4 letra A) letra a) y 56 N° 3 LIR",
         "bold": false,
         "fields": [
           {
             "code": 608,
             "operator": "-",
             "slot": 0,
-            "label": "37",
+            "label": "Crédito al IGC por IDPC sin derecho a devolución, según arts. 20 N° 1 letra a), 41 A N° 4 letra A) letra a) y 56 N° 3 LIR",
             "dataType": "number"
           }
         ]
@@ -21735,14 +21738,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 605,
         "type": "field",
-        "text": "38",
+        "text": "Crédito al IGC del 5% sobre total de retiros o dividendos que excedan de 310 UTA que tengan derecho a crédito por IDPC con obligación de restitución, según art. 56 N° 4 LIR",
         "bold": false,
         "fields": [
           {
             "code": 1636,
             "operator": "-",
             "slot": 0,
-            "label": "38",
+            "label": "Crédito al IGC del 5% sobre total de retiros o dividendos que excedan de 310 UTA que tengan derecho a crédito por IDPC con obligación de restitución, según art. 56 N° 4 LIR",
             "dataType": "number"
           }
         ]
@@ -21750,14 +21753,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 606,
         "type": "field",
-        "text": "39",
+        "text": "Crédito al IGC por Impuesto Territorial pagado por explotación de bienes raíces no agrícolas, según art. 56 N° 5 LIR",
         "bold": false,
         "fields": [
           {
             "code": 1637,
             "operator": "-",
             "slot": 0,
-            "label": "39",
+            "label": "Crédito al IGC por Impuesto Territorial pagado por explotación de bienes raíces no agrícolas, según art. 56 N° 5 LIR",
             "dataType": "number"
           }
         ]
@@ -21765,14 +21768,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 607,
         "type": "field",
-        "text": "40",
+        "text": "Crédito al IGC por art. 33 bis LIR, según art. 14 letra D) N°8 letra a) numeral (v) LIR",
         "bold": false,
         "fields": [
           {
             "code": 1638,
             "operator": "-",
             "slot": 0,
-            "label": "40",
+            "label": "Crédito al IGC por art. 33 bis LIR, según art. 14 letra D) N°8 letra a) numeral (v) LIR",
             "dataType": "number"
           }
         ]
@@ -21780,14 +21783,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 608,
         "type": "field",
-        "text": "41",
+        "text": "Crédito al IGC o IUSC por gastos en educación, según art. 55 ter LIR",
         "bold": false,
         "fields": [
           {
             "code": 895,
             "operator": "-",
             "slot": 0,
-            "label": "41",
+            "label": "Crédito al IGC o IUSC por gastos en educación, según art. 55 ter LIR",
             "dataType": "number"
           }
         ]
@@ -21795,14 +21798,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 609,
         "type": "field",
-        "text": "42",
+        "text": "Crédito al IGC o IUSC por donaciones para fines sociales, según art. 1° bis Ley N° 19.885",
         "bold": false,
         "fields": [
           {
             "code": 867,
             "operator": "-",
             "slot": 0,
-            "label": "42",
+            "label": "Crédito al IGC o IUSC por donaciones para fines sociales, según art. 1° bis Ley N° 19.885",
             "dataType": "number"
           }
         ]
@@ -21810,29 +21813,29 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 610,
         "type": "field",
-        "text": "43",
+        "text": "Crédito al IGC por donaciones a universidades, institutos profesionales y centros de formación técnica, según art. 69 Ley N° 18.681",
         "bold": false,
         "fields": [
           {
             "code": 609,
             "operator": "-",
             "slot": 0,
-            "label": "43",
-            "dataType": "number"
+            "label": "Crédito al IGC por donaciones a universidades, institutos profesionales y centros de formación técnica, según art. 69 Ley N° 18.681",
+            "dataType": "text"
           }
         ]
       },
       {
         "rowIndex": 611,
         "type": "field",
-        "text": "44",
+        "text": "Crédito al IGC por ingreso diferido, según art. 14 letra D) N°8 letra d) numeral (ii) LIR",
         "bold": false,
         "fields": [
           {
             "code": 1639,
             "operator": "-",
             "slot": 0,
-            "label": "44",
+            "label": "Crédito al IGC por ingreso diferido, según art. 14 letra D) N°8 letra d) numeral (ii) LIR",
             "dataType": "number"
           }
         ]
@@ -21840,14 +21843,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 612,
         "type": "field",
-        "text": "45",
+        "text": "Crédito al IUSC  o IGC por impuestos soportados en el exterior, según arts. 41 A N°4 letra B) o N° 5 LIR",
         "bold": false,
         "fields": [
           {
             "code": 1018,
             "operator": "-",
             "slot": 0,
-            "label": "45",
+            "label": "Crédito al IUSC  o IGC por impuestos soportados en el exterior, según arts. 41 A N°4 letra B) o N° 5 LIR",
             "dataType": "number"
           }
         ]
@@ -21855,14 +21858,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 613,
         "type": "field",
-        "text": "46",
+        "text": "Crédito al IGC o IUSC por IUSC, según art. 56 N° 2 LIR",
         "bold": false,
         "fields": [
           {
             "code": 162,
             "operator": "-",
             "slot": 0,
-            "label": "46",
+            "label": "Crédito al IGC o IUSC por IUSC, según art. 56 N° 2 LIR",
             "dataType": "number"
           }
         ]
@@ -21870,14 +21873,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 614,
         "type": "field",
-        "text": "47",
+        "text": "Crédito al IGC o IUSC por ahorro neto positivo (Recuadro N° 3), según art. 3° transitorio numeral VI) Ley N° 20.780 (ex. art. 57 bis LIR)",
         "bold": false,
         "fields": [
           {
             "code": 174,
             "operator": "-",
             "slot": 0,
-            "label": "47",
+            "label": "Crédito al IGC o IUSC por ahorro neto positivo (Recuadro N° 3), según art. 3° transitorio numeral VI) Ley N° 20.780 (ex. art. 57 bis LIR)",
             "dataType": "number"
           }
         ]
@@ -21885,14 +21888,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 615,
         "type": "field",
-        "text": "48",
+        "text": "Crédito al IGC o IUSC por IDPC con derecho a devolución, según art. 56 N° 3 LIR",
         "bold": false,
         "fields": [
           {
             "code": 610,
             "operator": "-",
             "slot": 0,
-            "label": "48",
+            "label": "Crédito al IGC o IUSC por IDPC con derecho a devolución, según art. 56 N° 3 LIR",
             "dataType": "number"
           }
         ]
@@ -21900,14 +21903,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 616,
         "type": "field",
-        "text": "49",
+        "text": "Crédito al IGC por impuestos soportados en el exterior, según art. 41 A N° 4 letra A) letra b) LIR",
         "bold": false,
         "fields": [
           {
             "code": 746,
             "operator": "-",
             "slot": 0,
-            "label": "49",
+            "label": "Crédito al IGC por impuestos soportados en el exterior, según art. 41 A N° 4 letra A) letra b) LIR",
             "dataType": "number"
           }
         ]
@@ -21915,14 +21918,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 617,
         "type": "field",
-        "text": "50",
+        "text": "Crédito al IGC por donaciones al Fondo Nacional de Reconstrucción, según arts. 5 y 9 Ley N° 20.444",
         "bold": false,
         "fields": [
           {
             "code": 866,
             "operator": "-",
             "slot": 0,
-            "label": "50",
+            "label": "Crédito al IGC por donaciones al Fondo Nacional de Reconstrucción, según arts. 5 y 9 Ley N° 20.444",
             "dataType": "number"
           }
         ]
@@ -21930,14 +21933,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 618,
         "type": "field",
-        "text": "51",
+        "text": "Crédito al IGC o IUSC por donaciones para fines culturales, según art. 8 Ley N° 18.985",
         "bold": false,
         "fields": [
           {
             "code": 607,
             "operator": "-",
             "slot": 0,
-            "label": "51",
+            "label": "Crédito al IGC o IUSC por donaciones para fines culturales, según art. 8 Ley N° 18.985",
             "dataType": "number"
           }
         ]
@@ -21945,14 +21948,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 619,
         "type": "field",
-        "text": "52",
+        "text": "IGC O IUSC, DÉBITO FISCAL Y/O TASA ADICIONAL DETERMINADO",
         "bold": false,
         "fields": [
           {
             "code": 304,
             "operator": "=",
             "slot": 0,
-            "label": "52",
+            "label": "IGC O IUSC, DÉBITO FISCAL Y/O TASA ADICIONAL DETERMINADO",
             "dataType": "number"
           }
         ]
@@ -21978,7 +21981,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 623,
         "type": "field",
-        "text": "53",
+        "text": "IMPUESTOS",
         "bold": false,
         "fields": [
           {
@@ -21993,7 +21996,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 624,
         "type": "field",
-        "text": "54",
+        "text": "IDPC de empresas acogidas al régimen Pro Pyme, según art. 14 letra D) N° 3 LIR",
         "bold": false,
         "fields": [
           {
@@ -22019,7 +22022,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 625,
         "type": "field",
-        "text": "55",
+        "text": "IDPC de empresas acogidas al régimen de imputación parcial de créditos, según art. 14 letra A) LIR",
         "bold": false,
         "fields": [
           {
@@ -22045,7 +22048,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 626,
         "type": "field",
-        "text": "56",
+        "text": "IDPC contribuyentes  o entidades sin vínculo directo o indirecto con propietarios afectos a IGC o IA, según art. 14 letra G) LIR",
         "bold": false,
         "fields": [
           {
@@ -22071,7 +22074,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 627,
         "type": "field",
-        "text": "57",
+        "text": "IDPC sobre rentas presuntas, según art. 34 LIR",
         "bold": false,
         "fields": [
           {
@@ -22097,7 +22100,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 628,
         "type": "field",
-        "text": "",
+        "text": "a) Rentas de la explotación de bienes raíces agrícolas",
         "bold": false,
         "fields": [
           {
@@ -22123,7 +22126,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 629,
         "type": "field",
-        "text": "",
+        "text": "b) Rentas del transporte de pasajeros",
         "bold": false,
         "fields": [
           {
@@ -22143,7 +22146,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 630,
         "type": "field",
-        "text": "",
+        "text": "c) Rentas del transporte de carga",
         "bold": false,
         "fields": [
           {
@@ -22163,27 +22166,27 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 631,
         "type": "field",
-        "text": "",
+        "text": "d) Rentas de la actividad minera",
         "bold": false,
         "fields": [
           {
             "code": 1931,
             "operator": "",
             "slot": 0,
-            "dataType": "number"
+            "dataType": "text"
           },
           {
             "code": 1932,
             "operator": "",
             "slot": 2,
-            "dataType": "number"
+            "dataType": "text"
           }
         ]
       },
       {
         "rowIndex": 632,
         "type": "field",
-        "text": "58",
+        "text": "IDPC sobre rentas efectivas determinadas sin contabilidad completa",
         "bold": false,
         "fields": [
           {
@@ -22209,7 +22212,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 633,
         "type": "field",
-        "text": "",
+        "text": "a) Rentas del arrendamiento, subarrendamiento, usufructo o cesión de cualquier otra forma de uso o goce temporal de bienes raíces agrícolas y no agrícolas",
         "bold": false,
         "fields": [
           {
@@ -22235,7 +22238,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 634,
         "type": "field",
-        "text": "",
+        "text": "b) Mayor valor obtenido en la enajenación de bienes raíces situados en Chile",
         "bold": false,
         "fields": [
           {
@@ -22255,7 +22258,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 635,
         "type": "field",
-        "text": "",
+        "text": "c) Rentas obtenidas por contribuyentes con contabilidad simplificada",
         "bold": false,
         "fields": [
           {
@@ -22281,7 +22284,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 636,
         "type": "field",
-        "text": "",
+        "text": "d) Otras rentas efectivas afectas a lDPC e impuestos finales",
         "bold": false,
         "fields": [
           {
@@ -22307,7 +22310,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 637,
         "type": "field",
-        "text": "",
+        "text": "e) Otras rentas de fuente extranjera afectas",
         "bold": false,
         "fields": [
           {
@@ -22333,7 +22336,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 638,
         "type": "field",
-        "text": "59",
+        "text": "Impuesto de 40% empresas del Estado, según art. 2º D.L. N° 2.398 de 1978",
         "bold": false,
         "fields": [
           {
@@ -22359,7 +22362,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 639,
         "type": "field",
-        "text": "60",
+        "text": "Pago voluntario a título de IDPC, según art. 14 letra A) N° 6 LIR",
         "bold": false,
         "fields": [
           {
@@ -22379,14 +22382,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 640,
         "type": "field",
-        "text": "61",
+        "text": "Diferencia de créditos por IDPC otorgados en forma indebida o en exceso, según art. 14 letra A) N° 7 LIR",
         "bold": false,
         "fields": [
           {
             "code": 1042,
             "operator": "+",
             "slot": 2,
-            "label": "61",
+            "label": "Diferencia de créditos por IDPC otorgados en forma indebida o en exceso, según art. 14 letra A) N° 7 LIR",
             "dataType": "number"
           }
         ]
@@ -22394,34 +22397,34 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 641,
         "type": "field",
-        "text": "62",
+        "text": "Impuesto específico a la actividad minera, según ex. art. 64 bis LIR",
         "bold": false,
         "fields": [
           {
             "code": 824,
             "operator": "",
             "slot": 0,
-            "dataType": "number"
+            "dataType": "text"
           },
           {
             "code": 825,
             "operator": "+",
             "slot": 2,
-            "dataType": "number"
+            "dataType": "text"
           }
         ]
       },
       {
         "rowIndex": 642,
         "type": "field",
-        "text": "63",
+        "text": "Royalty minero Ley N° 21.591",
         "bold": false,
         "fields": [
           {
             "code": 1976,
             "operator": "+",
             "slot": 2,
-            "label": "63",
+            "label": "Royalty minero Ley N° 21.591",
             "dataType": "number"
           }
         ]
@@ -22429,7 +22432,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 643,
         "type": "field",
-        "text": "",
+        "text": "a) Componente ad valorem, según art. 2 Ley N° 21.591",
         "bold": false,
         "fields": [
           {
@@ -22449,7 +22452,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 644,
         "type": "field",
-        "text": "",
+        "text": "b) Componente sobre la rentabilidad, según art. 3 o art. 4 Ley N° 21.591",
         "bold": false,
         "fields": [
           {
@@ -22469,7 +22472,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 645,
         "type": "field",
-        "text": "64",
+        "text": "Impuesto único de 10% por enajenación de bienes raíces, según art. 17 N° 8 letra b) LIR y/o art. 4 Ley N° 21.078",
         "bold": false,
         "fields": [
           {
@@ -22495,7 +22498,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 646,
         "type": "field",
-        "text": "65",
+        "text": "Impuesto único de 40% sobre gastos rechazados y otras partidas, según art. 21 inc. 1°, art. 14 letra A) N° 9 LIR",
         "bold": false,
         "fields": [
           {
@@ -22521,7 +22524,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 647,
         "type": "field",
-        "text": "66",
+        "text": "Impuesto único de 10% por enajenación o rescate de acciones de S.A. con presencia bursátil, de cuotas de fondos de inversión y fondos mutuos, según art. 107 LIR",
         "bold": false,
         "fields": [
           {
@@ -22541,7 +22544,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 648,
         "type": "field",
-        "text": "67",
+        "text": "Contribución para el desarrollo regional según art. 32 Ley N° 21.210",
         "bold": false,
         "fields": [
           {
@@ -22567,7 +22570,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 649,
         "type": "field",
-        "text": "68",
+        "text": "IA en carácter de único (activos subyacentes), según art. 58 N° 3 LIR",
         "bold": false,
         "fields": [
           {
@@ -22587,7 +22590,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 650,
         "type": "field",
-        "text": "69",
+        "text": "Impuesto único de 10%, según art. 82 del art. 1° Ley N° 20.712",
         "bold": false,
         "fields": [
           {
@@ -22607,7 +22610,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 651,
         "type": "field",
-        "text": "70",
+        "text": "Impuesto único por exceso de endeudamiento, según art. 41 F LIR",
         "bold": false,
         "fields": [
           {
@@ -22633,7 +22636,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 652,
         "type": "field",
-        "text": "71",
+        "text": "IA según ex D.L. N° 600 de 1974",
         "bold": false,
         "fields": [
           {
@@ -22659,7 +22662,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 653,
         "type": "field",
-        "text": "72",
+        "text": "IA según arts. 58 N° 1 y 2 y 60 inc. 1° LIR",
         "bold": false,
         "fields": [
           {
@@ -22685,7 +22688,7 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 654,
         "type": "field",
-        "text": "73",
+        "text": "Impuesto único tasa 25% por distribuciones desproporcionadas, según art. 39° transitorio Ley N° 21.210",
         "bold": false,
         "fields": [
           {
@@ -22705,14 +22708,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 655,
         "type": "field",
-        "text": "74",
+        "text": "Diferencia de IA por crédito indebido por IDPC o por crédito indebido del art. 41 A en caso de empresas acogidas al régimen del art. 14 letras A) y D) N° 3, según art. 74 N° 4 LIR",
         "bold": false,
         "fields": [
           {
             "code": 911,
             "operator": "+",
             "slot": 2,
-            "label": "74",
+            "label": "Diferencia de IA por crédito indebido por IDPC o por crédito indebido del art. 41 A en caso de empresas acogidas al régimen del art. 14 letras A) y D) N° 3, según art. 74 N° 4 LIR",
             "dataType": "number"
           }
         ]
@@ -22720,14 +22723,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 656,
         "type": "field",
-        "text": "75",
+        "text": "Tasa adicional de 10% de IA, sobre cantidades declaradas en código 106, según art. 21 inc 3° LIR",
         "bold": false,
         "fields": [
           {
             "code": 913,
             "operator": "+",
             "slot": 2,
-            "label": "75",
+            "label": "Tasa adicional de 10% de IA, sobre cantidades declaradas en código 106, según art. 21 inc 3° LIR",
             "dataType": "number"
           }
         ]
@@ -22735,14 +22738,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 657,
         "type": "field",
-        "text": "76",
+        "text": "Retención de impuesto sobre gastos rechazados y otras partidas (tasa 45%), según art. 74 N° 4 LIR",
         "bold": false,
         "fields": [
           {
             "code": 923,
             "operator": "+",
             "slot": 2,
-            "label": "76",
+            "label": "Retención de impuesto sobre gastos rechazados y otras partidas (tasa 45%), según art. 74 N° 4 LIR",
             "dataType": "number"
           }
         ]
@@ -22750,14 +22753,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 658,
         "type": "field",
-        "text": "77",
+        "text": "Retención de IA en carácter de único (activos subyacentes) (tasa 20% y/o 35%), según art. 74 N° 4 LIR",
         "bold": false,
         "fields": [
           {
             "code": 924,
             "operator": "+",
             "slot": 2,
-            "label": "77",
+            "label": "Retención de IA en carácter de único (activos subyacentes) (tasa 20% y/o 35%), según art. 74 N° 4 LIR",
             "dataType": "number"
           }
         ]
@@ -22765,14 +22768,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 659,
         "type": "field",
-        "text": "78",
+        "text": "Retención del IA sobre rentas asignadas empresas acogidas al régimen de los arts. 14 letra B) N° 1 , 2 y/o 14 letra D) N° 8, según art. 74 N° 4 LIR",
         "bold": false,
         "fields": [
           {
             "code": 1051,
             "operator": "+",
             "slot": 2,
-            "label": "78",
+            "label": "Retención del IA sobre rentas asignadas empresas acogidas al régimen de los arts. 14 letra B) N° 1 , 2 y/o 14 letra D) N° 8, según art. 74 N° 4 LIR",
             "dataType": "number"
           }
         ]
@@ -22780,14 +22783,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 660,
         "type": "field",
-        "text": "79",
+        "text": "Débito fiscal por restitución crédito por IDPC, según art. 63 inc. final LIR",
         "bold": false,
         "fields": [
           {
             "code": 1052,
             "operator": "+",
             "slot": 2,
-            "label": "79",
+            "label": "Débito fiscal por restitución crédito por IDPC, según art. 63 inc. final LIR",
             "dataType": "number"
           }
         ]
@@ -22795,14 +22798,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 661,
         "type": "field",
-        "text": "80",
+        "text": "Impuesto único talleres artesanales",
         "bold": false,
         "fields": [
           {
             "code": 21,
             "operator": "+",
             "slot": 2,
-            "label": "80",
+            "label": "Impuesto único talleres artesanales",
             "dataType": "number"
           }
         ]
@@ -22810,14 +22813,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 662,
         "type": "field",
-        "text": "81",
+        "text": "Impuesto único pescadores artesanales",
         "bold": false,
         "fields": [
           {
             "code": 43,
             "operator": "+",
             "slot": 2,
-            "label": "81",
+            "label": "Impuesto único pescadores artesanales",
             "dataType": "number"
           }
         ]
@@ -22825,14 +22828,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 663,
         "type": "field",
-        "text": "82",
+        "text": "Impuesto único por retiros de ahorro previsional, según art. 42 bis inc. 1° N° 3 LIR",
         "bold": false,
         "fields": [
           {
             "code": 767,
             "operator": "+",
             "slot": 2,
-            "label": "82",
+            "label": "Impuesto único por retiros de ahorro previsional, según art. 42 bis inc. 1° N° 3 LIR",
             "dataType": "number"
           }
         ]
@@ -22840,14 +22843,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 664,
         "type": "field",
-        "text": "83",
+        "text": "Restitución crédito por gastos de capacitación excesivo, según  art. 6° Ley N° 20.326",
         "bold": false,
         "fields": [
           {
             "code": 862,
             "operator": "+",
             "slot": 2,
-            "label": "83",
+            "label": "Restitución crédito por gastos de capacitación excesivo, según  art. 6° Ley N° 20.326",
             "dataType": "number"
           }
         ]
@@ -22867,40 +22870,40 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 667,
         "type": "field",
-        "text": "84",
+        "text": "Reliquidación IGC por término de giro de empresa acogida al régimen del art. 14 letras A) y D) N° 3 y 8, según art. 38 bis N° 3 LIR",
         "bold": false,
         "fields": [
           {
             "code": 51,
             "operator": "",
             "slot": 1,
-            "dataType": "number"
+            "dataType": "text"
           },
           {
             "code": 63,
             "operator": "",
             "slot": 2,
-            "dataType": "number"
+            "dataType": "text"
           },
           {
             "code": 71,
             "operator": "-",
             "slot": 3,
-            "dataType": "number"
+            "dataType": "text"
           }
         ]
       },
       {
         "rowIndex": 668,
         "type": "field",
-        "text": "85",
+        "text": "PPM y remanente del IEAM",
         "bold": false,
         "fields": [
           {
             "code": 36,
             "operator": "-",
             "slot": 3,
-            "label": "85",
+            "label": "PPM y remanente del IEAM",
             "dataType": "number"
           }
         ]
@@ -22908,13 +22911,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 669,
         "type": "field",
-        "text": "",
+        "text": "a) PPM arts. 84 letras a), c) , e), y h) y 14 D N° 3 letra (k) LIR  y PPM royalty minero según art. 7 Ley N° 21.591",
         "bold": false,
         "fields": [
           {
             "code": 1904,
             "operator": "",
             "slot": 3,
+            "label": "a) PPM arts. 84 letras a), c) , e), y h) y 14 D N° 3 letra (k) LIR  y PPM royalty minero según art. 7 Ley N° 21.591",
             "dataType": "number"
           }
         ]
@@ -22922,13 +22926,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 670,
         "type": "field",
-        "text": "",
+        "text": "b) PPM de segunda categoría art. 84 letra b) LIR",
         "bold": false,
         "fields": [
           {
             "code": 1905,
             "operator": "",
             "slot": 3,
+            "label": "b) PPM de segunda categoría art. 84 letra b) LIR",
             "dataType": "number"
           }
         ]
@@ -22936,13 +22941,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 671,
         "type": "field",
-        "text": "",
+        "text": "c) PPM Voluntario, según art. 88 incs. 1° y 2° LIR",
         "bold": false,
         "fields": [
           {
             "code": 1906,
             "operator": "",
             "slot": 3,
+            "label": "c) PPM Voluntario, según art. 88 incs. 1° y 2° LIR",
             "dataType": "number"
           }
         ]
@@ -22950,13 +22956,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 672,
         "type": "field",
-        "text": "",
+        "text": "d) Remanente del IEAM anotado en el código 829 del recuadro N° 8",
         "bold": false,
         "fields": [
           {
             "code": 1916,
             "operator": "",
             "slot": 3,
+            "label": "d) Remanente del IEAM anotado en el código 829 del recuadro N° 8",
             "dataType": "number"
           }
         ]
@@ -22964,14 +22971,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 673,
         "type": "field",
-        "text": "86",
+        "text": "Crédito fiscal AFP, según art. 23 D.L. N° 3.500 de 1980",
         "bold": false,
         "fields": [
           {
             "code": 848,
             "operator": "-",
             "slot": 3,
-            "label": "86",
+            "label": "Crédito fiscal AFP, según art. 23 D.L. N° 3.500 de 1980",
             "dataType": "number"
           }
         ]
@@ -22979,14 +22986,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 674,
         "type": "field",
-        "text": "87",
+        "text": "Crédito por gastos de capacitación, según Ley N° 19.518",
         "bold": false,
         "fields": [
           {
             "code": 82,
             "operator": "-",
             "slot": 3,
-            "label": "87",
+            "label": "Crédito por gastos de capacitación, según Ley N° 19.518",
             "dataType": "number"
           }
         ]
@@ -22994,14 +23001,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 675,
         "type": "field",
-        "text": "88",
+        "text": "Crédito por desembolsos directos por trazabilidad (art. 60 quinquies Código Tributario)",
         "bold": false,
         "fields": [
           {
             "code": 1123,
             "operator": "-",
             "slot": 3,
-            "label": "88",
+            "label": "Crédito por desembolsos directos por trazabilidad (art. 60 quinquies Código Tributario)",
             "dataType": "number"
           }
         ]
@@ -23009,14 +23016,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 676,
         "type": "field",
-        "text": "89",
+        "text": "Crédito empresas constructoras",
         "bold": false,
         "fields": [
           {
             "code": 83,
             "operator": "-",
             "slot": 3,
-            "label": "89",
+            "label": "Crédito empresas constructoras",
             "dataType": "number"
           }
         ]
@@ -23024,14 +23031,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 677,
         "type": "field",
-        "text": "90",
+        "text": "Crédito por reintegro de peajes, según art. 1° Ley N° 19.764",
         "bold": false,
         "fields": [
           {
             "code": 173,
             "operator": "-",
             "slot": 3,
-            "label": "90",
+            "label": "Crédito por reintegro de peajes, según art. 1° Ley N° 19.764",
             "dataType": "number"
           }
         ]
@@ -23039,14 +23046,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 678,
         "type": "field",
-        "text": "91",
+        "text": "Retenciones por rentas declaradas en código 110 (Recuadro N°1)",
         "bold": false,
         "fields": [
           {
             "code": 198,
             "operator": "-",
             "slot": 3,
-            "label": "91",
+            "label": "Retenciones por rentas declaradas en código 110 (Recuadro N°1)",
             "dataType": "number"
           }
         ]
@@ -23054,14 +23061,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 679,
         "type": "field",
-        "text": "92",
+        "text": "Mayor retención por sueldos, pensiones y otras rentas similares declaradas en código 1098, según art. 88 inc. final LIR",
         "bold": false,
         "fields": [
           {
             "code": 54,
             "operator": "-",
             "slot": 3,
-            "label": "92",
+            "label": "Mayor retención por sueldos, pensiones y otras rentas similares declaradas en código 1098, según art. 88 inc. final LIR",
             "dataType": "number"
           }
         ]
@@ -23069,14 +23076,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 680,
         "type": "field",
-        "text": "93",
+        "text": "Retenciones efectuadas por instituciones autorizadas con tasa 15%, sobre los retiros de ahorro previsional, según art. 42 bis N° 3 incs. 2° y 3° LIR",
         "bold": false,
         "fields": [
           {
             "code": 832,
             "operator": "-",
             "slot": 3,
-            "label": "93",
+            "label": "Retenciones efectuadas por instituciones autorizadas con tasa 15%, sobre los retiros de ahorro previsional, según art. 42 bis N° 3 incs. 2° y 3° LIR",
             "dataType": "number"
           }
         ]
@@ -23084,14 +23091,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 681,
         "type": "field",
-        "text": "94",
+        "text": "Retenciones por retiros de seguros de vida con ahorro y seguros dotales, y retenciones efectuadas sobre las rentas de capitales mobiliarios",
         "bold": false,
         "fields": [
           {
             "code": 1907,
             "operator": "-",
             "slot": 3,
-            "label": "94",
+            "label": "Retenciones por retiros de seguros de vida con ahorro y seguros dotales, y retenciones efectuadas sobre las rentas de capitales mobiliarios",
             "dataType": "number"
           }
         ]
@@ -23099,14 +23106,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 682,
         "type": "field",
-        "text": "95",
+        "text": "Retenciones por rentas declaradas en códigos 104, 106, 108, 955, 1632, 155, 1032, 1891, 908, 951, 32 y 1829",
         "bold": false,
         "fields": [
           {
             "code": 833,
             "operator": "-",
             "slot": 3,
-            "label": "95",
+            "label": "Retenciones por rentas declaradas en códigos 104, 106, 108, 955, 1632, 155, 1032, 1891, 908, 951, 32 y 1829",
             "dataType": "number"
           }
         ]
@@ -23114,22 +23121,22 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 683,
         "type": "field",
-        "text": "96",
+        "text": "Retenciones por actividades mineras según el N° 6 del art. 74 LIR",
         "bold": false,
         "fields": [
           {
             "code": 1908,
             "operator": "-",
             "slot": 3,
-            "label": "96",
-            "dataType": "number"
+            "label": "Retenciones por actividades mineras según el N° 6 del art. 74 LIR",
+            "dataType": "text"
           }
         ]
       },
       {
         "rowIndex": 684,
         "type": "field",
-        "text": "97",
+        "text": "Remanente de crédito por reliquidación del IUSC y/o por ahorro neto positivo, proveniente de códigos 162 y/o 174",
         "bold": false,
         "fields": [
           {
@@ -23157,14 +23164,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 685,
         "type": "field",
-        "text": "98",
+        "text": "Créditos puestos a disposición de los socios por la sociedad respectiva, según instrucciones",
         "bold": false,
         "fields": [
           {
             "code": 58,
             "operator": "-",
             "slot": 3,
-            "label": "98",
+            "label": "Créditos puestos a disposición de los socios por la sociedad respectiva, según instrucciones",
             "dataType": "number"
           }
         ]
@@ -23172,14 +23179,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 686,
         "type": "field",
-        "text": "99",
+        "text": "PPM puestos a disposición de los propietarios de empresas del régimen de transparencia tributaria del art. 14 letra D) N° 8 LIR",
         "bold": false,
         "fields": [
           {
             "code": 1645,
             "operator": "-",
             "slot": 3,
-            "label": "99",
+            "label": "PPM puestos a disposición de los propietarios de empresas del régimen de transparencia tributaria del art. 14 letra D) N° 8 LIR",
             "dataType": "number"
           }
         ]
@@ -23187,14 +23194,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 687,
         "type": "field",
-        "text": "100",
+        "text": "Pago provisional exportadores, según ex-art. 13 Ley N° 18.768",
         "bold": false,
         "fields": [
           {
             "code": 181,
             "operator": "-",
             "slot": 3,
-            "label": "100",
+            "label": "Pago provisional exportadores, según ex-art. 13 Ley N° 18.768",
             "dataType": "number"
           }
         ]
@@ -23202,14 +23209,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 688,
         "type": "field",
-        "text": "101",
+        "text": "Retenciones sobre intereses, según art. 74 N° 7 y 8 LIR",
         "bold": false,
         "fields": [
           {
             "code": 881,
             "operator": "-",
             "slot": 3,
-            "label": "101",
+            "label": "Retenciones sobre intereses, según art. 74 N° 7 y 8 LIR",
             "dataType": "number"
           }
         ]
@@ -23217,14 +23224,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 689,
         "type": "field",
-        "text": "102",
+        "text": "Impuestos declarados y pagados en conformidad al art. 69N° 4 LIR",
         "bold": false,
         "fields": [
           {
             "code": 1646,
             "operator": "-",
             "slot": 3,
-            "label": "102",
+            "label": "Impuestos declarados y pagados en conformidad al art. 69N° 4 LIR",
             "dataType": "number"
           }
         ]
@@ -23232,14 +23239,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 690,
         "type": "field",
-        "text": "103",
+        "text": "Excedente crédito por IDPC del código 76",
         "bold": false,
         "fields": [
           {
             "code": 1647,
             "operator": "-",
             "slot": 3,
-            "label": "103",
+            "label": "Excedente crédito por IDPC del código 76",
             "dataType": "number"
           }
         ]
@@ -23247,14 +23254,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 691,
         "type": "field",
-        "text": "104",
+        "text": "Deducción de impuesto por tasas rebajadas en virtud de convenios para evitar la doble tributación",
         "bold": false,
         "fields": [
           {
             "code": 1910,
             "operator": "-",
             "slot": 3,
-            "label": "104",
+            "label": "Deducción de impuesto por tasas rebajadas en virtud de convenios para evitar la doble tributación",
             "dataType": "number"
           }
         ]
@@ -23262,14 +23269,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 692,
         "type": "field",
-        "text": "105",
+        "text": "Crédito por la compra de viviendas nuevas adquiridas con créditos con garantía hipotecaria, según Ley N° 21.631",
         "bold": false,
         "fields": [
           {
             "code": 1915,
             "operator": "-",
             "slot": 3,
-            "label": "105",
+            "label": "Crédito por la compra de viviendas nuevas adquiridas con créditos con garantía hipotecaria, según Ley N° 21.631",
             "dataType": "number"
           }
         ]
@@ -23286,14 +23293,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 694,
         "type": "field",
-        "text": "106",
+        "text": "Cargo por cotizaciones previsionales, según arts. 89 y sgtes. D.L. N° 3.500 de 1980",
         "bold": false,
         "fields": [
           {
             "code": 900,
             "operator": "+",
             "slot": 0,
-            "label": "106",
+            "label": "Cargo por cotizaciones previsionales, según arts. 89 y sgtes. D.L. N° 3.500 de 1980",
             "dataType": "number"
           }
         ]
@@ -23301,14 +23308,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 695,
         "type": "field",
-        "text": "107",
+        "text": "Monto a pagar cuota préstamo tasa 0% (préstamo solidario del Estado)",
         "bold": false,
         "fields": [
           {
             "code": 1796,
             "operator": "+",
             "slot": 0,
-            "label": "107",
+            "label": "Monto a pagar cuota préstamo tasa 0% (préstamo solidario del Estado)",
             "dataType": "number"
           }
         ]
@@ -23316,14 +23323,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 696,
         "type": "field",
-        "text": "108",
+        "text": "Monto a pagar cuota anticipo solidario para pago de cotizaciones, según art. 21 inc. 1° y 3° Ley N° 21.354",
         "bold": false,
         "fields": [
           {
             "code": 1827,
             "operator": "+",
             "slot": 0,
-            "label": "108",
+            "label": "Monto a pagar cuota anticipo solidario para pago de cotizaciones, según art. 21 inc. 1° y 3° Ley N° 21.354",
             "dataType": "number"
           }
         ]
@@ -23331,14 +23338,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 697,
         "type": "field",
-        "text": "109",
+        "text": "RESULTADO LIQUIDACIÓN ANUAL IMPUESTO A LA RENTA",
         "bold": false,
         "fields": [
           {
             "code": 305,
             "operator": "=",
             "slot": 0,
-            "label": "109",
+            "label": "RESULTADO LIQUIDACIÓN ANUAL IMPUESTO A LA RENTA",
             "dataType": "number"
           }
         ]
@@ -23356,14 +23363,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 700,
         "type": "field",
-        "text": "110",
+        "text": "SALDO A FAVOR",
         "bold": false,
         "fields": [
           {
             "code": 85,
             "operator": "+",
             "slot": 1,
-            "label": "110",
+            "label": "SALDO A FAVOR",
             "dataType": "number"
           }
         ]
@@ -23371,14 +23378,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 701,
         "type": "field",
-        "text": "111",
+        "text": "Menos: saldo puesto a disposición de los socios",
         "bold": false,
         "fields": [
           {
             "code": 86,
             "operator": "-",
             "slot": 1,
-            "label": "111",
+            "label": "Menos: saldo puesto a disposición de los socios",
             "dataType": "number"
           }
         ]
@@ -23393,14 +23400,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 703,
         "type": "field",
-        "text": "112",
+        "text": "Monto",
         "bold": false,
         "fields": [
           {
             "code": 87,
             "operator": "=",
             "slot": 1,
-            "label": "112",
+            "label": "Monto",
             "dataType": "number"
           }
         ]
@@ -23480,14 +23487,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 714,
         "type": "field",
-        "text": "113",
+        "text": "Impuesto adeudado",
         "bold": false,
         "fields": [
           {
             "code": 90,
             "operator": "+",
             "slot": 0,
-            "label": "113",
+            "label": "Impuesto adeudado",
             "dataType": "number"
           }
         ]
@@ -23495,14 +23502,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 715,
         "type": "field",
-        "text": "114",
+        "text": "Reajuste art.72 LIR, código 305      %",
         "bold": false,
         "fields": [
           {
             "code": 39,
             "operator": "+",
             "slot": 0,
-            "label": "114",
+            "label": "Reajuste art.72 LIR, código 305      %",
             "dataType": "number"
           }
         ]
@@ -23510,14 +23517,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 716,
         "type": "field",
-        "text": "115",
-        "bold": false,
+        "text": "TOTAL A PAGAR (códigos 90 + 39)",
+        "bold": true,
         "fields": [
           {
             "code": 91,
             "operator": "=",
             "slot": 0,
-            "label": "115",
+            "label": "TOTAL A PAGAR (códigos 90 + 39)",
             "dataType": "number"
           }
         ]
@@ -23532,14 +23539,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 718,
         "type": "field",
-        "text": "116",
+        "text": "MÁS: reajustes declaración fuera de plazo",
         "bold": false,
         "fields": [
           {
             "code": 92,
             "operator": "+",
             "slot": 0,
-            "label": "116",
+            "label": "MÁS: reajustes declaración fuera de plazo",
             "dataType": "number"
           }
         ]
@@ -23547,14 +23554,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 719,
         "type": "field",
-        "text": "117",
+        "text": "MÁS: intereses y multas declaración fuera de plazo",
         "bold": false,
         "fields": [
           {
             "code": 93,
             "operator": "+",
             "slot": 0,
-            "label": "117",
+            "label": "MÁS: intereses y multas declaración fuera de plazo",
             "dataType": "number"
           }
         ]
@@ -23562,14 +23569,14 @@ export const LAYOUT_SECTIONS: LayoutSection[] = [
       {
         "rowIndex": 720,
         "type": "field",
-        "text": "118",
-        "bold": false,
+        "text": "TOTAL A PAGAR (códigos 91+92+ 93)",
+        "bold": true,
         "fields": [
           {
             "code": 94,
             "operator": "=",
             "slot": 0,
-            "label": "118",
+            "label": "TOTAL A PAGAR (códigos 91+92+ 93)",
             "dataType": "number"
           }
         ]
