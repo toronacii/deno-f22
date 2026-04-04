@@ -1,7 +1,7 @@
 /**
  * OnboardingPage — wizard de 2 pasos post-registro.
  * Paso 1: confirmar nombre
- * Paso 2: elegir plan → abre modal de intención de pago
+ * Paso 2: elegir plan → redirige a Flow para registro de tarjeta
  */
 
 import { useState } from "react";
@@ -27,153 +27,6 @@ interface Plan {
   min_commitment_months: number;
   promo_price_monthly_usd: number | null;
   promo_price_annual_usd: number | null;
-}
-
-// ---------------------------------------------------------------------------
-// Modal de intención de pago
-// ---------------------------------------------------------------------------
-
-interface ContactIntentModalProps {
-  plan: Plan;
-  billing: "monthly" | "annual";
-  name: string;
-  onClose: () => void;
-  onSuccess: () => void;
-}
-
-function ContactIntentModal({
-  plan,
-  billing,
-  name,
-  onClose,
-  onSuccess,
-}: ContactIntentModalProps) {
-  const cycleLabel = billing === "monthly" ? "mensual" : "anual";
-  const defaultMsg = `Hola, soy ${name} y quiero contratar el plan ${plan.name} (${cycleLabel}). Me gustaría coordinar el pago con el equipo.`;
-
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState(defaultMsg);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!phone.trim()) return;
-    setLoading(true);
-    setError(null);
-    try {
-      await api.post("/payments/contact-intent", {
-        planCode: plan.code,
-        planName: plan.name,
-        billingCycle: billing,
-        phone: phone.trim(),
-        message,
-      });
-      onSuccess();
-    } catch (err) {
-      setError((err as Error).message);
-      setLoading(false);
-    }
-  }
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-      {/* Overlay */}
-      <div
-        className="absolute inset-0 bg-stone-900/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
-      {/* Card */}
-      <div className="relative w-full max-w-md bg-white rounded-2xl border border-stone-200 shadow-2xl p-8">
-        {/* Plan badge */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-9 h-9 rounded-lg bg-stone-50 border border-stone-100 flex items-center justify-center">
-            <PlanIcon name={PLAN_META[plan.code]?.icon} />
-          </div>
-          <div>
-            <div className="font-semibold text-stone-900">{plan.name}</div>
-            <div className="text-xs text-stone-400 capitalize">
-              {cycleLabel}
-            </div>
-          </div>
-        </div>
-
-        <h2 className="text-lg font-semibold text-stone-900 mb-1">
-          Coordinar pago con el equipo
-        </h2>
-        <p className="text-sm text-stone-500 mb-6">
-          Déjanos tu teléfono y te contactamos para completar tu suscripción.
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Nombre (solo lectura) */}
-          <div>
-            <label className="block text-xs font-medium text-stone-600 mb-1">
-              Nombre
-            </label>
-            <div className="w-full border border-stone-100 bg-stone-50 rounded-lg px-3 py-2.5 text-sm text-stone-500">
-              {name}
-            </div>
-          </div>
-
-          {/* Teléfono */}
-          <div>
-            <label className="block text-xs font-medium text-stone-600 mb-1">
-              Teléfono <span className="text-danger-500">*</span>
-            </label>
-            <input
-              type="tel"
-              required
-              autoFocus
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="+56 9 1234 5678"
-              className="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm
-                focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400"
-            />
-          </div>
-
-          {/* Mensaje */}
-          <div>
-            <label className="block text-xs font-medium text-stone-600 mb-1">
-              Mensaje
-            </label>
-            <textarea
-              rows={3}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full border border-stone-200 rounded-lg px-3 py-2.5 text-sm resize-none
-                focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400"
-            />
-          </div>
-
-          {error && (
-            <div className="px-3 py-2.5 bg-danger-500/10 border border-danger-500/20 rounded-lg text-sm text-danger-600">
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={!phone.trim() || loading}
-            className="w-full bg-brand-700 hover:bg-brand-800 disabled:bg-brand-300
-              text-white font-semibold py-2.5 rounded-lg text-sm transition-colors"
-          >
-            {loading ? "Enviando…" : "Solicitar contacto"}
-          </button>
-
-          <button
-            type="button"
-            onClick={onClose}
-            className="w-full text-sm text-stone-400 hover:text-stone-600 transition-colors py-1"
-          >
-            Cancelar
-          </button>
-        </form>
-      </div>
-    </div>
-  );
 }
 
 // ---------------------------------------------------------------------------
@@ -248,13 +101,11 @@ export function OnboardingPage() {
 
   const [step, setStep] = useState<1 | 2>(1);
   const [name, setName] = useState(user?.user_metadata?.full_name ?? "");
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(
-    preselectedPlan ?? "sinergy",
-  );
   const [billing, setBilling] = useState<"monthly" | "annual">(
     preselectedBilling ?? "annual",
   );
-  const [showModal, setShowModal] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const { data: plansData } = useQuery({
     queryKey: ["plans"],
@@ -262,14 +113,13 @@ export function OnboardingPage() {
   });
   const plans = plansData?.plans ?? [];
 
-  const effectivePlan =
-    plans.length > 0 &&
-    selectedPlan &&
-    !plans.some((p) => p.code === selectedPlan)
+  // Resolve initial selection after plans load
+  const preselect = preselectedPlan ?? "sinergy";
+  const effectiveDefault =
+    plans.length > 0 && !plans.some((p) => p.code === preselect)
       ? "sinergy"
-      : selectedPlan;
-
-  const activePlan = plans.find((p) => p.code === effectivePlan) ?? null;
+      : preselect;
+  void effectiveDefault; // used only for UX highlight if needed
 
   async function handleStep1(e: { preventDefault(): void }) {
     e.preventDefault();
@@ -278,9 +128,37 @@ export function OnboardingPage() {
     setStep(2);
   }
 
-  async function handleIntentSuccess() {
-    await supabase.auth.updateUser({ data: { onboarding_completed: true } });
-    navigate("/dashboard", { replace: true });
+  async function handleCheckout(planCode: string) {
+    setLoadingPlan(planCode);
+    setError(null);
+    try {
+      await api.post("/auth/register", { full_name: name });
+
+      const result = await api.post<{
+        requiresCard?: boolean;
+        redirectUrl?: string;
+        success?: boolean;
+      }>("/payments/checkout", {
+        planCode,
+        billingCycle: billing,
+        returnTo: "/dashboard",
+      });
+
+      if (result.requiresCard && result.redirectUrl) {
+        // Redirect to Flow's card registration page — don't reset loading
+        window.location.assign(result.redirectUrl);
+        return;
+      }
+
+      if (result.success) {
+        // Card already registered (returning user changing plan)
+        await supabase.auth.updateUser({ data: { onboarding_completed: true } });
+        navigate("/dashboard", { replace: true });
+      }
+    } catch (err) {
+      setError((err as Error).message);
+      setLoadingPlan(null);
+    }
   }
 
   function getMonthlyPrice(plan: Plan): number {
@@ -421,6 +299,12 @@ export function OnboardingPage() {
               </div>
             </div>
 
+            {error && (
+              <div className="mb-6 px-3 py-2.5 bg-danger-500/10 border border-danger-500/20 rounded-lg text-sm text-danger-600 text-center max-w-lg mx-auto">
+                {error}
+              </div>
+            )}
+
             {/* Grid de planes */}
             {plans.length === 0 ? (
               <div className="text-center text-brand-400 py-8">Cargando planes…</div>
@@ -433,6 +317,7 @@ export function OnboardingPage() {
                   const [int, dec]   = splitPrice(monthlyPrice);
                   const ufPrice      = (monthlyPrice * UF_PER_USD).toFixed(2).replace(".", ",");
                   const isPopular    = meta?.popular ?? false;
+                  const isLoading    = loadingPlan === plan.code;
 
                   return (
                     <div
@@ -517,16 +402,17 @@ export function OnboardingPage() {
                           <div className="mb-4" />
                         )}
 
-                        {/* Conectar */}
+                        {/* CTA */}
                         <button
-                          onClick={() => { setSelectedPlan(plan.code); setShowModal(true); }}
-                          className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                          onClick={() => handleCheckout(plan.code)}
+                          disabled={loadingPlan !== null}
+                          className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-colors disabled:opacity-60 ${
                             isPopular
                               ? "bg-gold-400 hover:bg-gold-500 text-white"
                               : "bg-white hover:bg-stone-50 text-stone-700 border border-stone-200"
                           }`}
                         >
-                          Conectar
+                          {isLoading ? "Redirigiendo…" : "Comenzar"}
                         </button>
                       </div>
                     </div>
@@ -569,17 +455,6 @@ export function OnboardingPage() {
           </div>
         )}
       </div>
-
-      {/* Modal de intención de pago */}
-      {showModal && activePlan && (
-        <ContactIntentModal
-          plan={activePlan}
-          billing={billing}
-          name={name}
-          onClose={() => setShowModal(false)}
-          onSuccess={handleIntentSuccess}
-        />
-      )}
     </div>
   );
 }
