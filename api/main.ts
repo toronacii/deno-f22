@@ -89,7 +89,8 @@ const MIME: Record<string, string> = {
   ".woff2": "font/woff2",
 };
 
-app.get("*", async (c) => {
+// Flow redirects urlReturn via form POST — handle both GET and POST for SPA routes
+app.on(["GET", "POST"], "*", async (c) => {
   const url   = new URL(c.req.url);
   const path  = url.pathname;
   const ext   = path.includes(".") ? path.slice(path.lastIndexOf(".")) : "";

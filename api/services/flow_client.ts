@@ -164,13 +164,18 @@ export interface FlowPaymentStatus {
   amount:        number; // en CLP directamente (no centavos)
   currency:      string;
   subject:       string;
-  payer:         string;
+  payer:         string; // email del pagador
   requestDate:   string;
   paymentData?:  {
-    subscriptionId?: string;
-    date?:           string;
-    media?:          string;
-    cardLast4Digits?: string;
+    date?:           string | null;
+    media?:          string | null;
+    conversionDate?: string | null;
+    conversionRate?: number | null;
+    amount?:         number | null;
+    currency?:       string | null;
+    fee?:            number | null;
+    balance?:        number | null;
+    transferDate?:   string | null;
   };
 }
 
@@ -297,6 +302,38 @@ export async function cancelSubscription(params: {
 // ---------------------------------------------------------------------------
 // Payments
 // ---------------------------------------------------------------------------
+
+export interface FlowPaymentLinkResponse {
+  url:       string;
+  token:     string;
+  flowOrder: number;
+}
+
+/**
+ * Crea un link de pago único (sin suscripción, sin tarjeta pre-registrada).
+ * El usuario es redirigido a url + "?token=" + token para pagar con cualquier medio.
+ * Flow llama urlConfirmation (webhook) cuando el pago es confirmado.
+ */
+export async function createPaymentLink(params: {
+  amount:          string;   // CLP como string, sin centavos
+  subject:         string;   // descripción visible al pagador
+  commerceOrder:   string;   // ID único de la orden (nuestro)
+  urlConfirmation: string;   // webhook: Flow POST aquí al confirmar pago
+  urlReturn:       string;   // browser: redirect aquí tras el pago
+  email:           string;   // email del pagador (requerido por Flow)
+  currency?:       string;   // default "CLP"
+}): Promise<FlowPaymentLinkResponse> {
+  const body: Record<string, string> = {
+    amount:          params.amount,
+    subject:         params.subject,
+    commerceOrder:   params.commerceOrder,
+    urlConfirmation: params.urlConfirmation,
+    urlReturn:       params.urlReturn,
+    email:           params.email,
+    currency:        params.currency ?? "CLP",
+  };
+  return flowPost("/payment/create", body);
+}
 
 export async function getPaymentStatus(token: string): Promise<FlowPaymentStatus> {
   return flowGet("/payment/getStatus", { token });

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./lib/auth_context.tsx";
+import { ToastContainer } from "./lib/toast.tsx";
 import { AuthGuard } from "./components/auth/AuthGuard.tsx";
 import { EngineProvider } from "./engine/engine_context.tsx";
 
@@ -24,6 +25,7 @@ export default function App() {
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
+          <ToastContainer />
           <Routes>
             {/* Public */}
             <Route path="/login"            element={<LoginPage />} />

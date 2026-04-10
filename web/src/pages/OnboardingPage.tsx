@@ -1,19 +1,23 @@
 /**
  * OnboardingPage — wizard de 2 pasos post-registro.
  * Paso 1: confirmar nombre
- * Paso 2: elegir plan → redirige a Flow para registro de tarjeta
+ * Paso 2: elegir plan → checkout directo con Flow
+ *
+ * F22 Digital → POST /payments/f22-checkout → redirect a link de pago Flow
+ * Membresías  → POST /payments/checkout     → redirect a registro de tarjeta Flow (si no tiene)
+ *                                           → suscripción creada si ya tiene tarjeta
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Logo } from "../components/ui/Logo.tsx";
-import { PLAN_META, UF_PER_USD } from "../data/plan_meta.ts";
+import { PLAN_META } from "../data/plan_meta.ts";
 import { api } from "../lib/api.ts";
 import { supabase } from "../lib/supabase.ts";
 import { useAuth } from "../lib/auth_context.tsx";
 
-const VALID_PLANS = ["f22digital", "genesis", "sinergy", "momentum", "horizon"];
+const VALID_PLANS   = ["f22digital", "genesis", "sinergy", "momentum", "horizon"];
 const VALID_BILLING = ["monthly", "annual"] as const;
 
 interface Plan {
@@ -21,22 +25,63 @@ interface Plan {
   code: string;
   name: string;
   max_ruts: number | null;
-  price_monthly_usd: number;
-  price_quarterly_usd: number;
-  price_annual_usd: number;
+  price_monthly_clp: number | null;
+  price_annual_clp: number | null;
+  price_uf_monthly: number | null;
+  price_uf_annual: number | null;
+  is_one_time_payment: boolean;
+  price_one_time_clp: number | null;
+  price_uf_one_time: number | null;
   min_commitment_months: number;
-  promo_price_monthly_usd: number | null;
-  promo_price_annual_usd: number | null;
+  promo_price_monthly_clp: number | null;
+  promo_price_annual_clp: number | null;
+  promo_uf_monthly: number | null;
+  promo_uf_annual: number | null;
 }
 
 // ---------------------------------------------------------------------------
-// Plan icons (SVG inline, Feather-style, 20×20)
+// Helpers de precio CLP
+// ---------------------------------------------------------------------------
+
+function effectiveClpMonthly(plan: Plan, billing: "monthly" | "annual"): number {
+  if (billing === "monthly") {
+    return plan.promo_price_monthly_clp ?? plan.price_monthly_clp ?? 0;
+  }
+  if (plan.promo_price_annual_clp != null) return plan.promo_price_annual_clp;
+  return Math.round((plan.price_annual_clp ?? 0) / 12);
+}
+
+function effectiveUf(plan: Plan, billing: "monthly" | "annual"): number | null {
+  if (billing === "monthly") return plan.promo_uf_monthly ?? plan.price_uf_monthly;
+  return plan.promo_uf_annual ?? plan.price_uf_annual;
+}
+
+function originalClpMonthly(plan: Plan, billing: "monthly" | "annual"): number | null {
+  if (billing === "monthly" && plan.promo_price_monthly_clp != null) return plan.price_monthly_clp;
+  if (billing === "annual"  && plan.promo_price_annual_clp  != null) return Math.round((plan.price_annual_clp ?? 0) / 12);
+  return null;
+}
+
+function formatClp(amount: number): string {
+  return amount.toLocaleString("es-CL");
+}
+
+function formatUf(uf: number): string {
+  return uf % 1 === 0 ? String(uf) : uf.toFixed(2).replace(".", ",");
+}
+
+// ---------------------------------------------------------------------------
+// Plan icons
 // ---------------------------------------------------------------------------
 
 function PlanIcon({ name }: { name?: string }) {
-  const cls = "w-5 h-5 text-brand-700";
-  const props = { className: cls, fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, viewBox: "0 0 24 24" };
-
+  const cls   = "w-5 h-5 text-brand-700";
+  const props = {
+    className: cls, fill: "none", stroke: "currentColor",
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const, strokeLinejoin: "round" as const,
+    viewBox: "0 0 24 24",
+  };
   switch (name) {
     case "clipboard": return (
       <svg {...props}>
@@ -81,45 +126,134 @@ function PlanIcon({ name }: { name?: string }) {
 }
 
 // ---------------------------------------------------------------------------
+// Tarjeta héroe F22 Digital (pago único)
+// ---------------------------------------------------------------------------
+
+interface F22HeroCardProps {
+  plan:     Plan;
+  loading:  boolean;
+  onSelect: () => void;
+}
+
+function F22HeroCard({ plan, loading, onSelect }: F22HeroCardProps) {
+  const meta     = PLAN_META[plan.code];
+  const priceClp = plan.price_one_time_clp ?? 0;
+  const priceUf  = plan.price_uf_one_time;
+
+  return (
+    <div className="relative bg-white rounded-2xl overflow-hidden border-2 border-brand-200 shadow-sm mb-8">
+      <div className="h-1 bg-gradient-to-r from-brand-700 via-brand-500 to-brand-400" />
+
+      <div className="p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+        {/* Left */}
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <div className="w-8 h-8 rounded-lg bg-brand-50 border border-brand-100 flex items-center justify-center shrink-0">
+              <PlanIcon name={meta?.icon} />
+            </div>
+            <span className="font-bold text-brand-900 text-lg">{plan.name}</span>
+            <span className="text-[10px] font-bold text-brand-700 bg-brand-50 border border-brand-200 px-2 py-0.5 rounded-full uppercase tracking-wide">
+              Pago único
+            </span>
+          </div>
+
+          <p className="text-sm text-stone-500 mb-4 max-w-md">{meta?.description}</p>
+
+          <ul className="flex flex-col gap-1.5">
+            {(meta?.features ?? []).map((f) => (
+              <li key={f} className="flex items-center gap-2">
+                <svg className="w-3.5 h-3.5 shrink-0 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="text-xs text-stone-600">{f}</span>
+              </li>
+            ))}
+            <li className="flex items-center gap-2">
+              <svg className="w-3.5 h-3.5 shrink-0 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />
+              </svg>
+              <span className="text-xs font-medium text-gold-600">Plazo legal: 30 de abril de 2026</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Right */}
+        <div className="flex flex-col items-start sm:items-end gap-3 shrink-0">
+          <div className="sm:text-right">
+            <div className="flex items-baseline gap-1">
+              <span className="text-sm font-medium text-stone-400">CLP</span>
+              <span className="text-4xl font-bold text-brand-900">{formatClp(priceClp)}</span>
+            </div>
+            {priceUf != null && (
+              <div className="text-xs text-gold-600 font-medium mt-0.5">o {formatUf(priceUf)} UF</div>
+            )}
+          </div>
+
+          <button
+            onClick={onSelect}
+            disabled={loading}
+            className="bg-brand-700 hover:bg-brand-800 disabled:opacity-60 disabled:cursor-wait
+              text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-colors whitespace-nowrap"
+          >
+            {loading ? "Redirigiendo…" : "Declarar F22 →"}
+          </button>
+
+          <p className="text-xs text-stone-400 sm:text-right">Solo 1 declaración · Sin membresía</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // OnboardingPage
 // ---------------------------------------------------------------------------
 
 export function OnboardingPage() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
+  const { user }       = useAuth();
+  const navigate       = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const urlPlan = searchParams.get("plan");
+  const urlPlan    = searchParams.get("plan");
   const urlBilling = searchParams.get("billing");
   const preselectedPlan =
     urlPlan && VALID_PLANS.includes(urlPlan) ? urlPlan : null;
   const preselectedBilling =
-    urlBilling &&
-    VALID_BILLING.includes(urlBilling as (typeof VALID_BILLING)[number])
+    urlBilling && VALID_BILLING.includes(urlBilling as (typeof VALID_BILLING)[number])
       ? (urlBilling as (typeof VALID_BILLING)[number])
       : null;
 
-  const [step, setStep] = useState<1 | 2>(1);
-  const [name, setName] = useState(user?.user_metadata?.full_name ?? "");
-  const [billing, setBilling] = useState<"monthly" | "annual">(
-    preselectedBilling ?? "annual",
-  );
-  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [step,            setStep]           = useState<1 | 2>(1);
+  const [name,            setName]           = useState(user?.user_metadata?.full_name ?? "");
+  const [billing,         setBilling]        = useState<"monthly" | "annual">(preselectedBilling ?? "annual");
+  const [selectedPlan,    setSelectedPlan]   = useState<string>(preselectedPlan ?? "sinergy");
+  const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null); // plan code being processed
+
+  const queryClient = useQueryClient();
+
+  // If user already has an active plan, redirect to dashboard.
+  // AuthGuard uses the same ["portal"] cache — no extra fetch needed.
+  const { data: portalData } = useQuery({
+    queryKey: ["portal"],
+    queryFn:  () => api.get<{ subscription: unknown; hasF22: boolean }>("/payments/portal", { silent: true }),
+    retry:    false,
+    staleTime: 5 * 60 * 1000,
+  });
+  useEffect(() => {
+    if (!portalData) return;
+    if (portalData.subscription || portalData.hasF22) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [portalData, navigate]);
 
   const { data: plansData } = useQuery({
     queryKey: ["plans"],
-    queryFn: () => api.get<{ plans: Plan[] }>("/plans"),
+    queryFn:  () => api.get<{ plans: Plan[] }>("/plans"),
   });
-  const plans = plansData?.plans ?? [];
+  const allPlans        = plansData?.plans ?? [];
+  const f22Plan         = allPlans.find((p) => p.is_one_time_payment) ?? null;
+  const membershipPlans = allPlans.filter((p) => !p.is_one_time_payment);
 
-  // Resolve initial selection after plans load
-  const preselect = preselectedPlan ?? "sinergy";
-  const effectiveDefault =
-    plans.length > 0 && !plans.some((p) => p.code === preselect)
-      ? "sinergy"
-      : preselect;
-  void effectiveDefault; // used only for UX highlight if needed
 
   async function handleStep1(e: { preventDefault(): void }) {
     e.preventDefault();
@@ -128,16 +262,26 @@ export function OnboardingPage() {
     setStep(2);
   }
 
-  async function handleCheckout(planCode: string) {
-    setLoadingPlan(planCode);
-    setError(null);
+  /** Pago único F22 → link de pago Flow */
+  async function handleF22Checkout() {
+    setCheckoutLoading("f22digital");
     try {
-      await api.post("/auth/register", { full_name: name });
+      const result = await api.post<{ redirectUrl: string }>("/payments/f22-checkout", {});
+      window.location.assign(result.redirectUrl);
+    } catch {
+      setCheckoutLoading(null);
+    }
+  }
 
+  /** Membresía → registro de tarjeta Flow (si no tiene) o suscripción directa */
+  async function handleMembershipCheckout(planCode: string) {
+    setCheckoutLoading(planCode);
+    try {
       const result = await api.post<{
         requiresCard?: boolean;
         redirectUrl?: string;
         success?: boolean;
+        subscriptionId?: string;
       }>("/payments/checkout", {
         planCode,
         billingCycle: billing,
@@ -145,46 +289,18 @@ export function OnboardingPage() {
       });
 
       if (result.requiresCard && result.redirectUrl) {
-        // Redirect to Flow's card registration page — don't reset loading
         window.location.assign(result.redirectUrl);
-        return;
-      }
-
-      if (result.success) {
-        // Card already registered (returning user changing plan)
-        await supabase.auth.updateUser({ data: { onboarding_completed: true } });
+      } else if (result.success) {
+        // Invalidate portal cache so AuthGuard sees the new subscription immediately
+        await queryClient.invalidateQueries({ queryKey: ["portal"] });
         navigate("/dashboard", { replace: true });
       }
-    } catch (err) {
-      setError((err as Error).message);
-      setLoadingPlan(null);
+    } catch {
+      setCheckoutLoading(null);
     }
   }
 
-  function getMonthlyPrice(plan: Plan): number {
-    if (billing === "monthly") {
-      return plan.promo_price_monthly_usd ?? plan.price_monthly_usd;
-    }
-    return plan.promo_price_annual_usd ?? plan.price_annual_usd / 12;
-  }
-
-  function getOriginalMonthlyPrice(plan: Plan): number | null {
-    if (billing === "monthly" && plan.promo_price_monthly_usd != null) {
-      return plan.price_monthly_usd;
-    }
-    if (billing === "annual" && plan.promo_price_annual_usd != null) {
-      return plan.price_annual_usd / 12;
-    }
-    return null;
-  }
-
-  function splitPrice(price: number): [string, string] {
-    const cents = Math.round(price * 100) % 100;
-    return [
-      Math.floor(price).toLocaleString("es-CL"),
-      cents.toString().padStart(2, "0"),
-    ];
-  }
+  const isAnyLoading = checkoutLoading !== null;
 
   return (
     <div className="min-h-[100dvh] bg-stone-50 flex items-center justify-center px-4 py-12">
@@ -193,15 +309,11 @@ export function OnboardingPage() {
         <div className="flex items-center justify-between mb-8">
           <Logo className="h-8 w-auto" />
           <div className="flex items-center gap-2">
-            <div
-              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium ${step >= 1 ? "bg-brand-700 text-white" : "bg-stone-200 text-stone-500"}`}
-            >
+            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium ${step >= 1 ? "bg-brand-700 text-white" : "bg-stone-200 text-stone-500"}`}>
               1
             </div>
             <div className="w-8 h-px bg-stone-200" />
-            <div
-              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium ${step >= 2 ? "bg-brand-700 text-white" : "bg-stone-200 text-stone-500"}`}
-            >
+            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium ${step >= 2 ? "bg-brand-700 text-white" : "bg-stone-200 text-stone-500"}`}>
               2
             </div>
           </div>
@@ -210,12 +322,8 @@ export function OnboardingPage() {
         {/* ── Paso 1: Nombre ── */}
         {step === 1 && (
           <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8 max-w-sm mx-auto">
-            <h1 className="text-xl font-semibold text-stone-900 mb-1">
-              Bienvenido
-            </h1>
-            <p className="text-sm text-stone-500 mb-6">
-              ¿Cómo te llamas o cómo se llama tu estudio?
-            </p>
+            <h1 className="text-xl font-semibold text-stone-900 mb-1">Bienvenido</h1>
+            <p className="text-sm text-stone-500 mb-6">¿Cómo te llamas o cómo se llama tu estudio?</p>
             <form onSubmit={handleStep1} className="space-y-4">
               <input
                 type="text"
@@ -255,181 +363,187 @@ export function OnboardingPage() {
                 Tu estructura crece{" "}
                 <em className="text-brand-700 not-italic">con vos</em>
               </h1>
-              <p className="text-stone-500 text-sm">
-                Puedes cambiarlo en cualquier momento.
-              </p>
+              <p className="text-stone-500 text-sm">Puedes cambiarlo en cualquier momento.</p>
             </div>
 
-            {/* Toggle facturación */}
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <button
-                onClick={() => setBilling("monthly")}
-                className={`text-sm font-medium transition-colors ${
-                  billing === "monthly" ? "text-stone-900" : "text-stone-400"
-                }`}
-              >
-                Mensual
-              </button>
-
-              <button
-                onClick={() => setBilling(billing === "monthly" ? "annual" : "monthly")}
-                className="relative w-11 h-6 rounded-full transition-colors bg-stone-200 focus:outline-none"
-              >
-                <span
-                  className={`absolute top-0.5 w-5 h-5 rounded-full shadow transition-all ${
-                    billing === "annual"
-                      ? "left-[22px] bg-gold-400"
-                      : "left-0.5 bg-brand-700"
-                  }`}
-                />
-              </button>
-
-              <div className="flex items-center gap-1.5">
-                <button
-                  onClick={() => setBilling("annual")}
-                  className={`text-sm font-medium transition-colors ${
-                    billing === "annual" ? "text-stone-900" : "text-stone-400"
-                  }`}
-                >
-                  Anual
-                </button>
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">
-                  −17%
-                </span>
-              </div>
-            </div>
-
-            {error && (
-              <div className="mb-6 px-3 py-2.5 bg-danger-500/10 border border-danger-500/20 rounded-lg text-sm text-danger-600 text-center max-w-lg mx-auto">
-                {error}
-              </div>
-            )}
-
-            {/* Grid de planes */}
-            {plans.length === 0 ? (
+            {allPlans.length === 0 ? (
               <div className="text-center text-brand-400 py-8">Cargando planes…</div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-6">
-                {plans.map((plan) => {
-                  const meta         = PLAN_META[plan.code];
-                  const monthlyPrice = getMonthlyPrice(plan);
-                  const originalPrice = getOriginalMonthlyPrice(plan);
-                  const [int, dec]   = splitPrice(monthlyPrice);
-                  const ufPrice      = (monthlyPrice * UF_PER_USD).toFixed(2).replace(".", ",");
-                  const isPopular    = meta?.popular ?? false;
-                  const isLoading    = loadingPlan === plan.code;
+              <>
+                {/* ── F22 Digital ── */}
+                {f22Plan && (
+                  <F22HeroCard
+                    plan={f22Plan}
+                    loading={checkoutLoading === "f22digital"}
+                    onSelect={handleF22Checkout}
+                  />
+                )}
 
-                  return (
-                    <div
-                      key={plan.code}
-                      className={`relative bg-white text-left rounded-2xl flex flex-col transition-all ${
-                        isPopular
-                          ? "border-2 border-gold-300 shadow-lg"
-                          : "border border-stone-200 shadow-sm"
+                {/* Separador */}
+                <div className="relative mb-8">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-stone-200" />
+                  </div>
+                  <div className="relative flex justify-center">
+                    <span className="px-4 bg-stone-50 text-xs text-stone-400 uppercase tracking-widest">
+                      O elige una membresía
+                    </span>
+                  </div>
+                </div>
+
+                {/* Toggle facturación */}
+                <div className="flex items-center justify-center gap-3 mb-8">
+                  <button
+                    onClick={() => setBilling("monthly")}
+                    disabled={isAnyLoading}
+                    className={`text-sm font-medium transition-colors ${billing === "monthly" ? "text-stone-900" : "text-stone-400"}`}
+                  >
+                    Mensual
+                  </button>
+
+                  <button
+                    onClick={() => setBilling(billing === "monthly" ? "annual" : "monthly")}
+                    disabled={isAnyLoading}
+                    className="relative w-11 h-6 rounded-full transition-colors bg-stone-200 focus:outline-none disabled:opacity-50"
+                  >
+                    <span
+                      className={`absolute top-0.5 w-5 h-5 rounded-full shadow transition-all ${
+                        billing === "annual" ? "left-[22px] bg-gold-400" : "left-0.5 bg-brand-700"
                       }`}
+                    />
+                  </button>
+
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => setBilling("annual")}
+                      disabled={isAnyLoading}
+                      className={`text-sm font-medium transition-colors ${billing === "annual" ? "text-stone-900" : "text-stone-400"}`}
                     >
-                      {isPopular && (
-                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                          <span className="bg-gold-400 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
-                            Más Popular
-                          </span>
-                        </div>
-                      )}
+                      Anual
+                    </button>
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">
+                      −17%
+                    </span>
+                  </div>
+                </div>
 
-                      <div className="p-5 flex flex-col flex-1">
-                        {/* Icon */}
-                        <div className="w-9 h-9 rounded-lg bg-stone-50 border border-stone-100 flex items-center justify-center mb-4">
-                          <PlanIcon name={meta?.icon} />
-                        </div>
+                {/* Grid membresías */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                  {membershipPlans.map((plan) => {
+                    const meta        = PLAN_META[plan.code];
+                    const monthlyClp  = effectiveClpMonthly(plan, billing);
+                    const originalClp = originalClpMonthly(plan, billing);
+                    const uf          = effectiveUf(plan, billing);
+                    const isPopular   = meta?.popular ?? false;
+                    const isLoading   = checkoutLoading === plan.code;
+                    const isSelected  = selectedPlan === plan.code;
 
-                        {/* Name */}
-                        <div className="text-xl font-bold text-brand-900 mb-1">{plan.name}</div>
-
-                        {/* Description — min-h keeps prices aligned across all cards */}
-                        <div className="text-[11px] leading-snug text-stone-500 mb-5 min-h-[5.5rem]">{meta?.description}</div>
-
-                        {/* Strikethrough price — always reserves space so prices align */}
-                        <div className="text-xs line-through text-stone-400 mb-0.5 h-4">
-                          {originalPrice != null
-                            ? `USD ${Math.floor(originalPrice).toLocaleString("es-CL")} / mes`
-                            : ""}
-                        </div>
-
-                        {/* Main price */}
-                        <div className="flex items-baseline gap-0.5 mb-0.5">
-                          <span className="text-sm font-medium text-stone-500 mr-0.5">USD</span>
-                          <span className="text-4xl font-bold text-brand-900">{int}</span>
-                          {dec !== "00" && (
-                            <span className="text-xl font-bold text-brand-900">.{dec}</span>
-                          )}
-                          <span className="text-sm text-stone-400 ml-0.5">/mes</span>
-                        </div>
-
-                        {/* UF price */}
-                        <div className="text-xs font-medium text-gold-600 mb-4">
-                          o {ufPrice} UF /mes
-                        </div>
-
-                        <div className="h-px bg-stone-100 mb-4" />
-
-                        {/* RUT */}
-                        <div className="flex items-center gap-2 mb-4">
-                          <div className={`w-3 h-3 rounded-full shrink-0 ${meta?.rutDot ?? "bg-stone-400"}`} />
-                          <span className="text-sm font-semibold text-stone-800">{meta?.rutLabel}</span>
-                        </div>
-
-                        {/* Features */}
-                        <ul className="flex-1 mb-4">
-                          {(meta?.features ?? []).map((f, i, arr) => (
-                            <li
-                              key={f}
-                              className={`flex items-start gap-2 py-2 ${i < arr.length - 1 ? "border-b border-stone-100" : ""}`}
-                            >
-                              <svg className="w-3.5 h-3.5 mt-0.5 shrink-0 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                              </svg>
-                              <span className="text-xs text-stone-600">{f}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        {/* Donation */}
-                        {meta?.donation != null ? (
-                          <div className="text-[11px] text-gold-600 font-medium mb-4">
-                            Destinamos {meta.donation}% de la facturación a causas benéficas
+                    return (
+                      <div
+                        key={plan.code}
+                        onClick={() => setSelectedPlan(plan.code)}
+                        className={`relative bg-white text-left rounded-2xl flex flex-col transition-all cursor-pointer ${
+                          isSelected && isPopular  ? "border-2 border-gold-400 shadow-xl ring-2 ring-brand-300 ring-offset-1" :
+                          isSelected               ? "border-2 border-brand-500 shadow-md" :
+                          isPopular                ? "border-2 border-gold-300 shadow-lg" :
+                                                     "border border-stone-200 shadow-sm"
+                        }`}
+                      >
+                        {isPopular && (
+                          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                            <span className="bg-gold-400 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                              Más Popular
+                            </span>
                           </div>
-                        ) : (
-                          <div className="mb-4" />
                         )}
 
-                        {/* CTA */}
-                        <button
-                          onClick={() => handleCheckout(plan.code)}
-                          disabled={loadingPlan !== null}
-                          className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-colors disabled:opacity-60 ${
-                            isPopular
-                              ? "bg-gold-400 hover:bg-gold-500 text-white"
-                              : "bg-white hover:bg-stone-50 text-stone-700 border border-stone-200"
-                          }`}
-                        >
-                          {isLoading ? "Redirigiendo…" : "Comenzar"}
-                        </button>
+                        <div className="p-5 flex flex-col flex-1">
+                          <div className="w-9 h-9 rounded-lg bg-stone-50 border border-stone-100 flex items-center justify-center mb-4">
+                            <PlanIcon name={meta?.icon} />
+                          </div>
+
+                          <div className="text-xl font-bold text-brand-900 mb-1">{plan.name}</div>
+
+                          <div className="text-[11px] leading-snug text-stone-500 mb-5 min-h-[5.5rem]">
+                            {meta?.description}
+                          </div>
+
+                          {/* Precio tachado */}
+                          <div className="text-xs line-through text-stone-400 mb-0.5 h-4">
+                            {originalClp != null ? `CLP ${formatClp(originalClp)} / mes` : ""}
+                          </div>
+
+                          {/* Precio principal */}
+                          <div className="flex items-baseline gap-0.5 mb-0.5">
+                            <span className="text-sm font-medium text-stone-500 mr-0.5">CLP</span>
+                            <span className="text-4xl font-bold text-brand-900">{formatClp(monthlyClp)}</span>
+                          </div>
+
+                          {/* UF */}
+                          <div className="text-xs font-medium text-gold-600 mb-4">
+                            {uf != null ? `o ${formatUf(uf)} UF /mes` : "\u00a0"}
+                          </div>
+
+                          <div className="h-px bg-stone-100 mb-4" />
+
+                          {/* RUT */}
+                          <div className="flex items-center gap-2 mb-4">
+                            <div className={`w-3 h-3 rounded-full shrink-0 ${meta?.rutDot ?? "bg-stone-400"}`} />
+                            <span className="text-sm font-semibold text-stone-800">{meta?.rutLabel}</span>
+                          </div>
+
+                          {/* Features */}
+                          <ul className="flex-1 mb-4">
+                            {(meta?.features ?? []).map((f, i, arr) => (
+                              <li
+                                key={f}
+                                className={`flex items-start gap-2 py-2 ${i < arr.length - 1 ? "border-b border-stone-100" : ""}`}
+                              >
+                                <svg className="w-3.5 h-3.5 mt-0.5 shrink-0 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="text-xs text-stone-600">{f}</span>
+                              </li>
+                            ))}
+                          </ul>
+
+                          {/* Donación */}
+                          {meta?.donation != null ? (
+                            <div className="text-[11px] text-gold-600 font-medium mb-4">
+                              Destinamos {meta.donation}% de la facturación a causas benéficas
+                            </div>
+                          ) : (
+                            <div className="mb-4" />
+                          )}
+
+                          {/* CTA */}
+                          <button
+                            onClick={(e) => { e.stopPropagation(); handleMembershipCheckout(plan.code); }}
+                            disabled={isAnyLoading}
+                            className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-colors disabled:opacity-60 disabled:cursor-wait ${
+                              isPopular || isSelected
+                                ? "bg-brand-700 hover:bg-brand-800 text-white"
+                                : "bg-white hover:bg-stone-50 text-stone-700 border border-stone-200"
+                            }`}
+                          >
+                            {isLoading ? "Procesando…" : "Conectar"}
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
+
+              </>
             )}
 
-            {/* Notas de precios */}
+            {/* Notas */}
             <div className="text-center mb-6 space-y-1">
               <p className="text-xs text-stone-400">
-                Todos los precios en USD • Plan anual: 17% de descuento sobre el
-                precio mensual.{" "}
+                Todos los precios en CLP · Membresías: primer cobro equivale a 3 meses, luego mes a mes.
               </p>
               <p className="text-xs text-stone-400">
-                Apertura a cargo de cliente – OC Global Services SpA · Santiago
-                de Chile
+                Apertura a cargo de cliente – OC Global Services SpA · Santiago de Chile
               </p>
             </div>
 
@@ -448,7 +562,8 @@ export function OnboardingPage() {
 
             <button
               onClick={() => setStep(1)}
-              className="block mx-auto mt-2 text-sm text-stone-400 hover:text-stone-600 transition-colors"
+              disabled={isAnyLoading}
+              className="block mx-auto mt-2 text-sm text-stone-400 hover:text-stone-600 disabled:opacity-50 transition-colors"
             >
               Atrás
             </button>

@@ -15,12 +15,11 @@ import {
   createPlan,
   getPlan,
   deletePlan,
-  usdToClp,
   billingCycleToInterval,
   toFlowPlanId,
   FlowError,
 } from "../services/flow_client.ts";
-import { periodMultiplier, regularPricePerMonth, periodAmountUsd } from "../services/promotion_service.ts";
+import { periodMultiplier } from "../services/promotion_service.ts";
 
 const SUPABASE_URL         = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -45,9 +44,9 @@ const BILLING_CYCLES = ["monthly", "annual"] as const;
 
 const { data: plans, error: plansError } = await db
   .from("membership_plans")
-  .select("id, code, name, price_monthly_usd, price_quarterly_usd, price_annual_usd")
+  .select("id, code, name, price_monthly_clp, price_annual_clp, is_one_time_payment")
   .eq("is_active", true)
-  .order("price_monthly_usd", { ascending: true });
+  .order("price_monthly_clp", { ascending: true });
 
 if (plansError || !plans) {
   console.error("❌  No se pudieron cargar los planes:", plansError?.message);
@@ -56,20 +55,30 @@ if (plansError || !plans) {
 
 const { data: promos } = await db
   .from("plan_promotions")
-  .select("id, plan_id, name, billing_cycle, discounted_price_usd, valid_from, valid_until")
+  .select("id, plan_id, name, billing_cycle, discounted_price_clp, valid_from, valid_until")
   .eq("is_active", true);
 
 const today = new Date().toISOString().split("T")[0];
 
 // Collect all planIds to process
-const planIds: { planId: string; name: string; amountUsd: number; billingCycle: string }[] = [];
+const planIds: { planId: string; name: string; amountClp: number; billingCycle: string }[] = [];
 
 for (const plan of plans) {
+  if (plan.is_one_time_payment) continue;
+  if (!plan.price_monthly_clp || !plan.price_annual_clp) {
+    console.warn(`  ⚠️   ${plan.name} (${plan.code}) — sin precios CLP, saltando`);
+    continue;
+  }
+
   for (const cycle of BILLING_CYCLES) {
+    // Flow receives total charged per period:
+    //   monthly → price_monthly_clp (charged each month)
+    //   annual  → price_annual_clp  (charged once per year)
+    const amountClp = cycle === "monthly" ? plan.price_monthly_clp : plan.price_annual_clp;
     planIds.push({
       planId:       toFlowPlanId(plan.code, cycle),
       name:         `${plan.name} — ${cycle}`,
-      amountUsd:    periodAmountUsd(regularPricePerMonth(plan, cycle), cycle),
+      amountClp,
       billingCycle: cycle,
     });
   }
@@ -77,18 +86,22 @@ for (const plan of plans) {
 
 for (const promo of promos ?? []) {
   if (promo.valid_until < today) continue;
+  if (!promo.discounted_price_clp) continue;
+
   const plan = plans.find((p) => p.id === promo.plan_id);
-  if (!plan) continue;
+  if (!plan || plan.is_one_time_payment) continue;
 
   const cycles = promo.billing_cycle
     ? [promo.billing_cycle as typeof BILLING_CYCLES[number]]
     : [...BILLING_CYCLES];
 
   for (const cycle of cycles) {
+    // Promo: discounted_price_clp is per month × period
+    const amountClp = Number(promo.discounted_price_clp) * periodMultiplier(cycle);
     planIds.push({
       planId:       toFlowPlanId(plan.code, cycle, true),
       name:         `${plan.name} — ${cycle} (Promo)`,
-      amountUsd:    Number(promo.discounted_price_usd) * periodMultiplier(cycle),
+      amountClp,
       billingCycle: cycle,
     });
   }
@@ -118,26 +131,21 @@ for (const { planId } of planIds) {
 // ---------------------------------------------------------------------------
 console.log(`\n🔄  Recreando ${planIds.length} planes con webhook actualizado...\n`);
 
-// Get a fresh exchange rate once for all plans
-const { rate } = await usdToClp(1);
-console.log(`  💱  Tasa actual: ${rate.toFixed(2)} CLP/USD\n`);
-
-for (const { planId, name, amountUsd, billingCycle } of planIds) {
-  const clp      = Math.round(amountUsd * rate);
+for (const { planId, name, amountClp, billingCycle } of planIds) {
   const interval = billingCycleToInterval(billingCycle as "monthly" | "quarterly" | "annual");
 
   try {
     await createPlan({
       planId,
       name,
-      amount:         String(clp),
+      amount:         String(amountClp),
       currency:       "CLP",
       interval:       interval.interval,
       interval_count: interval.interval_count,
       urlCallback:    FLOW_WEBHOOK_URL,
       charges_retries_number: "3",
     });
-    console.log(`  ✓   ${planId} — creado a ${clp.toLocaleString("es-CL")} CLP`);
+    console.log(`  ✓   ${planId} — creado a ${amountClp.toLocaleString("es-CL")} CLP`);
   } catch (e) {
     console.error(`  ✖   ${planId} — error al crear:`, e instanceof FlowError ? e.message : e);
   }

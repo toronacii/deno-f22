@@ -3,9 +3,6 @@
  * Compartido entre OnboardingPage y AccountPage.
  */
 
-/** 1 USD ≈ 900 CLP; 1 UF = 38,500 CLP → tasa de conversión */
-export const UF_PER_USD = 900 / 38_500;
-
 export interface PlanMeta {
   icon:        string;    // clave para PlanIcon
   description: string;
@@ -25,7 +22,6 @@ export const PLAN_META: Record<string, PlanMeta> = {
     rutDot:      "bg-brand-700",
     features: [
       "Autogestión asistida con F22 Digital",
-      "RUT",
       "Sistema automático de alertas de vencimientos",
     ],
     popular: false,

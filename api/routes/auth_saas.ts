@@ -84,11 +84,5 @@ authSaasRouter.post("/select-plan", authMiddleware, async (c) => {
 
   if (subError) return c.json({ error: subError.message }, 400);
 
-  // Marcar onboarding completado
-  await db
-    .from("profiles")
-    .update({ onboarding_completed: true })
-    .eq("id", userId);
-
   return c.json({ subscription: sub, plan }, 201);
 });

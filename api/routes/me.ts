@@ -15,7 +15,7 @@ meRouter.get("/", authMiddleware, async (c) => {
 
   const { data, error } = await db
     .from("profiles")
-    .select("id, email, full_name, avatar_url, onboarding_completed, created_at")
+    .select("id, email, full_name, avatar_url, created_at")
     .eq("id", userId)
     .single();
 

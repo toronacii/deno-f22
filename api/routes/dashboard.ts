@@ -22,7 +22,7 @@ dashboardRouter.get("/", authMiddleware, async (c) => {
 
   const [profileResult, subscription, rutUsage, taxpayersResult] = await Promise.all([
     db.from("profiles")
-      .select("id, email, full_name, avatar_url, onboarding_completed")
+      .select("id, email, full_name, avatar_url")
       .eq("id", userId)
       .single(),
 

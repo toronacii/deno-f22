@@ -2,7 +2,8 @@
  * AuthCallbackPage — landing page para links de Supabase (confirm email, magic link).
  * Supabase redirige aquí con #access_token=... en el hash.
  * Esta página espera que el cliente Supabase procese los tokens,
- * luego redirige al destino correcto según el estado de onboarding.
+ * luego redirige a /onboarding (con plan/billing si vienen en la URL).
+ * Si el usuario ya tiene un plan activo, OnboardingPage lo redirige a /dashboard.
  */
 
 import { useEffect, useRef } from "react";
@@ -17,22 +18,21 @@ export function AuthCallbackPage() {
   const handled       = useRef(false);
   const [searchParams] = useSearchParams();
 
-  function buildDestination(onboardingDone: boolean) {
-    if (onboardingDone) return "/dashboard";
+  function buildDestination() {
     const plan    = searchParams.get("plan");
     const billing = searchParams.get("billing");
     const params  = new URLSearchParams();
-    if (plan    && VALID_PLANS.includes(plan))    params.set("plan",    plan);
+    if (plan    && VALID_PLANS.includes(plan))      params.set("plan",    plan);
     if (billing && VALID_BILLING.includes(billing)) params.set("billing", billing);
     const qs = params.toString();
     return qs ? `/onboarding?${qs}` : "/onboarding";
   }
 
   useEffect(() => {
-    function redirect(onboardingDone: boolean) {
+    function redirect() {
       if (handled.current) return;
       handled.current = true;
-      navigate(buildDestination(onboardingDone), { replace: true });
+      navigate(buildDestination(), { replace: true });
     }
 
     // onAuthStateChange detecta los tokens del hash automáticamente
@@ -43,16 +43,12 @@ export function AuthCallbackPage() {
         navigate("/reset-password", { replace: true });
         return;
       }
-      if (session) {
-        redirect(session.user.user_metadata?.onboarding_completed === true);
-      }
+      if (session) redirect();
     });
 
     // También chequeamos la sesión actual por si el evento ya disparó
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) {
-        redirect(data.session.user.user_metadata?.onboarding_completed === true);
-      }
+      if (data.session) redirect();
     });
 
     // Timeout de seguridad: si en 8s no hay sesión, mandar al login
